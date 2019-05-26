@@ -8,7 +8,7 @@ ________________________________________________________________________________
 - Retype new UNIX password:(YOU PASSWORD)<br>
 - passwd:password updated successfully YOU PASSWORD OK<br>
 ____________________________________________________________________________________________________
--sudo -i
+- sudo -i
 - wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
 - chmod +x openvpn-install.sh
 - ./openvpn-install.sh
