@@ -6,8 +6,9 @@ ________________________________________________________________________________
 - passwd root<br>
 - Enter new UNIX password:(YOU PASSWORD)<br>
 - Retype new UNIX password:(YOU PASSWORD)<br>
-- passwd:password updated successfully YOU PASSWORD OK<br>
+- passwd:password updated successfully (YOU PASSWORD) {OK}<br>
 ____________________________________________________________________________________________________
+# ** ติดตั้ง Openvpn  ** <br>
 - sudo -i
 - wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
 - chmod +x openvpn-install.sh
