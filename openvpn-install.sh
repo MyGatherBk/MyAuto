@@ -400,6 +400,12 @@ verb 3" > /etc/openvpn/client-common.txt
 	echo "Your client configuration is available at:" ~/"$CLIENT.ovpn"
 	echo "If you want to add more clients, you simply need to run this script again!"
 fi
+# install squid
+apt-get -y install squid
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/squid.conf"
+sed -i $MYIP2 /etc/squid/squid.conf;
+service squid restart
+
 # set locale
 wget -O /etc/ssh/sshd_config 'https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/sshd_config'
 service ssh restart
