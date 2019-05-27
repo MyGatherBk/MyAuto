@@ -401,7 +401,7 @@ verb 3" > /etc/openvpn/client-common.txt
 	echo "If you want to add more clients, you simply need to run this script again!"
 fi
 # install squid
-apt-get -y install squid
+apt-get -y install squid3
 wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/squid.conf"
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid restart
