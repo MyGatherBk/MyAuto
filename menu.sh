@@ -1,6 +1,8 @@
 #!/bin/bash
 #Menu
-
+echo ""
+echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+echo ""
 echo -e "================================MENU====================================="
 echo -e "* menu       : เรียกดู menu"
 echo -e "* member     : ดูจำนวน user"
