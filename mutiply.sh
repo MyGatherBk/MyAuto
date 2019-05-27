@@ -68,4 +68,3 @@ service openvpn restart
 
 esac
 
-	;;
