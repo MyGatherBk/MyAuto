@@ -14,9 +14,9 @@ ________________________________________________________________________________
 - ./openvpn-install.sh
 ____________________________________________________________________________________________________
 ____________________________________________________________________________________________________
-# **  โปรดเลือก ติดตั้ง squid proxy ** <br>
-Ubuntu 14.04 - 16.04 - 17.04
-Debian 7 - 8 - 9
-sudo -i 
-wget https://raw.githubusercontent.com/MyGatherBk/PURE/master/Install && chmod +x Install && bash Install
+# **  เลือก ติดตั้ง squid proxy ** <br>
+- Ubuntu 14.04 - 16.04 - 17.04
+- Debian 7 - 8 - 9
+- sudo -i 
+- wget https://raw.githubusercontent.com/MyGatherBk/PURE/master/Install && chmod +x Install && bash Install
 ____________________________________________________________________________________________________
