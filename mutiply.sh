@@ -1,5 +1,4 @@
 #!/bin/bash
-#script by pirakit khawpleum
 
 clear
 	echo ""
@@ -67,5 +66,3 @@ service openvpn restart
 	;;
 
 esac
-
-	;;
