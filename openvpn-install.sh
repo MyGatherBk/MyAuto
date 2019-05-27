@@ -379,7 +379,6 @@ dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-auth-user-pass
 remote $IP:$PORT@line.naver.jp $PORT
 http-proxy $IP 8080
 resolv-retry infinite
