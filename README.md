@@ -22,8 +22,7 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________
 
 - sudo -i
-- wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/install-proxy.sh
-- chmod +x install-proxy.sh
-- ./install-proxy.sh
+- wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/install-proxy.sh && chmod +x install-proxy.sh && bash Install
+
 
 
