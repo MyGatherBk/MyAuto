@@ -217,7 +217,6 @@ else
 		2)
 		read -p "Your Username : " -e Usernames
 		read -p "Your Password : " -e Passwords
-		;;
 	esac
 	echo ""
 	echo "Okay, that was all I needed. We are ready to set up your OpenVPN server now."
