@@ -204,14 +204,10 @@ else
 	echo "   4) OpenDNS"
 	echo "   5) Verisign"
 	read -p "DNS [1-5]: " -e -i 3 DNS
-	echo
-	echo "Finally, tell me your name for the client certificate."
-	echo "Please, use one word only, no special characters."
-	read -p "Client name: " -e -i client CLIENT
 	echo ""
-	echo -e " |${GRAY}1${NC}| 1 file can only connect 1 device But can create more files"
-	echo -e " |${GRAY}2${NC}| 1 file can connect to multiple devices But must use the account name and password to connect"
-	echo -e " |${GRAY}3${NC}| 1 file unlimited number of connected devices"
+	echo -e " |${GRAY}1${NC}| 1 ไฟล์สามารถเชื่อมต่อได้ 1 อุปกรณ์เท่านั้น แต่สามารถสร้างไฟล์ได้มากขึ้น"
+	echo -e " |${GRAY}2${NC}| 1 ไฟล์สามารถเชื่อมต่อกับอุปกรณ์หลายเครื่อง แต่ต้องใช้ชื่อบัญชีและรหัสผ่านเพื่อเชื่อมต่อ"
+	echo -e " |${GRAY}3${NC}| 1 ไฟล์ ไม่จำกัด การเชื่อมต่อหลายเครื่อง"
 	echo ""
 	read -p "Server System : " -e -i 2 OPENVPNSYSTEM
 	echo ""
