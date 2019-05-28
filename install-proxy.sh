@@ -1,32 +1,5 @@
 #!/bin/bash
 
-fi
-
-if [[ "$EUID" -ne 0 ]]; then
-	echo "Sorry, you need to run this as root"
-	exit
-fi
-
-if [[ ! -e /dev/net/tun ]]; then
-	echo "The TUN device is not available
-You need to enable TUN before running this script"
-	exit
-fi
-
-if [[ -e /etc/debian_version ]]; then
-	OS=debian
-	GROUPNAME=nogroup
-	RCLOCAL='/etc/rc.local'
-elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
-	OS=centos
-	GROUPNAME=nobody
-	RCLOCAL='/etc/rc.d/rc.local'
-else
-	echo "Looks like you aren't running this installer on Debian, Ubuntu or CentOS"
-	exit
-fi
-
-
 # Menu
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
