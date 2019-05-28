@@ -20,3 +20,10 @@ ________________________________________________________________________________
 - sudo -i 
 - wget https://raw.githubusercontent.com/MyGatherBk/PURE/master/Install && chmod +x Install && bash Install
 ____________________________________________________________________________________________________
+
+- sudo -i
+- wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/install-proxy.sh
+- chmod +x install-proxy.sh
+- ./install-proxy.sh
+
+
