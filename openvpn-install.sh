@@ -423,7 +423,6 @@ wget -O usernew "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/user
 wget -O speedtest "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/speedtest_cli.py"
 wget -O userd "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/deluser.sh"
 wget -O trial "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/trial.sh"
-wget -O allLIMI "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/allLIMI.sh"
 echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
 #echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
 chmod +x member
@@ -432,7 +431,6 @@ chmod +x usernew
 chmod +x speedtest
 chmod +x userd
 chmod +x trial
-chmod +x allLIMI
 clear
 
 printf '===============================\n'
