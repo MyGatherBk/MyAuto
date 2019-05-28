@@ -205,12 +205,18 @@ else
 	echo "   5) Verisign"
 	read -p "DNS [1-5]: " -e -i 3 DNS
 	echo ""
-	echo -e " |1| 1 ไฟล์ ไม่จำกัด การเชื่อมต่อหลายเครื่อง"
+	echo -e " |${GRAY}1${NC}| 1 file can only connect 1 device But can create more files"
+	echo -e " |${GRAY}2${NC}| 1 file can connect to multiple devices But must use the account name and password to connect"
+	echo -e " |${GRAY}3${NC}| 1 file unlimited number of connected devices"
 	echo ""
-	read -p "Server System : " -e -i 1 OPENVPNSYSTEM
+	read -p "Server System : " -e -i 2 OPENVPNSYSTEM
 	echo ""
-        read -p "Client name: " -e -i client CLIENT
+	read -p "Server Name: " -e CLIENT
 	echo ""
+	case $OPENVPNSYSTEM in
+		2)
+		read -p "Your Username : " -e Usernames
+		read -p "Your Password : " -e Passwords
 		;;
 	esac
 	echo ""
