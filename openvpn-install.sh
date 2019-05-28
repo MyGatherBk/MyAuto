@@ -58,24 +58,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 		echo "   2) Revoke an existing user"
 		echo "   3) Remove OpenVPN"
 		echo "   4) Exit"
-		echo "   5) -"
-		echo "   6) -"
-		echo "   7) -"
-		if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 8)${NC}| INSTALL SQUID PROXY ${GREEN} ✔   ${NC}"
-		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 8)${NC}| REMOVE SQUID PROXY ${GREEN} ✔   ${NC}"
-		fi
-
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 8)${NC}| INSTALL SQUID PROXY ${GREEN} ✔   ${NC}"
-		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 8)${NC}| REMOVE SQUID PROXY ${GREEN} ✔   ${NC}"
-		fi
-	    fi
-		read -p "Select an option [1-8]: " option
+		read -p "Select an option [1-4]: " option
 		case $option in
 			1) 
 			echo
@@ -226,7 +209,7 @@ else
 	echo -e " |${GRAY}2${NC}| 1 file can connect to multiple devices But must use the account name and password to connect"
 	echo -e " |${GRAY}3${NC}| 1 file unlimited number of connected devices"
 	echo ""
-	read -p "Server System : " -e -i 2 OPENVPNSYSTEM
+	read -p "Server System : " -e -i 3 OPENVPNSYSTEM
 	echo ""
 	read -p "Server Name: " -e CLIENT
 	echo ""
@@ -463,120 +446,3 @@ reboot
 else
 exit
 fi
-8) # ==================================================================================================================
-
-if [[ -e /etc/squid3/squid.conf ]]; then
-	apt-get -y remove --purge squid3
-	clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "Squid Proxy .....Removed."
-	exit
-elif [[ -e /etc/squid/squid.conf ]]; then
-	apt-get -y remove --purge squid
-	clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "Squid Proxy .....Removed."
-	exit
-fi
-
-read -p "Port Proxy : " -e -i 8080 PROXY
-
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-	apt-get -y install squid3
-	cat > /etc/squid3/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-	IP2="s/xxxxxxxxx/$IP/g";
-	sed -i $IP2 /etc/squid3/squid.conf;
-	if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		service squid3 restart
-	else
-		/etc/init.d/squid3 restart
-	fi
-	clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "Squid Proxy .....Install finish."
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
-	echo ""
-	exit
-
-elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
-	apt-get -y install squid
-	cat > /etc/squid/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-	IP2="s/xxxxxxxxx/$IP/g";
-	sed -i $IP2 /etc/squid/squid.conf;
-	/etc/init.d/squid restart
-	clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "Squid Proxy .....Install finish."
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
-	echo ""
-	exit
-
-fi
-
-	;;
