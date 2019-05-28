@@ -205,18 +205,12 @@ else
 	echo "   5) Verisign"
 	read -p "DNS [1-5]: " -e -i 3 DNS
 	echo ""
-	echo -e " |${GRAY}1${NC}| 1 ไฟล์สามารถเชื่อมต่อได้ 1 อุปกรณ์เท่านั้น แต่สามารถสร้างไฟล์ได้มากขึ้น"
-	echo -e " |${GRAY}2${NC}| 1 ไฟล์สามารถเชื่อมต่อกับอุปกรณ์หลายเครื่อง แต่ต้องใช้ชื่อบัญชีและรหัสผ่านเพื่อเชื่อมต่อ"
-	echo -e " |${GRAY}3${NC}| 1 ไฟล์ ไม่จำกัด การเชื่อมต่อหลายเครื่อง"
+	echo -e " |1| 1 ไฟล์ ไม่จำกัด การเชื่อมต่อหลายเครื่อง"
 	echo ""
-	read -p "Server System : " -e -i 2 OPENVPNSYSTEM
+	read -p "Server System : " -e -i 1 OPENVPNSYSTEM
 	echo ""
-	read -p "Server Name: " -e CLIENT
+        read -p "Client name: " -e -i client CLIENT
 	echo ""
-	case $OPENVPNSYSTEM in
-		2)
-		read -p "Your Username : " -e Usernames
-		read -p "Your Password : " -e Passwords
 		;;
 	esac
 	echo ""
@@ -497,7 +491,7 @@ fi
 	echo
 	echo "Your client configuration is available at:" ~/"$CLIENT.ovpn"
 	echo "If you want to add more clients, you simply need to run this script again!"
-
+fi
 # set locale
 wget -O /etc/ssh/sshd_config 'https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/sshd_config'
 service ssh restart
