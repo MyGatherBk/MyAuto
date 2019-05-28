@@ -536,6 +536,7 @@ wget -O usernew "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/user
 wget -O speedtest "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/speedtest_cli.py"
 wget -O userd "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/deluser.sh"
 wget -O trial "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/trial.sh"
+wget -O mutiply "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/mutiply.sh"
 echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
 #echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
 chmod +x member
@@ -544,6 +545,7 @@ chmod +x usernew
 chmod +x speedtest
 chmod +x userd
 chmod +x trial
+chmod +x mutiply
 clear
 
 printf '===============================\n'
@@ -551,7 +553,7 @@ printf '= Script by Pirakit Khawpleum =\n'
 printf '=   พิมพ์ menu เพื่อใช้คำสั่งต่างๆ    =\n'
 printf '===============================\n'
 echo -e "ดาวน์โหลดไฟล์  : /root/client.ovpn\n"
-printf '\n\nคุณจำเป็นต้องรีสตาร์ทระบบหนึ่งรอบ (y/n):'
+printf 'ออก จากแอฟ มะนาว:'
 read a
 if [ $a == 'y' ]
 then
