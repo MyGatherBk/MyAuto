@@ -20,10 +20,3 @@ ________________________________________________________________________________
 - sudo -i 
 - wget https://raw.githubusercontent.com/MyGatherBk/PURE/master/Install && chmod +x Install && bash Install
 ____________________________________________________________________________________________________
-
-- sudo -i
-- wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/squid.conf
-- chmod +x squid.conf
-- ./squid.conf
-____________________________________________________________________________________________________
-
