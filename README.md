@@ -12,10 +12,8 @@ ________________________________________________________________________________
 - wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
 - chmod +x openvpn-install.sh
 - ./openvpn-install.sh
-____________________________________________________________________________________________________
-____________________________________________________________________________________________________
-# **  เลือก ติดตั้ง squid proxy ** <br>
+# ** ติดตั้ง squid proxy ใส่ IP ** <br>
+- Ubuntu
 - Debian
-- sudo -i 
-- wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/proxy.sh && chmod +x proxy.sh && proxy.sh
+- centos
 ____________________________________________________________________________________________________
