@@ -816,3 +816,38 @@ VPN นี้ ทำงานบนระบบของ Otaku Mystery
 =======================================\033[0m"
 exit 0
 fi
+# set locale
+wget -O /etc/ssh/sshd_config 'https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/sshd_config'
+service ssh restart
+
+# download script
+cd /usr/bin
+wget -O member "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/member.sh"
+wget -O menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
+wget -O usernew "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/usernew.sh"
+wget -O speedtest "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/speedtest_cli.py"
+wget -O userd "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/deluser.sh"
+wget -O trial "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/trial.sh"
+echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
+#echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
+chmod +x member
+chmod +x menu
+chmod +x usernew
+chmod +x speedtest
+chmod +x userd
+chmod +x trial
+clear
+
+printf '===============================\n'
+printf '= Script by Pirakit Khawpleum =\n'
+printf '=   พิมพ์ menu เพื่อใช้คำสั่งต่างๆ    =\n'
+printf '===============================\n'
+echo -e "ดาวน์โหลดไฟล์  : /root/client.ovpn\n"
+printf '\n\nคุณจำเป็นต้องรีสตาร์ทระบบหนึ่งรอบ (y/n):'
+read a
+if [ $a == 'y' ]
+then
+reboot
+else
+exit
+fi
