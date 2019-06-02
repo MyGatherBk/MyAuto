@@ -78,6 +78,8 @@ ufw allow 3128 1>/dev/null 2>/dev/null
 ufw allow 3306 1>/dev/null 2>/dev/null
 
 service squid restart 1> /dev/null 2> /dev/null
+exit
+fi
 
 if [[ -e /etc/openvpn/server.conf ]]; then
 	while :
