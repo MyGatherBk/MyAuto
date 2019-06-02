@@ -47,6 +47,38 @@ newclient () {
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
 
+if cat /etc/so |grep -i ubuntu |grep 16 1> /dev/null 2> /dev/null ; then
+echo -e "\033[01;31mกำลังติดตั้ง...\033[0m"
+apt-get update 1> /dev/null 2> /dev/null
+apt-get install squid -y 1> /dev/null 2> /dev/null
+apt-get install ufw -y 1> /dev/null 2> /dev/null
+
+cd /etc/squid
+echo "http_port 80" > squid.conf
+echo "http_port 8080" >> squid.conf
+echo "http_port 3128" >> squid.conf
+echo "http_port 3306" >> squid.conf
+echo "visible_hostname otakumysterych.cf" >> squid.conf
+echo "acl ip dstdomain $ip" >> squid.conf
+echo "acl accept method GET" >> squid.conf
+echo "acl accept method POST" >> squid.conf
+echo "acl accept method OPTIONS" >> squid.conf
+echo "acl accept method CONNECT" >> squid.conf
+echo "acl accept method PUT" >> squid.conf
+echo "acl HEAD method HEAD" >> squid.conf
+echo "http_access allow ip" >> squid.conf
+echo "http_access allow accept" >> squid.conf
+echo "http_access allow HEAD" >> squid.conf
+echo "http_access allow all" >> squid.conf
+
+ufw allow 443 1>/dev/null 2>/dev/null
+ufw allow 80 1>/dev/null 2>/dev/null
+ufw allow 8080 1>/dev/null 2>/dev/null
+ufw allow 3128 1>/dev/null 2>/dev/null
+ufw allow 3306 1>/dev/null 2>/dev/null
+
+service squid restart 1> /dev/null 2> /dev/null
+
 if [[ -e /etc/openvpn/server.conf ]]; then
 	while :
 	do
@@ -402,33 +434,7 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
-cd /etc/squid
-echo "http_port 80" > squid.conf
-echo "http_port 8080" >> squid.conf
-echo "http_port 3128" >> squid.conf
-echo "http_port 3306" >> squid.conf
-echo "visible_hostname otakumysterych.cf" >> squid.conf
-echo "acl ip dstdomain $ip" >> squid.conf
-echo "acl accept method GET" >> squid.conf
-echo "acl accept method POST" >> squid.conf
-echo "acl accept method OPTIONS" >> squid.conf
-echo "acl accept method CONNECT" >> squid.conf
-echo "acl accept method PUT" >> squid.conf
-echo "acl HEAD method HEAD" >> squid.conf
-echo "http_access allow ip" >> squid.conf
-echo "http_access allow accept" >> squid.conf
-echo "http_access allow HEAD" >> squid.conf
-echo "http_access allow all" >> squid.conf
-
-ufw allow 443 1>/dev/null 2>/dev/null
-ufw allow 80 1>/dev/null 2>/dev/null
-ufw allow 8080 1>/dev/null 2>/dev/null
-ufw allow 3128 1>/dev/null 2>/dev/null
-ufw allow 3306 1>/dev/null 2>/dev/null
-
-service squid restart 1> /dev/null 2> /dev/null
-
-	# Generates the custom client.ovpn
+# Generates the custom client.ovpn
 	newclient "$CLIENT"
 	echo
 	echo "Finished!"
