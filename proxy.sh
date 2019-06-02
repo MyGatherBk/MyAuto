@@ -7,9 +7,9 @@ echo "Otaku Mystery" > squidcre
 squidcre=$(cat squidcre)
 if grep -i otaku squidban 1>/dev/null 2>/dev/null ; then
 echo -e "\033[1;33m- - - - -> \033[01;34mสร้างเเละจัดทำโดย @"$squidfail"\033[01;33m $squidcre\033[0m"
-else ###########
+else
 echo "ไม่สามารถติดตั้งได้"
-exit ##########
+exit
 fi
 cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//' > /etc/so 
 echo -e "\033[1;33m- - - - -> \033[01;34mทำงานบนระบบ:\033[0m $(cat /etc/so)"
