@@ -525,7 +525,7 @@ VPN นี้ ทำงานบนระบบของ Otaku Mystery
 ติดตามเราได้ที่
 Youtube: Otaku Mystery
 =======================================\033[0m"
-exit 0
+
 fi
 
 if cat /etc/so |grep -i ubuntu 1> /dev/null 2> /dev/null ; then
@@ -609,7 +609,7 @@ VPN นี้ ทำงานบนระบบของ Otaku Mystery
 ติดตามเราได้ที่
 Youtube: Otaku Mystery
 =======================================\033[0m"
-exit 0
+
 fi
 
 if cat /etc/so |grep -i centos 1> /dev/null 2> /dev/null ; then
@@ -714,7 +714,7 @@ VPN นี้ ทำงานบนระบบของ Otaku Mystery
 ติดตามเราได้ที่
 Youtube: Otaku Mystery
 =======================================\033[0m"
-exit
+
 fi
 
 if cat /etc/so |grep -i debian 1> /dev/null 2> /dev/null ; then
@@ -814,7 +814,7 @@ VPN นี้ ทำงานบนระบบของ Otaku Mystery
 ติดตามเราได้ที่
 Youtube: Otaku Mystery
 =======================================\033[0m"
-exit 0
+
 fi
 
 # set locale
