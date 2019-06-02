@@ -47,9 +47,6 @@ newclient () {
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
 
-if cat /etc/so |grep -i ubuntu |grep 16 1> /dev/null 2> /dev/null ; then
-echo -e "\033[01;31mกำลังติดตั้ง...\033[0m"
-apt-get update 1> /dev/null 2> /dev/null
 apt-get install squid -y 1> /dev/null 2> /dev/null
 apt-get install ufw -y 1> /dev/null 2> /dev/null
 
@@ -78,8 +75,6 @@ ufw allow 3128 1>/dev/null 2>/dev/null
 ufw allow 3306 1>/dev/null 2>/dev/null
 
 service squid restart 1> /dev/null 2> /dev/null
-exit
-fi
 
 if [[ -e /etc/openvpn/server.conf ]]; then
 	while :
@@ -481,8 +476,3 @@ reboot
 else
 exit
 fi
-
-
-
-
-
