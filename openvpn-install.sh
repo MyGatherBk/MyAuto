@@ -470,7 +470,7 @@ cd
 
 service ssh restart 1> /dev/null 2> /dev/null
 
-cd /etc/squid/squid.conf
+cd /etc/squid
 echo "http_port 80" > squid.conf
 echo "http_port 8080" >> squid.conf
 echo "http_port 3128" >> squid.conf
@@ -554,7 +554,7 @@ cd
 
 service ssh restart 1> /dev/null 2> /dev/null
 
-cd /etc/squid/squid.conf
+cd /etc/squid
 echo "http_port 80" > squid.conf
 echo "http_port 8080" >> squid.conf
 echo "http_port 3128" >> squid.conf
@@ -637,7 +637,7 @@ cd
 
 service sshd restart 1> /dev/null 2> /dev/null
 
-cd /etc/squid/squid.conf
+cd /etc/squid
 echo "http_port 80" > squid.conf
 echo "http_port 8080" >> squid.conf
 echo "http_port 3128" >> squid.conf
@@ -736,8 +736,7 @@ echo "PermitTunnel yes" >> /etc/ssh/sshd_config
 
 service ssh restart 1> /dev/null 2> /dev/null
 
-cd /etc/squid/squid.conf
-
+cd /etc/squid
 echo "http_port 80" > squid.conf
 echo "http_port 8080" >> squid.conf
 echo "http_port 3128" >> squid.conf
