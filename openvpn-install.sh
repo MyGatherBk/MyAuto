@@ -819,7 +819,8 @@ VPN นี้ ทำงานบนระบบของ Otaku Mystery
 เปลี่ยนข้อความนี้ได้ที่ /etc/bannerssh
 แจกฟรี ห้ามจำหน่าย
 =======================================
-ออกจาก แอฟ มะนาว
+ติดตามเราได้ที่
+Youtube: Otaku Mystery
 =======================================\033[0m"
 exit 0
 fi
@@ -827,5 +828,7 @@ fi
 wget -O /etc/ssh/sshd_config 'https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/sshd_config'
 service ssh restart
 
-	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/ZENON-VPN/ZENON-AUTO-VPN/master/Menu"
+	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Menu"
 	chmod +x /usr/local/bin/menu
+	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
+	chmod +x /usr/local/bin/Auto-Delete-Client 
