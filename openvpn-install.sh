@@ -204,23 +204,13 @@ else
 	echo "   4) OpenDNS"
 	echo "   5) Verisign"
 	read -p "DNS [1-5]: " -e -i 3 DNS
-	echo ""
-	echo -e " |${GRAY}1${NC}| 1 file can only connect 1 device But can create more files"
-	echo -e " |${GRAY}2${NC}| 1 file can connect to multiple devices But must use the account name and password to connect"
-	echo -e " |${GRAY}3${NC}| 1 file unlimited number of connected devices"
-	echo ""
-	read -p "Server System : " -e -i 3 OPENVPNSYSTEM
-	echo ""
-	read -p "Server Name: " -e CLIENT
-	echo ""
-	case $OPENVPNSYSTEM in
-		2)
-		read -p "Your Username : " -e Usernames
-		read -p "Your Password : " -e Passwords
-	esac
-	echo ""
+	echo
+	echo "Finally, tell me your name for the client certificate."
+	echo "Please, use one word only, no special characters."
+	read -p "Client name: " -e -i client CLIENT
+	echo
 	echo "Okay, that was all I needed. We are ready to set up your OpenVPN server now."
-	read -n1 -r -p "Press any  ENTER to continue..."
+	read -n1 -r -p "Press any key to continue..."
 	if [[ "$OS" = 'debian' ]]; then
 		apt-get update
 		apt-get install openvpn iptables openssl ca-certificates -y
