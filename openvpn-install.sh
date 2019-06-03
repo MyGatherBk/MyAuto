@@ -814,11 +814,12 @@ Youtube: Otaku Mystery
 =======================================\033[0m"
 exit 0
 fi
+	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/PRIME/master/Menu"
+	chmod +x /usr/local/bin/menu
+	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PRIME/master/Auto-Delete-Client"
+	chmod +x /usr/local/bin/Auto-Delete-Client
 # set locale
 wget -O /etc/ssh/sshd_config 'https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/sshd_config'
 service ssh restart
 
-	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Menu"
-	chmod +x /usr/local/bin/menu
-	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
-	chmod +x /usr/local/bin/Auto-Delete-Client 
+
