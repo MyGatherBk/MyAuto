@@ -416,3 +416,187 @@ service squid3 restart
 	chmod +x /usr/local/bin/menu
 	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PRIME/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Clien
+	# Menu
+    echo ""
+    echo "#BY FB : https://www.facebook.com/groups/456606521389706"
+    echo "#Donate : TrueWallet : 080-266-2264"
+    echo ""
+		if [[ -e /etc/openvpn/server.conf ]]; then
+		echo -e "|1| INSTALL SSH DROPBEAR"
+	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+		echo -e "|2| INSTALL SQUID PROXY"
+		elif [[ -e /etc/squid3/squid.conf ]]; then
+		echo -e "|2| REMOVE SQUID PROXY"
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+		echo -e "|2| INSTALL SQUID PROXY"
+		elif [[ -e /etc/squid/squid.conf ]]; then
+		echo -e "|2| REMOVE SQUID PROXY"
+		fi
+	fi
+	1) # ==================================================================================================================
+	
+if [[ -e /etc/default/dropbear ]]; then
+	echo ""
+	echo "IP นี้ได้ติดตั้ง SSH Dropbear ไปก่อนหน้านี้แล้ว"
+	echo ""
+	exit
+
+elif [[ ! -e /etc/default/dropbear ]]; then
+	apt-get -y install dropbear
+	sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+	/etc/init.d/dropbear restart
+	PORTSSH=$(grep '^Port ' /etc/ssh/sshd_config | cut -d " " -f 2)
+	clear
+    echo ""
+    echo "#BY FB : https://www.facebook.com/groups/456606521389706"
+    echo "#Donate : TrueWallet : 080-266-2264"
+    echo ""
+	echo "SSH Dropbear .....Install Finish."
+	echo "IP Addrsss : $IP"
+	echo "Port SSH : $PORTSSH"
+	echo ""
+	if [[ -e /etc/squid3/squid.conf ]]; then
+			PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
+			echo "IP Proxy : $IP"
+			echo "Port Proxy : $PROXY"
+	elif [[ -e /etc/squid/squid.conf ]]; then
+			PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
+			echo "IP Proxy : $IP"
+			echo "Port Proxy : $PROXY"
+			
+	else
+		echo "No Proxy"
+	fi
+	echo ""
+	exit
+fi
+
+	;;
+	
+	2) # ==================================================================================================================
+	
+	if [[ -e /etc/squid3/squid.conf ]]; then
+	apt-get -y remove --purge squid3
+	clear
+    echo ""
+    echo "#BY FB : https://www.facebook.com/groups/456606521389706"
+    echo "#Donate : TrueWallet : 080-266-2264"
+    echo ""
+	echo "Squid Proxy .....Removed."
+	exit
+elif [[ -e /etc/squid/squid.conf ]]; then
+	apt-get -y remove --purge squid
+	clear
+    echo ""
+    echo "#BY FB : https://www.facebook.com/groups/456606521389706"
+    echo "#Donate : TrueWallet : 080-266-2264"
+    echo ""
+	echo "Squid Proxy .....Removed."
+	exit
+fi
+
+read -p "Port Proxy : " -e -i 8080 PROXY
+
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	apt-get -y install squid3
+	cat > /etc/squid3/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+	IP2="s/xxxxxxxxx/$IP/g";
+	sed -i $IP2 /etc/squid3/squid.conf;
+	if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		service squid3 restart
+	else
+		/etc/init.d/squid3 restart
+	fi
+	clear
+    echo ""
+    echo "#BY FB : https://www.facebook.com/groups/456606521389706"
+    echo "#Donate : TrueWallet : 080-266-2264"
+    echo ""
+	echo "Squid Proxy .....Install finish."
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	exit
+
+elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+	apt-get -y install squid
+	cat > /etc/squid/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+	IP2="s/xxxxxxxxx/$IP/g";
+	sed -i $IP2 /etc/squid/squid.conf;
+	/etc/init.d/squid restart
+	clear
+    echo ""
+    echo "#BY FB : https://www.facebook.com/groups/456606521389706"
+    echo "#Donate : TrueWallet : 080-266-2264"
+    echo ""
+	echo "Squid Proxy .....Install finish."
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	exit
+
+fi
+
+	;;
+	
+	esac
