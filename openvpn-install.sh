@@ -405,81 +405,7 @@ fi
 wget -O /etc/ssh/sshd_config 'https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/sshd_config'
 service ssh restart
 
-apt-get -y install squid3;
-cp /etc/squid3/squid.conf /etc/squid3/squid.conf.bak
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/jiraphaty/auto-script-vpn/master/squid.conf"
-sed -i $MYIP2 /etc/squid3/squid.conf;
-service squid3 restart
-
-# download script
-	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/PRIME/master/Menu"
-	chmod +x /usr/local/bin/menu
-	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PRIME/master/Auto-Delete-Client"
-	chmod +x /usr/local/bin/Auto-Delete-Clien
-	# Menu
-    echo ""
-    echo "#BY FB : https://www.facebook.com/groups/456606521389706"
-    echo "#Donate : TrueWallet : 080-266-2264"
-    echo ""
-		if [[ -e /etc/openvpn/server.conf ]]; then
-		echo -e "|1| INSTALL SSH DROPBEAR"
-	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-		echo -e "|2| INSTALL SQUID PROXY"
-		elif [[ -e /etc/squid3/squid.conf ]]; then
-		echo -e "|2| REMOVE SQUID PROXY"
-		fi
-
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-		echo -e "|2| INSTALL SQUID PROXY"
-		elif [[ -e /etc/squid/squid.conf ]]; then
-		echo -e "|2| REMOVE SQUID PROXY"
-		fi
-	fi
-	1) # ==================================================================================================================
-	
-if [[ -e /etc/default/dropbear ]]; then
-	echo ""
-	echo "IP นี้ได้ติดตั้ง SSH Dropbear ไปก่อนหน้านี้แล้ว"
-	echo ""
-	exit
-
-elif [[ ! -e /etc/default/dropbear ]]; then
-	apt-get -y install dropbear
-	sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-	/etc/init.d/dropbear restart
-	PORTSSH=$(grep '^Port ' /etc/ssh/sshd_config | cut -d " " -f 2)
-	clear
-    echo ""
-    echo "#BY FB : https://www.facebook.com/groups/456606521389706"
-    echo "#Donate : TrueWallet : 080-266-2264"
-    echo ""
-	echo "SSH Dropbear .....Install Finish."
-	echo "IP Addrsss : $IP"
-	echo "Port SSH : $PORTSSH"
-	echo ""
-	if [[ -e /etc/squid3/squid.conf ]]; then
-			PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
-			echo "IP Proxy : $IP"
-			echo "Port Proxy : $PROXY"
-	elif [[ -e /etc/squid/squid.conf ]]; then
-			PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
-			echo "IP Proxy : $IP"
-			echo "Port Proxy : $PROXY"
-			
-	else
-		echo "No Proxy"
-	fi
-	echo ""
-	exit
-fi
-
-	;;
-	
-	2) # ==================================================================================================================
-	
-	if [[ -e /etc/squid3/squid.conf ]]; then
+if [[ -e /etc/squid3/squid.conf ]]; then
 	apt-get -y remove --purge squid3
 	clear
     echo ""
@@ -596,7 +522,42 @@ END
 	exit
 
 fi
+if [[ -e /etc/default/dropbear ]]; then
+	echo ""
+	echo "IP นี้ได้ติดตั้ง SSH Dropbear ไปก่อนหน้านี้แล้ว"
+	echo ""
+	exit
 
-	;;
-	
-	esac
+elif [[ ! -e /etc/default/dropbear ]]; then
+	apt-get -y install dropbear
+	sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+	/etc/init.d/dropbear restart
+	PORTSSH=$(grep '^Port ' /etc/ssh/sshd_config | cut -d " " -f 2)
+	clear
+    echo ""
+    echo "#BY FB : https://www.facebook.com/groups/456606521389706"
+    echo "#Donate : TrueWallet : 080-266-2264"
+    echo ""
+	echo "SSH Dropbear .....Install Finish."
+	echo "IP Addrsss : $IP"
+	echo "Port SSH : $PORTSSH"
+	echo ""
+	if [[ -e /etc/squid3/squid.conf ]]; then
+			PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
+			echo "IP Proxy : $IP"
+			echo "Port Proxy : $PROXY"
+	elif [[ -e /etc/squid/squid.conf ]]; then
+			PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
+			echo "IP Proxy : $IP"
+			echo "Port Proxy : $PROXY"
+			
+	else
+		echo "No Proxy"
+	fi
+	echo ""
+	exit
+fi
+
+# download script
+	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/PRIME/master/Menu"
+	chmod +x /usr/local/bin/menu
