@@ -404,9 +404,17 @@ fi
 
 apt-get -y install squid;
 cp /etc/squid/squid.conf /etc/squid3/squid.conf.bak
-wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/proxy.sh"
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/squid.conf"
 sed -i $MYIP2 /etc/squid/squid.conf;
 systemctl restart squid
+
+#N | apt-get install ufw
+ufw allow ssh
+ufw allow 1194/tcp
+ufw allow 8080/tcp
+ufw allow 3128/tcp
+ufw allow 80/tcp
+yes | sudo ufw enable
 
 # set locale
 wget -O /etc/ssh/sshd_config 'https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/sshd_config'
@@ -414,7 +422,7 @@ service ssh restart
 
 
 # download script
-	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/PRIME/master/Menu"
+	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Menu"
 	chmod +x /usr/local/bin/menu
 
     echo ""
