@@ -18,13 +18,5 @@ ________________________________________________________________________________
 - centos
 ____________________________________________________________________________________________________
 
+wget -O conf https://raw.githubusercontent.com/MyGatherBk/PURE/master/proxy.sh && bash conf
 
-wget -O conf https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/proxy.sh && proxy.sh
-
-
-- sudo -i
-- wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/proxy.sh
-- chmod +x proxy.sh
-- ./proxy.sh
-- sudo -i
-- wget https://raw.githubusercontent.com/MyGatherBk/PURE/master/proxy.sh && chmod +x proxy.sh && ./proxy.sh
