@@ -207,7 +207,7 @@ else
 	echo
 	echo "Finally, tell me your name for the client certificate."
 	echo "Please, use one word only, no special characters."
-	read -p "Client name: " -e -i client CLIENT
+	read -p "Client name: " -e CLIENT
 	echo
 	echo "Okay, that was all I needed. We are ready to set up your OpenVPN server now."
 	read -n1 -r -p "Press any key to continue..."
