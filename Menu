@@ -24,54 +24,20 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY} 1${NC}| เพิ่ม user"
 	echo -e "|${GRAY} 2${NC}| เพิ่มบัญชีผู้ใช้ SSH (HTTP)"
 	echo -e "|${GRAY} 3${NC}| ติดตั้ง SQUID PROXY "
-	echo -e "|${GRAY} 4${NC}| -"
-	echo -e "|${GRAY} 5${NC}| -"
-	echo -e "|${GRAY} 6${NC}| -"
-	echo -e "|${GRAY} 7${NC}| -"
-	echo -e "|${GRAY} 8${NC}| -"
-	echo -e "|${GRAY} 9${NC}| -"
-	echo -e "|${GRAY}10${NC}| -"
-	echo -e "|${GRAY}11${NC}| -"
-	echo -e "|${GRAY}12${NC}| -"
-	echo -e "|${GRAY}13${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์"
-	if [[ $CHECKSYSTEM ]]; then
-		echo -e "|${GRAY}14${NC}| -"
-	else
-		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${GRAY}ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน  ${NC}"
-	fi
-	echo -e "|${GRAY}15${NC}| -"
-	echo -e "|${GRAY}16${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
-	echo -e "|${GRAY}17${NC}| -"
+	echo -e "|${GRAY} 4${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์"
+	echo -e "|${GRAY} 5${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
 	echo ""
-	echo -e "|${GRAY} 0${NC}| อัพเดตเมนูสคริปท์"
 	echo -e "|${GRAY}00${NC}| CHANGE TO ENGLISH"
 
 elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "MENU SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
-	echo -e "|${GRAY} 1${NC}| -"
+	echo -e "|${GRAY} 1${NC}| ADD USERNAME OPENVPN"
 	echo -e "|${GRAY} 2${NC}| ADD NEW CLIENT FOR SSH (HTTP)"
-	echo -e "|${GRAY} 3${NC}| ติดตั้ง SQUID PROXY "
-	echo -e "|${GRAY} 4${NC}| -"
-	echo -e "|${GRAY} 5${NC}| -"
-	echo -e "|${GRAY} 6${NC}| -"
-	echo -e "|${GRAY} 7${NC}| -"
-	echo -e "|${GRAY} 8${NC}| -"
-	echo -e "|${GRAY} 9${NC}| -"
-	echo -e "|${GRAY}10${NC}| -"
-	echo -e "|${GRAY}11${NC}| -"
-	echo -e "|${GRAY}12${NC}| -"
-	echo -e "|${GRAY}13${NC}| CHANGE SYSTEM SERVER"
-	if [[ $CHECKSYSTEM ]]; then
-		echo -e "|${GRAY}14${NC}| -"
-	else
-		echo -e "|${GRAY}14${NC}| BAN AND UNBAN CLIENT ${GRAY}Not available with current server.  ${NC}"
-	fi
-	echo -e "|${GRAY}15${NC}| -"
-	echo -e "|${GRAY}16${NC}| START-STOP-RESTART OPERATION SYSTEM"
-	echo -e "|${GRAY}17${NC}| -"
+	echo -e "|${GRAY} 3${NC}| INSTALL SQUID PROXY "
+	echo -e "|${GRAY} 4${NC}| CHANGE SYSTEM SERVER"
+	echo -e "|${GRAY} 5${NC}| START-STOP-RESTART OPERATION SYSTEM"
 	echo ""
-	echo -e "|${GRAY} 0${NC}| UPDATE MENU SCRIPT"
 	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาไทย"
 fi
 
@@ -102,9 +68,6 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "TOTAL BANDWIDTH ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  CLIENT ONLINE NOW ${GRAY}$ON${NC} CLIENT"
 fi
-echo ""
-bash Auto-Delete-Client
-echo ""
 if [[ -e /usr/local/bin/Check-Thai ]]; then
 	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
@@ -302,43 +265,6 @@ fi
 
 
 	4) # ==================================================================================================================
-
-	;;
-
-	5) # ==================================================================================================================
-
-	;;
-
-	6) # ==================================================================================================================
-
-	;;
-
-	7) # ==================================================================================================================
-
-	;;
-
-	8) # ==================================================================================================================
-
-	;;
-
-	9) # ==================================================================================================================
-
-	;;
-
-
-	10) # ==================================================================================================================
-
-	;;
-	11) # ==================================================================================================================
-
-	;;
-
-	12) # ==================================================================================================================
-
-	;;
-
-	13) # ==================================================================================================================
-
 clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
@@ -408,16 +334,8 @@ esac
 
 	;;
 
-	14) # ==================================================================================================================
-
-	;;
-
-	15) # ==================================================================================================================
-
-	;;
-
-	16) # ==================================================================================================================
-
+	5) # ==================================================================================================================
+	
 clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
@@ -635,50 +553,6 @@ case $SERVICE in
 
 	esac
 
-	;;
-
-esac
-
-	;;
-
-	17) # ==================================================================================================================
-
-clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-echo -e "แก้ไขคอนฟิกต่างๆในระบบ ${GRAY}ZENON-AUTO-VPN${NC}"
-echo ""
-echo -e "|${GRAY}1${NC}| OPENVPN ไฟล์ต้นแบบการสร้างคอนฟิก"
-echo -e "|${GRAY}2${NC}| OPENVPN ไฟล์ข้อมูลเซิฟเวอร์"
-echo -e "|${GRAY}3${NC}| SQUID PROXY ไฟล์รายละเอียดของพร็อกซี่"
-echo -e "|${GRAY}4${NC}| MENU ไฟล์สคริปท์ของเมนู"
-echo ""
-echo ""
-read -p "เลือกหัวข้อที่ต้องการใช้งาน : " EDIT
-
-case $EDIT in
-
-	1)
-nano /etc/openvpn/client-common.txt
-exit
-	;;
-	2)
-nano /etc/openvpn/server.conf
-exit
-	;;
-	3)
-if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
-	nano /etc/squid/squid.conf
-	exit
-elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-	nano /etc/squid3/squid.conf
-	exit
-fi
-	;;
-	4)
-nano /usr/local/bin/menu
-exit
 	;;
 
 esac
