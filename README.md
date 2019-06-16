@@ -3,9 +3,11 @@
 - wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
 - chmod +x openvpn-install.sh
 - ./openvpn-install.sh
-____________________________________________________________________________________________________
-# ** ติดตั้ง squid proxy  ** <br>
-- Debian 9
+- ติดตั้งเสร็จ พิมพ์ MENU  กด 3
+
+# **  กด 3 ติดตั้ง squid proxy  ** <br>
+- Debian 7 8 9
+- Ubuntu 14.04 16.04 18.04
 ____________________________________________________________________________________________________
 # **ตั้งพาส Root โดยใช้คำสั่ง** <br>
 - sudo -i <br>
