@@ -21,7 +21,7 @@ NC='\033[0m'
 if [[ -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "เมนูสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
-	echo -e "|${GRAY} 1${NC}| ADD USER DOWNLOAD TO CONFIG AT ROOT"
+	echo -e "|${GRAY} 1${NC}| เพิ่มผู้ใช้งาน, ถอนการติดตั้ง open vpn, ลบผู้ใช้งาน "
 	echo -e "|${GRAY} 2${NC}| เพิ่มบัญชีผู้ใช้ SSH (HTTP)"
 	echo -e "|${GRAY} 3${NC}| ติดตั้ง SQUID PROXY "
 	echo -e "|${GRAY} 4${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์"
@@ -32,7 +32,7 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "MENU SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
-	echo -e "|${GRAY} 1${NC}| ADD USER DOWNLOAD TO CONFIG AT ROOT"
+	echo -e "|${GRAY} 1${NC}| Add users, uninstall open vpn, delete users"
 	echo -e "|${GRAY} 2${NC}| ADD NEW CLIENT FOR SSH (HTTP)"
 	echo -e "|${GRAY} 3${NC}| INSTALL SQUID PROXY "
 	echo -e "|${GRAY} 4${NC}| CHANGE SYSTEM SERVER"
@@ -64,9 +64,9 @@ do
 done < /etc/passwd
 
 if [[ -e /usr/local/bin/Check-Thai ]]; then
-	echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
+	#echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
 elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
-	echo -e "TOTAL BANDWIDTH ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  CLIENT ONLINE NOW ${GRAY}$ON${NC} CLIENT"
+	#echo -e "TOTAL BANDWIDTH ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  CLIENT ONLINE NOW ${GRAY}$ON${NC} CLIENT"
 fi
 if [[ -e /usr/local/bin/Check-Thai ]]; then
 	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
