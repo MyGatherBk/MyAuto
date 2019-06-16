@@ -596,7 +596,7 @@ END
 	echo ""
 	echo "Squid Proxy .....Install finish."
 	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PORT"
+	echo "Port Proxy : $PROXY"
 	echo ""
 	exit
 
@@ -640,7 +640,7 @@ END
 	echo ""
 	echo "Squid Proxy .....Install finish."
 	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PORT"
+	echo "Port Proxy : $PROXY"
 	echo ""
 	exit
 
