@@ -414,7 +414,7 @@ service ssh restart
     echo "Finished!"
     echo "พีรกฤช ขาวปลื้ม"
     echo "MyGatherBK VPN"
-    echo "-----menu-----"
+    echo "-----menu ENTER-----"
     echo ""
 
 
