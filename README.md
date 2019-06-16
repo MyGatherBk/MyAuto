@@ -3,7 +3,7 @@
 - wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
 - chmod +x openvpn-install.sh
 - ./openvpn-install.sh
-- ติดตั้งเสร็จ พิมพ์ MENU  กด 3
+- ติดตั้งเสร็จ พิมพ์ menu  กด 3
 
 # **  กด 3 ติดตั้ง squid proxy  ** <br>
 - Debian 7 8 9
