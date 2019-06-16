@@ -62,7 +62,11 @@ do
 		fi
 		fi
 done < /etc/passwd
-
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	 echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	 echo -e "TOTAL BANDWIDTH ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  CLIENT ONLINE NOW ${GRAY}$ON${NC} CLIENT"
+fi
 if [[ -e /usr/local/bin/Check-Thai ]]; then
 	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
