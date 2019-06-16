@@ -376,15 +376,23 @@ exit 0' > $RCLOCAL
 	# client-common.txt is created so we have a template to add further users later
 	echo "client
 dev tun
+client
+dev tun
+port $PORT
 proto $PROTOCOL
-sndbuf 0
-rcvbuf 0
 remote $IP:$PORT@line.naver.jp $PORT
 http-proxy $IP 8080
+connect-retry 1
+connect-timeout 120
 resolv-retry infinite
+route-method exe
 nobind
+ping 5
+ping-restart 30
 persist-key
 persist-tun
+persist-remote-ip
+mute-replay-warnings
 remote-cert-tls server
 auth SHA512
 cipher AES-256-CBC
