@@ -411,9 +411,10 @@ service ssh restart
 	chmod +x /usr/local/bin/menu
 
     echo ""
+    echo "Finished!"
     echo "พีรกฤช ขาวปลื้ม"
     echo "MyGatherBK VPN"
-    echo "MENU"
+    echo "-----menu-----"
     echo ""
 
 
