@@ -18,7 +18,17 @@ NC='\033[0m'
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
-if [[ ! -e /usr/local/bin/Check-Thai ]]; then
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "เมนูสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
+	echo ""
+	echo -e "|${GRAY} 1${NC}| -"
+	echo -e "|${GRAY} 2${NC}| เพิ่มบัญชีผู้ใช้ SSH (HTTP)"
+	echo -e "|${GRAY} 3${NC}| ติดตั้ง SQUID PROXY "
+	echo -e "|${GRAY} 4${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์"
+	echo -e "|${GRAY} 5${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
+	echo ""
+
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "MENU SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
 	echo -e "|${GRAY} 1${NC}| Add users, uninstall open vpn, delete users"
@@ -27,13 +37,16 @@ if [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY} 4${NC}| CHANGE SYSTEM SERVER"
 	echo -e "|${GRAY} 5${NC}| START-STOP-RESTART OPERATION SYSTEM"
 	echo ""
-
 fi
+
 
 if [[ -e /usr/local/bin/Check-Thai ]]; then
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+fi
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	read -p "Select a Menu Script : " MENU
 fi
-
 
 case $MENU in
 	1) # ==================================================================================================================
@@ -911,11 +924,6 @@ esac
 	;;
 
 	00) # ==================================================================================================================
-
-if [[ ! -e /usr/local/bin/Check-Thai ]]; then
-	echo "Check Thai" >> /usr/local/bin/Check-Thai
-	menu
-fi
 
 	;;
 
