@@ -375,12 +375,11 @@ exit 0' > $RCLOCAL
 	fi
 	# client-common.txt is created so we have a template to add further users later
 	echo "client
-dev tun
 client
 dev tun
 port $PORT
 proto $PROTOCOL
-remote $IP:$PORT@line.naver.jp $PORT
+remote $IP:$PORT@kd.truevisions.tv.www.treuplookpanya.com $PORT
 http-proxy $IP 8080
 connect-retry 1
 connect-timeout 120
