@@ -408,9 +408,6 @@ verb 3" > /etc/openvpn/client-common.txt
 	echo "If you want to add more clients, you simply need to run this script again!"
 fi
 
-# set locale
-wget -O /etc/ssh/sshd_config 'https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/sshd_config'
-service ssh restart
 
 
 # download script
