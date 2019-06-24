@@ -375,23 +375,17 @@ exit 0' > $RCLOCAL
 	fi
 	# client-common.txt is created so we have a template to add further users later
 	echo "client
-client
+client	
 dev tun
-port $PORT
 proto $PROTOCOL
+sndbuf 0
+rcvbuf 0
 remote $IP:$PORT@kd.truevisions.tv.www.treuplookpanya.com $PORT
 http-proxy $IP 8080
-connect-retry 1
-connect-timeout 120
 resolv-retry infinite
-route-method exe
 nobind
-ping 5
-ping-restart 30
 persist-key
 persist-tun
-persist-remote-ip
-mute-replay-warnings
 remote-cert-tls server
 auth SHA512
 cipher AES-256-CBC
@@ -415,10 +409,10 @@ fi
 	chmod +x /usr/local/bin/menu
 
     echo ""
-    echo "Finished!"
-    echo "พีรกฤช ขาวปลื้ม"
-    echo "MyGatherBK VPN"
-    echo "-----menu ENTER-----"
+    echo "-------------Finished!------------"
+    echo "-----------พีรกฤช ขาวปลื้ม----------"
+    echo "------------MyGatherBK VPN---------------"
+    echo "-------------------------------------------พิมพ์ menu ENTER----------------"
     echo ""
 
 
