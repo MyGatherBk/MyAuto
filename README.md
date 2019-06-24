@@ -17,8 +17,3 @@ ________________________________________________________________________________
 - passwd:password updated successfully (YOU PASSWORD) {OK}<br>
 ____________________________________________________________________________________________________
 
- <li>wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-auto-ub14.sh</li>
-        <li>chmod +x openvpn-auto-ub14.sh</li>
-        <li>./openvpn-auto-ub14.sh</li>
-        <li>reboot หนึ่งรอบ</li>
-____________________________________________________________________________________________________
