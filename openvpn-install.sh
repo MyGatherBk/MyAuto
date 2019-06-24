@@ -380,7 +380,7 @@ dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-remote $IP:$PORT@kd.truevisions.tv.www.treuplookpanya.com $PORT
+remote $IP:$PORT@kd.truevisions.tv.www.trueplookpanya.com $PORT
 http-proxy $IP 8080
 resolv-retry infinite
 nobind
