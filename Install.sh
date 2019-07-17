@@ -110,8 +110,8 @@ if [[ "$OS" = 'debian' ]]; then
 	#Install Git dan Ambil Script
 	apt-get -y install zip unzip
 	cd /home/vps/public_html
-	wget https://www.mediafire.com/folder/0hi4oore6ck9d/ocd/VIP1PANEL.zip
-	unzip VIP1PANEL.zip
+	wget https://www.mediafire.com/folder/0hi4oore6ck9d/ocd/ocspanel.zip
+	unzip ocspanel.zip
 	chmod 777 /home/vps/public_html/config
 	chmod 777 /home/vps/public_html/config/config.ini
 	chmod 777 /home/vps/public_html/config/route.ini
@@ -184,8 +184,8 @@ else
 	#Install Git dan Ambil Script
 	yum -y install zip unzip
 	cd /home/vps/public_html
-	wget https://www.mediafire.com/folder/0hi4oore6ck9d/ocd/VIP1PANEL.zip
-	unzip VIP1PANEL.zip
+	wget https://www.mediafire.com/folder/0hi4oore6ck9d/ocd/ocspanel.zip
+	unzip ocspanel.zip
 	chmod 777 /home/vps/public_html/config
 	chmod 777 /home/vps/public_html/config/config.ini
 	chmod 777 /home/vps/public_html/config/route.ini
