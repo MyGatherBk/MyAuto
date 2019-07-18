@@ -28,6 +28,7 @@ if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY} 5${NC}| START-STOP-RESTART OPERATION SYSTEM"
 	echo -e "|${GRAY} 6${NC}| test download config"
 	echo -e "|${GRAY} 7${NC}| ตรวจสอบบัญชีผู้ใช้ทั้งหมด"
+	echo -e "|${GRAY} 8${NC}| ลบบัญชีผู้ใช้"
 	echo ""
 
 
@@ -1078,6 +1079,46 @@ echo ""
 exit
 
 	;;
+
+		8) # ==================================================================================================================
+
+echo ""
+read -p "ชื่อบัญชีที่ต้องการลบ : " CLIENT
+egrep "^$CLIENT" /etc/passwd >/dev/null
+
+if [ $? -eq 0 ]; then
+	if [[ $CHECKSYSTEM ]]; then
+		echo ""
+		userdel -f $CLIENT
+		echo ""
+		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
+		echo ""
+		exit
+	else
+		echo ""
+		userdel -f $CLIENT
+		cd /etc/openvpn/easy-rsa/
+		./easyrsa --batch revoke $CLIENT
+		EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
+		rm -rf pki/reqs/$CLIENT.req
+		rm -rf pki/private/$CLIENT.key
+		rm -rf pki/issued/$CLIENT.crt
+		rm -rf /etc/openvpn/crl.pem
+		cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
+		chown nobody:$GROUPNAME /etc/openvpn/crl.pem
+		echo ""
+		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
+		echo ""
+		exit
+	fi
+else
+	echo ""
+	echo "ไม่มีชื่อบัญชีที่ระบุ"
+	echo ""
+	exit
+fi
+
+	;;		
 	
 	00) # ==================================================================================================================
 
