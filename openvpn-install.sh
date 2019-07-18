@@ -375,12 +375,11 @@ exit 0' > $RCLOCAL
 	fi
 	# client-common.txt is created so we have a template to add further users later
 	echo "client
-client	
 dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-remote $IP:$PORT@kd.truevisions.tv.www.trueplookpanya.com $PORT
+remote $IP:$PORT@ $PORT
 http-proxy $IP 8080
 resolv-retry infinite
 nobind
@@ -393,15 +392,6 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
-# Generates the custom client.ovpn
-	newclient "$CLIENT"
-	echo
-	echo "Finished!"
-	echo
-	echo "Your client configuration is available at:" ~/"$CLIENT.ovpn"
-	echo "If you want to add more clients, you simply need to run this script again!"
-fi
-
 
 
 # download script
@@ -410,30 +400,14 @@ fi
 	
 # install webserver
 apt-get -y install nginx
-# install webserver
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/nginx.conf"
 mkdir -p /home/vps/public_html
-echo "<pre>Setup by MyGatherBK</pre>" > /home/vps/public_html/index.html
-echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
-args='$args'
-uri='$uri'
-document_root='$document_root'
-fastcgi_script_name='$fastcgi_script_name'
+echo "<pre>Setup by mygatherbk</pre>" > /home/vps/public_html/index.html
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/vps.conf"
-	apt-get -y install vnstat
-	cd /etc/openvpn/easy-rsa/
-	./easyrsa build-client-full $CLIENT nopass
-	newclient "$CLIENT"
-	cp /root/$CLIENT.ovpn /home/vps/public_html/
-	rm -f /root/$CLIENT.ovpn
-	case $OPENVPNSYSTEM in
-		2)
-		useradd $Usernames
-		echo -e "$Passwords\n$Passwords\n"|passwd $Usernames &> /dev/null
-		;;
+service nginx restart
 	esac
 	clear
 	echo ""
