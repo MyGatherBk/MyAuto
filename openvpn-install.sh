@@ -555,7 +555,6 @@ END
 		/etc/init.d/nginx restart
 	fi
 
-fi
 
 	apt-get -y install vnstat
 	cd /etc/openvpn/easy-rsa/
@@ -580,8 +579,7 @@ fi
 		echo "Protocal : UDP"
 	elif [[ "$PROTOCOL" = 'tcp' ]]; then
 		echo "Protocal : TCP"
-	fi
-	echo "Port Nginx : 85"
+		echo "Port Nginx : 85"
 	echo "IP Proxy : $IP"
 	echo "Port Proxy : $PROXY"
 	echo ""
