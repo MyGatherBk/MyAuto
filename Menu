@@ -933,7 +933,7 @@ esac
 	;;
 	
 	6) # ==================================================================================================================
- if [[ $CHECKSYSTEM ]]; then
+if [[ $CHECKSYSTEM ]]; then
 	echo ""
 	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
 
@@ -999,7 +999,6 @@ else
 	read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
 newclient () {
-	# Generates the custom client.ovpn
 	cp /etc/openvpn/client-common.txt ~/$1.ovpn
 	echo "<ca>" >> ~/$1.ovpn
 	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
@@ -1040,6 +1039,7 @@ newclient () {
 fi
 
 	;;
+
 		7) # ==================================================================================================================
 
 clear
