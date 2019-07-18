@@ -408,8 +408,8 @@ mkdir -p /home/vps/public_html
 echo "<pre>Setup by mygatherbk</pre>" > /home/vps/public_html/index.html
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/vps.conf"
 service nginx restart
-	esac
-	clear
+
+clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
