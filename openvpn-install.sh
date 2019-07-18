@@ -409,36 +409,7 @@ echo "<pre>Setup by mygatherbk</pre>" > /home/vps/public_html/index.html
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/vps.conf"
 service nginx restart
 
-clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
-	echo "IP Server : $IP"
-	echo "Port Server : $PORT"
-	if [[ "$PROTOCOL" = 'udp' ]]; then
-		echo "Protocal : UDP"
-	elif [[ "$PROTOCOL" = 'tcp' ]]; then
-		echo "Protocal : TCP"
-	fi
-	echo "Port Nginx : 85"
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
-	echo ""
-	case $OPENVPNSYSTEM in
-		1)
-		echo "Download My Config : http://$IP:85/$CLIENT.ovpn"
-		;;
-		2)
-		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
-		echo ""
-		echo "Your Username : $Usernames"
-		echo "Your Password : $Passwords"
-		echo "Expire : Never"
-		;;
-		3)
-		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
-		;;
+
 	esac
 	echo ""
 	echo ""
