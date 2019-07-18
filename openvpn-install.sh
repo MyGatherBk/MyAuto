@@ -439,32 +439,14 @@ http {
         include /etc/nginx/conf.d/*.conf;
 }
 END
-	mkdir -p /home/vps/public_html
-	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
-	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
-	args='$args'
-	uri='$uri'
-	document_root='$document_root'
-	fastcgi_script_name='$fastcgi_script_name'
-	cat > /etc/nginx/conf.d/vps.conf <<END
-server {
-    listen       85;
-    server_name  127.0.0.1 localhost;
-    access_log /var/log/nginx/vps-access.log;
-    error_log /var/log/nginx/vps-error.log error;
-    root   /home/vps/public_html;
-    location / {
-        index  index.html index.htm index.php;
-	try_files $uri $uri/ /index.php?$args;
-    }
-    location ~ \.php$ {
-        include /etc/nginx/fastcgi_params;
-        fastcgi_pass  127.0.0.1:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-}
-END
+mkdir -p /home/vps/public_html
+echo "<pre>Setup by MyGatherBK</pre>" > /home/vps/public_html/index.html
+echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
+args='$args'
+uri='$uri'
+document_root='$document_root'
+fastcgi_script_name='$fastcgi_script_name'
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/vps.conf"
 
 	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ -e /etc/squid3/squid.conf ]]; then
@@ -555,6 +537,7 @@ END
 		/etc/init.d/nginx restart
 	fi
 
+fi
 
 	apt-get -y install vnstat
 	cd /etc/openvpn/easy-rsa/
@@ -579,7 +562,8 @@ END
 		echo "Protocal : UDP"
 	elif [[ "$PROTOCOL" = 'tcp' ]]; then
 		echo "Protocal : TCP"
-		echo "Port Nginx : 85"
+	fi
+	echo "Port Nginx : 85"
 	echo "IP Proxy : $IP"
 	echo "Port Proxy : $PROXY"
 	echo ""
@@ -605,5 +589,4 @@ END
 	echo "====================================================="
 	echo ""
 	exit
-
 
