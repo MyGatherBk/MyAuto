@@ -407,9 +407,79 @@ fi
 # download script
 	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
 	chmod +x /usr/local/bin/menu
+	
+# install webserver
+apt-get -y install nginx
+# install webserver
+cd
+rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/nginx.conf"
+mkdir -p /home/vps/public_html
+echo "<pre>Setup by MyGatherBK</pre>" > /home/vps/public_html/index.html
+echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
+args='$args'
+uri='$uri'
+document_root='$document_root'
+fastcgi_script_name='$fastcgi_script_name'
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/vps.conf"
+service nginx restart
+
+	apt-get -y install vnstat
+	cd /etc/openvpn/easy-rsa/
+	./easyrsa build-client-full $CLIENT nopass
+	newclient "$CLIENT"
+	cp /root/$CLIENT.ovpn /home/vps/public_html/
+	rm -f /root/$CLIENT.ovpn
+	case $OPENVPNSYSTEM in
+		2)
+		useradd $Usernames
+		echo -e "$Passwords\n$Passwords\n"|passwd $Usernames &> /dev/null
+		;;
+	esac
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
+	echo "IP Server : $IP"
+	echo "Port Server : $PORT"
+	if [[ "$PROTOCOL" = 'udp' ]]; then
+		echo "Protocal : UDP"
+	elif [[ "$PROTOCOL" = 'tcp' ]]; then
+		echo "Protocal : TCP"
+	fi
+	echo "Port Nginx : 85"
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	case $OPENVPNSYSTEM in
+		1)
+		echo "Download My Config : http://$IP:85/$CLIENT.ovpn"
+		;;
+		2)
+		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+		echo ""
+		echo "Your Username : $Usernames"
+		echo "Your Password : $Passwords"
+		echo "Expire : Never"
+		;;
+		3)
+		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+		;;
+	esac
+	echo ""
+	echo ""
+	echo "====================================================="
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo "====================================================="
+	echo ""
+	exit
+
 
     echo ""
     echo "-------------Finished!------------"
+    echo "Download My Config : http://$IP:85/$CLIENT.ovpn"
     echo "-----------พีรกฤช ขาวปลื้ม----------"
     echo "------------MyGatherBK VPN---------------"
     echo "-------------------------------------------พิมพ์ menu ENTER----------------"
