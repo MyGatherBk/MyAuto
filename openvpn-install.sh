@@ -409,12 +409,20 @@ echo "<pre>Setup by mygatherbk</pre>" > /home/vps/public_html/index.html
 wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/vps.conf"
 service nginx restart
 
+# Generates the custom client.ovpn
+	newclient "$CLIENT"
+	echo
+	echo "Finished!"
+	echo
+	echo "Your client configuration is available at:" ~/"$CLIENT.ovpn"
+	echo "If you want to add more clients, you simply need to run this script again!"
+fi
 
-	esac
-	echo ""
-	echo ""
-	echo "====================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
-	echo "====================================================="
-	echo ""
-	exit
+
+    echo ""
+    echo "Finished!"
+    echo "พีรกฤช ขาวปลื้ม"
+    echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+    echo "MyGatherBK VPN"
+    echo "-----menu ENTER-----"
+    echo ""
