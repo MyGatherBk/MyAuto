@@ -394,10 +394,17 @@ verb 3" > /etc/openvpn/client-common.txt
 
 
 
-# download script
-	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
-	chmod +x /usr/local/bin/menu
+
 	
+# install stunnel 
+apt-get install stunnel4 -y
+wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.conf"
+openssl genrsa -out key.pem 2048
+openssl req -new -x509 -key key.pem -out cert.pem -days 1095
+cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
+sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+service stunnel4 restart
+
 # install webserver
 apt-get -y install nginx php5-fpm php5-cli
 
@@ -413,6 +420,10 @@ wget -O /etc/nginx/conf.d/webserver.conf "https://raw.githubusercontent.com/MyGa
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
+
+# download script
+	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+	chmod +x /usr/local/bin/menu
 
 # finalisasi
 chown -R www-data:www-data /home/vps/public_html
