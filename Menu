@@ -452,17 +452,6 @@ verb 3" > /etc/openvpn/client-common.txt
 	echo "If you want to add more clients, you simply need to run this script again!"
 fi
 
-	RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
-	mkdir /home/vps/public_html/$RANDOMFOLDER
-	cd /etc/openvpn/easy-rsa/
-	./easyrsa build-client-full $CLIENT nopass
-	newclient "$CLIENT"
-	cp /root/$CLIENT.ovpn /home/vps/public_html/$RANDOMFOLDER/$CLIENT.ovpn
-	rm -f /root/$CLIENT.ovpn
-	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
-	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
-	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
-
 	clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
@@ -470,7 +459,7 @@ fi
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:81/$RANDOMFOLDER/$CLIENT.ovpn"
+	echo "Download Config : http://$IP:85/$CLIENT.ovpn"
 	echo ""
 	exit
 	;;
