@@ -470,7 +470,7 @@ fi
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn"
+	echo "ดาวน์โหลดคอนฟิก : http://$IP:81/$RANDOMFOLDER/$CLIENT.ovpn"
 	echo ""
 	exit
 	;;
