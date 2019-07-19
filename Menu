@@ -930,15 +930,13 @@ if [[ $CHECKSYSTEM ]]; then
 		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
 
 		clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
+		echo ""
 		echo "ชื่อบัญชี : $CLIENT"
 		echo "รหัสผ่าน : $PASSWORD"
 		echo "หมดอายุในวันที่ : $EXP"
 		echo ""
 		echo "IP : $IP"
-		echo "Port : 22,443"
+		echo "Port : 22"
 		echo "Proxy Port : $PROXY"
 		exit
 	else
@@ -994,17 +992,25 @@ newclient () {
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
 
+	RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
+	mkdir /home/vps/public_html/$RANDOMFOLDER
+	cd /etc/openvpn/easy-rsa/
+	./easyrsa build-client-full $CLIENT nopass
+	newclient "$CLIENT"
+	cp /root/$CLIENT.ovpn /home/vps/public_html/$RANDOMFOLDER/$CLIENT.ovpn
+	rm -f /root/$CLIENT.ovpn
+	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
+	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
+
 	clear
 	echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-    echo "-------------Finished!------------"
-    echo "-----------พีรกฤช ขาวปลื้ม----------"
-    echo "CONFIG :" ~/"$CLIENT.ovpn"
-    echo "------------MyGatherBK VPN---------------"
-    echo "--------------------พิมพ์ menu ENTER----------------"
-    echo ""
+	echo "CONFIG :" ~/"$CLIENT.ovpn"
+	echo ""
+	exit
 
 fi
 
