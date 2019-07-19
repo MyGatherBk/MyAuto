@@ -115,6 +115,9 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
 			read -p "กำหนดวันหมดอายุ : " -e TimeActive
 			echo
+				echo ""
+			echo "หมดอายุในวันที่ : $EXP"
+			echo ""
 			echo "Client $CLIENT added, configuration is available at:" ~/"$CLIENT.ovpn"
 			exit
 			;;
