@@ -438,34 +438,28 @@ cipher AES-256-CBC
 setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
+
+
 # Generates the custom client.ovpn
 	newclient "$CLIENT"
-	echo
-	echo ""
-	echo "Finished!"
-	echo "พีรกฤช ขาวปลื้ม"
-	echo "MyGatherBK VPN"
-	echo "-----menu ENTER-----"
-	echo ""
-	echo
-	echo "Your client configuration is available at:" ~/"$CLIENT.ovpn"
-	echo "If you want to add more clients, you simply need to run this script again!"
-fi
-
-	clear
+clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "        Finished!   "
-	echo "      พีรกฤช ขาวปลื้ม"
-	echo "   Download Config:" ~/"$CLIENT.ovpn"
-	echo "   MyGatherBK VPN"
-	 echo "      -----พิมพ์ menu ENTER-----"
-	echo ""
-	echo ""
+    echo ""
+    echo "------------Finished!------------"
+    echo "--------------พีรกฤช ขาวปลื้ม----------"
+    echo "-----------------------------------------------------Download Config:" ~/"$CLIENT.ovpn------------------"
+    echo "---------------------MyGatherBK VPN---------------"
+    echo "-------------------------------------------พิมพ์ menu ENTER----------------"
+    echo ""
+	
+
+fi
+
 	exit
 	;;
 	2) # ==================================================================================================================
