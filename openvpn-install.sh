@@ -393,16 +393,22 @@ key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
 
-
+# download script
+	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+	chmod +x /usr/local/bin/menu
+	
 # Generates the custom client.ovpn
 	newclient "$CLIENT"
+
     echo ""
-    echo "        Finished!   "
-    echo "      พีรกฤช ขาวปลื้ม"
-    echo "   Download Config:" ~/"$CLIENT.ovpn"
-    echo "   MyGatherBK VPN"
-    echo "      -----พิมพ์ menu ENTER-----"
+    echo "------------Finished!------------"
+    echo "--------------พีรกฤช ขาวปลื้ม----------"
+    echo "-----------------------------------------------------Download Config:" ~/"$CLIENT.ovpn------------------"
+    echo "---------------------MyGatherBK VPN---------------"
+    echo "-------------------------------------------พิมพ์ menu ENTER----------------"
     echo ""
+	
+
 fi
 
 
