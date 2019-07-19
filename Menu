@@ -21,10 +21,10 @@ NC='\033[0m'
 if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "MENU SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
-	echo -e "|${GRAY} 1${NC}| Add users, uninstall open vpn, delete users"
-	echo -e "|${GRAY} 2${NC}| ADD NEW CLIENT FOR SSH (HTTP)"
-	echo -e "|${GRAY} 3${NC}| INSTALL SQUID PROXY "
-	echo -e "|${GRAY} 4${NC}| CHANGE SYSTEM SERVER"
+	echo -e "|${GRAY} 1${NC}| เพิ่ม คอนฟิก, ถอนการติดตั้ง openvpn, ลบ users"
+	echo -e "|${GRAY} 2${NC}| เพิ้มชื่อผู้ใช้งาน  SSH (HTTP)"
+	echo -e "|${GRAY} 3${NC}| ติดตั้ง พร็อกซี่ SQUID PROXY "
+	echo -e "|${GRAY} 4${NC}| กำหนด 1 ไฟล์เชื่อมต่อได้หลายเครื่อง"
 	echo -e "|${GRAY} 5${NC}| START-STOP-RESTART OPERATION SYSTEM"
 	echo -e "|${GRAY} 6${NC}| test download config"
 	echo -e "|${GRAY} 7${NC}| ตรวจสอบบัญชีผู้ใช้ทั้งหมด"
@@ -240,7 +240,7 @@ else
 	esac
 	echo
 	echo "What port do you want OpenVPN listening to?"
-	read -p "Port: " -e -i 1194 PORT
+	read -p "Port: " -e -i 443 PORT
 	echo
 	echo "Which DNS do you want to use with the VPN?"
 	echo "   1) Current system resolvers"
@@ -459,7 +459,12 @@ fi
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+	echo "        Finished!   "
+	echo "      พีรกฤช ขาวปลื้ม"
+	echo "   Download Config:" ~/"$CLIENT.ovpn"
+	echo "   MyGatherBK VPN"
+	 echo "      -----พิมพ์ menu ENTER-----"
+	echo ""
 	echo ""
 	exit
 	;;
@@ -1003,25 +1008,18 @@ newclient () {
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
 
-	RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
-	mkdir /home/vps/public_html/$RANDOMFOLDER
-	cd /etc/openvpn/easy-rsa/
-	./easyrsa build-client-full $CLIENT nopass
-	newclient "$CLIENT"
-	cp /root/$CLIENT.ovpn /home/vps/public_html/$RANDOMFOLDER/$CLIENT.ovpn
-	rm -f /root/$CLIENT.ovpn
-	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
-	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
-	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
-
-	clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn"
+	echo "        Finished!   "
+	echo "      พีรกฤช ขาวปลื้ม"
+	echo "   Download Config:" ~/"$CLIENT.ovpn"
+	echo "   MyGatherBK VPN"
+	 echo "      -----พิมพ์ menu ENTER-----"
+	echo ""
 	echo ""
 	exit
 
