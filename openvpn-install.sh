@@ -399,13 +399,12 @@ verb 3" > /etc/openvpn/client-common.txt
 	
 # Generates the custom client.ovpn
 	newclient "$CLIENT"
-
     echo ""
     echo "------------Finished!------------"
-    echo "--------------พีรกฤช ขาวปลื้ม----------"
-    echo "-----------------------------------------------------Download Config:" ~/"$CLIENT.ovpn------------------"
-    echo "---------------------MyGatherBK VPN---------------"
-    echo "-------------------------------------------พิมพ์ menu ENTER----------------"
+    echo "------------พีรกฤช ขาวปลื้ม----------"
+    echo "-----Download Config:" ~/"$CLIENT.ovpn--------"
+    echo "------------MyGatherBK VPN---------------"
+    echo "------------พิมพ์ menu ENTER----------------"
     echo ""
 	
 
