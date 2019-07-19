@@ -439,28 +439,20 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
-
-# Generates the custom client.ovpn
-	newclient "$CLIENT"
-clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	clear
 	echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-    echo ""
-    echo "------------Finished!------------"
-    echo "------------พีรกฤช ขาวปลื้ม----------"
-    echo "-----Download Config:" ~/"$CLIENT.ovpn--------"
+    echo "-------------Finished!------------"
+    echo "-----------พีรกฤช ขาวปลื้ม----------"
+    echo "CONFIG :" ~/"$CLIENT.ovpn"
     echo "------------MyGatherBK VPN---------------"
-    echo "------------พิมพ์ menu ENTER----------------"
+    echo "--------------------พิมพ์ menu ENTER----------------"
     echo ""
-	
 
 fi
 
-	exit
 	;;
 	2) # ==================================================================================================================
 
@@ -1002,20 +994,17 @@ newclient () {
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
 
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	clear
 	echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "        Finished!   "
-	echo "      พีรกฤช ขาวปลื้ม"
-	echo "   Download Config:" ~/"$CLIENT.ovpn"
-	echo "   MyGatherBK VPN"
-	 echo "      -----พิมพ์ menu ENTER-----"
-	echo ""
-	echo ""
-	exit
+    echo "-------------Finished!------------"
+    echo "-----------พีรกฤช ขาวปลื้ม----------"
+    echo "CONFIG :" ~/"$CLIENT.ovpn"
+    echo "------------MyGatherBK VPN---------------"
+    echo "--------------------พิมพ์ menu ENTER----------------"
+    echo ""
 
 fi
 
