@@ -399,15 +399,25 @@ verb 3" > /etc/openvpn/client-common.txt
 	chmod +x /usr/local/bin/menu
 	
 # install webserver
-apt-get -y install nginx
+apt-get -y install nginx php5-fpm php5-cli
+
+# install webserver
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/nginx.conf"
-mkdir -p /home/vps/public_html
-echo "<pre>Setup by mygatherbk</pre>" > /home/vps/public_html/index.html
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/vps.conf"
+mkdir -p /home/webserver/public_html
+echo "<pre>Setup by man20820 | https://man20820.com | https:// tkjpedia.com </pre>" > /home/webserver/public_html/index.html
+echo "<?php phpinfo(); ?>" > /home/webserver/public_html/info.php
+wget -O /etc/nginx/conf.d/webserver.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/webserver.conf"
+sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
+service php5-fpm restart
 service nginx restart
+
+# finalisasi
+chown -R www-data:www-data /home/vps/public_html
+service nginx start
+service php-fpm start
 
 # Generates the custom client.ovpn
 	newclient "$CLIENT"
@@ -419,10 +429,12 @@ service nginx restart
 fi
 
 
+
+
     echo ""
     echo "Finished!"
     echo "พีรกฤช ขาวปลื้ม"
-    echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+    echo "Download Config : http://$MYIP/CLIENT.ovpn"
     echo "MyGatherBK VPN"
     echo "-----menu ENTER-----"
     echo ""
