@@ -445,7 +445,7 @@ fi
     echo ""
     echo "Finished!"
     echo "พีรกฤช ขาวปลื้ม"
-    echo "Download Config : http://$MYIP/CLIENT.ovpn"
+    echo "Download Config : http://$IP:81/$CLIENT.ovpn"
     echo "MyGatherBK VPN"
     echo "-----menu ENTER-----"
     echo ""
