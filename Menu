@@ -28,7 +28,6 @@ if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY} 5${NC}| START-STOP-RESTART OPERATION SYSTEM"
 	echo -e "|${GRAY} 6${NC}| ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด"
 	echo -e "|${GRAY} 7${NC}| ลบบัญชีผู้ใช้ SSH"
-	echo -e "|${GRAY} 8${NC}| Remove OpenVPN"
 	echo ""
 
 
@@ -40,7 +39,7 @@ if [[ ! -e /usr/local/bin/Check-Thai ]]; then
 fi
 
 case $MENU in
-	1) # ==================================================================================================================
+1) # ==================================================================================================================
 	
 	# Detect Debian users running the script with "sh" instead of bash
 if readlink /proc/$$/exe | grep -q "dash"; then
@@ -96,21 +95,22 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 		echo "Looks like OpenVPN is already installed."
 		echo
 		echo "What do you want to do?"
-		echo "   1) Add a new user"
-		echo "   2) Revoke an existing user"
-		echo "   3) Exit"
-		read -p "Select an option [1-3]: " option
+		echo "   1) เพิ่มผู้ใช้ใหม่"
+		echo "   2) เพิกถอนผู้ใช้ที่มีอยู่"
+		echo "   3) ลบ OpenVPN"
+		echo "   4) ออก"
+		read -p "เลือกตัวเลือก [1-4]: " option
 		case $option in
 			1) 
 			echo
-			echo "Tell me a name for the client certificate."
-			echo "Please, use one word only, no special characters."
-			read -p "Client name: " -e CLIENT
+			echo "บอกชื่อใบรับรองลูกค้าให้ฉัน "
+			echo "กรุณาใช้เพียงหนึ่งคำเท่านั้นไม่มีตัวอักษรพิเศษ "
+			read -p "ชื่อลูกค้า: " -e CLIENT
 			cd /etc/openvpn/easy-rsa/
 			EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $CLIENT nopass
 			# Generates the custom client.ovpn
 			newclient "$CLIENT"
-			echo "Client $CLIENT added, configuration is available at:" ~/"$CLIENT.ovpn"
+			echo "เพิ่มไคลเอนต์ $CLIENT แล้วการกำหนดค่ามีให้ที่: "~/"$CLIENT.ovpn"
 			exit
 			;;
 			2)
@@ -151,8 +151,54 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				echo "Certificate revocation for client $CLIENT aborted!"
 			fi
 			exit
-				;;
-				3) exit;;
+			;;
+			3) 
+			echo
+			read -p "คุณต้องการลบ OpenVPN จริง ๆ หรือไม่? [y/N]: " -e REMOVE
+			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
+				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
+				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
+				if pgrep firewalld; then
+					IP=$(firewall-cmd --direct --get-rules ipv4 nat POSTROUTING | grep '\-s 10.8.0.0/24 '"'"'!'"'"' -d 10.8.0.0/24 -j SNAT --to ' | cut -d " " -f 10)
+					# Using both permanent and not permanent rules to avoid a firewalld reload.
+					firewall-cmd --zone=public --remove-port=$PORT/$PROTOCOL
+					firewall-cmd --zone=trusted --remove-source=10.8.0.0/24
+					firewall-cmd --permanent --zone=public --remove-port=$PORT/$PROTOCOL
+					firewall-cmd --permanent --zone=trusted --remove-source=10.8.0.0/24
+					firewall-cmd --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
+					firewall-cmd --permanent --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
+				else
+					IP=$(grep 'iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to ' $RCLOCAL | cut -d " " -f 14)
+					iptables -t nat -D POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
+					sed -i '/iptables -t nat -A POSTROUTING -s 10.8.0.0\/24 ! -d 10.8.0.0\/24 -j SNAT --to /d' $RCLOCAL
+					if iptables -L -n | grep -qE '^ACCEPT'; then
+						iptables -D INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
+						iptables -D FORWARD -s 10.8.0.0/24 -j ACCEPT
+						iptables -D FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+						sed -i "/iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT/d" $RCLOCAL
+						sed -i "/iptables -I FORWARD -s 10.8.0.0\/24 -j ACCEPT/d" $RCLOCAL
+						sed -i "/iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT/d" $RCLOCAL
+					fi
+				fi
+				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
+					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
+				fi
+				if [[ "$OS" = 'debian' ]]; then
+					apt-get remove --purge -y openvpn
+				else
+					yum remove openvpn -y
+				fi
+				rm -rf /etc/openvpn
+				rm -f /etc/sysctl.d/30-openvpn-forward.conf
+				echo
+				echo "OpenVPN removed!"
+			else
+				echo
+				echo "Removal aborted!"
+			fi
+			exit
+			;;
+			4) exit;;
 		esac
 	done
 else
