@@ -603,8 +603,6 @@ fi
 		3)
 		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
 		;;
-		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
-		;;
 	esac
 	echo ""
 	echo ""
