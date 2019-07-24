@@ -572,44 +572,21 @@ fi
 		useradd $Usernames
 		echo -e "$Passwords\n$Passwords\n"|passwd $Usernames &> /dev/null
 		;;
-	esac
-	clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
-	echo "IP Server : $IP"
-	echo "Port Server : $PORT"
-	if [[ "$PROTOCOL" = 'udp' ]]; then
-		echo "Protocal : UDP"
-	elif [[ "$PROTOCOL" = 'tcp' ]]; then
-		echo "Protocal : TCP"
-	fi
-	echo "Port Nginx : 85"
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
-	echo ""
-	case $OPENVPNSYSTEM in
-		1)
-		echo "Download My Config : http://$IP:85/$CLIENT.ovpn"
-		;;
-		2)
-		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
-		echo ""
-		echo "Your Username : $Usernames"
-		echo "Your Password : $Passwords"
-		echo "Expire : Never"
-		;;
-		3)
-		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
-		;;
-	esac
-	echo ""
-	echo ""
-	echo "====================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
-	echo "====================================================="
-	echo ""
-	exit
 
-	;;
+# Generates the custom client.ovpn
+	newclient "$CLIENT"
+    echo ""
+    echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+    echo ""
+    echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
+    echo "IP Server : $IP"
+    echo "Port Server : $PORT"
+    echo ""
+    echo "-------------Finished!------------"
+    echo "-----------พีรกฤช ขาวปลื้ม----------"
+    echo "-----Download Config : http://$IP:85/$CLIENT.ovpn"
+    echo "------------MyGatherBK VPN---------------"
+    echo "--------------------พิมพ์ menu ENTER----------------"
+    echo ""
+fi
+
