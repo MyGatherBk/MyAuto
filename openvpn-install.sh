@@ -603,6 +603,8 @@ fi
 		3)
 		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
 		;;
+		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+		;;
 	esac
 	echo ""
 	echo ""
@@ -610,3 +612,4 @@ fi
 	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
 	echo "====================================================="
 	echo ""
+	exit
