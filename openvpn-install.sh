@@ -574,11 +574,11 @@ fi
 		;;
 
 # Generates the custom client.ovpn
-	newclient "$CLIENT"
     echo ""
     echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
     echo ""
     echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
+    echo "Port Nginx : 85"
     echo "IP Server : $IP"
     echo "Port Server : $PORT"
     echo ""
