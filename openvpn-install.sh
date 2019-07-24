@@ -35,6 +35,82 @@ GRAY='\033[1;33m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+# Menu
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
+	echo ""
+	if [[ -e /etc/openvpn/server.conf ]]; then
+		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
+	else
+		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
+	fi
+	echo -e "|${GRAY} 2${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่าน PRITUNL ${GREEN} ✔   ${NC}"
+	echo -e "|${GRAY} 3${NC}| ติดตั้ง SSH DROPBEAR ${GREEN} ✔   ${NC}"
+	echo -e "|${GRAY} 4${NC}| ติดตั้ง WEB PANEL [Debian 7] ${GREEN} ✔   ${NC}"
+	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
+		elif [[ -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
+		elif [[ -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
+		fi
+	fi
+	echo ""
+	echo -e "|${GRAY} 0${NC}| อัพเดตฟังก์ชั่นสคริปท์"
+	echo -e "|${GRAY}00${NC}| CHANGE TO ENGLISH"
+	echo ""
+	echo ""
+	read -p "เลือกหัวข้อฟังก์ชั่นที่ต้องการใช้งาน : " FUNCTIONSCRIPT
+
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "FUNCTION SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
+	echo ""
+	if [[ -e /etc/openvpn/server.conf ]]; then
+		echo -e "|${GRAY} 1${NC}| REMOVE OPENVPN TERMINAL CONTROL ${GREEN} ✔   ${NC}"
+	else
+		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL ${GREEN} ✔   ${NC}"
+	fi
+	echo -e "|${GRAY} 2${NC}| INSTALL OPENVPN PRITUNL CONTROL ${GREEN} ✔   ${NC}"
+	echo -e "|${GRAY} 3${NC}| INSTALL SSH DROPBEAR ${GREEN} ✔   ${NC}"
+	echo -e "|${GRAY} 4${NC}| INSTALL WEB PANEL [Debian 7] ${GREEN} ✔   ${NC}"
+	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ${GREEN} ✔   ${NC}"
+		elif [[ -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ${GREEN} ✔   ${NC}"
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ${GREEN} ✔   ${NC}"
+		elif [[ -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ${GREEN} ✔   ${NC}"
+		fi
+	fi
+	echo ""
+	echo -e "|${GRAY} 0${NC}| UPDATE FUNCTION SCRIPT"
+	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาไทย"
+	echo ""
+	echo ""
+	read -p "Select a Function Script : " FUNCTIONSCRIPT
+	
+	
+
+fi
+
+case $FUNCTIONSCRIPT in
+
+	1) # ==================================================================================================================
+
 newclient () {
 	# Generates the custom client.ovpn
 	cp /etc/openvpn/client-common.txt ~/$1.ovpn
@@ -572,21 +648,44 @@ fi
 		useradd $Usernames
 		echo -e "$Passwords\n$Passwords\n"|passwd $Usernames &> /dev/null
 		;;
+	esac
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
+	echo "IP Server : $IP"
+	echo "Port Server : $PORT"
+	if [[ "$PROTOCOL" = 'udp' ]]; then
+		echo "Protocal : UDP"
+	elif [[ "$PROTOCOL" = 'tcp' ]]; then
+		echo "Protocal : TCP"
+	fi
+	echo "Port Nginx : 85"
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	case $OPENVPNSYSTEM in
+		1)
+		echo "Download My Config : http://$IP:85/$CLIENT.ovpn"
+		;;
+		2)
+		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+		echo ""
+		echo "Your Username : $Usernames"
+		echo "Your Password : $Passwords"
+		echo "Expire : Never"
+		;;
+		3)
+		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+		;;
+	esac
+	echo ""
+	echo ""
+	echo "====================================================="
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo "====================================================="
+	echo ""
+	exit
 
-# Generates the custom client.ovpn
-    echo ""
-    echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-    echo ""
-    echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
-    echo "Port Nginx : 85"
-    echo "IP Server : $IP"
-    echo "Port Server : $PORT"
-    echo ""
-    echo "-------------Finished!------------"
-    echo "-----------พีรกฤช ขาวปลื้ม----------"
-    echo "-----Download Config : http://$IP:85/$CLIENT.ovpn"
-    echo "------------MyGatherBK VPN---------------"
-    echo "--------------------พิมพ์ menu ENTER----------------"
-    echo ""
-fi
-
+	;;
