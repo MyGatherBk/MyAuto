@@ -393,42 +393,6 @@ key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
 
-if [[ -e /etc/default/dropbear ]]; then
-	echo ""
-	echo "IP นี้ได้ติดตั้ง SSH Dropbear ไปก่อนหน้านี้แล้ว"
-	echo ""
-	exit
-
-elif [[ ! -e /etc/default/dropbear ]]; then
-	apt-get -y install dropbear
-	sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-	/etc/init.d/dropbear restart
-	PORTSSH=$(grep '^Port ' /etc/ssh/sshd_config | cut -d " " -f 2)
-	clear
-    echo ""
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "SSH Dropbear .....Install Finish."
-	echo "IP Addrsss : $IP"
-	echo "Port SSH : $PORTSSH"
-	echo ""
-	if [[ -e /etc/squid3/squid.conf ]]; then
-			PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
-			echo "IP Proxy : $IP"
-			echo "Port Proxy : $PROXY"
-	elif [[ -e /etc/squid/squid.conf ]]; then
-			PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
-			echo "IP Proxy : $IP"
-			echo "Port Proxy : $PROXY"
-			
-	else
-		echo "No Proxy"
-	fi
-	echo ""
-	exit
-fi
-
 # download script
 	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
 	chmod +x /usr/local/bin/menu
