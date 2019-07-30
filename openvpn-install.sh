@@ -402,7 +402,7 @@ verb 3" > /etc/openvpn/client-common.txt
     echo ""
     echo "-------------Finished!------------"
     echo "-----------พีรกฤช ขาวปลื้ม----------"
-    echo "CONFIG :" ~/"$CLIENT.ovpn"
+    echo "CONFIG :"~/"$CLIENT.ovpn"
     echo "------------MyGatherBK VPN---------------"
     echo "--------------------พิมพ์ menu ENTER----------------"
     echo ""
