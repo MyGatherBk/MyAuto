@@ -686,7 +686,7 @@ clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
-echo -e "เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GRAY}ZENON-AUTO-VPN${NC}"
+echo -e "เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GRAY}Admin MyGatherBK VPN${NC}"
 echo ""
 echo -e "|${GRAY}1${NC}| OPENVPN"
 echo -e "|${GRAY}2${NC}| SSH DROPBEAR"
