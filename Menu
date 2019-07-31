@@ -29,7 +29,7 @@ if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY} 6${NC}| ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด"
 	echo -e "|${GRAY} 7${NC}| ลบบัญชีผู้ใช้ SSH"
 	echo -e "|${GRAY} 8${NC}| ช็คแบนวิทที่ใช้งานทั้งหมดวันนี้"
-
+        echo -e "|${GRAY} 9${NC}| ช็คแบนวิทที่ใช้งาน รายวัน รายเดือน"
 	echo ""
 
 
@@ -998,6 +998,78 @@ echo -e "\033[1;31m"
 exit
 ;;
 
+	9) # ==================================================================================================================
+clear
+clear
+echo
+	echo -e "Total Data Usage:"
+echo -e "\033[1;31m" 
+	myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`
+	myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`
+	ifconfig $myint | grep "RX bytes" | sed -e 's/ *RX [a-z:0-9]*/Download : /g' | sed -e 's/TX [a-z:0-9]*/\nUpload   : /g'
+	echo -e "\033[0m" 
+exit
+;;
+if [ -d '/home/vps/public_html/bandwidth' ]; then
+	echo; echo; echo " "
+clear
+clear
+else
+apt-get update 
+apt-get -y upgrade
+apt-get -y install vnstat
+chown -R vnstat:vnstat /var/lib/vnstat
+
+# install vnstat gui
+cd /home/vps/public_html/
+wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
+tar xf vnstat_php_frontend-1.5.1.tar.gz
+rm vnstat_php_frontend-1.5.1.tar.gz
+mv vnstat_php_frontend-1.5.1 bandwidth
+cd bandwidth
+sed -i "s/\$iface_list = array('eth0', 'sixxs');/\$iface_list = array('eth0');/g" config.php
+sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
+sed -i 's/Internal/Internet/g' config.php
+sed -i '/SixXS IPv6/d' config.php
+sed -i "s/\$locale = 'en_US.UTF-8';/\$locale = 'en_US.UTF+8';/g" config.php
+clear
+clear
+echo "
+
+ สถานะการติดตั้ง
+"
+service vnstat restart
+echo "
+ ================
+   ติดตั้งเส็จเรียบร้อย
+ ================
+"
+exit
+ fi
+ if [ -e '/var/lib/vnstat/eth0' ]; then
+vnstat -u -i eth0
+sm=eth0
+else
+vnstat -u -i ens3
+sm=ens3
+fi
+echo "
+ =====================
+  เช็ดแบนวิทที่ใช้งานทั้งหมด
+ =====================
+  1. เช็ดรายวัน
+  2. เช็ดรายเดือน
+"
+read -p " Enter Number : " opcao
+case $opcao in
+  01 | 1 )
+vnstat -d -i $sm;;
+ 02 | 2 )
+vnstat -i $sm;;
+esac
+echo ""
+exit
+;;
 
 00) # ==================================================================================================================
 
