@@ -184,18 +184,15 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 					userdel $ACCOUNT
 				fi
 			done < /etc/passwd
-		fi
-		echo ""
-		echo -e "${GRAY}OpenVPN Removed. ${NC} "
-		echo ""
-		exit
-	else
-		echo ""
-		echo -e "${GRAY}Removal Aborted. ${NC} "
-		echo ""
-		exit
-	fi
-	exit
+				rm -rf /etc/openvpn
+				rm -f /etc/sysctl.d/30-openvpn-forward.conf
+				echo
+				echo "OpenVPN removed!"
+			else
+				echo
+				echo "Removal aborted!"
+			fi
+			exit
 
 # elif [[ -e /etc/apt/sources.list.d/pritunl.list ]]; then
 # echo ""
