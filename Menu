@@ -34,7 +34,7 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY}11${NC}| ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง"
 	echo -e "|${GRAY}12${NC}| ตรวจสอบแบนด์วิดท์ต่อบัญชี"
 	echo -e "|${GRAY}13${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์"
-	echo -e "|${GRAY}14${NC}| INSTALL PROXY "
+	echo -e "|${GRAY}18${NC}| INSTALL PROXY "
 	if [[ $CHECKSYSTEM ]]; then
 		echo -e "|${GRAY}15${NC}| แบนและปลดแบนบัญชีผู้ใช้"
 	else
@@ -63,7 +63,7 @@ elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY}11${NC}| CHECK BANDWIDTH PER HOUR"
 	echo -e "|${GRAY}12${NC}| CHECK BANDWIDTH PER USER"
 	echo -e "|${GRAY}13${NC}| CHANGE SYSTEM SERVER"
-	echo -e "|${GRAY}14${NC}| INSTALL PROXY "
+	echo -e "|${GRAY}18${NC}| INSTALL PROXY "
 	if [[ $CHECKSYSTEM ]]; then
 		echo -e "|${GRAY}15${NC}| BAN AND UNBAN CLIENT"
 	else
@@ -171,9 +171,7 @@ case $MENU in
 	fi
 
 	;;
-
 	3) # ==================================================================================================================
-
 			# This option could be documented a bit better and maybe even be simplified
 			# ...but what can I say, I want some sleep too
 			NUMBEROFCLIENTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c "^V")
@@ -1262,7 +1260,7 @@ esac
 	;;
 
 
-	15) # ==================================================================================================================
+	18) # ==================================================================================================================
 	if [[ -e /etc/squid3/squid.conf ]]; then
 	apt-get -y remove --purge squid3
 	clear
