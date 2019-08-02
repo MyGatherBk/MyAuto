@@ -34,10 +34,11 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY}11${NC}| ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง"
 	echo -e "|${GRAY}12${NC}| ตรวจสอบแบนด์วิดท์ต่อบัญชี"
 	echo -e "|${GRAY}13${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์"
+	echo -e "|${GRAY}14${NC}| INSTALL PROXY "
 	if [[ $CHECKSYSTEM ]]; then
-		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้"
+		echo -e "|${GRAY}15${NC}| แบนและปลดแบนบัญชีผู้ใช้"
 	else
-		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${GRAY}ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน  ${NC}"
+		echo -e "|${GRAY}15${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${GRAY}ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน  ${NC}"
 	fi
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
 	echo -e "|${GRAY}16${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
@@ -62,10 +63,11 @@ elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY}11${NC}| CHECK BANDWIDTH PER HOUR"
 	echo -e "|${GRAY}12${NC}| CHECK BANDWIDTH PER USER"
 	echo -e "|${GRAY}13${NC}| CHANGE SYSTEM SERVER"
+	echo -e "|${GRAY}14${NC}| INSTALL PROXY "
 	if [[ $CHECKSYSTEM ]]; then
-		echo -e "|${GRAY}14${NC}| BAN AND UNBAN CLIENT"
+		echo -e "|${GRAY}15${NC}| BAN AND UNBAN CLIENT"
 	else
-		echo -e "|${GRAY}14${NC}| BAN AND UNBAN CLIENT ${GRAY}Not available with current server.  ${NC}"
+		echo -e "|${GRAY}15${NC}| BAN AND UNBAN CLIENT ${GRAY}Not available with current server.  ${NC}"
 	fi
 	echo -e "|${GRAY}15${NC}| UP-DOWN SPEED INTERNET"
 	echo -e "|${GRAY}16${NC}| START-STOP-RESTART OPERATION SYSTEM"
@@ -105,9 +107,7 @@ fi
 echo ""
 bash Auto-Delete-Client
 echo ""
-if [[ -e /usr/local/bin/Check-Thai ]]; then
-	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
-elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+if [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	read -p "Select a Menu Script : " MENU
 fi
 
@@ -115,113 +115,17 @@ case $MENU in
 
 	1) # ==================================================================================================================
 
-if [[ $CHECKSYSTEM ]]; then
-	echo ""
-	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
-
-	if [ $? -eq 0 ]; then
-		read -p "รหัสผ่าน : " -e PASSWORD
-		echo ""
-		echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
-		read -p "กำหนดวันหมดอายุ : " -e TimeActive
-
-		PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
-		PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
-		useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
-		EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
-		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
-
-		clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-		echo "ชื่อบัญชี : $CLIENT"
-		echo "รหัสผ่าน : $PASSWORD"
-		echo "หมดอายุในวันที่ : $EXP"
-		echo ""
-		echo "IP : $IP"
-		echo "Port : 22,443"
-		echo "Proxy Port : $PROXY"
-		exit
-	else
-		echo ""
-		echo "ชื่อบัญชีที่ระบุอยู่ในระบบแล้ว"
-		echo ""
-		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
-
-		if [[ "$TOMENU" = 'Y' ]]; then
-			menu
+			echo
+			echo "บอกชื่อใบรับรองลูกค้าให้ฉัน "
+			echo "กรุณาใช้เพียงหนึ่งคำเท่านั้นไม่มีตัวอักษรพิเศษ "
+			read -p "ชื่อลูกค้า: " -e CLIENT
+			cd /etc/openvpn/easy-rsa/
+			EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $CLIENT nopass
+			# Generates the custom client.ovpn
+			newclient "$CLIENT"
+			echo "เพิ่มไคลเอนต์ $CLIENT แล้วการกำหนดค่ามีให้ที่: "~/"$CLIENT.ovpn"
 			exit
-		elif [[ "$TOMENU" = 'N' ]]; then
-			exit
-		fi
-	fi
-
-else
-
-	echo ""
-	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
-
-	if [[ -e /etc/openvpn/easy-rsa/pki/private/$CLIENT.key ]]; then
-		echo ""
-		echo "ชื่อบัญชีที่ระบุอยู่ในระบบแล้ว"
-		echo ""
-		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
-
-		if [[ "$TOMENU" = 'Y' ]]; then
-			menu
-			exit
-		elif [[ "$TOMENU" = 'N' ]]; then
-			exit
-		fi
-	fi
-
-	echo ""
-	echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
-	read -p "กำหนดวันหมดอายุ : " -e TimeActive
-
-newclient () {
-	# Generates the custom client.ovpn
-	cp /etc/openvpn/client-common.txt ~/$1.ovpn
-	echo "<ca>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-	echo "</ca>" >> ~/$1.ovpn
-	echo "<cert>" >> ~/$1.ovpn
-	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-	echo "</cert>" >> ~/$1.ovpn
-	echo "<key>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-	echo "</key>" >> ~/$1.ovpn
-	echo "<tls-auth>" >> ~/$1.ovpn
-	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
-	echo "</tls-auth>" >> ~/$1.ovpn
-}
-
-	RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
-	mkdir /home/vps/public_html/$RANDOMFOLDER
-	cd /etc/openvpn/easy-rsa/
-	./easyrsa build-client-full $CLIENT nopass
-	newclient "$CLIENT"
-	cp /root/$CLIENT.ovpn /home/vps/public_html/$RANDOMFOLDER/$CLIENT.ovpn
-	rm -f /root/$CLIENT.ovpn
-	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
-	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
-	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
-
-	clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "ชื่อบัญชี : $CLIENT"
-	echo "หมดอายุในวันที่ : $EXP"
-	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn"
-	echo ""
-	exit
-
-fi
-
-	;;
+			;;
 
 	2) # ==================================================================================================================
 
@@ -1357,15 +1261,125 @@ esac
 
 	;;
 
+
+	15) # ==================================================================================================================
+	if [[ -e /etc/squid3/squid.conf ]]; then
+	apt-get -y remove --purge squid3
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "Squid Proxy .....Removed."
+	exit
+elif [[ -e /etc/squid/squid.conf ]]; then
+	apt-get -y remove --purge squid
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "Squid Proxy .....Removed."
+	exit
+fi
+
+read -p "Port Proxy : " -e -i 8080 PROXY
+
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	apt-get -y install squid3
+	cat > /etc/squid3/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+	IP2="s/xxxxxxxxx/$IP/g";
+	sed -i $IP2 /etc/squid3/squid.conf;
+	if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		service squid3 restart
+	else
+		/etc/init.d/squid3 restart
+	fi
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "Squid Proxy .....Install finish."
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	exit
+
+elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+	apt-get -y install squid
+	cat > /etc/squid/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+	IP2="s/xxxxxxxxx/$IP/g";
+	sed -i $IP2 /etc/squid/squid.conf;
+	/etc/init.d/squid restart
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "Squid Proxy .....Install finish."
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	exit
+
+fi
+
+	;;
 	0) # ==================================================================================================================
 
-rm -f /usr/local/bin/menu
-wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
-chmod +x /usr/local/bin/menu
-rm -f /usr/local/bin/Auto-Delete-Client 
-wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
-chmod +x /usr/local/bin/Auto-Delete-Client
-menu
 
 	;;
 
