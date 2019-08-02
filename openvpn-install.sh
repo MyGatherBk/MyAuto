@@ -184,6 +184,11 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 					userdel $ACCOUNT
 				fi
 			done < /etc/passwd
+				if [[ "$OS" = 'debian' ]]; then
+					apt-get remove --purge -y openvpn
+				else
+					yum remove openvpn -y
+				fi
 				rm -rf /etc/openvpn
 				rm -f /etc/sysctl.d/30-openvpn-forward.conf
 				echo
