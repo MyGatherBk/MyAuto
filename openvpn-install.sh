@@ -580,6 +580,9 @@ END
 		/etc/init.d/squid restart
 		/etc/init.d/openvpn restart
 		/etc/init.d/nginx restart
+	fi
+
+fi
 		
 # download script
 	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
