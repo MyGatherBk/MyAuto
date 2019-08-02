@@ -49,7 +49,6 @@ newclient () {
 
 if [[ -e /etc/openvpn/server.conf ]]; then
 	
-else
 	clear
 	echo 'Welcome to this OpenVPN "road warrior" installer!'
 	echo
