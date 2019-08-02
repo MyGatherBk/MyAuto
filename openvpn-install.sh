@@ -396,6 +396,8 @@ verb 3" > /etc/openvpn/client-common.txt
 # download script
 	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
 	chmod +x /usr/local/bin/menu
+	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
+	chmod +x /usr/local/bin/Auto-Delete-Client 
 	
 # Generates the custom client.ovpn
 	newclient "$CLIENT"
