@@ -18,60 +18,167 @@ NC='\033[0m'
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
-if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "เมนูสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
+	echo ""
+	echo -e "|${GRAY} 1${NC}| เพิ่มบัญชีผู้ใช้ OpenVPN"
+	echo -e "|${GRAY} 2${NC}| เพิ่มบัญชีผู้ใช้ SSH (HTTP)"
+	echo -e "|${GRAY} 3${NC}| ลบบัญชีผู้ใช้"
+	echo -e "|${GRAY} 4${NC}| ตรวจสอบบัญชีผู้ใช้ทั้งหมด และตรวจสอบบัญชีที่กำลังเชื่อมต่อ"
+	echo -e "|${GRAY} 5${NC}| เปลี่ยนรหัสผ่านบัญชีผู้ใช้"
+	echo -e "|${GRAY} 6${NC}| เปลี่ยนวันหมดอายุบัญชีผู้ใช้"
+	echo -e "|${GRAY} 7${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ"
+	echo -e "|${GRAY} 8${NC}| ทดสอบความเร็วอินเตอร์เน็ต"
+	echo -e "|${GRAY} 9${NC}| -"
+	echo -e "|${GRAY}10${NC}| ตรวจสอบแบนด์วิดท์"
+	echo -e "|${GRAY}11${NC}| ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง"
+	echo -e "|${GRAY}12${NC}| ตรวจสอบแบนด์วิดท์ต่อบัญชี"
+	echo -e "|${GRAY}13${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์"
+	if [[ $CHECKSYSTEM ]]; then
+		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้"
+	else
+		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${GRAY}ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน  ${NC}"
+	fi
+	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
+	echo -e "|${GRAY}16${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
+	echo -e "|${GRAY}17${NC}| แก้ไขคอนฟิกต่างๆในระบบ"
+	echo ""
+	echo -e "|${GRAY} 0${NC}| อัพเดตเมนูสคริปท์"
+	echo -e "|${GRAY}00${NC}| CHANGE TO ENGLISH"
+
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "MENU SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
-	echo -e "|${GRAY} 1${NC}| เพิ่ม คอนฟิก, ถอนการติดตั้ง openvpn, ลบ users"
-	echo -e "|${GRAY} 2${NC}| เพิ่มชื่อผู้ใช้งาน  SSH (HTTP)"
-	echo -e "|${GRAY} 3${NC}| ติดตั้ง พร็อกซี่ SQUID PROXY "
-	echo -e "|${GRAY} 4${NC}| กำหนด 1 ไฟล์เชื่อมต่อได้หลายเครื่อง"
-	echo -e "|${GRAY} 5${NC}| START-STOP-RESTART OPERATION SYSTEM"
-	echo -e "|${GRAY} 6${NC}| ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด"
-	echo -e "|${GRAY} 7${NC}| ลบบัญชีผู้ใช้ SSH"
-	echo -e "|${GRAY} 8${NC}| ช็คแบนวิทที่ใช้งานทั้งหมดวันนี้"
-
+	echo -e "|${GRAY} 1${NC}| ADD NEW CLIENT FOR OPENVPN"
+	echo -e "|${GRAY} 2${NC}| ADD NEW CLIENT FOR SSH (HTTP)"
+	echo -e "|${GRAY} 3${NC}| REMOVE CLIENT"
+	echo -e "|${GRAY} 4${NC}| CHECK ALL CLIENT AND CHECK ALL CLIENT ONLINE"
+	echo -e "|${GRAY} 5${NC}| CHANGE PASSWORD OF CLIENT"
+	echo -e "|${GRAY} 6${NC}| RENEW EXPIRE DATE OF CLIENT"
+	echo -e "|${GRAY} 7${NC}| SET TIME AUTO REBOOT SERVER"
+	echo -e "|${GRAY} 8${NC}| SPEEDTEST"
+	echo -e "|${GRAY} 9${NC}| -"
+	echo -e "|${GRAY}10${NC}| CHECK ALL BANDWIDTH"
+	echo -e "|${GRAY}11${NC}| CHECK BANDWIDTH PER HOUR"
+	echo -e "|${GRAY}12${NC}| CHECK BANDWIDTH PER USER"
+	echo -e "|${GRAY}13${NC}| CHANGE SYSTEM SERVER"
+	if [[ $CHECKSYSTEM ]]; then
+		echo -e "|${GRAY}14${NC}| BAN AND UNBAN CLIENT"
+	else
+		echo -e "|${GRAY}14${NC}| BAN AND UNBAN CLIENT ${GRAY}Not available with current server.  ${NC}"
+	fi
+	echo -e "|${GRAY}15${NC}| UP-DOWN SPEED INTERNET"
+	echo -e "|${GRAY}16${NC}| START-STOP-RESTART OPERATION SYSTEM"
+	echo -e "|${GRAY}17${NC}| EDIT CONFIG"
 	echo ""
-
-
+	echo -e "|${GRAY} 0${NC}| UPDATE MENU SCRIPT"
+	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาไทย"
 fi
 
+echo ""
+if [[ -e /etc/vnstat.conf ]]; then
+	INTERFACE=`vnstat -m | head -n2 | awk '{print $1}'`
+	TOTALBW=$(vnstat -i $INTERFACE --nick local | grep "total:" | awk '{print $8" "substr ($9, 1, 1)}')
+fi
 
-if [[ ! -e /usr/local/bin/Check-Thai ]]; then
+ON=0
+OFF=0
+while read ONOFF
+do
+	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
+	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
+	ONLINE="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $ACCOUNT | grep -Eom 1 $ACCOUNT)"
+	if [[ $ID -ge 1000 ]]; then
+		if [[ -z $ONLINE ]]; then
+			OFF=$((OFF+1))
+		else
+			ON=$((ON+1))
+		fi
+		fi
+done < /etc/passwd
+
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "TOTAL BANDWIDTH ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  CLIENT ONLINE NOW ${GRAY}$ON${NC} CLIENT"
+fi
+echo ""
+bash Auto-Delete-Client
+echo ""
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	read -p "Select a Menu Script : " MENU
 fi
 
 case $MENU in
-1) # ==================================================================================================================
-	
-	# Detect Debian users running the script with "sh" instead of bash
-if readlink /proc/$$/exe | grep -q "dash"; then
-	echo "This script needs to be run with bash, not sh"
-	exit
-fi
 
-if [[ "$EUID" -ne 0 ]]; then
-	echo "Sorry, you need to run this as root"
-	exit
-fi
+	1) # ==================================================================================================================
 
-if [[ ! -e /dev/net/tun ]]; then
-	echo "The TUN device is not available
-You need to enable TUN before running this script"
-	exit
-fi
+if [[ $CHECKSYSTEM ]]; then
+	echo ""
+	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
 
-if [[ -e /etc/debian_version ]]; then
-	OS=debian
-	GROUPNAME=nogroup
-	RCLOCAL='/etc/rc.local'
-elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
-	OS=centos
-	GROUPNAME=nobody
-	RCLOCAL='/etc/rc.d/rc.local'
+	if [ $? -eq 0 ]; then
+		read -p "รหัสผ่าน : " -e PASSWORD
+		echo ""
+		echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
+		read -p "กำหนดวันหมดอายุ : " -e TimeActive
+
+		PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
+		PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
+		useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
+		EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
+
+		clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+		echo "ชื่อบัญชี : $CLIENT"
+		echo "รหัสผ่าน : $PASSWORD"
+		echo "หมดอายุในวันที่ : $EXP"
+		echo ""
+		echo "IP : $IP"
+		echo "Port : 22,443"
+		echo "Proxy Port : $PROXY"
+		exit
+	else
+		echo ""
+		echo "ชื่อบัญชีที่ระบุอยู่ในระบบแล้ว"
+		echo ""
+		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+		if [[ "$TOMENU" = 'Y' ]]; then
+			menu
+			exit
+		elif [[ "$TOMENU" = 'N' ]]; then
+			exit
+		fi
+	fi
+
 else
-	echo "Looks like you aren't running this installer on Debian, Ubuntu or CentOS"
-	exit
-fi
+
+	echo ""
+	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
+
+	if [[ -e /etc/openvpn/easy-rsa/pki/private/$CLIENT.key ]]; then
+		echo ""
+		echo "ชื่อบัญชีที่ระบุอยู่ในระบบแล้ว"
+		echo ""
+		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+		if [[ "$TOMENU" = 'Y' ]]; then
+			menu
+			exit
+		elif [[ "$TOMENU" = 'N' ]]; then
+			exit
+		fi
+	fi
+
+	echo ""
+	echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
+	read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
 newclient () {
 	# Generates the custom client.ovpn
@@ -90,363 +197,32 @@ newclient () {
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
 
-if [[ -e /etc/openvpn/server.conf ]]; then
-	while :
-	do
-	clear
-		echo "Looks like OpenVPN is already installed."
-		echo
-		echo "What do you want to do?"
-		echo "   1) เพิ่มผู้ใช้ใหม่"
-		echo "   2) เพิกถอนผู้ใช้ที่มีอยู่"
-		echo "   3) ลบ OpenVPN"
-		echo "   4) ออก"
-		read -p "เลือกตัวเลือก [1-4]: " option
-		case $option in
-			1) 
-			echo
-			echo "บอกชื่อใบรับรองลูกค้าให้ฉัน "
-			echo "กรุณาใช้เพียงหนึ่งคำเท่านั้นไม่มีตัวอักษรพิเศษ "
-			read -p "ชื่อลูกค้า: " -e CLIENT
-			cd /etc/openvpn/easy-rsa/
-			EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $CLIENT nopass
-			# Generates the custom client.ovpn
-			newclient "$CLIENT"
-			echo "เพิ่มไคลเอนต์ $CLIENT แล้วการกำหนดค่ามีให้ที่: "~/"$CLIENT.ovpn"
-			exit
-			;;
-			2)
-			# This option could be documented a bit better and maybe even be simplified
-			# ...but what can I say, I want some sleep too
-			NUMBEROFCLIENTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c "^V")
-			if [[ "$NUMBEROFCLIENTS" = '0' ]]; then
-				echo
-				echo "You have no existing clients!"
-				exit
-			fi
-			echo
-			echo "Select the existing client certificate you want to revoke:"
-			tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
-			if [[ "$NUMBEROFCLIENTS" = '1' ]]; then
-				read -p "Select one client [1]: " CLIENTNUMBER
-			else
-				read -p "Select one client [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
-			fi
-			CLIENT=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$CLIENTNUMBER"p)
-			echo
-			read -p "Do you really want to revoke access for client $CLIENT? [y/N]: " -e REVOKE
-			if [[ "$REVOKE" = 'y' || "$REVOKE" = 'Y' ]]; then
-				cd /etc/openvpn/easy-rsa/
-				./easyrsa --batch revoke $CLIENT
-				EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
-				rm -f pki/reqs/$CLIENT.req
-				rm -f pki/private/$CLIENT.key
-				rm -f pki/issued/$CLIENT.crt
-				rm -f /etc/openvpn/crl.pem
-				cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
-				# CRL is read with each client connection, when OpenVPN is dropped to nobody
-				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-				echo
-				echo "Certificate for client $CLIENT revoked!"
-			else
-				echo
-				echo "Certificate revocation for client $CLIENT aborted!"
-			fi
-			exit
-			;;
-			3) 
-			echo
-			read -p "คุณต้องการลบ OpenVPN จริง ๆ หรือไม่? [y/N]: " -e REMOVE
-			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
-				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
-				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
-				if pgrep firewalld; then
-					IP=$(firewall-cmd --direct --get-rules ipv4 nat POSTROUTING | grep '\-s 10.8.0.0/24 '"'"'!'"'"' -d 10.8.0.0/24 -j SNAT --to ' | cut -d " " -f 10)
-					# Using both permanent and not permanent rules to avoid a firewalld reload.
-					firewall-cmd --zone=public --remove-port=$PORT/$PROTOCOL
-					firewall-cmd --zone=trusted --remove-source=10.8.0.0/24
-					firewall-cmd --permanent --zone=public --remove-port=$PORT/$PROTOCOL
-					firewall-cmd --permanent --zone=trusted --remove-source=10.8.0.0/24
-					firewall-cmd --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-					firewall-cmd --permanent --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-				else
-					IP=$(grep 'iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to ' $RCLOCAL | cut -d " " -f 14)
-					iptables -t nat -D POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-					sed -i '/iptables -t nat -A POSTROUTING -s 10.8.0.0\/24 ! -d 10.8.0.0\/24 -j SNAT --to /d' $RCLOCAL
-					if iptables -L -n | grep -qE '^ACCEPT'; then
-						iptables -D INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
-						iptables -D FORWARD -s 10.8.0.0/24 -j ACCEPT
-						iptables -D FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-						sed -i "/iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT/d" $RCLOCAL
-						sed -i "/iptables -I FORWARD -s 10.8.0.0\/24 -j ACCEPT/d" $RCLOCAL
-						sed -i "/iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT/d" $RCLOCAL
-					fi
-				fi
-				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
-					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
-				fi
-				if [[ "$OS" = 'debian' ]]; then
-					apt-get remove --purge -y openvpn
-				else
-					yum remove openvpn -y
-				fi
-				rm -rf /etc/openvpn
-				rm -f /etc/sysctl.d/30-openvpn-forward.conf
-				echo
-				echo "OpenVPN removed!"
-			else
-				echo
-				echo "Removal aborted!"
-			fi
-			exit
-			;;
-			4) exit;;
-		esac
-	done
-else
-	clear
-	echo 'Welcome to this OpenVPN "road warrior" installer!'
-	echo
-	# OpenVPN setup and first user creation
-	echo "I need to ask you a few questions before starting the setup."
-	echo "You can leave the default options and just press enter if you are ok with them."
-	echo
-	echo "First, provide the IPv4 address of the network interface you want OpenVPN"
-	echo "listening to."
-	# Autodetect IP address and pre-fill for the user
-	IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-	read -p "IP address: " -e -i $IP IP
-	# If $IP is a private IP address, the server must be behind NAT
-	if echo "$IP" | grep -qE '^(10\.|172\.1[6789]\.|172\.2[0-9]\.|172\.3[01]\.|192\.168)'; then
-		echo
-		echo "This server is behind NAT. What is the public IPv4 address or hostname?"
-		read -p "Public IP address / hostname: " -e PUBLICIP
-	fi
-	echo
-	echo "Which protocol do you want for OpenVPN connections?"
-	echo "   1) UDP (recommended)"
-	echo "   2) TCP"
-	read -p "Protocol [1-2]: " -e -i 2 PROTOCOL
-	case $PROTOCOL in
-		1) 
-		PROTOCOL=udp
-		;;
-		2) 
-		PROTOCOL=tcp
-		;;
-	esac
-	echo
-	echo "What port do you want OpenVPN listening to?"
-	read -p "Port: " -e -i 443 PORT
-	echo
-	echo "Which DNS do you want to use with the VPN?"
-	echo "   1) Current system resolvers"
-	echo "   2) 1.1.1.1"
-	echo "   3) Google"
-	echo "   4) OpenDNS"
-	echo "   5) Verisign"
-	read -p "DNS [1-5]: " -e -i 3 DNS
-	echo
-	echo "Finally, tell me your name for the client certificate."
-	echo "Please, use one word only, no special characters."
-	read -p "Client name: " -e CLIENT
-	echo
-	echo "Okay, that was all I needed. We are ready to set up your OpenVPN server now."
-	read -n1 -r -p "Press any key to continue..."
-	if [[ "$OS" = 'debian' ]]; then
-		apt-get update
-		apt-get install openvpn iptables openssl ca-certificates -y
-	else
-		# Else, the distro is CentOS
-		yum install epel-release -y
-		yum install openvpn iptables openssl ca-certificates -y
-	fi
-	# Get easy-rsa
-	EASYRSAURL='https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.5/EasyRSA-nix-3.0.5.tgz'
-	wget -O ~/easyrsa.tgz "$EASYRSAURL" 2>/dev/null || curl -Lo ~/easyrsa.tgz "$EASYRSAURL"
-	tar xzf ~/easyrsa.tgz -C ~/
-	mv ~/EasyRSA-3.0.5/ /etc/openvpn/
-	mv /etc/openvpn/EasyRSA-3.0.5/ /etc/openvpn/easy-rsa/
-	chown -R root:root /etc/openvpn/easy-rsa/
-	rm -f ~/easyrsa.tgz
+	RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
+	mkdir /home/vps/public_html/$RANDOMFOLDER
 	cd /etc/openvpn/easy-rsa/
-	# Create the PKI, set up the CA and the server and client certificates
-	./easyrsa init-pki
-	./easyrsa --batch build-ca nopass
-	EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-server-full server nopass
-	EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $CLIENT nopass
-	EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
-	# Move the stuff we need
-	cp pki/ca.crt pki/private/ca.key pki/issued/server.crt pki/private/server.key pki/crl.pem /etc/openvpn
-	# CRL is read with each client connection, when OpenVPN is dropped to nobody
-	chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-	# Generate key for tls-auth
-	openvpn --genkey --secret /etc/openvpn/ta.key
-	# Create the DH parameters file using the predefined ffdhe2048 group
-	echo '-----BEGIN DH PARAMETERS-----
-MIIBCAKCAQEA//////////+t+FRYortKmq/cViAnPTzx2LnFg84tNpWp4TZBFGQz
-+8yTnc4kmz75fS/jY2MMddj2gbICrsRhetPfHtXV/WVhJDP1H18GbtCFY2VVPe0a
-87VXE15/V8k1mE8McODmi3fipona8+/och3xWKE2rec1MKzKT0g6eXq8CrGCsyT7
-YdEIqUuyyOP7uWrat2DX9GgdT0Kj3jlN9K5W7edjcrsZCwenyO4KbXCeAvzhzffi
-7MA0BM0oNC9hkXL+nOmFg/+OTxIy7vKBg8P+OxtMb61zO7X8vC7CIAXFjvGDfRaD
-ssbzSibBsu/6iGtCOGEoXJf//////////wIBAg==
------END DH PARAMETERS-----' > /etc/openvpn/dh.pem
-	# Generate server.conf
-	echo "port $PORT
-proto $PROTOCOL
-dev tun
-sndbuf 0
-rcvbuf 0
-ca ca.crt
-cert server.crt
-key server.key
-dh dh.pem
-auth SHA512
-tls-auth ta.key 0
-topology subnet
-server 10.8.0.0 255.255.255.0
-ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
-	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
-	# DNS
-	case $DNS in
-		1)
-		# Locate the proper resolv.conf
-		# Needed for systems running systemd-resolved
-		if grep -q "127.0.0.53" "/etc/resolv.conf"; then
-			RESOLVCONF='/run/systemd/resolve/resolv.conf'
-		else
-			RESOLVCONF='/etc/resolv.conf'
-		fi
-		# Obtain the resolvers from resolv.conf and use them for OpenVPN
-		grep -v '#' $RESOLVCONF | grep 'nameserver' | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | while read line; do
-			echo "push \"dhcp-option DNS $line\"" >> /etc/openvpn/server.conf
-		done
-		;;
-		2)
-		echo 'push "dhcp-option DNS 1.1.1.1"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 1.0.0.1"' >> /etc/openvpn/server.conf
-		;;
-		3)
-		echo 'push "dhcp-option DNS 8.8.8.8"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 8.8.4.4"' >> /etc/openvpn/server.conf
-		;;
-		4)
-		echo 'push "dhcp-option DNS 208.67.222.222"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 208.67.220.220"' >> /etc/openvpn/server.conf
-		;;
-		5)
-		echo 'push "dhcp-option DNS 64.6.64.6"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 64.6.65.6"' >> /etc/openvpn/server.conf
-		;;
-	esac
-	echo "keepalive 10 120
-cipher AES-256-CBC
-user nobody
-group $GROUPNAME
-persist-key
-persist-tun
-status openvpn-status.log
-verb 3
-crl-verify crl.pem" >> /etc/openvpn/server.conf
-	# Enable net.ipv4.ip_forward for the system
-	echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/30-openvpn-forward.conf
-	# Enable without waiting for a reboot or service restart
-	echo 1 > /proc/sys/net/ipv4/ip_forward
-	if pgrep firewalld; then
-		# Using both permanent and not permanent rules to avoid a firewalld
-		# reload.
-		# We don't use --add-service=openvpn because that would only work with
-		# the default port and protocol.
-		firewall-cmd --zone=public --add-port=$PORT/$PROTOCOL
-		firewall-cmd --zone=trusted --add-source=10.8.0.0/24
-		firewall-cmd --permanent --zone=public --add-port=$PORT/$PROTOCOL
-		firewall-cmd --permanent --zone=trusted --add-source=10.8.0.0/24
-		# Set NAT for the VPN subnet
-		firewall-cmd --direct --add-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-		firewall-cmd --permanent --direct --add-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-	else
-		# Needed to use rc.local with some systemd distros
-		if [[ "$OS" = 'debian' && ! -e $RCLOCAL ]]; then
-			echo '#!/bin/sh -e
-exit 0' > $RCLOCAL
-		fi
-		chmod +x $RCLOCAL
-		# Set NAT for the VPN subnet
-		iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-		sed -i "1 a\iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP" $RCLOCAL
-		if iptables -L -n | grep -qE '^(REJECT|DROP)'; then
-			# If iptables has at least one REJECT rule, we asume this is needed.
-			# Not the best approach but I can't think of other and this shouldn't
-			# cause problems.
-			iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
-			iptables -I FORWARD -s 10.8.0.0/24 -j ACCEPT
-			iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-			sed -i "1 a\iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT" $RCLOCAL
-			sed -i "1 a\iptables -I FORWARD -s 10.8.0.0/24 -j ACCEPT" $RCLOCAL
-			sed -i "1 a\iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT" $RCLOCAL
-		fi
-	fi
-	# If SELinux is enabled and a custom port was selected, we need this
-	if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
-		# Install semanage if not already present
-		if ! hash semanage 2>/dev/null; then
-			yum install policycoreutils-python -y
-		fi
-		semanage port -a -t openvpn_port_t -p $PROTOCOL $PORT
-	fi
-	# And finally, restart OpenVPN
-	if [[ "$OS" = 'debian' ]]; then
-		# Little hack to check for systemd
-		if pgrep systemd-journal; then
-			systemctl restart openvpn@server.service
-		else
-			/etc/init.d/openvpn restart
-		fi
-	else
-		if pgrep systemd-journal; then
-			systemctl restart openvpn@server.service
-			systemctl enable openvpn@server.service
-		else
-			service openvpn restart
-			chkconfig openvpn on
-		fi
-	fi
-	# If the server is behind a NAT, use the correct IP address
-	if [[ "$PUBLICIP" != "" ]]; then
-		IP=$PUBLICIP
-	fi
-	# client-common.txt is created so we have a template to add further users later
-	echo "client
+	./easyrsa build-client-full $CLIENT nopass
+	newclient "$CLIENT"
+	cp /root/$CLIENT.ovpn /home/vps/public_html/$RANDOMFOLDER/$CLIENT.ovpn
+	rm -f /root/$CLIENT.ovpn
+	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
+	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
 
-client	
-dev tun
-proto $PROTOCOL
-sndbuf 0
-rcvbuf 0
-remote $IP:$PORT@kd.truevisions.tv.www.trueplookpanya.com $PORT
-http-proxy $IP 8080
-resolv-retry infinite
-nobind
-persist-key
-persist-tun
-remote-cert-tls server
-auth SHA512
-cipher AES-256-CBC
-setenv opt block-outside-dns
-key-direction 1
-verb 3" > /etc/openvpn/client-common.txt
-
+	clear
 	echo ""
-    echo "-------------Finished!------------"
-    echo "-----------พีรกฤช ขาวปลื้ม----------"
-    echo "CONFIG :" ~/"$CLIENT.ovpn"
-    echo "------------MyGatherBK VPN---------------"
-    echo "--------------------พิมพ์ menu ENTER----------------"
-    echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "ชื่อบัญชี : $CLIENT"
+	echo "หมดอายุในวันที่ : $EXP"
+	echo ""
+	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn"
+	echo ""
+	exit
 
 fi
 
 	;;
+
 	2) # ==================================================================================================================
 
 	echo ""
@@ -493,124 +269,586 @@ fi
 	;;
 
 	3) # ==================================================================================================================
-if [[ -e /etc/squid3/squid.conf ]]; then
-	apt-get -y remove --purge squid3
-	clear
+
+			# This option could be documented a bit better and maybe even be simplified
+			# ...but what can I say, I want some sleep too
+			NUMBEROFCLIENTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c "^V")
+			if [[ "$NUMBEROFCLIENTS" = '0' ]]; then
+				echo
+				echo "You have no existing clients!"
+				exit
+			fi
+			echo
+			echo "Select the existing client certificate you want to revoke:"
+			tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
+			if [[ "$NUMBEROFCLIENTS" = '1' ]]; then
+				read -p "Select one client [1]: " CLIENTNUMBER
+			else
+				read -p "Select one client [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
+			fi
+			CLIENT=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$CLIENTNUMBER"p)
+			echo
+			read -p "Do you really want to revoke access for client $CLIENT? [y/N]: " -e REVOKE
+			if [[ "$REVOKE" = 'y' || "$REVOKE" = 'Y' ]]; then
+				cd /etc/openvpn/easy-rsa/
+				./easyrsa --batch revoke $CLIENT
+				EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
+				rm -f pki/reqs/$CLIENT.req
+				rm -f pki/private/$CLIENT.key
+				rm -f pki/issued/$CLIENT.crt
+				rm -f /etc/openvpn/crl.pem
+				cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
+				# CRL is read with each client connection, when OpenVPN is dropped to nobody
+				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
+				echo
+				echo "Certificate for client $CLIENT revoked!"
+			else
+				echo
+				echo "Certificate revocation for client $CLIENT aborted!"
+			fi
+			exit
+			;;;;
+
+	4) # ==================================================================================================================
+
+clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
-	echo "Squid Proxy .....Removed."
-	exit
-elif [[ -e /etc/squid/squid.conf ]]; then
-	apt-get -y remove --purge squid
-	clear
+echo ""
+echo "ลำดับ   ชื่อบัญชีผู้ใช้        สถานะ      วันหมดอายุ"
+echo ""
+C=1
+ON=0
+OFF=0
+while read ONOFF
+do
+	CLIENTOFFLINE=$(echo -e "${GRAY}OFFLINE${NC}")
+	CLIENTONLINE=$(echo -e "${GREEN}ONLINE${NC}")
+	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
+	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
+	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
+	ONLINE="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $ACCOUNT | grep -Eom 1 $ACCOUNT)"
+	if [[ $ID -ge 1000 ]]; then
+		if [[ -z $ONLINE ]]; then
+			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTOFFLINE" "$EXP"
+			OFF=$((OFF+1))
+		else
+			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTONLINE" "$EXP"
+			ON=$((ON+1))
+		fi
+			C=$((C+1))
+        fi
+done < /etc/passwd
+TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
+echo ""
+echo ""
+echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${GRAY}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL"
+echo ""
+exit
+
+	;;
+
+	5) # ==================================================================================================================
+
+	echo ""
+	read -p "ชื่อบัญชีที่ต้องการเปลี่ยนรหัสผ่าน : " CLIENTNAME
+	egrep "^$CLIENTNAME" /etc/passwd >/dev/null
+
+	if [ $? -eq 0 ]; then
+		echo ""
+		read -p "รหัสผ่านที่ต้องการปลี่ยน : " NEWPASSWORD
+		read -p "ยืนยันรหัสผ่านอีกครั้ง : " RETYPEPASSWORD
+
+		if [[ $NEWPASSWORD = $RETYPEPASSWORD ]]; then
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
-	echo "Squid Proxy .....Removed."
-	exit
-fi
-
-read -p "Port Proxy : " -e -i 8080 PROXY
-
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-	apt-get -y install squid3
-	cat > /etc/squid3/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-	IP2="s/xxxxxxxxx/$IP/g";
-	sed -i $IP2 /etc/squid3/squid.conf;
-	if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		service squid3 restart
+			echo "ระบบได้ทำการเปลี่ยนรหัสผ่านเรียบร้อยแล้ว"
+			echo ""
+			echo "ชื่อบัญชีผู้ใข้ : $CLIENTNAME"
+			echo "รหัสผ่านใหม่ : $NEWPASSWORD"
+			echo ""
+			exit
+		else
+			echo ""
+			echo "เปลี่ยนรหัสผ่านไม่สำเร็จ การยืนยันรหัสผ่านไม่สอดคล้อง"
+			echo ""
+			exit
+		fi
 	else
-		/etc/init.d/squid3 restart
+
+		echo ""
+		echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+		echo ""
+		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+		if [[ "$TOMENU" = 'Y' ]]; then
+			menu
+			exit
+		elif [[ "$TOMENU" = 'N' ]]; then
+			exit
+		fi
 	fi
-	clear
+
+	;;
+
+	6) # ==================================================================================================================
+
+echo ""
+read -p "ชื่อบัญชีที่ต้องการเปลี่ยนวันหมดอายุ : " -e CLIENT
+
+if [ $? -eq 0 ]; then
+	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+	echo ""
+	echo -e "ชื่อบัญชีนี้หมดอายุในวันที่ ${GRAY}$EXP${NC}"
+	echo ""
+	read -p "เปลี่ยนวันหมดอายุ : " -e TimeActive
+	userdel $CLIENT
+	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
+	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
-	echo "Squid Proxy .....Install finish."
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
+	echo "ชื่อบัญชี : $CLIENT"
+	echo "หมดวันหมดในวันที่ : $EXP"
 	echo ""
 	exit
 
-elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-	apt-get -y install squid
-	cat > /etc/squid/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-	IP2="s/xxxxxxxxx/$IP/g";
-	sed -i $IP2 /etc/squid/squid.conf;
-	/etc/init.d/squid restart
-	clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "Squid Proxy .....Install finish."
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
-	echo ""
-	exit
+else
 
+	echo ""
+	echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+	echo ""
+	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+	if [[ "$TOMENU" = 'Y' ]]; then
+		menu
+		exit
+	elif [[ "$TOMENU" = 'N' ]]; then
+		exit
+	fi
 fi
 
 	;;
 
+	7) # ==================================================================================================================
 
-	4) # ==================================================================================================================
+ if [ ! -e /usr/local/bin/Reboot-Server ]; then
+	echo '#!/bin/bash' > /usr/local/bin/Reboot-Server
+	echo '' >> /usr/local/bin/Reboot-Server
+	echo 'DATE=$(date +"%m-%d-%Y")' >> /usr/local/bin/Reboot-Server
+	echo 'TIME=$(date +"%T")' >> /usr/local/bin/Reboot-Server
+	echo 'echo "รีบูทเมื่อวันที่ $DATE เวลา $TIME" >> /usr/local/bin/Reboot-Log' >> /usr/local/bin/Reboot-Server
+	echo '/sbin/shutdown -r now' >> /usr/local/bin/Reboot-Server
+	chmod +x /usr/local/bin/Reboot-Server
+fi
+
+clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+echo -e "${GRAY}ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ ${NC} "
+echo ""
+echo -e "|${GRAY}1${NC}| รีบูททุกๆ  1 ชั่วโมง"
+echo -e "|${GRAY}2${NC}| รีบูททุกๆ  6 ชั่วโมง"
+echo -e "|${GRAY}3${NC}| รีบูททุกๆ 12 ชั่วโมง"
+echo -e "|${GRAY}4${NC}| รีบูททุกๆ  1 วัน"
+echo -e "|${GRAY}5${NC}| รีบูททุกๆ  7 วัน"
+echo -e "|${GRAY}6${NC}| รีบูททุกๆ 30 วัน"
+echo -e "|${GRAY}7${NC}| หยุดการรีบูทเซิฟเวอร์"
+echo -e "|${GRAY}8${NC}| ตรวจสอบดูบันทึกการรีบูทเซิฟเวอร์"
+echo -e "|${GRAY}9${NC}| ลบบันทึกการรีบูทเซิฟเวอร์"
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " REBOOT
+
+case $REBOOT in
+
+	1)
+
+echo "0 * * * * root /usr/local/bin/Reboot-Server" > /etc/cron.d/Reboot-Server
+echo ""
+echo "ตั้งค่ารีบูทเซิฟเวอร์ทุกๆ 1 ชั่วโมงเรียบร้อยแล้ว"
+echo ""
+exit
+
+	;;
+
+	2)
+
+echo "0 */6 * * * root /usr/local/bin/Reboot-Server" > /etc/cron.d/Reboot-Server
+echo ""
+echo "ตั้งค่ารีบูทเซิฟเวอร์ทุกๆ 6 ชั่วโมงเรียบร้อยแล้ว"
+echo ""
+exit
+
+	;;
+
+	3)
+
+echo "0 */12 * * * root /usr/local/bin/Reboot-Server" > /etc/cron.d/Reboot-Server
+echo ""
+echo "ตั้งค่ารีบูทเซิฟเวอร์ทุกๆ 12 ชั่วโมงเรียบร้อยแล้ว"
+echo ""
+exit
+
+	;;
+
+	4)
+
+echo "0 0 * * * root /usr/local/bin/Reboot-Server" > /etc/cron.d/Reboot-Server
+echo ""
+echo "ตั้งค่ารีบูทเซิฟเวอร์ทุกๆ 1 วันเรียบร้อยแล้ว"
+echo ""
+exit
+
+	;;
+
+	5)
+
+echo "0 0 * * MON root /usr/local/bin/Reboot-Server" > /etc/cron.d/Reboot-Server
+echo ""
+echo "ตั้งค่ารีบูทเซิฟเวอร์ทุกๆ 7 วันเรียบร้อยแล้ว"
+echo ""
+exit
+
+	;;
+
+	6)
+
+echo "0 0 1 * * root /usr/local/bin/Reboot-Server" > /etc/cron.d/Reboot-Server
+echo ""
+echo "ตั้งค่ารีบูทเซิฟเวอร์ทุกๆ 30 วันเรียบร้อยแล้ว"
+echo ""
+exit
+
+	;;
+
+	7)
+
+rm -rf /usr/local/bin/Reboot-Server
+echo ""
+echo "หยุดการรีบูทเซิฟเวอร์เรียบร้อยแล้ว"
+echo ""
+exit
+
+	;;
+
+	8)
+
+if [[ ! -e /usr/local/bin/Reboot-Log ]]; then
+	echo ""
+	echo "ไม่มีบันทึกการรีบูทเซิฟเวอร์"
+	echo ""
+	exit
+else
+	echo ""
+	cat /usr/local/bin/Reboot-Log
+	echo ""
+	exit
+fi
+
+	;;
+
+	9)
+
+rm -rf /usr/local/bin/Reboot-Log
+echo ""
+echo "ลบบันทึกการรีบูทเซิฟเวอร์เรียบร้อยแล้ว"
+echo ""
+exit
+
+	;;
+
+esac
+
+	;;
+
+	8) # ==================================================================================================================
+
+if [[ -e /usr/local/bin/speedtest ]]; then
+	clear
+	speedtest --share
+elif [[ ! -e /usr/local/bin/speedtest ]]; then
+	wget -O /usr/local/bin/speedtest "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Speedtest"
+	chmod +x /usr/local/bin/speedtest
+	clear
+	speedtest --share
+fi
+
+	;;
+
+	9) # ==================================================================================================================
+
+	;;
+
+
+	10) # ==================================================================================================================
+
+INTERFACE=`ifconfig | head -n1 | awk '{print $1}' | cut -d ':' -f 1`
+TODAY=$(vnstat -i $INTERFACE | grep "today" | awk '{print $8" "substr ($9, 1, 1)}')
+YESTERDAY=$(vnstat -i $INTERFACE | grep "yesterday" | awk '{print $8" "substr ($9, 1, 1)}')
+WEEK=$(vnstat -i $INTERFACE -w | grep "current week" | awk '{print $9" "substr ($10, 1, 1)}')
+RXWEEK=$(vnstat -i $INTERFACE -w | grep "current week" | awk '{print $3" "substr ($10, 1, 1)}')
+TXWEEK=$(vnstat -i $INTERFACE -w | grep "current week" | awk '{print $6" "substr ($10, 1, 1)}')
+MOUNT=$(vnstat -i $INTERFACE | grep "`date +"%b '%y"`" | awk '{print $9" "substr ($10, 1, 1)}')
+RXMOUNT=$(vnstat -i $INTERFACE | grep "`date +"%b '%y"`" | awk '{print $3" "substr ($10, 1, 1)}')
+TXMOUNT=$(vnstat -i $INTERFACE | grep "`date +"%b '%y"`" | awk '{print $6" "substr ($10, 1, 1)}')
+TOTAL=$(vnstat -i $INTERFACE | grep "total:" | awk '{print $8" "substr ($9, 1, 1)}')
+RXTOTAL=$(vnstat -i $INTERFACE | grep "rx:" | awk '{print $2" "substr ($9, 1, 1)}')
+TXTOTAL=$(vnstat -i $INTERFACE | grep "tx:" | awk '{print $5" "substr ($9, 1, 1)}')
+
+clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "แบนด์วิดท์ ${GRAY}ZENON-AUTO-VPN${NC}"
+	echo ""
+	echo -e "วันนี้ ${GRAY}$TODAY${NC}"
+	echo -e "เมื่อวานนี้ ${GRAY}$YESTERDAY${NC}"
+	echo ""
+	echo -e "รับข้อมูล (rx) ${GRAY}$RXWEEK${NC} ส่งข้อมูล (tx) ${GRAY}$TXWEEK${NC}"
+	echo -e "สัปดาห์นี้ ${GRAY}$WEEK${NC}"
+	echo ""
+	echo -e "รับข้อมูล (rx) ${GRAY}$RXMOUNT${NC} ส่งข้อมูล (tx) ${GRAY}$TXMOUNT${NC}"
+	echo -e "รวมทั้งหมดเฉพาะเดือนนี้ ${GRAY}$MOUNT${NC}"
+	echo ""
+	echo -e "รับข้อมูล (rx) ${GRAY}$RXTOTAL${NC} ส่งข้อมูล (tx) ${GRAY}$TXTOTAL${NC}"
+	echo -e "รวมทั้งหมด ${GRAY}$TOTAL${NC}"
+	echo ""
+	exit
+
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "BANDWIDTH ${GRAY}ZENON-AUTO-VPN${NC}"
+	echo ""
+	echo -e "TODAY ${GRAY}$TODAY${NC}"
+	echo -e "YESTERDAY ${GRAY}$YESTERDAY${NC}"
+	echo ""
+	echo -e "RECEIVE (rx) ${GRAY}$RXWEEK${NC} TRANSMIT (tx) ${GRAY}$TXWEEK${NC}"
+	echo -e "CURRENT WEEK ${GRAY}$WEEK${NC}"
+	echo ""
+	echo -e "RECEIVE (rx) ${GRAY}$RXMOUNT${NC} TRANSMIT (tx) ${GRAY}$TXMOUNT${NC}"
+	echo -e "THIS MOUNT TOTAL ${GRAY}$MOUNT${NC}"
+	echo ""
+	echo -e "RECEIVE (rx) ${GRAY}$RXTOTAL${NC} TRANSMIT (tx) ${GRAY}$TXTOTAL${NC}"
+	echo -e "TOTAL ${GRAY}$TOTAL${NC}"
+	echo ""
+	exit
+fi
+
+	;;
+
+	11) # ==================================================================================================================
+
+DATE1=$(vnstat -h | sed -n '16p' | awk '{print $1}')
+RX1=$(vnstat -h | sed -n '16p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX1=$(vnstat -h | sed -n '16p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX1=$(echo "scale=2;$RX1 / 1000000" | bc)
+CONTX1=$(echo "scale=2;$TX1 / 1000000" | bc)
+
+DATE2=$(vnstat -h | sed -n '17p' | awk '{print $1}')
+RX2=$(vnstat -h | sed -n '17p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX2=$(vnstat -h | sed -n '17p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX2=$(echo "scale=2;$RX2 / 1000000" | bc)
+CONTX2=$(echo "scale=2;$TX2 / 1000000" | bc)
+
+DATE3=$(vnstat -h | sed -n '18p' | awk '{print $1}')
+RX3=$(vnstat -h | sed -n '18p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX3=$(vnstat -h | sed -n '18p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX3=$(echo "scale=2;$RX3 / 1000000" | bc)
+CONTX3=$(echo "scale=2;$TX3 / 1000000" | bc)
+
+DATE4=$(vnstat -h | sed -n '19p' | awk '{print $1}')
+RX4=$(vnstat -h | sed -n '19p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX4=$(vnstat -h | sed -n '19p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX4=$(echo "scale=2;$RX4 / 1000000" | bc)
+CONTX4=$(echo "scale=2;$TX4 / 1000000" | bc)
+
+DATE5=$(vnstat -h | sed -n '20p' | awk '{print $1}')
+RX5=$(vnstat -h | sed -n '20p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX5=$(vnstat -h | sed -n '20p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX5=$(echo "scale=2;$RX4 / 1000000" | bc)
+CONTX5=$(echo "scale=2;$TX4 / 1000000" | bc)
+
+DATE6=$(vnstat -h | sed -n '21p' | awk '{print $1}')
+RX6=$(vnstat -h | sed -n '21p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX6=$(vnstat -h | sed -n '21p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX6=$(echo "scale=2;$RX6 / 1000000" | bc)
+CONTX6=$(echo "scale=2;$TX6 / 1000000" | bc)
+
+DATE7=$(vnstat -h | sed -n '22p' | awk '{print $1}')
+RX7=$(vnstat -h | sed -n '22p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX7=$(vnstat -h | sed -n '22p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX7=$(echo "scale=2;$RX7 / 1000000" | bc)
+CONTX7=$(echo "scale=2;$TX7 / 1000000" | bc)
+
+DATE8=$(vnstat -h | sed -n '23p' | awk '{print $1}')
+RX8=$(vnstat -h | sed -n '23p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX8=$(vnstat -h | sed -n '23p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX8=$(echo "scale=2;$RX8 / 1000000" | bc)
+CONTX8=$(echo "scale=2;$TX8 / 1000000" | bc)
+
+DATE9=$(vnstat -h | sed -n '16p' | awk '{print $4}')
+RX9=$(vnstat -h | sed -n '16p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX9=$(vnstat -h | sed -n '16p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX9=$(echo "scale=2;$RX9 / 1000000" | bc)
+CONTX9=$(echo "scale=2;$TX9 / 1000000" | bc)
+
+DATE10=$(vnstat -h | sed -n '17p' | awk '{print $4}')
+RX10=$(vnstat -h | sed -n '17p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX10=$(vnstat -h | sed -n '17p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX10=$(echo "scale=2;$RX10 / 1000000" | bc)
+CONTX10=$(echo "scale=2;$TX10 / 1000000" | bc)
+
+DATE11=$(vnstat -h | sed -n '18p' | awk '{print $4}')
+RX11=$(vnstat -h | sed -n '18p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX11=$(vnstat -h | sed -n '18p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX11=$(echo "scale=2;$RX11 / 1000000" | bc)
+CONTX11=$(echo "scale=2;$TX11 / 1000000" | bc)
+
+DATE12=$(vnstat -h | sed -n '19p' | awk '{print $4}')
+RX12=$(vnstat -h | sed -n '19p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX12=$(vnstat -h | sed -n '19p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX12=$(echo "scale=2;$RX12 / 1000000" | bc)
+CONTX12=$(echo "scale=2;$TX12 / 1000000" | bc)
+
+DATE13=$(vnstat -h | sed -n '20p' | awk '{print $4}')
+RX13=$(vnstat -h | sed -n '20p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX13=$(vnstat -h | sed -n '20p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX13=$(echo "scale=2;$RX13 / 1000000" | bc)
+CONTX13=$(echo "scale=2;$TX13 / 1000000" | bc)
+
+DATE14=$(vnstat -h | sed -n '21p' | awk '{print $4}')
+RX14=$(vnstat -h | sed -n '21p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX14=$(vnstat -h | sed -n '21p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX14=$(echo "scale=2;$RX14 / 1000000" | bc)
+CONTX14=$(echo "scale=2;$TX14 / 1000000" | bc)
+
+DATE15=$(vnstat -h | sed -n '22p' | awk '{print $4}')
+RX15=$(vnstat -h | sed -n '22p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX15=$(vnstat -h | sed -n '22p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX15=$(echo "scale=2;$RX15 / 1000000" | bc)
+CONTX15=$(echo "scale=2;$TX15 / 1000000" | bc)
+
+DATE16=$(vnstat -h | sed -n '23p' | awk '{print $4}')
+RX16=$(vnstat -h | sed -n '23p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX16=$(vnstat -h | sed -n '23p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX16=$(echo "scale=2;$RX16 / 1000000" | bc)
+CONTX16=$(echo "scale=2;$TX16 / 1000000" | bc)
+
+DATE17=$(vnstat -h | sed -n '16p' | awk '{print $7}')
+RX17=$(vnstat -h | sed -n '16p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX17=$(vnstat -h | sed -n '16p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX17=$(echo "scale=2;$RX17 / 1000000" | bc)
+CONTX17=$(echo "scale=2;$TX17 / 1000000" | bc)
+
+DATE18=$(vnstat -h | sed -n '17p' | awk '{print $7}')
+RX18=$(vnstat -h | sed -n '17p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX18=$(vnstat -h | sed -n '17p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX18=$(echo "scale=2;$RX18 / 1000000" | bc)
+CONTX18=$(echo "scale=2;$TX18 / 1000000" | bc)
+
+DATE19=$(vnstat -h | sed -n '18p' | awk '{print $7}')
+RX19=$(vnstat -h | sed -n '18p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX19=$(vnstat -h | sed -n '18p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX19=$(echo "scale=2;$RX19 / 1000000" | bc)
+CONTX19=$(echo "scale=2;$TX19 / 1000000" | bc)
+
+DATE20=$(vnstat -h | sed -n '19p' | awk '{print $7}')
+RX20=$(vnstat -h | sed -n '19p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX20=$(vnstat -h | sed -n '19p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX20=$(echo "scale=2;$RX20 / 1000000" | bc)
+CONTX20=$(echo "scale=2;$TX20 / 1000000" | bc)
+
+DATE21=$(vnstat -h | sed -n '20p' | awk '{print $7}')
+RX21=$(vnstat -h | sed -n '20p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX21=$(vnstat -h | sed -n '20p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX21=$(echo "scale=2;$RX21 / 1000000" | bc)
+CONTX21=$(echo "scale=2;$TX21 / 1000000" | bc)
+
+DATE22=$(vnstat -h | sed -n '21p' | awk '{print $7}')
+RX22=$(vnstat -h | sed -n '21p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX22=$(vnstat -h | sed -n '21p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX22=$(echo "scale=2;$RX22 / 1000000" | bc)
+CONTX22=$(echo "scale=2;$TX22 / 1000000" | bc)
+
+DATE23=$(vnstat -h | sed -n '22p' | awk '{print $7}')
+RX23=$(vnstat -h | sed -n '22p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX23=$(vnstat -h | sed -n '22p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX23=$(echo "scale=2;$RX23 / 1000000" | bc)
+CONTX23=$(echo "scale=2;$TX23 / 1000000" | bc)
+
+DATE24=$(vnstat -h | sed -n '23p' | awk '{print $7}')
+RX24=$(vnstat -h | sed -n '23p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX24=$(vnstat -h | sed -n '23p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX24=$(echo "scale=2;$RX24 / 1000000" | bc)
+CONTX24=$(echo "scale=2;$TX24 / 1000000" | bc)
+
+clear
+NOW=`echo -e "${GRAY}เวลาปัจจุบัน${NC}"`
+echo ""
+echo -e "${GRAY}ตัวเลขรับและส่งข้อมูลที่แสดงจะมีหน่วยวัดปริมาณเป็น Gigabyte ทั้งหมด${NC}"
+printf "%-7s %-7s %-10s\n" "เวลา" "รับข้อมูล" "ส่งข้อมูล"
+echo ""
+printf "%-3s %-6s %-10s\n" "$DATE1" "$CONRX1" "$CONTX1"
+printf "%-3s %-6s %-10s\n" "$DATE2" "$CONRX2" "$CONTX2"
+printf "%-3s %-6s %-10s\n" "$DATE3" "$CONRX3" "$CONTX3"
+printf "%-3s %-6s %-10s\n" "$DATE4" "$CONRX4" "$CONTX4"
+printf "%-3s %-6s %-10s\n" "$DATE5" "$CONRX5" "$CONTX5"
+printf "%-3s %-6s %-10s\n" "$DATE6" "$CONRX6" "$CONTX6"
+printf "%-3s %-6s %-10s\n" "$DATE7" "$CONRX7" "$CONTX7"
+printf "%-3s %-6s %-10s\n" "$DATE8" "$CONRX8" "$CONTX8"
+printf "%-3s %-6s %-10s\n" "$DATE9" "$CONRX9" "$CONTX9"
+printf "%-3s %-6s %-10s\n" "$DATE10" "$CONRX10" "$CONTX10"
+printf "%-3s %-6s %-10s\n" "$DATE11" "$CONRX11" "$CONTX11"
+printf "%-3s %-6s %-10s\n" "$DATE12" "$CONRX12" "$CONTX12"
+printf "%-3s %-6s %-10s\n" "$DATE13" "$CONRX13" "$CONTX13"
+printf "%-3s %-6s %-10s\n" "$DATE14" "$CONRX14" "$CONTX14"
+printf "%-3s %-6s %-10s\n" "$DATE15" "$CONRX15" "$CONTX15"
+printf "%-3s %-6s %-10s\n" "$DATE16" "$CONRX16" "$CONTX16"
+printf "%-3s %-6s %-10s\n" "$DATE17" "$CONRX17" "$CONTX17"
+printf "%-3s %-6s %-10s\n" "$DATE18" "$CONRX18" "$CONTX18"
+printf "%-3s %-6s %-10s\n" "$DATE19" "$CONRX19" "$CONTX19"
+printf "%-3s %-6s %-10s\n" "$DATE20" "$CONRX20" "$CONTX20"
+printf "%-3s %-6s %-10s\n" "$DATE21" "$CONRX21" "$CONTX21"
+printf "%-3s %-6s %-10s\n" "$DATE22" "$CONRX22" "$CONTX22"
+printf "%-3s %-6s %-10s\n" "$DATE23" "$CONRX23" "$CONTX23"
+printf "%-3s %-6s %-5s %-5s\n" "$DATE24" "$CONRX24" "$CONTX24" "< $NOW"
+echo ""
+exit
+
+	;;
+
+	12) # ==================================================================================================================
+
+if [[ ! -e /usr/local/bin/Banwidth-Per-Client ]]; then
+	apt-get install python
+	wget -O /usr/local/bin/Banwidth-Per-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Banwidth-Per-Client"
+	chmod +x /usr/local/bin/Banwidth-Per-Client
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo -e "Script by ${GRAY}Ekkachai Chompoowiset ${NC}"
+	echo -e "FB Group : ${GRAY}# ${NC}"
+	echo ""
+	Banwidth-Per-Client
+	echo ""
+else
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	Banwidth-Per-Client
+	echo ""
+fi
+
+	;;
+
+	13) # ==================================================================================================================
+
 clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
@@ -680,13 +918,183 @@ esac
 
 	;;
 
-	5) # ==================================================================================================================
-	
+	14) # ==================================================================================================================
+
+if [[ ! $CHECKSYSTEM ]]; then
+	echo ""
+	echo "ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน"
+	echo ""
+	exit
+fi
+
 clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
-echo -e "เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GRAY}Admin MyGatherBK VPN${NC}"
+echo -e "${GRAY}แบนและปลดแบนบัญชีผู้ใช้ ${NC} "
+echo ""
+echo -e "|${GRAY}1${NC}| แบนบัญชีผู้ใช้"
+echo -e "|${GRAY}2${NC}| ปลดแบนบัญชีผู้ใช้"
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " BandUB
+
+case $BandUB in
+
+	1)
+
+echo ""
+read -p "ชื่อบัญชีที่ต้องการแบน : " CLIENT
+
+egrep "^$CLIENT" /etc/passwd >/dev/null
+if [ $? -eq 0 ]; then
+	echo "V=$CLIENT" >> /usr/local/bin/Ban-Unban
+	passwd -l $CLIENT
+	clear
+	echo ""
+	echo "บัญชีชื่อ $CLIENT ได้ถูกแบนเรียบร้อยแล้ว"
+	echo ""
+	exit
+elif [ $? -eq 1 ]; then
+	clear
+	echo ""
+	echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+	echo ""
+	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+	if [[ "$TOMENU" = 'Y' ]]; then
+		menu
+		exit
+	elif [[ "$TOMENU" = 'N' ]]; then
+		exit
+	fi
+fi
+
+	;;
+
+	2)
+
+echo ""
+read -p "ชื่อบัญชีที่ต้องการปลดแบน : " CLIENT
+
+egrep "^$CLIENT" /etc/passwd >/dev/null
+if [ $? -eq 0 ]; then
+	sed -i 's/V=$CLIENT/R=$CLIENT/g' /usr/local/bin/Ban-Unban
+	passwd -u $CLIENT
+	clear
+	echo ""
+	echo "บัญชีชื่อ $CLIENT ได้ถูกปลดแบนเรียบร้อยแล้ว"
+	echo ""
+	exit
+
+elif [ $? -eq 1 ]; then
+	clear
+	echo ""
+	echo "ชื่อบัญชีที่ระบุไม่ได้ถูกแบน หรือไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+	echo ""
+	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+	if [[ "$TOMENU" = 'Y' ]]; then
+		menu
+		exit
+	elif [[ "$TOMENU" = 'N' ]]; then
+		exit
+	fi
+fi
+
+	;;
+
+esac
+
+	;;
+
+	15) # ==================================================================================================================
+
+clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+echo -e "${GRAY}ปรับความเร็วอินเตอร์เน็ต ${NC} "
+echo ""
+echo -e "|${GRAY}1${NC}| เปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
+echo -e "|${GRAY}2${NC}| ปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " LIMITINTERNET
+
+case $LIMITINTERNET in
+
+	1)
+
+echo ""
+echo -e "|${GRAY}1${NC}| Megabyte (Mbps)"
+echo -e "|${GRAY}2${NC}| Kilobyte (Kbps)"
+echo ""
+read -p "กรุณาเลือกหน่วยวัดความเร็วอินเทอร์เน็ต : " -e PERSECOND
+case $PERSECOND in
+	1)
+	PERSECOND=mbit
+	;;
+	2)
+	PERSECOND=kbit
+	;;
+esac
+
+echo ""
+echo ""
+echo -e "วิธีการใส่ : เช่นต้องการให้มีความเร็ว 10Mbps ให้ใส่เลข ${GRAY}10${NC}"
+echo -e "         หากต้องการให้มีความเร็ว 512Kbps ให้ใส่เลข ${GRAY}512${NC}"
+echo ""
+read -p "ใส่จำนวนความเร็วการดาวน์โหลด : " -e CHDL
+read -p "ใส่จำนวนความเร็วการอัพโหลด : " -e CHUL
+
+DNLD=$CHDL$PERSECOND
+UPLD=$CHUL$PERSECOND
+
+TC=/sbin/tc
+
+IF="$(ip ro | awk '$1 == "default" { print $5 }')"
+IP="$(ip -o ro get $(ip ro | awk '$1 == "default" { print $3 }') | awk '{print $5}')/32"     # Host IP
+
+U32="$TC filter add dev $IF protocol ip parent 1: prio 1 u32"
+
+    $TC qdisc add dev $IF root handle 1: htb default 30
+    $TC class add dev $IF parent 1: classid 1:1 htb rate $DNLD
+    $TC class add dev $IF parent 1: classid 1:2 htb rate $UPLD
+    $U32 match ip dst $IP flowid 1:1
+    $U32 match ip src $IP flowid 1:2
+    echo ""
+    echo -e "ความเร็วดาวน์โหลด ${GRAY}$CHDL $PERSECOND${NC}"
+    echo -e "ความเร็วอัพโหลด ${GRAY}$CHUL $PERSECOND${NC}"
+    echo ""
+    echo "เปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
+    echo ""
+    exit
+
+	;;
+
+	2)
+
+TC=/sbin/tc
+IF="$(ip ro | awk '$1 == "default" { print $5 }')"
+
+    $TC qdisc del dev $IF root
+    echo ""
+    echo "ปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
+    echo ""
+    exit
+
+	;;
+
+esac
+
+	;;
+
+	16) # ==================================================================================================================
+
+clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+echo -e "เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GRAY}ZENON-AUTO-VPN${NC}"
 echo ""
 echo -e "|${GRAY}1${NC}| OPENVPN"
 echo -e "|${GRAY}2${NC}| SSH DROPBEAR"
@@ -868,7 +1276,7 @@ case $SERVICE in
 		;;
 
 		3)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
 			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
@@ -904,107 +1312,72 @@ case $SERVICE in
 esac
 
 	;;
-	
-		6) # ==================================================================================================================
+
+	17) # ==================================================================================================================
 
 clear
 	echo ""
 	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
 	echo ""
+echo -e "แก้ไขคอนฟิกต่างๆในระบบ ${GRAY}ZENON-AUTO-VPN${NC}"
 echo ""
-echo "ลำดับ   ชื่อบัญชีผู้ใช้        สถานะ      วันหมดอายุ"
-echo ""
-C=1
-ON=0
-OFF=0
-while read ONOFF
-do
-	CLIENTOFFLINE=$(echo -e "${GRAY}OFFLINE${NC}")
-	CLIENTONLINE=$(echo -e "${GREEN}ONLINE${NC}")
-	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
-	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
-	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
-	ONLINE="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $ACCOUNT | grep -Eom 1 $ACCOUNT)"
-	if [[ $ID -ge 1000 ]]; then
-		if [[ -z $ONLINE ]]; then
-			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTOFFLINE" "$EXP"
-			OFF=$((OFF+1))
-		else
-			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTONLINE" "$EXP"
-			ON=$((ON+1))
-		fi
-			C=$((C+1))
-        fi
-done < /etc/passwd
-TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
+echo -e "|${GRAY}1${NC}| OPENVPN ไฟล์ต้นแบบการสร้างคอนฟิก"
+echo -e "|${GRAY}2${NC}| OPENVPN ไฟล์ข้อมูลเซิฟเวอร์"
+echo -e "|${GRAY}3${NC}| SQUID PROXY ไฟล์รายละเอียดของพร็อกซี่"
+echo -e "|${GRAY}4${NC}| MENU ไฟล์สคริปท์ของเมนู"
 echo ""
 echo ""
-echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${GRAY}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL"
-echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " EDIT
+
+case $EDIT in
+
+	1)
+nano /etc/openvpn/client-common.txt
 exit
+	;;
+	2)
+nano /etc/openvpn/server.conf
+exit
+	;;
+	3)
+if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+	nano /etc/squid/squid.conf
+	exit
+elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	nano /etc/squid3/squid.conf
+	exit
+fi
+	;;
+	4)
+nano /usr/local/bin/menu
+exit
+	;;
+
+esac
 
 	;;
 
-		7) # ==================================================================================================================
+	0) # ==================================================================================================================
 
-echo ""
-read -p "ชื่อบัญชีที่ต้องการลบ : " CLIENT
-egrep "^$CLIENT" /etc/passwd >/dev/null
+rm -f /usr/local/bin/menu
+wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+chmod +x /usr/local/bin/menu
+rm -f /usr/local/bin/Auto-Delete-Client 
+wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
+chmod +x /usr/local/bin/Auto-Delete-Client
+menu
 
-if [ $? -eq 0 ]; then
-	if [[ $CHECKSYSTEM ]]; then
-		echo ""
-		userdel -f $CLIENT
-		echo ""
-		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
-		echo ""
-		exit
-	else
-		echo ""
-		userdel -f $CLIENT
-		cd /etc/openvpn/easy-rsa/
-		./easyrsa --batch revoke $CLIENT
-		EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
-		rm -rf pki/reqs/$CLIENT.req
-		rm -rf pki/private/$CLIENT.key
-		rm -rf pki/issued/$CLIENT.crt
-		rm -rf /etc/openvpn/crl.pem
-		cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
-		chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-		echo ""
-		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
-		echo ""
-		exit
-	fi
-else
-	echo ""
-	echo "ไม่มีชื่อบัญชีที่ระบุ"
-	echo ""
-	exit
+	;;
+
+	00) # ==================================================================================================================
+
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	rm -f /usr/local/bin/Check-Thai
+	menu
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo "Check Thai" >> /usr/local/bin/Check-Thai
+	menu
 fi
-
-	;;		
-	
-	8) # ==================================================================================================================
-clear
-clear
-echo
-	echo -e "Total Data Usage:"
-echo -e "\033[1;31m" 
-	myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`
-	myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`
-	ifconfig $myint | grep "RX bytes" | sed -e 's/ *RX [a-z:0-9]*/Download : /g' | sed -e 's/TX [a-z:0-9]*/\nUpload   : /g'
-	echo -e "\033[0m" 
-exit
-;;
-
-	
-
-
-
-
-
-00) # ==================================================================================================================
 
 	;;
 
