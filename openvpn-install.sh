@@ -582,7 +582,6 @@ END
 		/etc/init.d/nginx restart
 	fi
 
-fi
 
 	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Menu"
 	chmod +x /usr/local/bin/menu
