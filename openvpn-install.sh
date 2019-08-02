@@ -187,6 +187,7 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 	esac
 	echo "keepalive 10 120
 cipher AES-256-CBC
+comp-lzo
 user nobody
 group $GROUPNAME
 persist-key
@@ -268,7 +269,7 @@ proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
 remote $IP:$PORT@ $PORT
-http-proxy $IP 8080
+#http-proxy $IP 8080
 resolv-retry infinite
 nobind
 persist-key
