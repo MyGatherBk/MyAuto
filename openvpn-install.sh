@@ -30,6 +30,92 @@ else
 	exit
 fi
 
+# Set Localtime GMT +7
+ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+
+clear
+# IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+# if [[ "$IP" = "" ]]; then
+IP=$(wget -4qO- "http://whatismyip.akamai.com/")
+# fi
+
+
+
+# Color
+GRAY='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+# Menu
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
+	echo ""
+	if [[ -e /etc/openvpn/server.conf ]]; then
+		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
+	else
+		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
+	fi
+		if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 2${NC}| ติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
+		elif [[ -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 2${NC}| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 2${NC}| ติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
+		elif [[ -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 2${NC}| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
+		fi
+	fi
+	echo ""
+	echo -e "|${GRAY} 0${NC}| อัพเดตฟังก์ชั่นสคริปท์"
+	echo -e "|${GRAY}00${NC}| CHANGE TO ENGLISH"
+	echo ""
+	echo ""
+	read -p "เลือกหัวข้อฟังก์ชั่นที่ต้องการใช้งาน : " FUNCTIONSCRIPT
+
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "FUNCTION SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
+	echo ""
+	if [[ -e /etc/openvpn/server.conf ]]; then
+		echo -e "|${GRAY} 1${NC}| REMOVE OPENVPN TERMINAL CONTROL ${GREEN} ✔   ${NC}"
+	else
+		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL ${GREEN} ✔   ${NC}"
+	fi
+    	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 2${NC}| INSTALL SQUID PROXY ${GREEN} ✔   ${NC}"
+		elif [[ -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 2${NC}| REMOVE SQUID PROXY ${GREEN} ✔   ${NC}"
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 2${NC}| INSTALL SQUID PROXY ${GREEN} ✔   ${NC}"
+		elif [[ -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 2${NC}| REMOVE SQUID PROXY ${GREEN} ✔   ${NC}"
+		fi
+	fi
+	echo ""
+	echo -e "|${GRAY} 0${NC}| UPDATE FUNCTION SCRIPT"
+	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาไทย"
+	echo ""
+	echo ""
+	read -p "Select a Function Script : " FUNCTIONSCRIPT
+	
+	
+
+fi
+
+case $FUNCTIONSCRIPT in
+
+	1) # ==================================================================================================================
+
 newclient () {
 	# Generates the custom client.ovpn
 	cp /etc/openvpn/client-common.txt ~/$1.ovpn
@@ -48,73 +134,9 @@ newclient () {
 }
 
 if [[ -e /etc/openvpn/server.conf ]]; then
-	while :
-	do
-	clear
-		echo "Looks like OpenVPN is already installed."
-		echo
-		echo "What do you want to do?"
-		echo "   1) Add a new user"
-		echo "   2) Revoke an existing user"
-		echo "   3) Remove OpenVPN"
-		echo "   4) Exit"
-		read -p "Select an option [1-4]: " option
-		case $option in
-			1) 
-			echo
-			echo "Tell me a name for the client certificate."
-			echo "Please, use one word only, no special characters."
-			read -p "Client name: " -e CLIENT
-			cd /etc/openvpn/easy-rsa/
-			EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $CLIENT nopass
-			# Generates the custom client.ovpn
-			newclient "$CLIENT"
-			echo
-			echo "Client $CLIENT added, configuration is available at:" ~/"$CLIENT.ovpn"
-			exit
-			;;
-			2)
-			# This option could be documented a bit better and maybe even be simplified
-			# ...but what can I say, I want some sleep too
-			NUMBEROFCLIENTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c "^V")
-			if [[ "$NUMBEROFCLIENTS" = '0' ]]; then
-				echo
-				echo "You have no existing clients!"
-				exit
-			fi
-			echo
-			echo "Select the existing client certificate you want to revoke:"
-			tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
-			if [[ "$NUMBEROFCLIENTS" = '1' ]]; then
-				read -p "Select one client [1]: " CLIENTNUMBER
-			else
-				read -p "Select one client [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
-			fi
-			CLIENT=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$CLIENTNUMBER"p)
-			echo
-			read -p "Do you really want to revoke access for client $CLIENT? [y/N]: " -e REVOKE
-			if [[ "$REVOKE" = 'y' || "$REVOKE" = 'Y' ]]; then
-				cd /etc/openvpn/easy-rsa/
-				./easyrsa --batch revoke $CLIENT
-				EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
-				rm -f pki/reqs/$CLIENT.req
-				rm -f pki/private/$CLIENT.key
-				rm -f pki/issued/$CLIENT.crt
-				rm -f /etc/openvpn/crl.pem
-				cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
-				# CRL is read with each client connection, when OpenVPN is dropped to nobody
-				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-				echo
-				echo "Certificate for client $CLIENT revoked!"
-			else
-				echo
-				echo "Certificate revocation for client $CLIENT aborted!"
-			fi
-			exit
-			;;
-			3) 
-			echo
-			read -p "Do you really want to remove OpenVPN? [y/N]: " -e REMOVE
+	echo ""
+	read -p "ต้องการถอนการติดตั้ง OpenVPN หรือไม่  (Y or N): " -e -i N REMOVE
+
 			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
 				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
 				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
@@ -143,48 +165,57 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
 					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
 				fi
-				if [[ "$OS" = 'debian' ]]; then
-					apt-get remove --purge -y openvpn
-				else
-					yum remove openvpn -y
-				fi
-				rm -rf /etc/openvpn
-				rm -f /etc/sysctl.d/30-openvpn-forward.conf
-				echo
-				echo "OpenVPN removed!"
-			else
-				echo
-				echo "Removal aborted!"
 			fi
-			exit
-			;;
-			4) exit;;
-		esac
-	done
+		fi
+		apt-get remove --purge -y openvpn
+		apt-get remove --purge -y nginx
+		rm -rf /home/vps/public_html
+		rm -rf /etc/openvpn
+		rm -rf /usr/local/bin/*
+		echo ""
+		read -p "ต้องการลบข้อมูลบัญชีทั้งหมดหรือไม่ (Y or N) : " -e -i N DELETEACCOUNT
+		if [[ "$DELETEACCOUNT" = "Y" ]]; then
+			UIDN=1000
+			while read CHECKCLIENT
+			do
+				ACCOUNT="$(echo $CHECKCLIENT | cut -d: -f1)"
+				ID="$(echo $CHECKCLIENT | grep -v nobody | cut -d: -f3)"
+				if [[ $ID -ge $UIDN ]]; then
+					userdel $ACCOUNT
+				fi
+			done < /etc/passwd
+		fi
+		echo ""
+		echo -e "${GRAY}OpenVPN Removed. ${NC} "
+		echo ""
+		exit
+	else
+		echo ""
+		echo -e "${GRAY}Removal Aborted. ${NC} "
+		echo ""
+		exit
+	fi
+	exit
+
+# elif [[ -e /etc/apt/sources.list.d/pritunl.list ]]; then
+# echo ""
+# echo "ไม่สามารถติดตั้ง OpenVPN ได้"
+# echo "เนื่องจาก IP นี้ได้ติดตั้ง OpenVPN ที่ควบคุมการใช้งานผ่าน PRITUNL ไปก่อนหน้านี้แล้ว"
+# exit
+
 else
 	clear
-	echo 'Welcome to this OpenVPN "road warrior" installer!'
-	echo
-	# OpenVPN setup and first user creation
-	echo "I need to ask you a few questions before starting the setup."
-	echo "You can leave the default options and just press enter if you are ok with them."
-	echo
-	echo "First, provide the IPv4 address of the network interface you want OpenVPN"
-	echo "listening to."
-	# Autodetect IP address and pre-fill for the user
-	IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-	read -p "IP address: " -e -i $IP IP
-	# If $IP is a private IP address, the server must be behind NAT
-	if echo "$IP" | grep -qE '^(10\.|172\.1[6789]\.|172\.2[0-9]\.|172\.3[01]\.|192\.168)'; then
-		echo
-		echo "This server is behind NAT. What is the public IPv4 address or hostname?"
-		read -p "Public IP address / hostname: " -e PUBLICIP
-	fi
-	echo
-	echo "Which protocol do you want for OpenVPN connections?"
-	echo "   1) UDP (recommended)"
-	echo "   2) TCP"
-	read -p "Protocol [1-2]: " -e -i 2 PROTOCOL
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	read -p "IP Server : " -e -i $IP IP
+	read -p "Port Server : " -e -i 1194 PORT
+	read -p "Port Proxy : " -e -i 8080 PROXY
+	echo ""
+	echo -e " |${GRAY}1${NC}| UDP"
+	echo -e " |${GRAY}2${NC}| TCP"
+	echo ""
+	read -p "Protocol : " -e -i 2 PROTOCOL
 	case $PROTOCOL in
 		1) 
 		PROTOCOL=udp
@@ -193,24 +224,29 @@ else
 		PROTOCOL=tcp
 		;;
 	esac
-	echo
-	echo "What port do you want OpenVPN listening to?"
-	read -p "Port: " -e -i 443 PORT
-	echo
-	echo "Which DNS do you want to use with the VPN?"
-	echo "   1) Current system resolvers"
-	echo "   2) 1.1.1.1"
-	echo "   3) Google"
-	echo "   4) OpenDNS"
-	echo "   5) Verisign"
-	read -p "DNS [1-5]: " -e -i 3 DNS
-	echo
-	echo "Finally, tell me your name for the client certificate."
-	echo "Please, use one word only, no special characters."
-	read -p "Client name: " -e CLIENT
-	echo
-	echo "Okay, that was all I needed. We are ready to set up your OpenVPN server now."
-	read -n1 -r -p "Press any key to continue..."
+	echo ""
+	echo -e " |${GRAY}1${NC}| DNS Current System"
+	echo -e " |${GRAY}2${NC}| DNS Google"
+	echo ""
+	read -p "DNS : " -e -i 2 DNS
+	echo ""
+	echo -e " |${GRAY}1${NC}| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น แต่สามารถสร้างไฟล์เพิ่มได้"
+	echo -e " |${GRAY}2${NC}| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องใช้ชื่อบัญชีและรหัสผ่านเพื่อใช้เชื่อมต่อ"
+	echo -e " |${GRAY}3${NC}| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดจำนวนเครื่อง"
+	echo ""
+	read -p "Server System : " -e -i 3 OPENVPNSYSTEM
+	echo ""
+	read -p "Server Name: " -e CLIENT
+	echo ""
+	case $OPENVPNSYSTEM in
+		2)
+		read -p "Your Username : " -e Usernames
+		read -p "Your Password : " -e Passwords
+		;;
+	esac
+	echo ""
+	read -n1 -r -p "กด Enter 1 ครั้งเพื่อเริ่มทำการติดตั้ง หรือกด CTRL+C เพื่อยกเลิก"
+
 	if [[ "$OS" = 'debian' ]]; then
 		apt-get update
 		apt-get install openvpn iptables openssl ca-certificates -y
@@ -265,11 +301,8 @@ topology subnet
 server 10.8.0.0 255.255.255.0
 ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
-	# DNS
 	case $DNS in
 		1)
-		# Locate the proper resolv.conf
-		# Needed for systems running systemd-resolved
 		if grep -q "127.0.0.53" "/etc/resolv.conf"; then
 			RESOLVCONF='/run/systemd/resolve/resolv.conf'
 		else
@@ -281,24 +314,13 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 		done
 		;;
 		2)
-		echo 'push "dhcp-option DNS 1.1.1.1"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 1.0.0.1"' >> /etc/openvpn/server.conf
-		;;
-		3)
 		echo 'push "dhcp-option DNS 8.8.8.8"' >> /etc/openvpn/server.conf
 		echo 'push "dhcp-option DNS 8.8.4.4"' >> /etc/openvpn/server.conf
-		;;
-		4)
-		echo 'push "dhcp-option DNS 208.67.222.222"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 208.67.220.220"' >> /etc/openvpn/server.conf
-		;;
-		5)
-		echo 'push "dhcp-option DNS 64.6.64.6"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 64.6.65.6"' >> /etc/openvpn/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
 cipher AES-256-CBC
+comp-lzo
 user nobody
 group $GROUPNAME
 persist-key
@@ -306,6 +328,26 @@ persist-tun
 status openvpn-status.log
 verb 3
 crl-verify crl.pem" >> /etc/openvpn/server.conf
+	case $OPENVPNSYSTEM in
+		1)
+		echo "client-to-client" >> /etc/openvpn/server.conf
+		;;
+		2)
+		if [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
+			echo "plugin /usr/lib/openvpn/openvpn-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
+			echo "client-cert-not-required" >> /etc/openvpn/server.conf
+			echo "username-as-common-name" >> /etc/openvpn/server.conf
+		else
+			echo "plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
+			echo "client-cert-not-required" >> /etc/openvpn/server.conf
+			echo "username-as-common-name" >> /etc/openvpn/server.conf
+		fi
+		;;
+		3)
+		echo "duplicate-cn" >> /etc/openvpn/server.conf
+		;;
+	esac
+
 	# Enable net.ipv4.ip_forward for the system
 	echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/30-openvpn-forward.conf
 	# Enable without waiting for a reboot or service restart
@@ -379,8 +421,8 @@ dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-remote $IP:$PORT@ $PORT
-http-proxy $IP 8080
+remote $IP $PORT
+http-proxy $IP $PROXY
 resolv-retry infinite
 nobind
 persist-key
@@ -392,18 +434,351 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
+	case $OPENVPNSYSTEM in
+		2)
+		echo "auth-user-pass" >> /etc/openvpn/client-common.txt
+		;;
+	esac
 
-# download script
-	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
-	chmod +x /usr/local/bin/menu
-	
-# Generates the custom client.ovpn
-	newclient "$CLIENT"
-    echo ""
-    echo "-------------Finished!------------"
-    echo "-----------พีรกฤช ขาวปลื้ม----------"
-    echo "CONFIG :"~/"$CLIENT.ovpn"
-    echo "------------MyGatherBK VPN---------------"
-    echo "--------------------พิมพ์ menu ENTER----------------"
-    echo ""
+	cd
+	apt-get -y install nginx
+	cat > /etc/nginx/nginx.conf <<END
+user www-data;
+worker_processes 2;
+pid /var/run/nginx.pid;
+events {
+	multi_accept on;
+        worker_connections 1024;
+}
+http {
+	autoindex on;
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        server_tokens off;
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+        client_max_body_size 32M;
+	client_header_buffer_size 8m;
+	large_client_header_buffers 8 8m;
+	fastcgi_buffer_size 8m;
+	fastcgi_buffers 8 8m;
+	fastcgi_read_timeout 600;
+        include /etc/nginx/conf.d/*.conf;
+}
+END
+	mkdir -p /home/vps/public_html
+	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
+	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
+	args='$args'
+	uri='$uri'
+	document_root='$document_root'
+	fastcgi_script_name='$fastcgi_script_name'
+	cat > /etc/nginx/conf.d/vps.conf <<END
+server {
+    listen       85;
+    server_name  127.0.0.1 localhost;
+    access_log /var/log/nginx/vps-access.log;
+    error_log /var/log/nginx/vps-error.log error;
+    root   /home/vps/public_html;
+    location / {
+        index  index.html index.htm index.php;
+	try_files $uri $uri/ /index.php?$args;
+    }
+    location ~ \.php$ {
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass  127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
+END
+
+	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ -e /etc/squid3/squid.conf ]]; then
+			apt-get -y remove --purge squid3
+		fi
+
+		apt-get -y install squid3
+		cat > /etc/squid3/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+		IP2="s/xxxxxxxxx/$IP/g";
+		sed -i $IP2 /etc/squid3/squid.conf;
+		if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+			service squid3 restart
+			/etc/init.d/openvpn restart
+			/etc/init.d/nginx restart
+		else
+			/etc/init.d/squid3 restart
+			/etc/init.d/openvpn restart
+			/etc/init.d/nginx restart
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+		if [[ -e /etc/squid/squid.conf ]]; then
+			apt-get -y remove --purge squid
+		fi
+
+		apt-get -y install squid
+		cat > /etc/squid/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+		IP2="s/xxxxxxxxx/$IP/g";
+		sed -i $IP2 /etc/squid/squid.conf;
+		/etc/init.d/squid restart
+		/etc/init.d/openvpn restart
+		/etc/init.d/nginx restart
+	fi
+
 fi
+
+	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Menu"
+	chmod +x /usr/local/bin/menu
+	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
+	chmod +x /usr/local/bin/Auto-Delete-Client 
+	apt-get -y install vnstat
+	cd /etc/openvpn/easy-rsa/
+	./easyrsa build-client-full $CLIENT nopass
+	newclient "$CLIENT"
+	cp /root/$CLIENT.ovpn /home/vps/public_html/
+	rm -f /root/$CLIENT.ovpn
+	case $OPENVPNSYSTEM in
+		2)
+		useradd $Usernames
+		echo -e "$Passwords\n$Passwords\n"|passwd $Usernames &> /dev/null
+		;;
+	esac
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
+	echo "IP Server : $IP"
+	echo "Port Server : $PORT"
+	if [[ "$PROTOCOL" = 'udp' ]]; then
+		echo "Protocal : UDP"
+	elif [[ "$PROTOCOL" = 'tcp' ]]; then
+		echo "Protocal : TCP"
+	fi
+	echo "Port Nginx : 85"
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	case $OPENVPNSYSTEM in
+		1)
+		echo "Download My Config : http://$IP:85/$CLIENT.ovpn"
+		;;
+		2)
+		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+		echo ""
+		echo "Your Username : $Usernames"
+		echo "Your Password : $Passwords"
+		echo "Expire : Never"
+		;;
+		3)
+		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+		;;
+	esac
+	echo ""
+	echo ""
+	echo "====================================================="
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo "====================================================="
+	echo ""
+	exit
+
+	;;
+
+	2) # ==================================================================================================================
+
+if [[ -e /etc/squid3/squid.conf ]]; then
+	apt-get -y remove --purge squid3
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "Squid Proxy .....Removed."
+	exit
+elif [[ -e /etc/squid/squid.conf ]]; then
+	apt-get -y remove --purge squid
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "Squid Proxy .....Removed."
+	exit
+fi
+
+read -p "Port Proxy : " -e -i 8080 PROXY
+
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	apt-get -y install squid3
+	cat > /etc/squid3/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+	IP2="s/xxxxxxxxx/$IP/g";
+	sed -i $IP2 /etc/squid3/squid.conf;
+	if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		service squid3 restart
+	else
+		/etc/init.d/squid3 restart
+	fi
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "Squid Proxy .....Install finish."
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	exit
+
+elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+	apt-get -y install squid
+	cat > /etc/squid/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+	IP2="s/xxxxxxxxx/$IP/g";
+	sed -i $IP2 /etc/squid/squid.conf;
+	/etc/init.d/squid restart
+	clear
+	echo ""
+	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
+	echo ""
+	echo "Squid Proxy .....Install finish."
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	exit
+
+fi
+
+	;;
+
+	0) # ==================================================================================================================
+
+rm -rf openvpn-install.sh
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh && chmod +x openvpn-install.sh && bash openvpn-install.sh
+
+	;;
+
+	00) # ==================================================================================================================
+
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	rm -f /usr/local/bin/Check-Thai
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo "Check Thai" >> /usr/local/bin/Check-Thai
+fi
+bash Install
+	;;
+
+esac
