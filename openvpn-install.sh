@@ -379,7 +379,7 @@ dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-remote $IP $PORT
+remote $IP:$PORT@ $PORT
 http-proxy $IP 8080
 resolv-retry infinite
 nobind
@@ -395,13 +395,14 @@ verb 3" > /etc/openvpn/client-common.txt
 
 # download script
 	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+	chmod +x /usr/local/bin/menu
 	
 # Generates the custom client.ovpn
 	newclient "$CLIENT"
     echo ""
     echo "-------------Finished!------------"
     echo "-----------พีรกฤช ขาวปลื้ม----------"
-    echo "CONFIG :" root/"$CLIENT.ovpn"
+    echo "-------CONFIG :"~/"$CLIENT.ovpn"
     echo "------------MyGatherBK VPN---------------"
     echo "--------------------พิมพ์ menu ENTER----------------"
     echo ""
