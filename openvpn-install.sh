@@ -392,6 +392,43 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
+if [ -d '/home/vps/public_html/bandwidth' ]; then
+	echo; echo; echo " "
+clear
+clear
+cr
+else
+apt-get update 
+apt-get -y upgrade
+apt-get -y install vnstat
+chown -R vnstat:vnstat /var/lib/vnstat
+
+# install vnstat gui
+cd /home/vps/public_html/
+wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
+tar xf vnstat_php_frontend-1.5.1.tar.gz
+rm vnstat_php_frontend-1.5.1.tar.gz
+mv vnstat_php_frontend-1.5.1 bandwidth
+cd bandwidth
+sed -i "s/\$iface_list = array('eth0', 'sixxs');/\$iface_list = array('eth0');/g" config.php
+sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
+sed -i 's/Internal/Internet/g' config.php
+sed -i '/SixXS IPv6/d' config.php
+sed -i "s/\$locale = 'en_US.UTF-8';/\$locale = 'en_US.UTF+8';/g" config.php
+clear
+clear
+echo "
+
+ สถานะการติดตั้ง
+"
+service vnstat restart
+echo "
+ ================
+   ติดตั้งเส็จเรียบร้อย
+ ================
+"
+exit
+ fi
 
 # download script
 	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
@@ -402,7 +439,7 @@ verb 3" > /etc/openvpn/client-common.txt
     echo ""
     echo "-------------Finished!------------"
     echo "-----------พีรกฤช ขาวปลื้ม----------"
-    echo "-------CONFIG :"~/"$CLIENT.ovpn"
+    echo "-------CONFIG :"root/"$CLIENT.ovpn"
     echo "------------MyGatherBK VPN---------------"
     echo "--------------------พิมพ์ menu ENTER----------------"
     echo ""
