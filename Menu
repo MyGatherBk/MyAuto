@@ -28,7 +28,9 @@ if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY} 5${NC}| START-STOP-RESTART OPERATION SYSTEM"
 	echo -e "|${GRAY} 6${NC}| ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด"
 	echo -e "|${GRAY} 7${NC}| ลบบัญชีผู้ใช้ SSH"
-	echo -e "|${GRAY} 8${NC}| ช็คแบนวิทที่ใช้งานทั้งหมดวันนี้"
+	echo -e "|${GRAY} 8${NC}| เช็คแบนวิทที่ใช้งานทั้งหมดวันนี้"
+echo -e "|${GRAY} 9${NC}| เช็ดแบนวิทที่ใช้งานทั้งหมด"
+
 
 	echo ""
 
@@ -998,8 +1000,31 @@ echo -e "\033[1;31m"
 exit
 ;;
 
-	
-
+	9) # ==================================================================================================================
+ if [ -e '/var/lib/vnstat/eth0' ]; then
+vnstat -u -i eth0
+sm=eth0
+else
+vnstat -u -i ens3
+sm=ens3
+fi
+echo "
+ =====================
+  เช็ดแบนวิทที่ใช้งานทั้งหมด
+ =====================
+  1. เช็ดรายวัน
+  2. เช็ดรายเดือน
+"
+read -p " Enter Number : " opcao
+case $opcao in
+  01 | 1 )
+vnstat -d -i $sm;;
+ 02 | 2 )
+vnstat -i $sm;;
+esac
+echo ""
+exit
+;;
 
 
 
