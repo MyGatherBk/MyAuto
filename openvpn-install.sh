@@ -392,6 +392,12 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
+
+apt-get update 
+apt-get -y upgrade
+apt-get -y install vnstat
+chown -R vnstat:vnstat /var/lib/vnstat
+
 # install vnstat gui
 cd /home/vps/public_html/
 wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
@@ -405,6 +411,13 @@ sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
 sed -i 's/Internal/Internet/g' config.php
 sed -i '/SixXS IPv6/d' config.php
 cd
+# install webmin
+cd
+wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.670_all.deb"
+dpkg --install webmin_1.670_all.deb;
+apt-get -y -f install;
+rm /root/webmin_1.670_all.deb
+service webmin restart
 service vnstat restart
 
 # download script
