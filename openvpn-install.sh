@@ -298,12 +298,13 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
-cipher AES-256-CBC
+cipher AES-256-GCM
 user nobody
 group $GROUPNAME
 persist-key
 persist-tun
 status openvpn-status.log
+comp-lzo
 verb 3
 crl-verify crl.pem" >> /etc/openvpn/server.conf
 	# Enable net.ipv4.ip_forward for the system
@@ -379,7 +380,7 @@ dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-remote $IP:$PORT@ $PORT
+remote $IP $PORT
 http-proxy $IP 8080
 resolv-retry infinite
 nobind
@@ -387,12 +388,12 @@ persist-key
 persist-tun
 remote-cert-tls server
 auth SHA512
-cipher AES-256-CBC
+cipher AES-256-GCM
 setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
-
+apt-get -y install apache2
 apt-get update 
 apt-get -y upgrade
 apt-get -y install vnstat
@@ -429,8 +430,9 @@ service vnstat restart
     echo ""
     echo "-------------Finished!------------"
     echo "-----------พีรกฤช ขาวปลื้ม----------"
-    echo "-------CONFIG :"root/"$CLIENT.ovpn"
+    echo "------CONFIG :"root/"$CLIENT.ovpn"
     echo "------------MyGatherBK VPN---------------"
-    echo "--------------------พิมพ์ menu ENTER----------------"
+    echo "------reboot&พิมพ์ menu ENTER----------------"
     echo ""
 fi
+
