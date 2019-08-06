@@ -298,13 +298,12 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
-cipher AES-256-GCM
+cipher AES-256-CBC
 user nobody
 group $GROUPNAME
 persist-key
 persist-tun
 status openvpn-status.log
-comp-lzo
 verb 3
 crl-verify crl.pem" >> /etc/openvpn/server.conf
 	# Enable net.ipv4.ip_forward for the system
@@ -380,7 +379,7 @@ dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-remote $IP $PORT
+remote $IP:$PORT@ $PORT
 http-proxy $IP 8080
 resolv-retry infinite
 nobind
@@ -388,7 +387,7 @@ persist-key
 persist-tun
 remote-cert-tls server
 auth SHA512
-cipher AES-256-GCM
+cipher AES-256-CBC
 setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
@@ -398,28 +397,6 @@ apt-get update
 apt-get -y upgrade
 apt-get -y install vnstat
 chown -R vnstat:vnstat /var/lib/vnstat
-
-# install vnstat gui
-cd /home/vps/public_html/
-wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
-tar xf vnstat_php_frontend-1.5.1.tar.gz
-rm vnstat_php_frontend-1.5.1.tar.gz
-mv vnstat_php_frontend-1.5.1 vnstat
-cd vnstat
-sed -i 's/eth0/venet0/g' config.php
-sed -i "s/\$iface_list = array('venet0', 'sixxs');/\$iface_list = array('venet0');/g" config.php
-sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
-sed -i 's/Internal/Internet/g' config.php
-sed -i '/SixXS IPv6/d' config.php
-cd
-# install webmin
-cd
-wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.670_all.deb"
-dpkg --install webmin_1.670_all.deb;
-apt-get -y -f install;
-rm /root/webmin_1.670_all.deb
-service webmin restart
-service vnstat restart
 
 # download script
 	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
