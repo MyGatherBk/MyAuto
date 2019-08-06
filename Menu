@@ -866,7 +866,7 @@ case $SERVICE in
 		;;
 
 		3)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
 			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
@@ -997,7 +997,7 @@ exit
 ;;
 
 
-00) # ==================================================================================================================
+9) # ==================================================================================================================
 
 
 
