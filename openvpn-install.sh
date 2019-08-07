@@ -392,11 +392,6 @@ setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
 
-apt-get -y install apache2
-apt-get update 
-apt-get -y upgrade
-apt-get -y install vnstat
-chown -R vnstat:vnstat /var/lib/vnstat
 
 # download script
 	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
