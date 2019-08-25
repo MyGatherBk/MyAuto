@@ -111,6 +111,14 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $CLIENT nopass
 			# Generates the custom client.ovpn
 			newclient "$CLIENT"
+			    echo ""
+    echo "-------------Finished!------------"
+    echo "-----------พีรกฤช ขาวปลื้ม----------"
+    echo "http://$IP:85/root/$CLIENT.ovpn"
+    echo "------CONFIG :"root/"$CLIENT.ovpn"
+    echo "------------MyGatherBK VPN---------------"
+    echo "------reboot&พิมพ์ menu ENTER----------------"
+    echo ""
 			echo "เพิ่มไคลเอนต์ $CLIENT แล้วการกำหนดค่ามีให้ที่: "root/"$CLIENT.ovpn"
 			exit
 			;;
