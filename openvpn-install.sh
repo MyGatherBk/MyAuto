@@ -37,7 +37,7 @@ elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
 else
 	echo "Looks like you aren't running this installer on Debian, Ubuntu or CentOS"
 	exit
-fii
+fi
 
 
 # ads
@@ -600,3 +600,4 @@ echo ""
 	echo "====================================================="
 	echo ""
 	exit
+;;
