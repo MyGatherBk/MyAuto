@@ -17,6 +17,15 @@ You need to enable TUN before running this script"
 	exit
 fi
 
+# Set Localtime GMT +7
+ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+
+clear
+# IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+# if [[ "$IP" = "" ]]; then
+IP=$(wget -4qO- "http://whatismyip.akamai.com/")
+# fi
+
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
 	GROUPNAME=nogroup
@@ -520,8 +529,9 @@ END
 
 fi
 
-	wget -q -O m "/usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
-	chmod +x m /usr/local/bin/menu
+
+	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyGatherBk/master/Menu"
+	chmod +x /usr/local/bin/menu
 	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Client 
 	apt-get -y install vnstat
@@ -586,7 +596,8 @@ echo ""
 	echo ""
 	echo ""
 	echo "====================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
 	echo "====================================================="
 	echo ""
 	exit
+;;
