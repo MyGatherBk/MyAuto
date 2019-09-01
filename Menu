@@ -43,10 +43,11 @@ if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY} 4${NC}|  เปิดปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง"
 	echo -e "|${GRAY} 5${NC}|  เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
 	echo -e "|${GRAY} 6${NC}|  ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด"
-	echo -e "|${GRAY} 7${NC}|  ลบบัญชีผู้ใช้ SSH"
-	echo -e "|${GRAY} 8${NC}|  เปลียนรหัสผ่านเซิฟร์เวอร์ ROOT"
-	echo -e "|${GRAY} 9${NC}|  ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ"
-	echo -e "|${GRAY} 10${NC}| ตรวจสอบแบนด์วิดท์ต่อบัญชี"
+	echo -e "|${GRAY} 7${NC}|  Delete บัญชีผู้ใช้ SSH"
+	echo -e "|${GRAY} 8${NC}|  Delete บัญชีผู้ใช้ OPENVPN"
+	echo -e "|${GRAY} 9${NC}|  User ROOT TO Pass เปลียนรหัสผ่านเซิฟร์เวอร์ "
+	echo -e "|${GRAY}10${NC}|  ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ"
+	echo -e "|${GRAY}11${NC}|  ตรวจสอบแบนด์วิดท์ต่อบัญชี"
 	echo ""
 
 
@@ -262,7 +263,7 @@ echo ""
 		echo "หมดอายุในวันที่ : $EXP"
 		echo ""
 		echo "IP : $IP"
-		echo "Port : 22"
+		echo "Port : 22,80,143"
 		echo "Proxy Port : $PROXY"
 		exit
 	else
@@ -867,44 +868,123 @@ echo ""
 echo " ไอพีเซิฟ:$IP "
 echo ""
 echo ""
-read -p "ชื่อบัญชีที่ต้องการลบ : " CLIENT
-egrep "^$CLIENT" /etc/passwd >/dev/null
+read -p "Delete User : " Nama
 
-if [ $? -eq 0 ]; then
-	if [[ $CHECKSYSTEM ]]; then
-		echo ""
-		userdel -f $CLIENT
-		echo ""
-		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
-		echo ""
-		exit
-	else
-		echo ""
-		userdel -f $CLIENT
-		cd /etc/openvpn/easy-rsa/
-		./easyrsa --batch revoke $CLIENT
-		EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
-		rm -rf pki/reqs/$CLIENT.req
-		rm -rf pki/private/$CLIENT.key
-		rm -rf pki/issued/$CLIENT.crt
-		rm -rf /etc/openvpn/crl.pem
-		cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
-		chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-		echo ""
-		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
-		echo ""
-		exit
-	fi
-else
-	echo ""
-	echo "ไม่มีชื่อบัญชีที่ระบุ"
-	echo ""
-	exit
-fi
+userdel -r $Nama
 
 	;;		
-	
-	8) # ==================================================================================================================
+		8) # ==================================================================================================================
+
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+			NUMBEROFCLIENTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c "^V")
+			if [[ "$NUMBEROFCLIENTS" = '0' ]]; then
+				echo
+				echo "You have no existing clients!"
+				exit
+			fi
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+			echo "Select the existing client certificate you want to revoke:"
+			tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
+			if [[ "$NUMBEROFCLIENTS" = '1' ]]; then
+				read -p "Select one client [1]: " CLIENTNUMBER
+			else
+				read -p "Select one client [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
+			fi
+			CLIENT=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$CLIENTNUMBER"p)
+			echo
+			read -p "Do you really want to revoke access for client $CLIENT? [y/N]: " -e REVOKE
+			if [[ "$REVOKE" = 'y' || "$REVOKE" = 'Y' ]]; then
+				cd /etc/openvpn/easy-rsa/
+				./easyrsa --batch revoke $CLIENT
+				EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
+				rm -f pki/reqs/$CLIENT.req
+				rm -f pki/private/$CLIENT.key
+				rm -f pki/issued/$CLIENT.crt
+				rm -f /etc/openvpn/crl.pem
+				cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
+				# CRL is read with each client connection, when OpenVPN is dropped to nobody
+				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+				echo "Certificate for client $CLIENT revoked!"
+			else
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+				echo "Certificate revocation for client $CLIENT aborted!"
+			fi
+			exit
+			;;
+	9) # ==================================================================================================================
 #!/bin/bash
 clear
 clear
@@ -969,7 +1049,7 @@ service ssh restart
 exit
 ;;
 
- 9) # ==================================================================================================================
+ 10) # ==================================================================================================================
  
   if [ ! -e /usr/local/bin/Reboot-Server ]; then
 	echo '#!/bin/bash' > /usr/local/bin/Reboot-Server
@@ -1116,7 +1196,7 @@ exit
 esac
 
 	;;
-	10) # ==================================================================================================================
+	11) # ==================================================================================================================
 if [[ ! -e /usr/local/bin/Banwidth-Per-Client ]]; then
 	apt-get install python
 	wget -O /usr/local/bin/Banwidth-Per-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Banwidth-Per-Client"
