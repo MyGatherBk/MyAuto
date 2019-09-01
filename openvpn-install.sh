@@ -1,58 +1,34 @@
 #!/bin/bash
 
+# Detect Debian users running the script with "sh" instead of bash
+if readlink /proc/$$/exe | grep -q "dash"; then
+	echo "This script needs to be run with bash, not sh"
+	exit
+fi
+
 if [[ "$EUID" -ne 0 ]]; then
-	echo ""
-	echo "กรุณาเข้าสู่ระบบผู้ใช้ root ก่อนทำการใช้งานสคริปท์"
-	echo "คำสั่งเข้าสู่ระบบผู้ใช้ root คือ sudo -i"
-	echo ""
+	echo "Sorry, you need to run this as root"
 	exit
 fi
 
 if [[ ! -e /dev/net/tun ]]; then
-	echo ""
-	echo "TUN ไม่สามารถใช้งานได้"
+	echo "The TUN device is not available
+You need to enable TUN before running this script"
 	exit
 fi
 
-# Set Localtime GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-
-clear
-# IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-# if [[ "$IP" = "" ]]; then
-IP=$(wget -4qO- "http://whatismyip.akamai.com/")
-# fi
-
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
-	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 	GROUPNAME=nogroup
 	RCLOCAL='/etc/rc.local'
-
-	if [[ "$VERSION_ID" != 'VERSION_ID="7"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="17.04"' ]]; then
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
-		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
-		echo ""
-		echo "Ubuntu 14.04 - 16.04 - 17.04"
-		echo "Debian 7 - 8 - 9"
-		echo ""
-		exit
-	fi
+elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
+	OS=centos
+	GROUPNAME=nobody
+	RCLOCAL='/etc/rc.d/rc.local'
 else
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
-	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
-	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
-	echo ""
-	echo "Ubuntu 14.04 - 16.04 - 17.04"
-	echo "Debian 7 - 8 - 9"
-	echo ""
+	echo "Looks like you aren't running this installer on Debian, Ubuntu or CentOS"
 	exit
-	fi
+fii
 
 
 # ads
@@ -65,7 +41,6 @@ echo "    #      -----------About Us------------         #    "
 echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16      #    "
 echo "    #    Truemoney Wallet : 096-746-2978           #    "
 echo "    #               { VPN / SSH }                  #    "
-echo "    #                  NAMNUEA                     #    "
 echo "    #         BY : Pirakit Khawpleum               #    "
 echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "    #                                              #    "
@@ -73,7 +48,7 @@ echo "    =============== OS-32 & 64-bit =================    "
 echo ""
 echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
 echo ""
-echo " ไอพีเซิฟ:$IP "
+echo "                    ไอพีเซิฟ:$IP "
 echo ""
 echo ""
 # Install openvpn
@@ -156,9 +131,25 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 
 else
 	clear
-	echo ""
-	echo "~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~"
-	echo ""
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16      #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo "                    ไอพีเซิฟ:$IP "
+echo ""
+echo ""
 	read -p "IP Server : " -e -i $IP IP
 	read -p "Port Server : " -e -i 1194 PORT
 	read -p "Port Proxy : " -e -i 8080 PROXY
@@ -529,8 +520,8 @@ END
 
 fi
 
-	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
-	chmod +x /usr/local/bin/menu
+	wget -q -O m "/usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+	chmod +x m /usr/local/bin/menu
 	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Client 
 	apt-get -y install vnstat
@@ -555,7 +546,6 @@ echo "    #      -----------About Us------------         #    "
 echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16      #    "
 echo "    #    Truemoney Wallet : 096-746-2978           #    "
 echo "    #               { VPN / SSH }                  #    "
-echo "    #                  NAMNUEA                     #    "
 echo "    #         BY : Pirakit Khawpleum               #    "
 echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "    #                                              #    "
@@ -563,7 +553,7 @@ echo "    =============== OS-32 & 64-bit =================    "
 echo ""
 echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
 echo ""
-echo " ไอพีเซิฟ:$IP "
+echo "                    ไอพีเซิฟ:$IP "
 echo ""
 echo ""
 	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
@@ -596,7 +586,7 @@ echo ""
 	echo ""
 	echo ""
 	echo "====================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
 	echo "====================================================="
 	echo ""
 	exit
