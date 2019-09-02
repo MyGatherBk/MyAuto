@@ -46,7 +46,10 @@ echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
 echo ""
+clear
+echo
 chek=$(cat /etc/issue)
+exit
 echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
@@ -73,7 +76,10 @@ echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
 echo ""
+clear
+echo
 chek=$(cat /etc/issue)
+exit
 echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
@@ -102,7 +108,10 @@ echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
 echo ""
+clear
+echo
 chek=$(cat /etc/issue)
+exit
 echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
@@ -200,7 +209,10 @@ echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
 echo ""
+clear
+echo
 chek=$(cat /etc/issue)
+exit
 echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
@@ -607,7 +619,10 @@ echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
 echo ""
+clear
+echo
 chek=$(cat /etc/issue)
+exit
 echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
