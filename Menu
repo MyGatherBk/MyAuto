@@ -39,7 +39,20 @@ if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo ""
 	echo -e "|${GRAY} 1${NC}|  เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)"
 	echo -e "|${GRAY} 2${NC}|  เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN)"
-	echo -e "|${GRAY} 3${NC}|  ติดตั้ง พร็อกซี่ SQUID PROXY (Port) "
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 3${NC}| ติดตั้ง SQUID PROXY "
+		elif [[ -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 3${NC}| ถอนการติดตั้ง SQUID PROXY "
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 3${NC}| ติดตั้ง SQUID PROXY "
+		elif [[ -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 3${NC}| ถอนการติดตั้ง SQUID PROXY "
+		fi
+	fi
 	echo -e "|${GRAY} 4${NC}|  เปิดปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง"
 	echo -e "|${GRAY} 5${NC}|  เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
 	echo -e "|${GRAY} 6${NC}|  ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด"
@@ -48,6 +61,10 @@ if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "|${GRAY} 9${NC}|  User ROOT TO Pass เปลียนรหัสผ่านเซิฟร์เวอร์ "
 	echo -e "|${GRAY}10${NC}|  ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ"
 	echo -e "|${GRAY}11${NC}|  ตรวจสอบแบนด์วิดท์ต่อบัญชี"
+	echo -e "|${GRAY}12${NC}|  เปลี่ยนรหัสผ่านบัญชีผู้ใช้"
+	echo -e "|${GRAY}13${NC}|  เปลี่ยนวันหมดอายุบัญชีผู้ใช้"
+	echo -e "|${GRAY}14${NC}|  ตรวจสอบแบนด์วิดท์"
+	echo -e "|${GRAY} 0${NC}|  อัพเดตฟังก์ชั่นสคริปท์"
 	echo ""
 
 
@@ -221,7 +238,8 @@ echo ""
 fi
 
 	;;
-	2) # ==================================================================================================================
+	
+2) # ==================================================================================================================
 
 	echo ""
 	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
@@ -282,7 +300,8 @@ echo ""
 
 	;;
 
-	3) # ==================================================================================================================
+3) # =================================================================================================================
+	
 if [[ -e /etc/squid3/squid.conf ]]; then
 	apt-get -y remove --purge squid3
 	clear
@@ -464,7 +483,8 @@ fi
 	;;
 
 
-	4) # ==================================================================================================================
+4) # ==================================================================================================================
+
 clear
 echo ""
 echo ""
@@ -550,7 +570,7 @@ esac
 
 	;;
 
-	5) # ==================================================================================================================
+5) # ==================================================================================================================
 	
 clear
 echo ""
@@ -791,7 +811,7 @@ esac
 
 	;;
 	
-		6) # ==================================================================================================================
+6) # ==================================================================================================================
 
 clear
 echo ""
@@ -846,9 +866,8 @@ exit
 
 	;;
 
-		7) # ==================================================================================================================
+7) # ==================================================================================================================
 
-clear
 echo ""
 echo ""
 echo "    =============== OS-32 & 64-bit =================    "
@@ -868,12 +887,43 @@ echo ""
 echo " ไอพีเซิฟ:$IP "
 echo ""
 echo ""
-read -p "Delete User : " Nama
+read -p "ชื่อบัญชีที่ต้องการลบ : " CLIENT
+egrep "^$CLIENT" /etc/passwd >/dev/null
 
-userdel -r $Nama
+if [ $? -eq 0 ]; then
+	if [[ $CHECKSYSTEM ]]; then
+		echo ""
+		userdel -f $CLIENT
+		echo ""
+		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
+		echo ""
+		exit
+	else
+		echo ""
+		userdel -f $CLIENT
+		cd /etc/openvpn/easy-rsa/
+		./easyrsa --batch revoke $CLIENT
+		EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
+		rm -rf pki/reqs/$CLIENT.req
+		rm -rf pki/private/$CLIENT.key
+		rm -rf pki/issued/$CLIENT.crt
+		rm -rf /etc/openvpn/crl.pem
+		cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
+		chown nobody:$GROUPNAME /etc/openvpn/crl.pem
+		echo ""
+		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
+		echo ""
+		exit
+	fi
+else
+	echo ""
+	echo "ไม่มีชื่อบัญชีที่ระบุ"
+	echo ""
+	exit
+fi
 
-	;;		
-		8) # ==================================================================================================================
+	;;
+8) # ==================================================================================================================
 
 echo ""
 echo ""
@@ -919,16 +969,16 @@ echo ""
 echo " ไอพีเซิฟ:$IP "
 echo ""
 echo ""
-			echo "Select the existing client certificate you want to revoke:"
+			echo "เลือก Config ที่มีอยู่ที่คุณต้องการเพิกถอน:"
 			tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
 			if [[ "$NUMBEROFCLIENTS" = '1' ]]; then
-				read -p "Select one client [1]: " CLIENTNUMBER
+				read -p "เลือก Config [1]: " CLIENTNUMBER
 			else
-				read -p "Select one client [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
+				read -p "เลือก Config [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
 			fi
 			CLIENT=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$CLIENTNUMBER"p)
 			echo
-			read -p "Do you really want to revoke access for client $CLIENT? [y/N]: " -e REVOKE
+			read -p "คุณต้องการยกเลิกสิทธิ์การเข้าถึง Config จริงๆหรือไม่$CLIENT? [y/N]: " -e REVOKE
 			if [[ "$REVOKE" = 'y' || "$REVOKE" = 'Y' ]]; then
 				cd /etc/openvpn/easy-rsa/
 				./easyrsa --batch revoke $CLIENT
@@ -959,7 +1009,7 @@ echo ""
 echo " ไอพีเซิฟ:$IP "
 echo ""
 echo ""
-				echo "Certificate for client $CLIENT revoked!"
+				echo "Certificate สำหรับ Config $CLIENT เพิกถอน!"
 			else
 echo ""
 echo ""
@@ -980,11 +1030,11 @@ echo ""
 echo " ไอพีเซิฟ:$IP "
 echo ""
 echo ""
-				echo "Certificate revocation for client $CLIENT aborted!"
+				echo "Certificate การเพิกถอน Config $CLIENT ยกเลิก!"
 			fi
 			exit
 			;;
-	9) # ==================================================================================================================
+9) # ==================================================================================================================
 #!/bin/bash
 clear
 clear
@@ -1049,7 +1099,7 @@ service ssh restart
 exit
 ;;
 
- 10) # ==================================================================================================================
+10) # ==================================================================================================================
  
   if [ ! -e /usr/local/bin/Reboot-Server ]; then
 	echo '#!/bin/bash' > /usr/local/bin/Reboot-Server
@@ -1196,7 +1246,9 @@ exit
 esac
 
 	;;
-	11) # ==================================================================================================================
+	
+11) # ==================================================================================================================
+
 if [[ ! -e /usr/local/bin/Banwidth-Per-Client ]]; then
 	apt-get install python
 	wget -O /usr/local/bin/Banwidth-Per-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Banwidth-Per-Client"
@@ -1250,7 +1302,256 @@ echo ""
 fi
 
 	;;
-00) # ==================================================================================================================
+	
+12) # ==================================================================================================================
+
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+	read -p "ชื่อบัญชีที่ต้องการเปลี่ยนรหัสผ่าน : " CLIENTNAME
+	egrep "^$CLIENTNAME" /etc/passwd >/dev/null
+
+	if [ $? -eq 0 ]; then
+		echo ""
+		read -p "รหัสผ่านที่ต้องการปลี่ยน : " NEWPASSWORD
+		read -p "ยืนยันรหัสผ่านอีกครั้ง : " RETYPEPASSWORD
+
+		if [[ $NEWPASSWORD = $RETYPEPASSWORD ]]; then
+	echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+			echo "ระบบได้ทำการเปลี่ยนรหัสผ่านเรียบร้อยแล้ว"
+			echo ""
+			echo "ชื่อบัญชีผู้ใข้ : $CLIENTNAME"
+			echo "รหัสผ่านใหม่ : $NEWPASSWORD"
+			echo ""
+			exit
+		else
+			echo ""
+			echo "เปลี่ยนรหัสผ่านไม่สำเร็จ การยืนยันรหัสผ่านไม่สอดคล้อง"
+			echo ""
+			exit
+		fi
+	else
+
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+		echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+		echo ""
+		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+		if [[ "$TOMENU" = 'Y' ]]; then
+			menu
+			exit
+		elif [[ "$TOMENU" = 'N' ]]; then
+			exit
+		fi
+	fi
+
+	;;
+	
+13) # ==================================================================================================================
+
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+read -p "ชื่อบัญชีที่ต้องการเปลี่ยนวันหมดอายุ : " -e CLIENT
+
+if [ $? -eq 0 ]; then
+	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+	echo ""
+	echo -e "ชื่อบัญชีนี้หมดอายุในวันที่ ${GRAY}$EXP${NC}"
+	echo ""
+	read -p "เปลี่ยนวันหมดอายุ : " -e TimeActive
+	userdel $CLIENT
+	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
+	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+	echo "ชื่อบัญชี : $CLIENT"
+	echo "หมดวันหมดในวันที่ : $EXP"
+	echo ""
+	exit
+
+else
+
+	echo ""
+	echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+	echo ""
+	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+	if [[ "$TOMENU" = 'Y' ]]; then
+		menu
+		exit
+	elif [[ "$TOMENU" = 'N' ]]; then
+		exit
+	fi
+fi
+
+	;;
+
+14) # ==================================================================================================================
+
+
+INTERFACE=`ifconfig | head -n1 | awk '{print $1}' | cut -d ':' -f 1`
+TODAY=$(vnstat -i $INTERFACE | grep "today" | awk '{print $8" "substr ($9, 1, 1)}')
+YESTERDAY=$(vnstat -i $INTERFACE | grep "yesterday" | awk '{print $8" "substr ($9, 1, 1)}')
+WEEK=$(vnstat -i $INTERFACE -w | grep "current week" | awk '{print $9" "substr ($10, 1, 1)}')
+RXWEEK=$(vnstat -i $INTERFACE -w | grep "current week" | awk '{print $3" "substr ($10, 1, 1)}')
+TXWEEK=$(vnstat -i $INTERFACE -w | grep "current week" | awk '{print $6" "substr ($10, 1, 1)}')
+MOUNT=$(vnstat -i $INTERFACE | grep "`date +"%b '%y"`" | awk '{print $9" "substr ($10, 1, 1)}')
+RXMOUNT=$(vnstat -i $INTERFACE | grep "`date +"%b '%y"`" | awk '{print $3" "substr ($10, 1, 1)}')
+TXMOUNT=$(vnstat -i $INTERFACE | grep "`date +"%b '%y"`" | awk '{print $6" "substr ($10, 1, 1)}')
+TOTAL=$(vnstat -i $INTERFACE | grep "total:" | awk '{print $8" "substr ($9, 1, 1)}')
+RXTOTAL=$(vnstat -i $INTERFACE | grep "rx:" | awk '{print $2" "substr ($9, 1, 1)}')
+TXTOTAL=$(vnstat -i $INTERFACE | grep "tx:" | awk '{print $5" "substr ($9, 1, 1)}')
+
+clear
+echo ""
+echo ""
+echo "    =============== OS-32 & 64-bit =================    "
+echo "    #                                              #    "
+echo "    #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "    #      -----------About Us------------         #    "
+echo "    #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "    #    Truemoney Wallet : 096-746-2978           #    "
+echo "    #               { VPN / SSH }                  #    "
+echo "    #         BY : Pirakit Khawpleum               #    "
+echo "    #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "    #                                              #    "
+echo "    =============== OS-32 & 64-bit =================    "
+echo ""
+echo "    ~¤~ ๏[-ิ_•ิ]๏ ~¤~ Admin MyGatherBK ~¤~ ๏[-ิ_•ิ]๏ ~¤~ "
+echo ""
+echo " ไอพีเซิฟ:$IP "
+echo ""
+echo ""
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "แบนด์วิดท์ ${GRAY}ZENON-AUTO-VPN${NC}"
+	echo ""
+	echo -e "วันนี้ ${GRAY}$TODAY${NC}"
+	echo -e "เมื่อวานนี้ ${GRAY}$YESTERDAY${NC}"
+	echo ""
+	echo -e "รับข้อมูล (rx) ${GRAY}$RXWEEK${NC} ส่งข้อมูล (tx) ${GRAY}$TXWEEK${NC}"
+	echo -e "สัปดาห์นี้ ${GRAY}$WEEK${NC}"
+	echo ""
+	echo -e "รับข้อมูล (rx) ${GRAY}$RXMOUNT${NC} ส่งข้อมูล (tx) ${GRAY}$TXMOUNT${NC}"
+	echo -e "รวมทั้งหมดเฉพาะเดือนนี้ ${GRAY}$MOUNT${NC}"
+	echo ""
+	echo -e "รับข้อมูล (rx) ${GRAY}$RXTOTAL${NC} ส่งข้อมูล (tx) ${GRAY}$TXTOTAL${NC}"
+	echo -e "รวมทั้งหมด ${GRAY}$TOTAL${NC}"
+	echo ""
+	exit
+
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "BANDWIDTH ${GRAY}ZENON-AUTO-VPN${NC}"
+	echo ""
+	echo -e "TODAY ${GRAY}$TODAY${NC}"
+	echo -e "YESTERDAY ${GRAY}$YESTERDAY${NC}"
+	echo ""
+	echo -e "RECEIVE (rx) ${GRAY}$RXWEEK${NC} TRANSMIT (tx) ${GRAY}$TXWEEK${NC}"
+	echo -e "CURRENT WEEK ${GRAY}$WEEK${NC}"
+	echo ""
+	echo -e "RECEIVE (rx) ${GRAY}$RXMOUNT${NC} TRANSMIT (tx) ${GRAY}$TXMOUNT${NC}"
+	echo -e "THIS MOUNT TOTAL ${GRAY}$MOUNT${NC}"
+	echo ""
+	echo -e "RECEIVE (rx) ${GRAY}$RXTOTAL${NC} TRANSMIT (tx) ${GRAY}$TXTOTAL${NC}"
+	echo -e "TOTAL ${GRAY}$TOTAL${NC}"
+	echo ""
+	exit
+fi
+
+	;;
+		
+0) # ==================================================================================================================
+
+rm -rf openvpn-install.sh
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
 
 	;;
 
