@@ -23,13 +23,7 @@ clear
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 # fi
 
-echo
-chek=$(cat /etc/issue)
-echo "
-$chek
-"
 
-exit
 
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
@@ -110,6 +104,13 @@ echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 # Install openvpn
+clear
+echo
+chek=$(cat /etc/issue)
+echo "
+$chek
+"
+exit
 cd
 echo "
 ----------------------------------------------
