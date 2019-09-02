@@ -34,7 +34,7 @@ if [[ -e /etc/debian_version ]]; then
 	GROUPNAME=nogroup
 	RCLOCAL='/etc/rc.local'
 
-	if [[ "$VERSION_ID" != 'VERSION_ID="7"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="17.04"' ]]; then
+	if [[ "$VERSION_ID" != 'VERSION_ID="7"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
 echo ""
 echo ""
 echo "               =============== OS-32 & 64-bit =================    "
@@ -48,17 +48,13 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
 		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
 		echo ""
-		echo "Ubuntu 14.04 - 16.04 - 17.04"
+		echo "Ubuntu 14.04 - 16.04 - 18.04"
 		echo "Debian 7 - 8 - 9"
 		echo ""
 		exit
@@ -77,12 +73,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
 	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
@@ -108,12 +100,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 # Install openvpn
 cd
@@ -208,13 +196,7 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
-echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
 echo ""
 	read -p "IP Server : " -e -i $IP IP
@@ -618,12 +600,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
 	echo "IP Server : $IP"
