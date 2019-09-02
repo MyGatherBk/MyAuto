@@ -50,17 +50,17 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 			echo -e "|${GRAY} 3${NC}| ถอนการติดตั้ง SQUID PROXY "
 		fi
 	fi
-	echo -e "|${GRAY} 4${NC}|เปิดปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง ${GREEN} "
-	echo -e "|${GRAY} 5${NC}|  เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GREEN} "
-	echo -e "|${GRAY} 6${NC}|  ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${GREEN} "
-	echo -e "|${GRAY} 7${NC}|   Delete บัญชีผู้ใช้ SSH ${GREEN} "
-	echo -e "|${GRAY} 8${NC}|    Delete บัญชีผู้ใช้ OPENVPN ${GREEN} "
-	echo -e "|${GRAY} 9${NC}|   User ROOT TO Pass เปลียนรหัสผ่านเซิฟร์เวอร์ ${GREEN} "
-	echo -e "|${GRAY}10${NC}|  ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ ${GREEN} "
-	echo -e "|${GRAY}11${NC}|ตรวจสอบแบนด์วิดท์ต่อบัญชี ${GREEN} "
-	echo -e "|${GRAY}12${NC}|  เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${GREEN} "
-	echo -e "|${GRAY}13${NC}| เปลี่ยนวันหมดอายุบัญชีผู้ใช้ ${GREEN} "
-	echo -e "|${GRAY}14${NC}|ตรวจสอบแบนด์วิดท์ ${GREEN} "
+	echo -e "|${GRAY} 4${NC}| ปิดปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง "
+	echo -e "|${GRAY} 5${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
+	echo -e "|${GRAY} 6${NC}| ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด "
+	echo -e "|${GRAY} 7${NC}| Delete บัญชีผู้ใช้ SSH "
+	echo -e "|${GRAY} 8${NC}| Delete บัญชีผู้ใช้ OPENVPN "
+	echo -e "|${GRAY} 9${NC}| User ROOT TO Pass เปลียนรหัสผ่านเซิฟร์เวอร์ "
+	echo -e "|${GRAY}10${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ "
+	echo -e "|${GRAY}11${NC}| ตรวจสอบแบนด์วิดท์ต่อบัญชี "
+	echo -e "|${GRAY}12${NC}| เปลี่ยนรหัสผ่านบัญชีผู้ใช้ "
+	echo -e "|${GRAY}13${NC}| เปลี่ยนวันหมดอายุบัญชีผู้ใช้ "
+	echo -e "|${GRAY}14${NC}| ตรวจสอบแบนด์วิดท์ "
 	echo ""
 
 
@@ -1076,9 +1076,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
-echo "                              ไอพีเซิฟ: $IP "
+echo "                               ไอพีเซิฟ: $IP"
 echo ""
-echo """                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 echo -e "${GRAY}ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ ${NC} "
 echo ""
@@ -1348,9 +1347,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
-echo "                              ไอพีเซิฟ: $IP "
+echo "                               ไอพีเซิฟ: $IP"
 echo ""
-echo ""                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 read -p "ชื่อบัญชีที่ต้องการเปลี่ยนวันหมดอายุ : " -e CLIENT
 
@@ -1377,7 +1375,7 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
-echo "                              ไอพีเซิฟ: $IP "
+echo "                               ไอพีเซิฟ: $IP"
 echo ""
 echo ""
 	echo "ชื่อบัญชี : $CLIENT"
@@ -1401,7 +1399,6 @@ else
 fi
 
 	;;
-
 14) # ==================================================================================================================
 
 
