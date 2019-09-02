@@ -104,13 +104,6 @@ echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 # Install openvpn
-clear
-echo
-chek=$(cat /etc/issue)
-echo "
-$chek
-"
-exit
 cd
 echo "
 ----------------------------------------------
