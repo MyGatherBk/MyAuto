@@ -28,14 +28,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-echo
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "MENU SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
@@ -94,13 +88,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 if [[ $CHECKSYSTEM ]]; then
 	echo ""
@@ -132,13 +121,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 		echo "ชื่อบัญชี : $CLIENT"
 		echo "รหัสผ่าน : $PASSWORD"
@@ -228,13 +212,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit)
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
@@ -278,13 +257,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 		echo "ชื่อบัญชี : $CLIENT"
 		echo "รหัสผ่าน : $PASSWORD"
@@ -328,13 +302,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	echo "Squid Proxy .....Removed."
 	exit
@@ -354,13 +323,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	echo "Squid Proxy .....Removed."
 	exit
@@ -420,13 +384,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	echo "Squid Proxy .....Install finish."
 	echo "IP Proxy : $IP"
@@ -469,7 +428,7 @@ END
 	sed -i $IP2 /etc/squid/squid.conf;
 	/etc/init.d/squid restart
 	clear
-echo ""
+eecho ""
 echo ""
 echo "               =============== OS-32 & 64-bit =================    "
 echo "               #                                              #    "
@@ -482,13 +441,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	echo "Squid Proxy .....Install finish."
 	echo "IP Proxy : $IP"
@@ -517,13 +471,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 echo -e "${GRAY}ปรับเปลี่ยนระบบของเซิฟเวอร์ ${NC} "
 echo ""
@@ -606,13 +555,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 echo -e "เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GRAY}Admin MyGatherBK VPN${NC}"
 echo ""
@@ -849,13 +793,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 echo "ลำดับ   ชื่อบัญชีผู้ใช้        สถานะ      วันหมดอายุ"
 echo ""
@@ -905,13 +844,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 read -p "ชื่อบัญชีที่ต้องการลบ : " CLIENT
 egrep "^$CLIENT" /etc/passwd >/dev/null
@@ -964,13 +898,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 			NUMBEROFCLIENTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c "^V")
 			if [[ "$NUMBEROFCLIENTS" = '0' ]]; then
@@ -991,9 +920,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 			echo "เลือก Config ที่มีอยู่ที่คุณต้องการเพิกถอน:"
 			tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
@@ -1016,7 +944,7 @@ echo ""
 				cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
 				# CRL is read with each client connection, when OpenVPN is dropped to nobody
 				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-echo ""
+eecho ""
 echo ""
 echo "               =============== OS-32 & 64-bit =================    "
 echo "               #                                              #    "
@@ -1029,6 +957,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
+echo ""
 echo ""
 clear
 echo
@@ -1052,9 +982,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 				echo "Certificate การเพิกถอน Config $CLIENT ยกเลิก!"
 			fi
@@ -1062,7 +991,6 @@ echo ""
 			;;
 9) # ==================================================================================================================
 #!/bin/bash
-clear
 clear
 echo ""
 echo ""
@@ -1077,13 +1005,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 echo "             === WELLCOM === "
 echo " ======================================"
@@ -1153,13 +1076,9 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
+echo """                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 echo -e "${GRAY}ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ ${NC} "
 echo ""
@@ -1297,10 +1216,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-chek=$(cat /etc/issue)
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	echo ""
 	Banwidth-Per-Client
@@ -1320,14 +1237,9 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
-echo """
+echo ""
 	Banwidth-Per-Client
 	echo ""
 fi
@@ -1349,13 +1261,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	read -p "ชื่อบัญชีที่ต้องการเปลี่ยนรหัสผ่าน : " CLIENTNAME
 	egrep "^$CLIENTNAME" /etc/passwd >/dev/null
@@ -1379,13 +1286,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 			echo "ระบบได้ทำการเปลี่ยนรหัสผ่านเรียบร้อยแล้ว"
 			echo ""
@@ -1414,13 +1316,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 		echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
 		echo ""
@@ -1451,13 +1348,9 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
+echo ""                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 read -p "ชื่อบัญชีที่ต้องการเปลี่ยนวันหมดอายุ : " -e CLIENT
 
@@ -1484,13 +1377,8 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดวันหมดในวันที่ : $EXP"
@@ -1530,7 +1418,6 @@ TOTAL=$(vnstat -i $INTERFACE | grep "total:" | awk '{print $8" "substr ($9, 1, 1
 RXTOTAL=$(vnstat -i $INTERFACE | grep "rx:" | awk '{print $2" "substr ($9, 1, 1)}')
 TXTOTAL=$(vnstat -i $INTERFACE | grep "tx:" | awk '{print $5" "substr ($9, 1, 1)}')
 
-clear
 echo ""
 echo ""
 echo "               =============== OS-32 & 64-bit =================    "
@@ -1544,13 +1431,7 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
-echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
+echo "                              ไอพีเซิฟ: $IP "
 echo ""
 echo ""
 if [[ -e /usr/local/bin/Check-Thai ]]; then
