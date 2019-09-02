@@ -149,7 +149,7 @@ echo ""
 echo "                    ไอพีเซิฟ:$IP "
 echo ""
 echo ""
-	read -p "IP Server : " -e -i $IP IP
+	read -p "IP Server : " -e -i $IP
 	read -p "Port Server : " -e -i 443 PORT
 	read -p "Port Proxy : " -e -i 8080 PROXY
 	echo ""
