@@ -34,8 +34,8 @@ echo ""
 if   [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "MENU SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
-	echo -e "|${GRAY} 1${NC}|เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)"
-	echo -e "|${GRAY} 2${NC}|  เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN)"
+	echo -e "|${GRAY} 1${NC}| เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)"
+	echo -e "|${GRAY} 2${NC}| เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN)"
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
 			echo -e "|${GRAY} 3${NC}| ติดตั้ง SQUID PROXY "
@@ -1401,7 +1401,6 @@ fi
 	;;
 14) # ==================================================================================================================
 
-
 INTERFACE=`ifconfig | head -n1 | awk '{print $1}' | cut -d ':' -f 1`
 TODAY=$(vnstat -i $INTERFACE | grep "today" | awk '{print $8" "substr ($9, 1, 1)}')
 YESTERDAY=$(vnstat -i $INTERFACE | grep "yesterday" | awk '{print $8" "substr ($9, 1, 1)}')
@@ -1415,6 +1414,7 @@ TOTAL=$(vnstat -i $INTERFACE | grep "total:" | awk '{print $8" "substr ($9, 1, 1
 RXTOTAL=$(vnstat -i $INTERFACE | grep "rx:" | awk '{print $2" "substr ($9, 1, 1)}')
 TXTOTAL=$(vnstat -i $INTERFACE | grep "tx:" | awk '{print $5" "substr ($9, 1, 1)}')
 
+clear
 echo ""
 echo ""
 echo "               =============== OS-32 & 64-bit =================    "
@@ -1428,7 +1428,7 @@ echo "               #         BY : Pirakit Khawpleum               #    "
 echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "               #                                              #    "
 echo "               =============== OS-32 & 64-bit =================    "
-echo "                              ไอพีเซิฟ: $IP "
+echo "                                                                                   ไอพีเซิฟ: $IP"
 echo ""
 echo ""
 if [[ -e /usr/local/bin/Check-Thai ]]; then
@@ -1447,10 +1447,26 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "รวมทั้งหมด ${GRAY}$TOTAL${NC}"
 	echo ""
 	exit
+
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "แบนด์วิดท์ ${GRAY}MyGatherBK-VPN${NC}"
+	echo ""
+	echo -e "วันนี้ ${GRAY}$TODAY${NC}"
+	echo -e "เมื่อวานนี้  ${GRAY}$YESTERDAY${NC}"
+	echo ""
+	echo -e "รับข้อมูล  (rx) ${GRAY}$RXWEEK${NC} TRANSMIT (tx) ${GRAY}$TXWEEK${NC}"
+	echo -e "สัปดาห์นี้ ${GRAY}$WEEK${NC}"
+	echo ""
+	echo -e "รับข้อมูล  (rx) ${GRAY}$RXMOUNT${NC} TRANSMIT (tx) ${GRAY}$TXMOUNT${NC}"
+	echo -e "รวมทั้งหมดเฉพาะเดือนนี้ ${GRAY}$MOUNT${NC}"
+	echo ""
+	echo -e "รับข้อมูล (rx) ${GRAY}$RXTOTAL${NC} TRANSMIT (tx) ${GRAY}$TXTOTAL${NC}"
+	echo -e "รวมทั้งหมด ${GRAY}$TOTAL${NC}"
+	echo ""
+	exit
 fi
 
 	;;
-		
 0) # ==================================================================================================================
 
 rm -rf openvpn-install.sh
