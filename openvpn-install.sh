@@ -30,17 +30,11 @@ ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
+	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 	GROUPNAME=nogroup
 	RCLOCAL='/etc/rc.local'
-elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
-	OS=centos
-	GROUPNAME=nobody
-	RCLOCAL='/etc/rc.d/rc.local'
-else
-	echo "Looks like you aren't running this installer on Debian, Ubuntu or CentOS"
-	exit
-fi
 
+	if [[ "$VERSION_ID" != 'VERSION_ID="7"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="17.04"' ]]; then
 echo ""
 echo ""
 echo "               =============== OS-32 & 64-bit =================    "
@@ -64,7 +58,7 @@ echo ""
 		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
 		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
 		echo ""
-		echo "Ubuntu 14.04 - 16.04 - 18.04"
+		echo "Ubuntu 14.04 - 16.04 - 17.04"
 		echo "Debian 7 - 8 - 9"
 		echo ""
 		exit
