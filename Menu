@@ -64,7 +64,6 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY}12${NC}|  เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${GREEN} "
 	echo -e "|${GRAY}13${NC}| เปลี่ยนวันหมดอายุบัญชีผู้ใช้ ${GREEN} "
 	echo -e "|${GRAY}14${NC}|ตรวจสอบแบนด์วิดท์ ${GREEN} "
-	echo -e "|${GRAY} 0${NC}|  อัพเดตฟังก์ชั่นสคริปท์ ${GREEN} "
 	echo ""
 
 
