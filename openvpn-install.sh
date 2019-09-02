@@ -25,13 +25,22 @@ IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 
 
 
+# Set Localtime GMT +7
+ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
-	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 	GROUPNAME=nogroup
 	RCLOCAL='/etc/rc.local'
+elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
+	OS=centos
+	GROUPNAME=nobody
+	RCLOCAL='/etc/rc.d/rc.local'
+else
+	echo "Looks like you aren't running this installer on Debian, Ubuntu or CentOS"
+	exit
+fi
 
-	if [[ "$VERSION_ID" != 'VERSION_ID="7"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
 echo ""
 echo ""
 echo "               =============== OS-32 & 64-bit =================    "
@@ -49,7 +58,6 @@ echo ""
 clear
 echo
 chek=$(cat /etc/issue)
-exit
 echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
@@ -79,7 +87,6 @@ echo ""
 clear
 echo
 chek=$(cat /etc/issue)
-exit
 echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
@@ -111,7 +118,6 @@ echo ""
 clear
 echo
 chek=$(cat /etc/issue)
-exit
 echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
@@ -622,7 +628,6 @@ echo ""
 clear
 echo
 chek=$(cat /etc/issue)
-exit
 echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
 echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
 echo ""
