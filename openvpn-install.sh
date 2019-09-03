@@ -1,6 +1,6 @@
 #!/bin/bash
 
-elseif [[ "$EUID" -ne 0 ]]; then
+if [[ "$EUID" -ne 0 ]]; then
 	echo "Sorry, you need to run this as root"
 	exit
 fi
