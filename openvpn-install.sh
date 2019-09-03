@@ -1,90 +1,32 @@
 #!/bin/bash
 
-if [[ "$EUID" -ne 0 ]]; then
-	echo ""
-	echo "กรุณาเข้าสู่ระบบผู้ใช้ root ก่อนทำการใช้งานสคริปท์"
-	echo "คำสั่งเข้าสู่ระบบผู้ใช้ root คือ sudo -i"
-	echo ""
+elseif [[ "$EUID" -ne 0 ]]; then
+	echo "Sorry, you need to run this as root"
 	exit
 fi
 
 if [[ ! -e /dev/net/tun ]]; then
-	echo ""
-	echo "TUN ไม่สามารถใช้งานได้"
+	echo "The TUN device is not available
+You need to enable TUN before running this script"
 	exit
 fi
 
-# Set Localtime GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+if [[ -e /etc/debian_version ]]; then
+	OS=debian
+	GROUPNAME=nogroup
+elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
+	OS=centos
+	GROUPNAME=nobody
+else
+	echo "Looks like you aren't running this installer on Debian, Ubuntu or CentOS"
+	exit
+fi
 
 clear
 # IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 # if [[ "$IP" = "" ]]; then
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 # fi
-
-
-
-# Set Localtime GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-
-if [[ -e /etc/debian_version ]]; then
-	OS=debian
-	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
-	GROUPNAME=nogroup
-	RCLOCAL='/etc/rc.local'
-
-	if [[ "$VERSION_ID" != 'VERSION_ID="7"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
-echo ""
-echo ""
-echo "               =============== OS-32 & 64-bit =================    "
-echo "               #                                              #    "
-echo "               #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "               #      -----------About Us------------         #    "
-echo "               #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
-echo "               #    Truemoney Wallet : 096-746-2978           #    "
-echo "               #               { VPN / SSH }                  #    "
-echo "               #         BY : Pirakit Khawpleum               #    "
-echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "               #                                              #    "
-echo "               =============== OS-32 & 64-bit =================    "
-echo "                              ไอพีเซิฟ: $IP "
-echo ""
-echo ""
-		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
-		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
-		echo ""
-		echo "Ubuntu 14.04 - 16.04 - 18.04"
-		echo "Debian 7 - 8 - 9"
-		echo ""
-		exit
-	fi
-else
-echo ""
-echo ""
-echo "               =============== OS-32 & 64-bit =================    "
-echo "               #                                              #    "
-echo "               #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "               #      -----------About Us------------         #    "
-echo "               #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
-echo "               #    Truemoney Wallet : 096-746-2978           #    "
-echo "               #               { VPN / SSH }                  #    "
-echo "               #         BY : Pirakit Khawpleum               #    "
-echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "               #                                              #    "
-echo "               =============== OS-32 & 64-bit =================    "
-echo "                              ไอพีเซิฟ: $IP "
-echo ""
-echo ""
-	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
-	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
-	echo ""
-	echo "Ubuntu 14.04 - 16.04 - 18.04"
-	echo "Debian 7 - 8 - 9"
-	echo ""
-	exit
-	fi
-
 
 # ads
 echo ""
