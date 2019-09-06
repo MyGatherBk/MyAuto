@@ -186,20 +186,27 @@ else
 	clear
 echo ""
 echo ""
-echo "           =============== OS-32 & 64-bit =================    "
-echo "           #                                              #    "
-echo "           #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "           #      -----------About Us------------         #    "
-echo "           #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
-echo "           #    Truemoney Wallet : 096-746-2978           #    "
-echo "           #               { VPN / SSH }                  #    "
-echo "           #         BY : Pirakit Khawpleum               #    "
-echo "           #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "           #                                              #    "
-echo "           =============== OS-32 & 64-bit =================    "
-echo "                              ไอพีเซิฟ: $IP "
+echo "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo "\033[33;1m #      -----------About Us------------         #    "
+echo "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
+echo "\033[35;1m #               { VPN / SSH }                  #    "
+echo "\033[0;32m #         BY : Pirakit Khawpleum               #    "
+echo "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo "\033[34;1m  ไอพีเซิฟ: $IP "
 echo ""
 echo ""
+# Install openvpn
+cd
+echo "\033[0m 
+----------------------------------------------
+[√] ระบบสคริป  : Pirakit Khawpleum 
+[√] กรุณารอสักครู่ .....
+[√] Loading .....
+----------------------------------------------
+ "
 	read -p "IP Server : " -e -i $IP IP
 	read -p "Port Server : " -e -i 443 PORT
 	read -p "Port Proxy : " -e -i 8080 PROXY
