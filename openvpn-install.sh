@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Detect Debian users running the script with "sh" instead of bash
-if readlink /proc/$$/exe | grep -q "dash"; then
-	echo "This script needs to be run with bash, not sh"
-	exit
-fi
 
 if [[ "$EUID" -ne 0 ]]; then
 	echo "Sorry, you need to run this as root"
@@ -111,10 +106,6 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
 					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
 				fi
-				apt-get remove --purge -y nginx
-				rm -rf /home/vps/public_html
-				rm -rf /etc/openvpn
-				rm -rf /usr/local/bin/*
 				if [[ "$OS" = 'debian' ]]; then
 					apt-get remove --purge -y openvpn
 				else
