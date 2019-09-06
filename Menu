@@ -94,9 +94,9 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "\033[0;32m|||||||||||||||| REMOVE OPENVPN SCRIPT |||||||||||||||||" 
 	echo -e "\033[33;1m-------------------------------------------------------" 
 		if [[ -e /etc/openvpn/server.conf ]]; then
-		echo -e "|${GRAY} 16${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
+		echo -e "|${GRAY} 17${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
 	else
-		echo -e "|${GRAY} 16${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
+		echo -e "|${GRAY} 17${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
 	fi
 	echo ""
 	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
@@ -1677,90 +1677,54 @@ esac
 	;;
 
 	
-16) # ==================================================================================================================
-newclient () {
-	# Generates the custom client.ovpn
-	cp /etc/openvpn/client-common.txt ~/$1.ovpn
-	echo "<ca>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-	echo "</ca>" >> ~/$1.ovpn
-	echo "<cert>" >> ~/$1.ovpn
-	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-	echo "</cert>" >> ~/$1.ovpn
-	echo "<key>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-	echo "</key>" >> ~/$1.ovpn
-	echo "<tls-auth>" >> ~/$1.ovpn
-	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
-	echo "</tls-auth>" >> ~/$1.ovpn
-}
-
-if [[ -e /etc/openvpn/server.conf ]]; then
-	echo ""
-	read -p "ต้องการถอนการติดตั้ง OpenVPN หรือไม่  (Y or N): " -e -i N REMOVE
-
-	if [[ "$REMOVE" = 'Y' ]]; then
-		PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
-		PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
-		if pgrep firewalld; then
-			IP=$(firewall-cmd --direct --get-rules ipv4 nat POSTROUTING | grep '\-s 10.8.0.0/24 '"'"'!'"'"' -d 10.8.0.0/24 -j SNAT --to ' | cut -d " " -f 10)
-			firewall-cmd --zone=public --remove-port=$PORT/$PROTOCOL
-			firewall-cmd --zone=trusted --remove-source=10.8.0.0/24
-			firewall-cmd --permanent --zone=public --remove-port=$PORT/$PROTOCOL
-			firewall-cmd --permanent --zone=trusted --remove-source=10.8.0.0/24
-			firewall-cmd --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-			firewall-cmd --permanent --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-		else
-			IP=$(grep 'iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to ' $RCLOCAL | cut -d " " -f 14)
-			iptables -t nat -D POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-			sed -i '/iptables -t nat -A POSTROUTING -s 10.8.0.0\/24 ! -d 10.8.0.0\/24 -j SNAT --to /d' $RCLOCAL
-			if iptables -L -n | grep -qE '^ACCEPT'; then
-				iptables -D INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
-				iptables -D FORWARD -s 10.8.0.0/24 -j ACCEPT
-				iptables -D FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-				sed -i "/iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT/d" $RCLOCAL
-				sed -i "/iptables -I FORWARD -s 10.8.0.0\/24 -j ACCEPT/d" $RCLOCAL
-				sed -i "/iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT/d" $RCLOCAL
-			fi
-		fi
-		if hash sestatus 2>/dev/null; then
-			if sestatus | grep "Current mode" | grep -qs "enforcing"; then
-				if [[ "$PORT" != '1194' || "$PROTOCOL" = 'tcp' ]]; then
+17) # ==================================================================================================================
+			echo
+			read -p "Do you really want to remove OpenVPN? [y/N]: " -e REMOVE
+			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
+				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
+				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
+				if pgrep firewalld; then
+					IP=$(firewall-cmd --direct --get-rules ipv4 nat POSTROUTING | grep '\-s 10.8.0.0/24 '"'"'!'"'"' -d 10.8.0.0/24 -j SNAT --to ' | cut -d " " -f 10)
+					# Using both permanent and not permanent rules to avoid a firewalld reload.
+					firewall-cmd --zone=public --remove-port=$PORT/$PROTOCOL
+					firewall-cmd --zone=trusted --remove-source=10.8.0.0/24
+					firewall-cmd --permanent --zone=public --remove-port=$PORT/$PROTOCOL
+					firewall-cmd --permanent --zone=trusted --remove-source=10.8.0.0/24
+					firewall-cmd --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
+					firewall-cmd --permanent --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
+				else
+					IP=$(grep 'iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to ' $RCLOCAL | cut -d " " -f 14)
+					iptables -t nat -D POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
+					sed -i '/iptables -t nat -A POSTROUTING -s 10.8.0.0\/24 ! -d 10.8.0.0\/24 -j SNAT --to /d' $RCLOCAL
+					if iptables -L -n | grep -qE '^ACCEPT'; then
+						iptables -D INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
+						iptables -D FORWARD -s 10.8.0.0/24 -j ACCEPT
+						iptables -D FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+						sed -i "/iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT/d" $RCLOCAL
+						sed -i "/iptables -I FORWARD -s 10.8.0.0\/24 -j ACCEPT/d" $RCLOCAL
+						sed -i "/iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT/d" $RCLOCAL
+					fi
+				fi
+				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
 					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
 				fi
-			fi
-		fi
-		apt-get remove --purge -y openvpn
-		apt-get remove --purge -y nginx
-		rm -rf /home/vps/public_html
-		rm -rf /etc/openvpn
-		rm -rf /usr/local/bin/*
-		echo ""
-		read -p "ต้องการลบข้อมูลบัญชีทั้งหมดหรือไม่ (Y or N) : " -e -i N DELETEACCOUNT
-		if [[ "$DELETEACCOUNT" = "Y" ]]; then
-			UIDN=1000
-			while read CHECKCLIENT
-			do
-				ACCOUNT="$(echo $CHECKCLIENT | cut -d: -f1)"
-				ID="$(echo $CHECKCLIENT | grep -v nobody | cut -d: -f3)"
-				if [[ $ID -ge $UIDN ]]; then
-					userdel $ACCOUNT
+				apt-get remove --purge -y nginx
+				rm -rf /home/vps/public_html
+				if [[ "$OS" = 'debian' ]]; then
+					apt-get remove --purge -y openvpn
+				else
+					yum remove openvpn -y
 				fi
-			done < /etc/passwd
-		fi
-		echo ""
-		echo -e "${GRAY}OpenVPN Removed. ${NC} "
-		echo ""
-		exit
-	else
-		echo ""
-		echo -e "${GRAY}Removal Aborted. ${NC} "
-		echo ""
-		exit
-	fi
-	exit
-	
-	;;
+				rm -rf /etc/openvpn
+				rm -f /etc/sysctl.d/30-openvpn-forward.conf
+				echo
+				echo "OpenVPN removed!"
+			else
+				echo
+				echo "Removal aborted!"
+			fi
+			exit
+			;;
 0) # ==================================================================================================================
 
 rm -rf openvpn-install.sh
