@@ -64,11 +64,15 @@ echo "
  "
 	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK_SCRIPT${NC}"
 	echo ""
-		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ${GREEN} ✔   ${NC}"
+	if [[ -e /etc/openvpn/server.conf ]]; then
+		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
 	else
-		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN  ${GREEN} ✔   ${NC}"
+		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
 	fi
-	
+	echo ""
+	read -p "Select a Function Script : " FUNCTIONSCRIPT
+        echo ""
+case $FUNCTIONSCRIPT in
 1) # ==================================================================================================================
 
 newclient () {
