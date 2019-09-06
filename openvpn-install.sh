@@ -32,7 +32,12 @@ else
 	exit
 fi
 
-# ads
+# Color
+GRAY='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+# Menu
 echo ""
 echo ""
 echo "           =============== OS-32 & 64-bit =================    "
@@ -50,7 +55,6 @@ echo "           ไอพีเซิฟ: $IP "
 echo ""
 echo ""
 # Install openvpn
-cd
 echo "
 ----------------------------------------------
 [√] ระบบสคริป  : Pirakit Khawpleum 
@@ -58,6 +62,14 @@ echo "
 [√] Loading .....
 ----------------------------------------------
  "
+	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK_SCRIPT${NC}"
+	echo ""
+		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ${GREEN} ✔   ${NC}"
+	else
+		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN  ${GREEN} ✔   ${NC}"
+	fi
+	
+1) # ==================================================================================================================
 
 newclient () {
 	# Generates the custom client.ovpn
