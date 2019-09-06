@@ -62,19 +62,6 @@ echo "
 [√] Loading .....
 ----------------------------------------------
  "
-	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK_SCRIPT${NC}"
-	echo ""
-	if [[ -e /etc/openvpn/server.conf ]]; then
-		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
-	else
-		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
-	fi
-	echo ""
-	read -p "Select a Function Script : " FUNCTIONSCRIPT
-        echo ""
-case $FUNCTIONSCRIPT in
-1) # ==================================================================================================================
-
 newclient () {
 	# Generates the custom client.ovpn
 	cp /etc/openvpn/client-common.txt ~/$1.ovpn
