@@ -75,6 +75,15 @@ echo ""
 	echo ""
 	exit
 fi
+# Color
+GRAY='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+YELLOW='\033[33;1m'
+RED='\033[31;1m'
+BLUE='\033[34;1m'
+MAGENTA='\033[35;1m'
+CYAN='\033[36;1m'
 
 # ads
 echo ""
