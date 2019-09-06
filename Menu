@@ -40,16 +40,16 @@ echo ""
 	echo -e "|${GRAY} 2${NC}| เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN)"
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "\033[31;1m| 3| ติดตั้ง SQUID PROXY "
+			echo -e "\033[31;1m| 3| ติดตั้ง SQUID PROXY ${RED} X "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "\033[31;1m| 3| ถอนการติดตั้ง SQUID PROXY "
+			echo -e "\033[31;1m| 3| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔ "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "\033[31;1m| 3| ติดตั้ง SQUID PROXY "
+			echo -e "\033[31;1m| 3| ติดตั้ง SQUID PROXY ${RED} X "
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "\033[31;1m| 3| ถอนการติดตั้ง SQUID PROXY "
+			echo -e "\033[31;1m| 3| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔ "
 		fi
 	fi
 	echo -e "\033[34;1m| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง "
@@ -71,7 +71,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY}14${NC}| ตรวจสอบแบนด์วิดท์ "
 	echo -e "|${GRAY}10${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ "	
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
-        echo -e "033[35;1m |18|  เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ "
+        echo -e "\033[34;1m'|18|  เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${GREEN} ✔ "
 	echo -e "\033[33;1m-------------------------------------------------------" 
 	echo -e "\033[0;32m|||||||||||||||| REMOVE OPENVPN SCRIPT |||||||||||||||||" 
         echo -e "\033[33;1m-------------------------------------------------------" 
