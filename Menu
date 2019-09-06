@@ -92,12 +92,8 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
 	echo -e "\033[33;1m-------------------------------------------------------" 
 	echo -e "\033[0;32m|||||||||||||||| REMOVE OPENVPN SCRIPT |||||||||||||||||" 
-	echo -e "\033[33;1m-------------------------------------------------------" 
-		if [[ -e /etc/openvpn/server.conf ]]; then
-		echo -e "|${GRAY} 17${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
-	else
-		echo -e "|${GRAY} 17${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
-	fi
+        echo -e "\033[33;1m-------------------------------------------------------" 
+        echo -e "|${GRAY} 17${NC}| ถอนการติดตั้ง OPENVPN  ${GREEN} ✔   ${NC}"
 	echo ""
 	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
         echo ""
@@ -1678,7 +1674,34 @@ esac
 
 	
 17) # ==================================================================================================================
-			echo
+echo ""
+echo ""
+echo "           =============== OS-32 & 64-bit =================    "
+echo "           #                                              #    "
+echo "           #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "           #      -----------About Us------------         #    "
+echo "           #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "           #    Truemoney Wallet : 096-746-2978           #    "
+echo "           #               { VPN / SSH }                  #    "
+echo "           #         BY : Pirakit Khawpleum               #    "
+echo "           #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "           #                                              #    "
+echo "           =============== OS-32 & 64-bit =================    "
+echo "           ไอพีเซิฟ: $IP "
+echo ""
+echo ""
+if [[ -e /etc/openvpn/server.conf ]]; then
+	while :
+	do
+	clear
+		echo "Looks like OpenVPN is already installed."
+		echo
+		echo "What do you want to do?"
+		echo "   1) Remove OpenVPN"
+		echo "   2) Exit"
+		read -p "Select an option [1-2]: " option
+		case $option in
+                     echo
 			read -p "Do you really want to remove OpenVPN? [y/N]: " -e REMOVE
 			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
 				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
@@ -1708,8 +1731,6 @@ esac
 				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
 					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
 				fi
-				apt-get remove --purge -y nginx
-				rm -rf /home/vps/public_html
 				if [[ "$OS" = 'debian' ]]; then
 					apt-get remove --purge -y openvpn
 				else
@@ -1725,6 +1746,7 @@ esac
 			fi
 			exit
 			;;
+			4) exit;;
 0) # ==================================================================================================================
 
 rm -rf openvpn-install.sh
