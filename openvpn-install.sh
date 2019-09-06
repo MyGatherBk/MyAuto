@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Detect Debian users running the script with "sh" instead of bash
+if readlink /proc/$$/exe | grep -q "dash"; then
+	echo "This script needs to be run with bash, not sh"
+	exit
+fi
+
 if [[ "$EUID" -ne 0 ]]; then
 	echo "Sorry, you need to run this as root"
 	exit
@@ -10,6 +16,15 @@ if [[ ! -e /dev/net/tun ]]; then
 You need to enable TUN before running this script"
 	exit
 fi
+
+# Set Localtime GMT +7
+ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+
+clear
+# IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+# if [[ "$IP" = "" ]]; then
+IP=$(wget -4qO- "http://whatismyip.akamai.com/")
+# fi
 
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
@@ -22,26 +37,20 @@ else
 	exit
 fi
 
-clear
-# IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-# if [[ "$IP" = "" ]]; then
-IP=$(wget -4qO- "http://whatismyip.akamai.com/")
-# fi
-
 # ads
 echo ""
 echo ""
-echo "               =============== OS-32 & 64-bit =================    "
-echo "               #                                              #    "
-echo "               #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "               #      -----------About Us------------         #    "
-echo "               #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
-echo "               #    Truemoney Wallet : 096-746-2978           #    "
-echo "               #               { VPN / SSH }                  #    "
-echo "               #         BY : Pirakit Khawpleum               #    "
-echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "               #                                              #    "
-echo "               =============== OS-32 & 64-bit =================    "
+echo "           =============== OS-32 & 64-bit =================    "
+echo "           #                                              #    "
+echo "           #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "           #      -----------About Us------------         #    "
+echo "           #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "           #    Truemoney Wallet : 096-746-2978           #    "
+echo "           #               { VPN / SSH }                  #    "
+echo "           #         BY : Pirakit Khawpleum               #    "
+echo "           #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "           #                                              #    "
+echo "           =============== OS-32 & 64-bit =================    "
 echo "                              ไอพีเซิฟ: $IP "
 echo ""
 echo ""
@@ -102,6 +111,10 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
 					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
 				fi
+				apt-get remove --purge -y nginx
+				rm -rf /home/vps/public_html
+				rm -rf /etc/openvpn
+				rm -rf /usr/local/bin/*
 				if [[ "$OS" = 'debian' ]]; then
 					apt-get remove --purge -y openvpn
 				else
@@ -127,17 +140,17 @@ else
 	clear
 echo ""
 echo ""
-echo "               =============== OS-32 & 64-bit =================    "
-echo "               #                                              #    "
-echo "               #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "               #      -----------About Us------------         #    "
-echo "               #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
-echo "               #    Truemoney Wallet : 096-746-2978           #    "
-echo "               #               { VPN / SSH }                  #    "
-echo "               #         BY : Pirakit Khawpleum               #    "
-echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "               #                                              #    "
-echo "               =============== OS-32 & 64-bit =================    "
+echo "           =============== OS-32 & 64-bit =================    "
+echo "           #                                              #    "
+echo "           #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "           #      -----------About Us------------         #    "
+echo "           #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "           #    Truemoney Wallet : 096-746-2978           #    "
+echo "           #               { VPN / SSH }                  #    "
+echo "           #         BY : Pirakit Khawpleum               #    "
+echo "           #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "           #                                              #    "
+echo "           =============== OS-32 & 64-bit =================    "
 echo "                              ไอพีเซิฟ: $IP "
 echo ""
 echo ""
@@ -531,17 +544,17 @@ fi
 	clear
 echo ""
 echo ""
-echo "               =============== OS-32 & 64-bit =================    "
-echo "               #                                              #    "
-echo "               #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
-echo "               #      -----------About Us------------         #    "
-echo "               #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
-echo "               #    Truemoney Wallet : 096-746-2978           #    "
-echo "               #               { VPN / SSH }                  #    "
-echo "               #         BY : Pirakit Khawpleum               #    "
-echo "               #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "               #                                              #    "
-echo "               =============== OS-32 & 64-bit =================    "
+echo "           =============== OS-32 & 64-bit =================    "
+echo "           #                                              #    "
+echo "           #       AUTOSCRIPT CREATED BY PIRAKIT          #    "
+echo "           #      -----------About Us------------         #    "
+echo "           #      OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18   #    "
+echo "           #    Truemoney Wallet : 096-746-2978           #    "
+echo "           #               { VPN / SSH }                  #    "
+echo "           #         BY : Pirakit Khawpleum               #    "
+echo "           #    FB : https://m.me/pirakrit.khawplum       #    "
+echo "           #                                              #    "
+echo "           =============== OS-32 & 64-bit =================    "
 echo "                              ไอพีเซิฟ: $IP "
 echo ""
 echo ""
