@@ -23,6 +23,16 @@ clear
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 # fi
 
+# Color
+GRAY='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+YELLOW='\033[33;1m'
+RED='\033[31;1m'
+BLUE='\033[34;1m'
+MAGENTA='\033[35;1m'
+CYAN='\033[36;1m'
+
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
 	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
@@ -32,16 +42,16 @@ if [[ -e /etc/debian_version ]]; then
 	if [[ "$VERSION_ID" != 'VERSION_ID="7"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
 echo ""
 echo ""
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo "\033[33;1m #      -----------About Us------------         #    "
-echo "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
-echo "\033[35;1m #               { VPN / SSH }                  #    "
-echo "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[34;1m  ไอพีเซิฟ: $IP "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[33;1m #      -----------About Us------------         #    "
+echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[35;1m #               { VPN / SSH }                  #    "
+echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
 echo ""
 echo ""
 		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
@@ -55,16 +65,16 @@ echo ""
 else
 echo ""
 echo ""
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo "\033[33;1m #      -----------About Us------------         #    "
-echo "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
-echo "\033[35;1m #               { VPN / SSH }                  #    "
-echo "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[34;1m  ไอพีเซิฟ: $IP "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[33;1m #      -----------About Us------------         #    "
+echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[35;1m #               { VPN / SSH }                  #    "
+echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
 echo ""
 echo ""
 	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
@@ -75,29 +85,21 @@ echo ""
 	echo ""
 	exit
 fi
-# Color
-GRAY='\033[1;33m'
-GREEN='\033[0;32m'
-NC='\033[0m'
-YELLOW='\033[33;1m'
-RED='\033[31;1m'
-BLUE='\033[34;1m'
-MAGENTA='\033[35;1m'
-CYAN='\033[36;1m'
+
 
 # ads
 echo ""
 echo ""
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo "\033[33;1m #      -----------About Us------------         #    "
-echo "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
-echo "\033[35;1m #               { VPN / SSH }                  #    "
-echo "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[34;1m  ไอพีเซิฟ: $IP "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[33;1m #      -----------About Us------------         #    "
+echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[35;1m #               { VPN / SSH }                  #    "
+echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
 echo ""
 echo ""
 # Install openvpn
@@ -186,21 +188,21 @@ else
 	clear
 echo ""
 echo ""
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo "\033[33;1m #      -----------About Us------------         #    "
-echo "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
-echo "\033[35;1m #               { VPN / SSH }                  #    "
-echo "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[34;1m  ไอพีเซิฟ: $IP "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[33;1m #      -----------About Us------------         #    "
+echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[35;1m #               { VPN / SSH }                  #    "
+echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
 echo ""
 echo ""
 # Install openvpn
 cd
-echo "\033[0m 
+echo -e "\033[0m 
 ----------------------------------------------
 [√] ระบบสคริป  : Pirakit Khawpleum 
 [√] กรุณารอสักครู่ .....
@@ -597,16 +599,18 @@ fi
 	clear
 echo ""
 echo ""
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo "\033[33;1m #      -----------About Us------------         #    "
-echo "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
-echo "\033[35;1m #               { VPN / SSH }                  #    "
-echo "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo "\033[34;1m  ไอพีเซิฟ: $IP "
+echo ""
+echo ""
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[33;1m #      -----------About Us------------         #    "
+echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "\033[0m    #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[35;1m #               { VPN / SSH }                  #    "
+echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
 echo ""
 echo ""
 	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
