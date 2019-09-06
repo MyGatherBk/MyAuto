@@ -14,6 +14,8 @@ GRAY='\033[1;33m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 YELLOW='\033[33;1m'
+RED='\033[31;1m'
+BLUE='\033[34;1m'
 # Functions
 z1='\e[31;1m'  #red
 z2='\e[34;1m'  #blue
@@ -62,19 +64,19 @@ echo ""
 	echo -e "|${GRAY} 2${NC}| เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN)"
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 3${NC}| ติดตั้ง SQUID PROXY "
+			echo -e "\033[31;1m| 3| ติดตั้ง SQUID PROXY "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 3${NC}| ถอนการติดตั้ง SQUID PROXY "
+			echo -e "\033[31;1m| 3| ถอนการติดตั้ง SQUID PROXY "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 3${NC}| ติดตั้ง SQUID PROXY "
+			echo -e "\033[31;1m| 3| ติดตั้ง SQUID PROXY "
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 3${NC}| ถอนการติดตั้ง SQUID PROXY "
+			echo -e "\033[31;1m| 3| ถอนการติดตั้ง SQUID PROXY "
 		fi
 	fi
-	echo -e "|${GRAY} 4${NC}| ปิดเปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง "
+	echo -e "\033[34;1m| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง "
 	echo -e "|${GRAY} 6${NC}| ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด "
 	echo -e "|${GRAY} 7${NC}| Delete บัญชีผู้ใช้ SSH "
 	echo -e "|${GRAY} 8${NC}| Delete บัญชีผู้ใช้ OPENVPN "
@@ -85,7 +87,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "\033[33;1m-------------------------------------------------------" 
 	echo -e "\033[0;32m|||||||||||||||| VPS MANAGER |||||||||||||||||" 
 	echo -e "\033[33;1m-------------------------------------------------------" 
-	echo -e "|${GRAY} 9${NC}| User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ "
+	echo -e "\033[0;32m| 9| User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ "
 	echo -e "|${GRAY} 5${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
 	echo -e "|${GRAY}14${NC}| ตรวจสอบแบนด์วิดท์ "
 	echo -e "|${GRAY}10${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ "	
@@ -2334,7 +2336,7 @@ echo "           #         BY : Pirakit Khawpleum               #    "
 echo "           #    FB : https://m.me/pirakrit.khawplum       #    "
 echo "           #                                              #    "
 echo "           =============== OS-32 & 64-bit =================    "
-echo "                              ไอพีเซิฟ: $IP "
+echo "           ไอพีเซิฟ: $IP "
 echo ""
 echo ""
 	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
