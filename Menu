@@ -255,16 +255,53 @@ echo -e "\e[94m[][][]======================================[][][]\e[0m"
 ;;
 	
 03) # ==================================================================================================================
-ok "➡ apt-get install dropbear"
-apt-get install -qy dropbear > /dev/null 2>&1
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=3128/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 143"/g' /etc/default/dropbear
-echo "/bin/false" >> /etc/shells
-echo "/usr/sbin/nologin" >> /etc/shells
-ok "➡ service dropbear restart"
-service dropbear restart > /dev/null 2>&1
-;;
+if [[ -e /etc/default/dropbear ]]; then
+	echo ""
+	echo "IP นี้ได้ติดตั้ง SSH Dropbear ไปก่อนหน้านี้แล้ว"
+	echo ""
+	exit
+
+elif [[ ! -e /etc/default/dropbear ]]; then
+	apt-get -y install dropbear
+	sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+	/etc/init.d/dropbear restart
+	PORTSSH=$(grep '^Port ' /etc/ssh/sshd_config | cut -d " " -f 2)
+	clear
+echo ""
+echo ""
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[33;1m #      -----------About Us------------         #    "
+echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "\033[0;32m #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[35;1m #               { VPN / SSH }                  #    "
+echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
+echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
+echo ""
+echo ""
+	echo "SSH Dropbear .....Install Finish."
+	echo "IP Addrsss : $IP"
+	echo "Port SSH : $PORTSSH"
+	echo ""
+	if [[ -e /etc/squid3/squid.conf ]]; then
+			PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
+			echo "IP Proxy : $IP"
+			echo "Port Proxy : $PROXY"
+	elif [[ -e /etc/squid/squid.conf ]]; then
+			PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
+			echo "IP Proxy : $IP"
+			echo "Port Proxy : $PROXY"
+			
+	else
+		echo "No Proxy"
+	fi
+	echo ""
+	exit
+fi
+
+	;;
 2) # ==================================================================================================================
 
 	echo ""
