@@ -41,18 +41,19 @@ echo ""
 	echo -e "|${GRAY} 2${NC}| เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN)"
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "\033[31;1m| 3| ติดตั้ง SQUID PROXY ${RED} X "
+			echo -e "\033[34;1m| 3| ติดตั้ง SQUID PROXY ${RED} X "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "\033[31;1m| 3| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔ "
+			echo -e "\033[34;1m| 3| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔ "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "\033[31;1m| 3| ติดตั้ง SQUID PROXY ${RED} X "
+			echo -e "\033[34;1m| 3| ติดตั้ง SQUID PROXY ${RED} X "
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "\033[31;1m| 3| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔ "
+			echo -e "\033[34;1m| 3| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔ "
 		fi
 	fi
+	echo -e "\033[34;1m|03| ติดตั้ง SSH DROPBEAR "
 	echo -e "\033[34;1m| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง "
 	echo -e "|${GRAY} 6${NC}| ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด "
 	echo -e "|${GRAY} 7${NC}| Delete บัญชีผู้ใช้ SSH "
@@ -253,6 +254,17 @@ echo -e "\e[0m                                                   "
 echo -e "\e[94m[][][]======================================[][][]\e[0m"
 ;;
 	
+03) # ==================================================================================================================
+ok "➡ apt-get install dropbear"
+apt-get install -qy dropbear > /dev/null 2>&1
+sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=3128/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 143"/g' /etc/default/dropbear
+echo "/bin/false" >> /etc/shells
+echo "/usr/sbin/nologin" >> /etc/shells
+ok "➡ service dropbear restart"
+service dropbear restart > /dev/null 2>&1
+;;
 2) # ==================================================================================================================
 
 	echo ""
