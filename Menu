@@ -248,7 +248,7 @@ echo -e "\e[0m                                                   "
 echo -e "         Port OpenSSH    :  "$opensshport
 echo -e "         Port Dropbear   :  "$dropbearport
 echo -e "         Port SSL        :  "$stunnel4port
-echo -e "         Port Squid      :  "$squidport
+echo -e "         Port Squid      :  "$PROXY
 echo -e "         Port OpenVPN    :  "$openvpnport
 echo -e "\e[0m                                                   "
 echo -e "\e[94m[][][]======================================[][][]\e[0m"
