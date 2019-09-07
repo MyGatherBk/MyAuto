@@ -232,42 +232,93 @@ fi
 	;;
 08) # ==================================================================================================================
 #!/bin/bash
-read -p "ชื่อผู้ใช้ที่จะรีเซ็ต: " namer
- if cat /etc/passwd |grep $namer: > /dev/null
- then
- echo " "
- else
- clear
- echo "ผู้ใช้ $ namer ไม่มีอยู่"
- exit
- fi
-clear
-echo -e "\033[33;1mคุณต้องการรีเซ็ตอะไร ?\033[33;1m
-1) จำนวนการเข้าสู่ระบบ
-2) วันหมดอายุ
-3) เปลี่ยนรหัสผ่านผู้ใช้ "
-read -p "ตัวเลือก: " option
-if [ $option -eq 1 ]; then
-read -p "ขีด จำกัด การเข้าสู่ระบบใหม่คืออะไร: " liml
-limite $namer $liml
-exit 0
-fi
+# Program untuk membatasi jumlah login user dropbear
+PARAM=$1
 
-if [ $option -eq 2 ]; then
-echo "วันที่ใหม่คืออะไร : formato AAAA/MM/DD"
-read -p ": " date
-chage -E $date $namer 2> /dev/null
-echo -e "\033[33;1mผู้ใช้งาน $namer Date: $date\033[33;1m"
-exit
-fi
-if [ $option -eq 3 ]
+echo "Semua user dropbear yang login lebih dari $1 akan di kill"
+echo -n > /tmp/pid2
+ps ax|grep dropbear > /tmp/pid
+cat /tmp/pid | grep -i 'dropbear -p' > /tmp/pids
+cat /var/log/secure |  grep -i "Password auth succeeded" > /tmp/sks
+perl -pi -e 's/Password auth succeeded for//g' /tmp/sks
+perl -pi -e 's/dropbear//g' /tmp/sks
+
+cat /tmp/pid | while read line;do
+set -- $line
+p=$1
+var=`cat /tmp/sks | grep -i $1`
+set -- $var
+l=$6
+if [ "$6" != '' ]
 then
-read -p "รหัสผ่านใหม่คืออะไร$namer: " senha
-(echo "$senha" ; echo "$senha" ) |passwd $namer > /dev/null 2>/dev/null
-echo "$senha" > /etc/VpsPackdir/senha/$namer
-echo "ใช้รหัสผ่านใหม่"
-exit
+echo "$p $l" | cat - /tmp/pid2 > /tmp/temp && mv /tmp/temp /tmp/pid2
 fi
+ done
+
+case $PARAM in
+
+1)
+echo -n > /tmp/user1
+cat /tmp/pid2 | while read line;do
+set -- $line
+p=$1
+u=$2
+cat /tmp/user1 | grep -i $u > /dev/null
+if [ $? = 1 ];then
+echo $line >> /tmp/user1
+else
+kill $p
+echo "kill $p user $u" 
+fi
+done
+rm -f /tmp/pid
+rm -f /tmp/pid2
+rm -f /tmp/pids
+rm -f /tmp/sks
+rm -f /tmp/user1
+exit 0
+;;
+2)
+echo -n > /tmp/user1
+echo -n > /tmp/user2
+cat /tmp/pid2 | while read line;do
+set -- $line
+p=$1
+u=$2
+cat /tmp/user1 | grep -i $u > /dev/null
+if [ $? = 1 ];then
+echo $line >> /tmp/user1
+else
+cat /tmp/user2 | grep -i $u > /dev/null
+if [ $? = 1 ];then
+echo $line >> /tmp/user2
+else
+kill $p
+echo "kill $p user $u"
+fi
+fi
+done
+rm -f /tmp/pid
+rm -f /tmp/pid2
+rm -f /tmp/pids
+rm -f /tmp/sks
+rm -f /tmp/user1
+rm -f /tmp/user2
+rm -f /tmp/user3
+
+exit 0
+;;
+*)
+  echo " gunakan perintah userlimit 1 untuk limit 1 login saja"
+  echo " atau userlimit 2  untuk melimit max 3 login"   
+rm -f /tmp/pid
+rm -f /tmp/pid2
+rm -f /tmp/pids
+rm -f /tmp/sks
+exit 1
+;;
+
+esac
 ;;
 	
 2) # ==================================================================================================================
