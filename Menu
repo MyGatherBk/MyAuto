@@ -76,8 +76,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "\033[33;1m-------------------------------------------------------" 
 	echo -e "\033[0;32m|||||||||||||||| REMOVE OPENVPN SCRIPT |||||||||||||||||" 
         echo -e "\033[33;1m-------------------------------------------------------" 
-        echo -e "|${GRAY} 17${NC}| REMOVE OPENVPN  ${GREEN} ✔   ${NC}"
-	echo -e "|${GRAY} 19${NC}| Install OPENVPN  ${GREEN} ✔   ${NC}"
+        echo -e "|${GRAY} 17${NC}| REMOVE/Install OPENVPN  ${GREEN} ✔   ${NC}"
 	echo -e "|${GRAY} 0${NC}| Update MENU SCRIPT  ${GREEN} ✔   ${NC}"
 	echo ""
 	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
@@ -1670,75 +1669,8 @@ esac
 
 	;;
 
-	
-17) # ==================================================================================================================
-echo ""
-echo ""
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "\033[33;1m #      -----------About Us------------         #    "
-echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "\033[0;32m #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "\033[35;1m #               { VPN / SSH }                  #    "
-echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
-echo ""
-echo " REMOVE OPENVPN"
-read -p "Do you really want to remove OpenVPN? [y/N]: " -e REMOVE
-			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
-				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
-				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
-				if pgrep firewalld; then
-					IP=$(firewall-cmd --direct --get-rules ipv4 nat POSTROUTING | grep '\-s 10.8.0.0/24 '"'"'!'"'"' -d 10.8.0.0/24 -j SNAT --to ' | cut -d " " -f 10)
-					# Using both permanent and not permanent rules to avoid a firewalld reload.
-					firewall-cmd --zone=public --remove-port=$PORT/$PROTOCOL
-					firewall-cmd --zone=trusted --remove-source=10.8.0.0/24
-					firewall-cmd --permanent --zone=public --remove-port=$PORT/$PROTOCOL
-					firewall-cmd --permanent --zone=trusted --remove-source=10.8.0.0/24
-					firewall-cmd --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-					firewall-cmd --permanent --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-				else
-					IP=$(grep 'iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to ' $RCLOCAL | cut -d " " -f 14)
-					iptables -t nat -D POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-					sed -i '/iptables -t nat -A POSTROUTING -s 10.8.0.0\/24 ! -d 10.8.0.0\/24 -j SNAT --to /d' $RCLOCAL
-					if iptables -L -n | grep -qE '^ACCEPT'; then
-						iptables -D INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
-						iptables -D FORWARD -s 10.8.0.0/24 -j ACCEPT
-						iptables -D FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-						sed -i "/iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT/d" $RCLOCAL
-						sed -i "/iptables -I FORWARD -s 10.8.0.0\/24 -j ACCEPT/d" $RCLOCAL
-						sed -i "/iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT/d" $RCLOCAL
-					fi
-				fi
-				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
-					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
-				fi
-				if [[ "$OS" = 'debian' ]]; then
-					apt-get remove --purge -y openvpn
-				else
-					yum remove openvpn -y
-				fi
-				rm -rf /etc/openvpn
-				rm -f /etc/sysctl.d/30-openvpn-forward.conf
-				echo
-				echo "OpenVPN removed!"
-			else
-				echo
-				echo "Removal aborted!"
-			fi
-			exit
-echo "Script  install openvpn"
-echo "
-sudo -i
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
-chmod +x openvpn-install.sh
-./openvpn-install.sh
-"		
-;;
 
-19) # ================================================================================================================== 
+17) # ================================================================================================================== 
 #!/bin/bash
 
 if [[ "$EUID" -ne 0 ]]; then
@@ -1918,6 +1850,13 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				echo "Removal aborted!"
 			fi
 			exit
+echo "Script  install openvpn"
+echo "
+sudo -i
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
+"
 
 # elif [[ -e /etc/apt/sources.list.d/pritunl.list ]]; then
 # echo ""
