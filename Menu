@@ -1802,7 +1802,9 @@ newclient () {
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
 if [[ -e /etc/openvpn/server.conf ]]; then
-read -p "คุณต้องการลบ OpenVPN จริงๆหรือ? [y/N]: " -e REMOVE
+	echo ""
+	read -p "ต้องการถอนการติดตั้ง OpenVPN หรือไม่  (Y or N): " -e -i N REMOVE
+
 			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
 				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
 				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
