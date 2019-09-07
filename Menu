@@ -238,7 +238,7 @@ opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' 
 dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-Squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
+Squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
 clear
 echo -e "\e[0m                                                   "
 echo -e "\e[94m[][][]======================================[][][]"
@@ -248,58 +248,70 @@ echo -e "\e[0m                                                   "
 echo -e "         Port OpenSSH    :  "$opensshport
 echo -e "         Port Dropbear   :  "$dropbearport
 echo -e "         Port SSL        :  "$stunnel4port
-echo -e "         Port Squid      :  "$ProxyPort
+echo -e "         Port Squid      :  "$$PROXY
 echo -e "         Port OpenVPN    :  "$openvpnport
 echo -e "\e[0m                                                   "
 echo -e "\e[94m[][][]======================================[][][]\e[0m"
 ;;
 	
 03) # ==================================================================================================================
-if [[ -e /etc/default/dropbear ]]; then
-	echo ""
-	echo "IP นี้ได้ติดตั้ง SSH Dropbear ไปก่อนหน้านี้แล้ว"
-	echo ""
-	exit
-
-elif [[ ! -e /etc/default/dropbear ]]; then
-	apt-get -y install dropbear
-	sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-	/etc/init.d/dropbear restart
-	PORTSSH=$(grep '^Port ' /etc/ssh/sshd_config | cut -d " " -f 2)
-	clear
-echo ""
-echo ""
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "\033[33;1m #      -----------About Us------------         #    "
-echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "\033[0;32m #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "\033[35;1m #               { VPN / SSH }                  #    "
-echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
-echo ""
-echo ""
-	echo "SSH Dropbear .....Install Finish."
-	echo "IP Addrsss : $IP"
-	echo "Port SSH : $PORTSSH"
-	echo ""
-	if [[ -e /etc/squid3/squid.conf ]]; then
-			PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
-			echo "IP Proxy : $IP"
-			echo "Port Proxy : $PROXY"
-	elif [[ -e /etc/squid/squid.conf ]]; then
-			PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
-			echo "IP Proxy : $IP"
-			echo "Port Proxy : $PROXY"
-			
-	else
-		echo "No Proxy"
-	fi
-	echo ""
-	exit
-fi
+#!/bin/bash
+# Script by : _Dreyannz_
+clear
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]"
+echo -e "\e[0m                                                   "
+echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
+echo -e "\e[0m                                                   "
+echo -e "\e[93m            [1] Show All Service Ports"
+echo -e "\e[93m            [2] Edit Port OpenSSH"
+echo -e "\e[93m            [3] Edit Port Dropbear"
+echo -e "\e[93m            [4] Edit Port Stunnel"
+echo -e "\e[93m            [5] Edit Port OpenVPN"
+echo -e "\e[93m            [6] Edit Port Squid"
+echo -e "\e[93m            [x] Exit"
+echo -e "\e[0m                                                   "
+read -p "       Select From Options [1-6 or x] :  " Port
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]\e[0m"
+sleep 3
+clear
+case $Port in
+			1)
+			clear
+			show_ports
+			exit
+			;;
+			2)
+			clear
+			edit_openssh
+			exit
+			;;
+			3)
+			clear
+			edit_dropbear
+			exit
+			;;
+			4)
+			clear
+			edit_stunnel4
+			exit
+			;;
+			5)
+			clear
+			edit_openvpn
+			exit
+			;;
+			6)
+			clear
+			edit_squid3
+			exit
+			;;
+			x)
+			clear
+			exit
+			;;
+	esac
 
 	;;
 2) # ==================================================================================================================
