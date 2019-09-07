@@ -238,7 +238,7 @@ opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' 
 dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-Squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
+Squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
 clear
 echo -e "\e[0m                                                   "
 echo -e "\e[94m[][][]======================================[][][]"
@@ -248,7 +248,7 @@ echo -e "\e[0m                                                   "
 echo -e "         Port OpenSSH    :  "$opensshport
 echo -e "         Port Dropbear   :  "$dropbearport
 echo -e "         Port SSL        :  "$stunnel4port
-echo -e "         Port Squid      :  "$$PROXY
+echo -e "         Port Squid      :  "$PROXY
 echo -e "         Port OpenVPN    :  "$openvpnport
 echo -e "\e[0m                                                   "
 echo -e "\e[94m[][][]======================================[][][]\e[0m"
@@ -263,54 +263,88 @@ echo -e "\e[94m[][][]======================================[][][]"
 echo -e "\e[0m                                                   "
 echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
 echo -e "\e[0m                                                   "
-echo -e "\e[93m            [1] Show All Service Ports"
-echo -e "\e[93m            [2] Edit Port OpenSSH"
-echo -e "\e[93m            [3] Edit Port Dropbear"
-echo -e "\e[93m            [4] Edit Port Stunnel"
-echo -e "\e[93m            [5] Edit Port OpenVPN"
-echo -e "\e[93m            [6] Edit Port Squid"
+echo -e "\e[93m            [1] Change Server Password"
+echo -e "\e[93m            [2] RAM Usage"
+echo -e "\e[93m            [3] Diagnostics"
+echo -e "\e[93m            [4] Benchmark"
+echo -e "\e[93m            [5] SpeedTest"
 echo -e "\e[93m            [x] Exit"
 echo -e "\e[0m                                                   "
-read -p "       Select From Options [1-6 or x] :  " Port
+read -p "       Select From Options [1-7 or x] :  " Server
 echo -e "\e[0m                                                   "
 echo -e "\e[94m[][][]======================================[][][]\e[0m"
-sleep 3
-clear
-case $Port in
-			1)
-			clear
-			show_ports
-			exit
-			;;
-			2)
-			clear
-			edit_openssh
-			exit
-			;;
-			3)
-			clear
-			edit_dropbear
-			exit
-			;;
-			4)
-			clear
-			edit_stunnel4
-			exit
-			;;
-			5)
-			clear
-			edit_openvpn
-			exit
-			;;
-			6)
-			clear
-			edit_squid3
-			exit
-			;;
-			x)
-			clear
-			exit
-			;;
+case $Server in
+		1)
+		clear
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m             Checking root Permissions            "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		sleep 4
+		if [[ $USER != "root" ]]; then
+		clear
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[91m              root Permissions Denied             "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		fi
+		clear
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
+		echo -e "\e[0m                                                   "
+		read -p "         New Password   :  " Pass
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		sleep 4
+		New_Pass=root:$Pass;
+		echo $New_Pass > passwd
+		chpasswd < passwd
+		rm passwd
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m            Password Has Been Changed             "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		;;
+		2)
+		clear
+		ram
+		exit
+		;;
+		3)
+		clear
+		diagnose
+		exit
+		;;
+		4)
+		clear
+		bench-network
+		exit
+		;;
+		5)
+		clear
+		speedtest --share
+		exit
+		;;
+		x)
+		clear
+		exit
+		;;
 	esac
 
 	;;
