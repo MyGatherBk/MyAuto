@@ -63,7 +63,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "\033[34;1m|11| ตรวจสอบแบนด์วิดท์ต่อบัญชี "
 	echo -e "\033[34;1m|12| เปลี่ยนรหัสผ่านบัญชีผู้ใช้ "
 	echo -e "\033[34;1m|13| เปลี่ยนวันหมดอายุบัญชีผู้ใช้ "
-	echo -e "\033[34;1m|16| แบนและปลดแบนบัญชีผู้ใช้"
+	echo -e "\033[34;1m|16| แบนและปลดแบนบัญชีผู้ใช้ "
 	echo -e "\033[33;1m-------------------------------------------------------" 
 	echo -e "\033[0;32m|||||||||||||||| VPS MANAGER |||||||||||||||||" 
 	echo -e "\033[33;1m-------------------------------------------------------" 
@@ -71,13 +71,13 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY} 5${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
 	echo -e "|${GRAY}14${NC}| ตรวจสอบแบนด์วิดท์ "
 	echo -e "|${GRAY}10${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ "	
-	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
+	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต "
         echo -e "\033[34;1m|18| เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${GREEN} ✔ "
 	echo -e "\033[33;1m-------------------------------------------------------" 
 	echo -e "\033[0;32m|||||||||||||||| REMOVE OPENVPN SCRIPT |||||||||||||||||" 
         echo -e "\033[33;1m-------------------------------------------------------" 
-        echo -e "|${GRAY} 17${NC}| REMOVE/Install OPENVPN  ${GREEN} ✔   ${NC}"
-	echo -e "|${GRAY} 0${NC}| Update MENU SCRIPT  ${GREEN} ✔   ${NC}"
+        echo -e "\033[36;1m|17| REMOVE/Install OPENVPN  ${GREEN} ✔ "
+	echo -e "\033[31;1m| 0| Update MENU SCRIPT  ${GREEN} ✔ "
 	echo ""
 	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
         echo ""
@@ -1802,8 +1802,7 @@ newclient () {
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
 if [[ -e /etc/openvpn/server.conf ]]; then
-			echo
-			read -p "คุณต้องการลบ OpenVPN จริงๆหรือ? [y/N]: " -e REMOVE
+read -p "คุณต้องการลบ OpenVPN จริงๆหรือ? [y/N]: " -e REMOVE
 			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
 				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
 				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
