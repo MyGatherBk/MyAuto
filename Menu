@@ -53,12 +53,10 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 			echo -e "\033[34;1m| 3| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔ "
 		fi
 	fi
-	echo -e "\033[34;1m|03| ติดตั้ง SSH DROPBEAR "
 	echo -e "\033[34;1m| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง "
 	echo -e "|${GRAY} 6${NC}| ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด "
 	echo -e "|${GRAY} 7${NC}| Delete บัญชีผู้ใช้ SSH "
 	echo -e "|${GRAY} 8${NC}| Delete บัญชีผู้ใช้ OPENVPN "
-	echo -e "|${GRAY} 08${NC}| show_ports "
 	echo -e "\033[33;1m-------------------------------------------------------" 
 	echo -e "\033[0;32m|||||||||||||||| บัญชีผู้ใช้ MANAGER |||||||||||||||||" 
 	echo -e "\033[33;1m-------------------------------------------------------" 
@@ -231,123 +229,7 @@ echo ""
 fi
 
 	;;
-08) # ==================================================================================================================
-#!/bin/bash
-# Script by : _Dreyannz_
-opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-Squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
-clear
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]"
-echo -e "\e[0m                                                   "
-echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
-echo -e "\e[0m                                                   "
-echo -e "         Port OpenSSH    :  "$opensshport
-echo -e "         Port Dropbear   :  "$dropbearport
-echo -e "         Port SSL        :  "$stunnel4port
-echo -e "         Port Squid      :  "$PROXY
-echo -e "         Port OpenVPN    :  "$openvpnport
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]\e[0m"
-;;
-	
-03) # ==================================================================================================================
-#!/bin/bash
-# Script by : _Dreyannz_
-clear
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]"
-echo -e "\e[0m                                                   "
-echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
-echo -e "\e[0m                                                   "
-echo -e "\e[93m            [1] Change Server Password"
-echo -e "\e[93m            [2] RAM Usage"
-echo -e "\e[93m            [3] Diagnostics"
-echo -e "\e[93m            [4] Benchmark"
-echo -e "\e[93m            [5] SpeedTest"
-echo -e "\e[93m            [x] Exit"
-echo -e "\e[0m                                                   "
-read -p "       Select From Options [1-7 or x] :  " Server
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]\e[0m"
-case $Server in
-		1)
-		clear
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m             Checking root Permissions            "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		sleep 4
-		if [[ $USER != "root" ]]; then
-		clear
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              root Permissions Denied             "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		fi
-		clear
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
-		echo -e "\e[0m                                                   "
-		read -p "         New Password   :  " Pass
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		sleep 4
-		New_Pass=root:$Pass;
-		echo $New_Pass > passwd
-		chpasswd < passwd
-		rm passwd
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m           AutoScriptVPS by  _Dreyannz_           "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m            Password Has Been Changed             "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		;;
-		2)
-		clear
-		ram
-		exit
-		;;
-		3)
-		clear
-		diagnose
-		exit
-		;;
-		4)
-		clear
-		bench-network
-		exit
-		;;
-		5)
-		clear
-		speedtest --share
-		exit
-		;;
-		x)
-		clear
-		exit
-		;;
-	esac
 
-	;;
 2) # ==================================================================================================================
 
 	echo ""
