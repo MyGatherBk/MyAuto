@@ -1844,8 +1844,17 @@ if [[ -e /etc/openvpn/server.conf ]]; then
    fi
    rm -rf /etc/openvpn
    rm -f /etc/sysctl.d/30-openvpn-forward.conf
+   echo "Script  install openvpn"
+echo "
+sudo -i
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
+"
    echo
    echo "OpenVPN removed!"
+
+   else
    echo "Script  install openvpn"
 echo "
 sudo -i
@@ -1853,16 +1862,8 @@ wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.
 chmod +x openvpn-install.sh
 ./openvpn-install.sh
 "
-   else
    echo
    echo "Removal aborted!"
-   echo "Script  install openvpn"
-echo "
-sudo -i
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
-chmod +x openvpn-install.sh
-./openvpn-install.sh
-"
    fi
 			exit
 
