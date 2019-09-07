@@ -1845,18 +1845,19 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				rm -f /etc/sysctl.d/30-openvpn-forward.conf
 				echo
 				echo "OpenVPN removed!"
-			else
-				echo
-				echo "Removal aborted!"
-			fi
-			exit
-echo "Script  install openvpn"
+				echo "Script  install openvpn"
 echo "
 sudo -i
 wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
 chmod +x openvpn-install.sh
 ./openvpn-install.sh
 "
+			else
+				echo
+				echo "Removal aborted!"
+			fi
+			exit
+
 
 # elif [[ -e /etc/apt/sources.list.d/pritunl.list ]]; then
 # echo ""
