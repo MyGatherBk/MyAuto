@@ -1774,7 +1774,13 @@ echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
 echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
 echo ""
-echo ""
+echo "Script  install openvpn"
+echo "
+sudo -i
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
+"
 # Install openvpn
 cd
 echo -e "\033[35;1m
@@ -1784,7 +1790,6 @@ echo -e "\033[35;1m
 [√] Loading .....
 ----------------------------------------------
  "
-
 newclient () {
 	# Generates the custom client.ovpn
 	cp /etc/openvpn/client-common.txt ~/$1.ovpn
@@ -1844,24 +1849,10 @@ if [[ -e /etc/openvpn/server.conf ]]; then
    fi
    rm -rf /etc/openvpn
    rm -f /etc/sysctl.d/30-openvpn-forward.conf
-   echo "Script  install openvpn"
-echo "
-sudo -i
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
-chmod +x openvpn-install.sh
-./openvpn-install.sh
-"
    echo
    echo "OpenVPN removed!"
 
    else
-   echo "Script  install openvpn"
-echo "
-sudo -i
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
-chmod +x openvpn-install.sh
-./openvpn-install.sh
-"
    echo
    echo "Removal aborted!"
    fi
