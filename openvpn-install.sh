@@ -429,7 +429,9 @@ verb 3" > /etc/openvpn/client-common.txt
 		echo "auth-user-pass" >> /etc/openvpn/client-common.txt
 		;;
 	esac
-echo -e "\033[35;1m #               { Insatll nginx }                  #    "
+echo ""
+echo -e "\033[35;1m { install nginx }  "
+echo ""
 	cd
 	apt-get -y install nginx
 	cat > /etc/nginx/nginx.conf <<END
@@ -492,7 +494,9 @@ END
 		if [[ -e /etc/squid3/squid.conf ]]; then
 			apt-get -y remove --purge squid3
 		fi
-echo -e "\033[0;32m #               { Insatll PROXY }                  #    "
+echo ""
+echo -e "\033[0;32m { Insatll PROXY }  "
+echo ""
 		apt-get -y install squid3
 		cat > /etc/squid3/squid.conf <<END
 http_port $PROXY
@@ -539,7 +543,9 @@ END
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
 		fi
-echo -e "\033[0;32m #               { Insatll PROXY }                  #    "
+echo ""
+echo -e "\033[0;32m { Insatll PROXY }  "
+echo ""
 		apt-get -y install squid
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
