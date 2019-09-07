@@ -1856,6 +1856,13 @@ chmod +x openvpn-install.sh
    else
    echo
    echo "Removal aborted!"
+   echo "Script  install openvpn"
+echo "
+sudo -i
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
+"
    fi
 			exit
 
