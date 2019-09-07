@@ -889,33 +889,20 @@ echo ""
 			NUMBEROFCLIENTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c "^V")
 			if [[ "$NUMBEROFCLIENTS" = '0' ]]; then
 				echo
-				echo "You have no existing clients!"
+				echo "no existing clients!ที่มีอยู่!"
 				exit
 			fi
-echo ""
-echo ""
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "\033[33;1m #      -----------About Us------------         #    "
-echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "\033[0;32m #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "\033[35;1m #               { VPN / SSH }                  #    "
-echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
-echo ""
-echo ""
-			echo "เลือก Config ที่มีอยู่ที่คุณต้องการเพิกถอน:"
+			echo
+			echo "เลือกใบรับรองไคลเอ็นต์ที่มีอยู่ที่คุณต้องการเพิกถอน:"
 			tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
 			if [[ "$NUMBEROFCLIENTS" = '1' ]]; then
-				read -p "เลือก Config [1]: " CLIENTNUMBER
+				read -p "Select one client [1]: " CLIENTNUMBER
 			else
-				read -p "เลือก Config [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
+				read -p "Select one client [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
 			fi
 			CLIENT=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$CLIENTNUMBER"p)
 			echo
-			read -p "คุณต้องการยกเลิกสิทธิ์การเข้าถึง Config จริงๆหรือไม่$CLIENT? [y/N]: " -e REVOKE
+			read -p "คุณต้องการยกเลิกการเข้าถึงสำหรับหรือไม่ client $CLIENT? [y/N]: " -e REVOKE
 			if [[ "$REVOKE" = 'y' || "$REVOKE" = 'Y' ]]; then
 				cd /etc/openvpn/easy-rsa/
 				./easyrsa --batch revoke $CLIENT
@@ -927,44 +914,11 @@ echo ""
 				cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
 				# CRL is read with each client connection, when OpenVPN is dropped to nobody
 				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-echo ""
-echo ""
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "\033[33;1m #      -----------About Us------------         #    "
-echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "\033[0;32m #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "\033[35;1m #               { VPN / SSH }                  #    "
-echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
-echo ""
-echo ""
-clear
-echo
-chek=$(cat /etc/issue)
-exit
-echo -e "                       ${GRAY} OS system:${GREEN} $chek ${NC}"
-echo -e "                       ${GRAY}ไอพีเซิฟ:${GREEN} $IP ${NC}"
-echo ""
-				echo "Certificate สำหรับ Config $CLIENT เพิกถอน!"
+				echo
+				echo "ใบรับรองสำหรับ $CLIENT เพิกถอนเรียบร้อย!"
 			else
-echo ""
-echo ""
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[36;1m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "\033[33;1m #      -----------About Us------------         #    "
-echo -e "\033[31;1m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "\033[0;32m #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "\033[35;1m #               { VPN / SSH }                  #    "
-echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
-echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
-echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
-echo ""
-echo ""
-				echo "Certificate การเพิกถอน Config $CLIENT ยกเลิก!"
+				echo
+				echo "การเพิกถอนใบรับรองสำหรับ $CLIENT ยกเลิก!"
 			fi
 			exit
 			;;
@@ -1569,7 +1523,6 @@ echo -e "|${GRAY}1${NC}| แบนบัญชีผู้ใช้"
 echo -e "|${GRAY}2${NC}| ปลดแบนบัญชีผู้ใช้"
 echo ""
 read -p "เลือกหัวข้อที่ต้องการใช้งาน : " BandUB
-
 case $BandUB in
 
 	1)
@@ -1735,41 +1688,54 @@ echo ""
 echo " REMOVE OPENVPN"
 read -p "Do you really want to remove OpenVPN? [y/N]: " -e REMOVE
 			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
-				PORT=$(grep '^port ' /etc/openvpn/server/server.conf | cut -d " " -f 2)
-				PROTOCOL=$(grep '^proto ' /etc/openvpn/server/server.conf | cut -d " " -f 2)
+				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
+				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
 				if pgrep firewalld; then
 					IP=$(firewall-cmd --direct --get-rules ipv4 nat POSTROUTING | grep '\-s 10.8.0.0/24 '"'"'!'"'"' -d 10.8.0.0/24 -j SNAT --to ' | cut -d " " -f 10)
 					# Using both permanent and not permanent rules to avoid a firewalld reload.
-					firewall-cmd --remove-port=$PORT/$PROTOCOL
+					firewall-cmd --zone=public --remove-port=$PORT/$PROTOCOL
 					firewall-cmd --zone=trusted --remove-source=10.8.0.0/24
-					firewall-cmd --permanent --remove-port=$PORT/$PROTOCOL
+					firewall-cmd --permanent --zone=public --remove-port=$PORT/$PROTOCOL
 					firewall-cmd --permanent --zone=trusted --remove-source=10.8.0.0/24
 					firewall-cmd --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
 					firewall-cmd --permanent --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
 				else
-					systemctl disable --now openvpn-iptables.service
-					rm -f /etc/systemd/system/openvpn-iptables.service
+					IP=$(grep 'iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to ' $RCLOCAL | cut -d " " -f 14)
+					iptables -t nat -D POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
+					sed -i '/iptables -t nat -A POSTROUTING -s 10.8.0.0\/24 ! -d 10.8.0.0\/24 -j SNAT --to /d' $RCLOCAL
+					if iptables -L -n | grep -qE '^ACCEPT'; then
+						iptables -D INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
+						iptables -D FORWARD -s 10.8.0.0/24 -j ACCEPT
+						iptables -D FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+						sed -i "/iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT/d" $RCLOCAL
+						sed -i "/iptables -I FORWARD -s 10.8.0.0\/24 -j ACCEPT/d" $RCLOCAL
+						sed -i "/iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT/d" $RCLOCAL
+					fi
 				fi
 				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
 					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
 				fi
-				systemctl disable --now openvpn-server@server.service
-				rm -rf /etc/openvpn/server
-				rm -f /etc/systemd/system/openvpn-server@server.service.d/disable-limitnproc.conf
-				rm -f /etc/sysctl.d/30-openvpn-forward.conf
 				if [[ "$OS" = 'debian' ]]; then
 					apt-get remove --purge -y openvpn
 				else
 					yum remove openvpn -y
 				fi
+				rm -rf /etc/openvpn
+				rm -f /etc/sysctl.d/30-openvpn-forward.conf
 				echo
-				echo "OpenVPN removed! OK"
+				echo "OpenVPN removed!"
 			else
 				echo
-				echo "Removal aborted! OK"
+				echo "Removal aborted!"
 			fi
 			exit
-			
+echo "Script  install openvpn"
+echo "
+sudo -i
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
+"		
 ;;
 
 19) # ================================================================================================================== 
