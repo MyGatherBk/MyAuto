@@ -33,7 +33,6 @@ echo -e "\033[0;32m #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
 echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
 echo ""
-echo ""
 	echo -e "\033[33;1m-------------------------------------------------------" 
 	echo -e "\033[0;32m|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo -e "\033[33;1m-------------------------------------------------------"
@@ -74,9 +73,9 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต "
         echo -e "\033[34;1m|18| เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${GREEN} ✔ "
 	echo -e "\033[33;1m-------------------------------------------------------" 
-	echo -e "\033[0;32m|||||||||||||||| REMOVE OPENVPN SCRIPT |||||||||||||||||" 
+	echo -e "\033[0;32m|||||||||||||| REMOVE OPENVPN SCRIPT |||||||||||||| " 
         echo -e "\033[33;1m-------------------------------------------------------" 
-        echo -e "\033[36;1m|17| REMOVE/Install OPENVPN  ${GREEN} ✔ "
+        echo -e "\033[36;1m|17| REMOVE OPENVPN SCRIPT  ${GREEN} ✔ "
 	echo -e "\033[31;1m| 0| Update MENU SCRIPT  ${GREEN} ✔ "
 	echo ""
 	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
@@ -222,7 +221,7 @@ echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn"
+	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn "
 	echo ""
 	exit
 
@@ -2176,7 +2175,7 @@ END
 			apt-get -y remove --purge squid3
 		fi
 echo ""
-echo -e "\033[0;32m { Insatll PROXY }  "
+echo -e "\033[0;32m { Install PROXY }  "
 echo ""
 		apt-get -y install squid3
 		cat > /etc/squid3/squid.conf <<END
@@ -2225,7 +2224,7 @@ END
 			apt-get -y remove --purge squid
 		fi
 echo ""
-echo -e "\033[0;32m { Insatll PROXY }  "
+echo -e "\033[0;32m { Install PROXY }  "
 echo ""
 		apt-get -y install squid
 		cat > /etc/squid/squid.conf <<END
