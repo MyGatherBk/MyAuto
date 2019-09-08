@@ -8,7 +8,10 @@ CHECKSYSTEM=$(tail -n +2 /etc/openvpn/server.conf | grep "^username-as-common-na
 # if [[ "$IP" = "" ]]; thenN
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 #
-
+# Color
+GRAY='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
 # Regular Colors
 Black="\033[0;30m"       # Black
 Red="\033[0;31m"         # Red
@@ -822,17 +825,16 @@ echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
 echo -e "\033[0;35m #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "\033[0;37m =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;32m ไอพีเซิฟ: $IP "
-echo ""
-echo "============================================================ "
-echo "ลำดับ   ชื่อบัญชีผู้ใช้       สถานะ                วันหมดอายุ "
-echo "============================================================ "
+echo "============================================= "
+echo "ลำดับ   ชื่อบัญชีผู้ใช้        สถานะ      วันหมดอายุ "
+echo "============================================= "
 C=1
 ON=0
 OFF=0
 while read ONOFF
 do
-	CLIENTOFFLINE=$(echo -e "${Red}OFFLINE${NC}")
-	CLIENTONLINE=$(echo -e "${Green}ONLINE${NC}")
+	CLIENTOFFLINE=$(echo -e "${GRAY}OFFLINE${NC}")
+	CLIENTONLINE=$(echo -e "${GREEN}ONLINE${NC}")
 	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
 	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
 	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
@@ -856,6 +858,7 @@ echo ""
 exit
 
 	;;
+
 
 7) # ==================================================================================================================
 
