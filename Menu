@@ -477,10 +477,10 @@ echo ""
 echo ""
 echo -e "${GRAY}ปรับเปลี่ยนระบบของเซิฟเวอร์ ${NC} "
 echo ""
-echo -e "|${GRAY}1${NC}| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น สามารถสร้างไฟล์เพิ่มได้"
-echo -e "|${GRAY}2${NC}| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องสร้างบัญชีเพื่อใช้เชื่อมต่อ"
-echo -e "|${GRAY}3${NC}| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดเครื่อง"
-echo -e "|${GRAY}4${NC}| 1 ไฟล์เชื่อมต่อได้ 50 เครื่อง"
+echo -e "|${GRAY}1${NC}| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น สามารถสร้างไฟล์เพิ่มได้ "
+echo -e "|${GRAY}2${NC}| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องสร้างบัญชีเพื่อใช้เชื่อมต่อ "
+echo -e "|${GRAY}3${NC}| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดเครื่อง "
+echo -e "|${GRAY}4${NC}| 1 ไฟล์เชื่อมต่อได้ 50 เครื่อง "
 echo ""
 read -p "เลือกหัวข้อที่ต้องการใช้งาน : " CHANGESYSTEMSERVER
 
@@ -494,7 +494,7 @@ sed -i '28d' /etc/openvpn/server.conf
 sed -i '20d' /etc/openvpn/client-common.txt
 echo "client-to-client" >> /etc/openvpn/server.conf
 echo ""
-echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 1 เรียบร้อย"
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 1 เรียบร้อย "
 echo ""
 service openvpn restart
 
@@ -517,7 +517,7 @@ else
 fi
 echo "auth-user-pass" >> /etc/openvpn/client-common.txt
 echo ""
-echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 2 เรียบร้อย"
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 2 เรียบร้อย "
 echo ""
 service openvpn restart
 
@@ -531,7 +531,7 @@ sed -i '28d' /etc/openvpn/server.conf
 sed -i '20d' /etc/openvpn/client-common.txt
 echo "duplicate-cn" >> /etc/openvpn/server.conf
 echo ""
-echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 3 เรียบร้อย"
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 3 เรียบร้อย "
 echo ""
 service openvpn restart
 
@@ -545,7 +545,7 @@ sed -i '28d' /etc/openvpn/server.conf
 sed -i '20d' /etc/openvpn/client-common.txt
 echo "duplicate-cn" >> /etc/openvpn/server.conf
 echo ""
-echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 4 เรียบร้อย"
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 4 เรียบร้อย "
 echo ""
 service openvpn restart
 
