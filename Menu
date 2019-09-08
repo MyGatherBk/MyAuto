@@ -793,15 +793,15 @@ echo -e "\033[34;1m =============== OS-32 & 64-bit =================    "
 echo -e "\033[34;1m  ไอพีเซิฟ: $IP "
 echo ""
 echo ""
-echo "ลำดับ   ชื่อบัญชีผู้ใช้        สถานะ      วันหมดอายุ "
+echo "ลำดับ   ชื่อบัญชีผู้ใช้       สถานะ         วันหมดอายุ "
 echo ""
 C=1
 ON=0
 OFF=0
 while read ONOFF
 do
-	CLIENTOFFLINE=$(echo -e "${Green}OFFLINE${NC}")
-	CLIENTONLINE=$(echo -e "${Yellow}ONLINE${NC}")
+	CLIENTOFFLINE=$(echo -e "${Red}OFFLINE ")
+	CLIENTONLINE=$(echo -e "${Green}ONLINE ")
 	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
 	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
 	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
@@ -820,7 +820,7 @@ done < /etc/passwd
 TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 echo ""
 echo ""
-echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${GRAY}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL"
+echo -e "กำลังเชื่อมต่อ ${Green}$ON  |  ไม่ได้เชื่อมต่อ ${Red}$OFF  |  บัญชีทั้งหมด ${Blue}$TOTAL"
 echo ""
 exit
 
