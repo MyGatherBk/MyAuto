@@ -800,8 +800,8 @@ ON=0
 OFF=0
 while read ONOFF
 do
-	CLIENTOFFLINE=$(echo -e "${Red}OFFLINE ")
-	CLIENTONLINE=$(echo -e "${Green}ONLINE ")
+	CLIENTOFFLINE=$(echo -e "${Red}OFFLINE")
+	CLIENTONLINE=$(echo -e "${Green}ONLINE")
 	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
 	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
 	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
@@ -820,7 +820,7 @@ done < /etc/passwd
 TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 echo ""
 echo ""
-echo -e "กำลังเชื่อมต่อ ${Green}$ON  |  ไม่ได้เชื่อมต่อ ${Red}$OFF  |  บัญชีทั้งหมด ${Blue}$TOTAL"
+echo -e "กำลังเชื่อมต่อ ${Green}$ON${Purple}  |  ไม่ได้เชื่อมต่อ ${Red}$OFF${Purple}  |  บัญชีทั้งหมด ${Blue}$TOTAL${Purple}"
 echo ""
 exit
 
