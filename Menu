@@ -851,7 +851,7 @@ done < /etc/passwd
 TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 echo ""
 echo ""
-echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${GRAY}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL"
+echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${Green}  |  ไม่ได้เชื่อมต่อ ${GRAY}$OFF${Red}  |  บัญชีทั้งหมด $TOTAL${Blue} "
 echo ""
 exit
 
