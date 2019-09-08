@@ -10,37 +10,37 @@ IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 #
 
 # Regular Colors
-Black="\033[0;30m]"         # Black
-Red="\033[0;31m]"         # Red
-Green="\033[0;32m]"         # Green
-Yellow="\033[0;33m]"       # Yellow
-Blue="\033[0;34m]"       # Blue
-Purple="\033[0;35m]"         # Purple
-Cyan="\033[0;36m]"          # Cyan
-White="\033[0;37m]"         # White
+Black="\033[0;30m"       # Black
+Red="\033[0;31m"         # Red
+Green="\033[0;32m"         # Green
+Yellow="\033[0;33m"       # Yellow
+Blue="\033[0;34m"        # Blue
+Purple="\033[0;35m"        # Purple
+Cyan="\033[0;36m"          # Cyan
+White="\033[0;37m"         # White
 # Bold
-BBlack="\033[1;30m]"        # Black
-BRed="\033[1;31m]"        # Red
-BGreen="\033[1;32m]"      # Green
-BYellow="\033[1;33m]"       # Yellow
-BBlue="\033[1;34m]"     # Blue
-BPurple="\033[1;35m]"     # Purple
-BCyan="\033[1;36m]"     # Cyan
-BWhite="\033[1;37m]"       # White
+BBlack="\033[1;30m"        # Black
+BRed="\033[1;31m"        # Red
+BGreen="\033[1;32m"      # Green
+BYellow="\033[1;33m"       # Yellow
+BBlue="\033[1;34m"     # Blue
+BPurple="\033[1;35m"     # Purple
+BCyan="\033[1;36m"     # Cyan
+BWhite="\033[1;37m"       # White
 
 # ads
 echo ""
 echo ""
-echo -e "\033[0;37m] =============== OS-32 & 64-bit =================    "
-echo -e "\033[0;35m] #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "\033[0;32m] #      -----------About Us------------         #    "
-echo -e "\033[0;34m] #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "\033[0;33m] #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "\033[0;34m] #               { VPN / SSH }                  #    "
-echo -e "\033[0;32m] #         BY : Pirakit Khawpleum               #    "
-echo -e "\033[0;35m] #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "\033[0;37m] =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;32m] ไอพีเซิฟ: $IP "
+echo -e "\033[0;37m =============== OS-32 & 64-bit =================    "
+echo -e "\033[0;35m #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[0;32m #      -----------About Us------------         #    "
+echo -e "\033[0;34m #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "\033[0;33m #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[0;34m #               { VPN / SSH }                  #    "
+echo -e "\033[0;32m #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[0;35m #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[0;37m =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;32m ไอพีเซิฟ: $IP "
 echo ""
 	echo -e "\033[33;1m-------------------------------------------------------" 
 	echo -e "\033[0;32m|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
@@ -85,9 +85,9 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "\033[0;32m|||||||||||||| REMOVE OPENVPN SCRIPT |||||||||||||| " 
         echo -e "\033[33;1m-------------------------------------------------------" 
         echo -e "\033[36;1m|17| REMOVE OPENVPN SCRIPT  ${GREEN} ✔ "
-	echo -e "\033[0;31m]| 0| Update MENU SCRIPT  ${GREEN} ✔ "
+	echo -e "\033[1;31m| 0| Update MENU SCRIPT  ${GREEN} ✔ "
 	echo ""
-	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
+	read -p "${GREEN} เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
         echo ""
 case $MENU in
 1) # ==================================================================================================================
