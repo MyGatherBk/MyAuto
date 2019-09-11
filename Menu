@@ -39,16 +39,16 @@ echo ""
 	echo "| 2| เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN)"
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "${RED}| 3| ติดตั้ง SQUID PROXY  X "
+			echo -e "| 3| ติดตั้ง SQUID PROXY  X${RED} "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "${GREEN}| 3| ถอนการติดตั้ง SQUID PROXY  ✔ "
+			echo -e "| 3| ถอนการติดตั้ง SQUID PROXY  ✔${GREEN} "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "${RED}| 3| ติดตั้ง SQUID PROXY X  "
+			echo -e "| 3| ติดตั้ง SQUID PROXY X${RED}"
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "${GREEN}| 3| ถอนการติดตั้ง SQUID PROXY ✔ "
+			echo -e "| 3| ถอนการติดตั้ง SQUID PROXY ✔${GREEN} "
 		fi
 	fi
 	echo "| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง "
