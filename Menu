@@ -35,20 +35,20 @@ echo ""
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
-	echo "| 1| เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)"
-	echo "| 2| เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN)"
+	echo "| 1| เพิ่มชื่อผู้ใช้งาน OpenVPN (Config) "
+	echo "| 2| เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN) "
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "| 3| ติดตั้ง SQUID PROXY  X${RED} "
+			echo "| 3| ติดตั้ง SQUID PROXY  X "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "| 3| ถอนการติดตั้ง SQUID PROXY  ✔${GREEN} "
+			echo "| 3| ถอนการติดตั้ง SQUID PROXY  ✔ "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "| 3| ติดตั้ง SQUID PROXY X${RED}"
+			echo "| 3| ติดตั้ง SQUID PROXY X "
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "| 3| ถอนการติดตั้ง SQUID PROXY ✔${GREEN} "
+			echo "| 3| ถอนการติดตั้ง SQUID PROXY ✔ "
 		fi
 	fi
 	echo "| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง "
@@ -70,15 +70,15 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo "|14| ตรวจสอบแบนด์วิดท์ "
 	echo "|10| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ "	
 	echo "|15| ปรับความเร็วอินเตอร์เน็ต "
-    echo "|18| เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้  ✔ "
+        echo "|18| เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้  ✔ "
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||| REMOVE OPENVPN SCRIPT |||||||||||||| " 
-    echo "-------------------------------------------------------" 
-    echo "|17| REMOVE OPENVPN SCRIPT  ✔ "
-	echo "| 0| Update MENU SCRIPT   ✔ "
-	echo ""
-	read -p " เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
-    echo ""
+        echo "-------------------------------------------------------" 
+        echo "|17| REMOVE OPENVPN SCRIPT  ✔ "
+        echo "| 0| Update MENU SCRIPT   ✔ "
+        echo ""
+        read -p " เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
+        echo ""
 case $MENU in
 1) # ==================================================================================================================
 	
