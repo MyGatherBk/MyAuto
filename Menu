@@ -36,36 +36,36 @@ echo ""
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
-	echo -e "| 1|${RED} เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)${NC} "
-	echo "| 2| เพิ่มชื่อผู้ใช้งาน  SSH (HTTP) VPN (OPENVPN) "
+	echo -e "| 1|${BLUE} เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)${NC} "
+	echo -e "| 2|${BLUE} เพิ่มชื่อผู้ใช้งาน {User/Pass}  SSH (HTTP) VPN (OPENVPN)${NC} "
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "| 3|${GREEN} ติดตั้ง SQUID PROXY${NC}-${RED}X${NC} "
+			echo -e "| 3|${GREEN} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "| 3|${RED} ถอนการติดตั้ง SQUID PROXY${NC}-${GREEN}✔${NC} "
+			echo -e "| 3|${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "| 3|${GREEN} ติดตั้ง SQUID PROXY${NC}-${RED}X${NC} "
+			echo -e "| 3|${GREEN} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "| 3|${RED} ถอนการติดตั้ง SQUID PROXY${NC}-${GREEN}✔${NC} "
+			echo -e "| 3|${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 	fi
 	echo "| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
-	echo "| 6| ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด  "
+	echo -e "| 6|${BLUE} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด${NC} "
 	echo "| 7| Delete บัญชีผู้ใช้ SSH "
 	echo "| 8| Delete บัญชีผู้ใช้ OPENVPN "
 	echo "| 9| User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์  "
-    echo "|10| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
-	echo "|11| ตรวจสอบแบนด์วิดท์ต่อบัญชี  "
+        echo "|10| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
+	echo -e "|11|${BLUE} ตรวจสอบแบนด์วิดท์ต่อบัญชี${NC} "
 	echo "|12| เปลี่ยนรหัสผ่านบัญชีผู้ใช้  "
 	echo "|13| เปลี่ยนวันหมดอายุบัญชีผู้ใช้  "
 	echo "|15| ปรับความเร็วอินเตอร์เน็ต  "
-	echo "|16| แบนและปลดแบนบัญชีผู้ใช้ "
+	echo -e "|16|${BLUE} แบนและปลดแบนบัญชีผู้ใช้ {Uesr/Pass}${NC} "
     echo "|17| REMOVE OPENVPN SCRIPT  ✔ "
 	echo "|18| เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้  ✔ "
-    echo "| 0| Update MENU SCRIPT   ✔ "
+    echo "|00| Update MENU SCRIPT   ✔ "
     echo ""
     read -p " เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
     echo ""
@@ -2326,7 +2326,7 @@ echo ""
 	
 ;;
 
-	0) # ==================================================================================================================
+	00) # ==================================================================================================================
 
 rm -f /usr/local/bin/menu   
 wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
