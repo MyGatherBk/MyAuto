@@ -17,6 +17,13 @@ RED='\033[31;1m'
 BLUE='\033[34;1m'
 MAGENTA='\033[35;1m'
 CYAN='\033[36;1m'
+z1='\e[31;1m'  #red
+z2='\e[34;1m'  #blue
+z3='\e[32;1m'  #green
+z4='\e[35;1m'  #magenta
+z5='\e[36;1m'  #cyan
+z6='\e[33;1m'  #yellow
+z7='\e[0m'
 
 # ads
 echo ""
@@ -32,7 +39,6 @@ echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
-echo ""
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
@@ -62,7 +68,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo "|12| เปลี่ยนรหัสผ่านบัญชีผู้ใช้  "
 	echo "|13| เปลี่ยนวันหมดอายุบัญชีผู้ใช้  "
 	echo "|15| ปรับความเร็วอินเตอร์เน็ต  "
-	echo -e "|16|${YELLOW} แบนและปลดแบนบัญชีผู้ใช้ {Uesr/Pass} ${NC} "
+	echo -e "|16|${z6} แบนและปลดแบนบัญชีผู้ใช้ {Uesr/Pass} ${NC} "
         echo -e "|17|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|18|${GREEN} เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${NC} ${GREEN} ✔ ${NC} "
         echo -e "|00|${YELLOW} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
