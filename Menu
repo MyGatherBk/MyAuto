@@ -24,6 +24,11 @@ z4='\e[35;1m'  #magenta
 z5='\e[36;1m'  #cyan
 z6='\e[33;1m'  #yellow
 z7='\e[0m'
+cor[1]="\033[1;36m"
+cor[2]="\033[1;33m"
+cor[3]="\033[1;31m"
+cor[5]="\033[1;32m"
+cor[4]="\033[0m"
 
 # ads
 echo ""
@@ -61,18 +66,18 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo "| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
 	echo -e "| 6|${BLUE} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${NC} "
 	echo "| 7| Delete บัญชีผู้ใช้ SSH "
-	echo -e "| 8|${GREEN} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
-	echo -e "| 9|${GREEN} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
+	echo -e "| 8|${cor[3]} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
+	echo -e "| 9|${cor[3]} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
         echo "|10| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
 	echo -e "|11|${YELLOW} ตรวจสอบแบนด์วิดท์ต่อบัญชี ${NC} "
-	echo "|12| เปลี่ยนรหัสผ่านบัญชีผู้ใช้  "
-	echo "|13| เปลี่ยนวันหมดอายุบัญชีผู้ใช้  "
+	echo -e "|12|${z5} เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${NC} "
+	echo -e "|13|${z2} เปลี่ยนวันหมดอายุบัญชีผู้ใช้ ${NC} "
 	echo "|14| เช็ดการใช้งานแบนวิท " 
 	echo "|15| ปรับความเร็วอินเตอร์เน็ต  "
-	echo -e "|16|${z6} แบนและปลดแบนบัญชีผู้ใช้ {Uesr/Pass} ${NC} "
+	echo -e "|16|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
         echo -e "|17|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|18|${GREEN} เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${NC} ${GREEN} ✔ ${NC} "
-        echo -e "|00|${YELLOW} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
+        echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
