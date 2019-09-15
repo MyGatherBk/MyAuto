@@ -66,7 +66,9 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
         echo -e "|17|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|18|${GREEN} เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${NC} ${GREEN} ✔ ${NC} "
         echo -e "|00|${YELLOW} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
-echo ""
+	echo "-------------------------------------------------------" 
+	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
+	echo "-------------------------------------------------------"
         read -p " เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 echo ""
 case $MENU in
