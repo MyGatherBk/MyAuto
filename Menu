@@ -2393,6 +2393,8 @@ nano /usr/local/bin/menu
 exit
 	;;
 	5)
+apt-get install nano
+echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
 nano /etc/bannerssh
 exit
 	;;
