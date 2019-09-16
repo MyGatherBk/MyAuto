@@ -2366,6 +2366,7 @@ echo -e "|${GRAY}2${NC}| OPENVPN ไฟล์ข้อมูลเซิฟเ�
 echo -e "|${GRAY}3${NC}| SQUID PROXY ไฟล์รายละเอียดของพร็อกซี่"
 echo -e "|${GRAY}4${NC}| MENU ไฟล์สคริปท์ของเมนู"
 echo -e "|${GRAY}5${NC}| ใส่ เคดิต LOG SSH {HTTP Injector}TO(service ssh restart)"
+echo -e "|${GRAY}6${NC}| (service ssh restart) ใส่ เคดิต LOG "
 echo ""
 echo ""
 read -p "เลือกหัวข้อที่ต้องการใช้งาน : " EDIT
@@ -2396,6 +2397,13 @@ exit
 	5)
 apt-get install nano
 nano /etc/bannerssh
+service ssh restart
+service dropbear restart
+exit
+	;;
+	6)
+service ssh restart
+service dropbear restart
 exit
 	;;
 esac
