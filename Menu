@@ -2397,8 +2397,6 @@ exit
 	5)
 apt-get install nano
 nano /etc/bannerssh
-service ssh restart
-service dropbear restart
 exit
 	;;
 	6)
