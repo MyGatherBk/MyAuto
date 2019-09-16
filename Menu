@@ -78,6 +78,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
         echo -e "|17|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|18|${GREEN} เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|${GRAY}19${NC}| แก้ไขคอนฟิกต่างๆในระบบ "
+	echo -e "|${GRAY}20${NC}| Update Cradits Bannerssh "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
@@ -2401,6 +2402,17 @@ esac
 
 	;;
 	
+	20) # ==================================================================================================================
+
+# Banner
+rm /etc/issue.net
+wget -O /etc/issue.net "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/issue.net"
+sed -i 's@#Banner@Banner@g' /etc/ssh/sshd_config
+sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
+service ssh restart
+service dropbear restart
+
+	;;
 	00) # ==================================================================================================================
 
 cd /usr/local/bin/menu   
