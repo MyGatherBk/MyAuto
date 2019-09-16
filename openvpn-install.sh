@@ -223,15 +223,15 @@ ${NC} "
 	esac
 	echo ""
 	echo -e " |${GRAY}1${NC}| DNS Current System"
-	echo -e "\033[31;1m  |2| DNS Google"
+	echo -e " |${GRAY}2${NC}| DNS Google"
 	echo ""
-	read -p "DNS : " -e -i 2 DNS
+	read -p "DNS : " -e -i 1 DNS
 	echo ""
-	echo -e "\033[35;1m |1| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น แต่สามารถสร้างไฟล์เพิ่มได้"
-	echo -e "\033[36;1m |2| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องใช้ชื่อบัญชีและรหัสผ่านเพื่อใช้เชื่อมต่อ"
-	echo -e "\033[33;1m |3| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดจำนวนเครื่อง"
+	echo -e " |${GRAY}1${NC}| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น แต่สามารถสร้างไฟล์เพิ่มได้"
+	echo -e " |${GRAY}2${NC}| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องใช้ชื่อบัญชีและรหัสผ่านเพื่อใช้เชื่อมต่อ"
+	echo -e " |${GRAY}3${NC}| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดจำนวนเครื่อง"
 	echo ""
-	read -p "Server System : " -e -i 3 OPENVPNSYSTEM
+	read -p "Server System : " -e OPENVPNSYSTEM
 	echo ""
 	read -p "Server Name: " -e CLIENT
 	echo ""
