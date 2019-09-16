@@ -77,6 +77,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|16|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
         echo -e "|17|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|18|${GREEN} เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${NC} ${GREEN} ✔ ${NC} "
+	echo -e "|${GRAY}19${NC}| แก้ไขคอนฟิกต่างๆในระบบ "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
@@ -2340,6 +2341,65 @@ echo ""
 	
 ;;
 
+	19) # ==================================================================================================================
+
+clear
+echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "${RED} #      -----------About Us------------         #    "
+echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "${RED} #               { VPN / SSH }                  #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
+echo -e "แก้ไขคอนฟิกต่างๆในระบบ ${GRAY} BY : Pirakit Khawpleum  ${NC}"
+echo ""
+echo -e "|${GRAY}1${NC}| OPENVPN ไฟล์ต้นแบบการสร้างคอนฟิก"
+echo -e "|${GRAY}2${NC}| OPENVPN ไฟล์ข้อมูลเซิฟเวอร์"
+echo -e "|${GRAY}3${NC}| SQUID PROXY ไฟล์รายละเอียดของพร็อกซี่"
+echo -e "|${GRAY}4${NC}| MENU ไฟล์สคริปท์ของเมนู"
+echo -e "|${GRAY}5${NC}| ใส่ เคดิต LOG SSH {HTTP Injector}"
+echo ""
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " EDIT
+
+case $EDIT in
+
+	1)
+nano /etc/openvpn/client-common.txt
+exit
+	;;
+	2)
+nano /etc/openvpn/server.conf
+exit
+	;;
+	3)
+if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+	nano /etc/squid/squid.conf
+	exit
+elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	nano /etc/squid3/squid.conf
+	exit
+fi
+	;;
+	4)
+nano /usr/local/bin/menu
+exit
+	;;
+	5)
+nano /etc/bannerssh
+exit
+	;;
+esac
+
+	;;
+	
 	00) # ==================================================================================================================
 
 cd /usr/local/bin/menu   
