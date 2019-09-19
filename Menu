@@ -2379,7 +2379,7 @@ echo -e "|${GRAY}2${NC}| OPENVPN ไฟล์ข้อมูลเซิฟเ�
 echo -e "|${GRAY}3${NC}| SQUID PROXY ไฟล์รายละเอียดของพร็อกซี่"
 echo -e "|${GRAY}4${NC}| MENU ไฟล์สคริปท์ของเมนู"
 echo -e "|${GRAY}5${NC}| ใส่ เคดิต LOG SSH {HTTP Injector} ${GREEN}Ctrl x เพื่อบันทึก y ออก${NC} "
-echo -e "|${GRAY}6${NC}| (รีสตาร์ท การทำงานของระบบ ssh,Openvpn,SQUID,SQUID3) "
+echo -e "|${GRAY}6${NC}| (${GRAY}จัดการตั้งค่าพร็อกซี่ ${NC} ) "
 echo ""
 echo ""
 read -p "เลือกหัวข้อที่ต้องการใช้งาน : " EDIT
@@ -2414,10 +2414,1055 @@ service ssh restart
 exit
 	;;
 	6)
-service openvpn restart
-service squid3 restart
-service squid restart
-service ssh restart
+#!/bin/bash
+#DEV BY PRATYASART THEEJANMART
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+if [[ -e /etc/debian_version ]]; then
+VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+fi
+
+# IP Address
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+if [ -e '/etc/squid3/squid.txt' ]; then
+echo ""
+clear
+clear
+else
+echo "" > /etc/squid3/squid.txt
+sed -i '/^$/d' /etc/squid3/squid.txt
+fi
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+if [ -e '/etc/squid/squid.txt' ]; then
+echo ""
+clear
+clear
+else
+echo "" > /etc/squid/squid.txt
+sed -i '/^$/d' /etc/squid/squid.txt
+fi
+fi
+
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+if [ -e '/etc/squid3/port.txt' ]; then
+echo ""
+clear
+clear
+else
+echo " ┣ http_port 8080  " > /etc/squid3/port.txt
+sed -i '/^$/d' /etc/squid3/squid.txt
+fi
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+if [ -e '/etc/squid/port.txt' ]; then
+echo ""
+clear
+clear
+else
+echo " ┣ http_port 8080  " > /etc/squid/port.txt
+sed -i '/^$/d' /etc/squid/squid.txt
+fi
+fi
+
+IP=$(wget -qO- ipv4.icanhazip.com);
+if [[ "$IP" = "" ]]; then
+    IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | grep -v '192.168'`;
+fi
+
+
+ok() {
+    echo -e '\e[32m'$1'\e[m';
+}
+
+die() {
+    echo -e '\e[1;35m'$1'\e[m';
+}
+
+des() {
+    echo -e '\e[1;31m'$1'\e[m'; exit 1;
+}
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# การตั้งค่า Proxy ############# 
+              ## 1. เปิดปิดใช้งานไม่จำกัด IP
+              ## 2. ตั้งค่าไอพี 
+              ## 3. ตั้งค่าพอร์ต  "
+ read -p "    ##  พิมพ์ตัวเลข  : " zenonnew
+
+if [[ "$zenonnew" = "" ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo -e "${z1} ############# พิมพ์คำสั่งไม่ถูกต้อง ############# ${z7}"
+echo -e ""
+ exit
+fi
+if [[ "1" = "$zenonnew" ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+grep -E "^http_access allow all" /etc/squid3/squid.conf >/dev/null
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+grep -E "^http_access allow all" /etc/squid/squid.conf >/dev/null
+fi
+ if [ $? -eq 0 ]; then
+clear
+clear
+echo  "    ╭━━━━━━━━━━━━━━━━━━╮  
+           ┣ สถานะปัจจุบัน Proxy ไม่จำกัด IP
+           ╰━━━━┳━━━━━━━━━━━━━╯"
+read -p "          ╰━━ เปลี่ยนเป็น Proxy ใช้ใด้เฉพาะเซิฟร์นี้หรือไม่ Y/n :" selet
+if [[ "$selet" = "Y" || "$selet" = "y" ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+sed -i "s/http_access allow all/http_access allow localhost/g" /etc/squid3/squid.conf
+ok "➡ service squid3 restart "
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+sed -i "s/http_access allow all/http_access allow localhost/g" /etc/squid/squid.conf
+ok "➡ service squid restart "
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้ ############# "
+exit
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# สถานะเปลี่ยนเป็น Proxy ไม่จำกัด IP ############# "
+exit
+ else
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้ ############# "
+
+read -p "เปลี่ยนเป็น Proxy ไม่จำกัด IP หรือไม่ Y/n :" selet
+if [[ "$selet" = "Y" || "$selet" = "y" ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+sed -i "s/http_access allow localhost/http_access allow all/g" /etc/squid3/squid.conf
+ok "➡ service squid3 restart"
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+sed -i "s/http_access allow localhost/http_access allow all/g" /etc/squid/squid.conf
+ok "➡ service squid restart"
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# สถานะเปลี่ยนเป็น Proxy ใช้ใด้หลาย IP ############# "
+exit
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้ ############# "
+exit
+fi
+elif [[ "2" = "$zenonnew" ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# เลือกใช้คำสั่ง #############
+              ## 1. เพิ่มไอพี
+              ## 2. เช็ดไอพี
+              ## 3. ลบไอพี "
+ read -p "    ## พิมพ์ตัวเลข : " Selet
+ if [[ "$Selet" = "" ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# โปรดพิมพ์คำสั่ง ############# "
+ exit
+fi
+ if [[ $Selet = 1 ]]; then
+ read -p " ## ใส่เลขไอพีที่จะใช้งานพร็อกซี่นี้ : " SERVER_IP
+ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid3/squid.conf >/dev/null
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
+fi
+if [ $? -eq 0 ]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# IP $SERVER_IP มีอยู่ในระบบแล้ว ############# "
+exit
+else
+read -p "บันทึกการตั้งค่านี้หรือไม่ y/n : " YN
+fi
+ if [[ n = $YN || N = $YN ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# $SERVER_IP ไม่ได้ยืนยันการใช้งาน ############# "
+exit 
+ fi
+
+
+ 
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
+sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid3/squid.conf
+echo " ┣ $SERVER_IP " >> /etc/squid3/squid.txt
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
+sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid/squid.conf
+echo " ┣ $SERVER_IP " >> /etc/squid/squid.txt
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# $SERVER_IP ใช้งานพร็อกซี่เซิฟร์นี้เรียบร้อย ############# "
+exit 
+elif [[ $Selet = 2 ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+grep -E "^http_access allow all" /etc/squid3/squid.conf >/dev/null
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+grep -E "^http_access allow all" /etc/squid/squid.conf >/dev/null
+fi
+ if [ $? -eq 0 ]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# สถานะปัจจุบัน Proxy ไม่จำกัด IP ############# "
+exit
+else
+
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ไอพีที่เปิดใช้งานอยู่ปัจจุบัน ############# "
+echo " $IP  "
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+cat /etc/squid3/squid.txt
+echo "########################"
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+cat /etc/squid/squid.txt
+echo "########################"
+fi
+exit
+fi
+elif [[ $Selet = 3 ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ลบไอพีพร็อกซี่ ############# "
+echo "        ## 1. ลบบางไอพี  "
+echo "        ## 2. รีเซ็ตค่าเดิม  "
+read -p "     ## พิมพ์ตัวเลข : " Selet1
+if [[ $Selet1 = 1 ]]; then
+read -p " ┣ ใส่เลขไอพีที่จะลบ : " SERVER_IP
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid3/squid.conf >/dev/null
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
+fi
+
+if [ $? -eq 0 ]; then
+if [[ $SERVER_IP = $IP ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ไม่อณุญาตให้ลบไอพีของเซิฟร์นี้ ############# "
+
+ exit
+fi
+ read -p "       ## แน่ใจว่าต้องการลบไอพี Y/n : " YN
+else
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ไม่พบ IP $SERVER_IP ในระบบ ############# "
+exit
+fi
+
+if [[ $YN = N || $YN = n ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ยกเลิกการเปลียนแปลง ############# "
+ exit
+fi
+
+
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+SERVER_IP2="/$SERVER_IP/d";
+sed -i $SERVER_IP2 /etc/squid3/squid.txt
+sed -i $SERVER_IP2 /etc/squid3/squid.conf
+sed -i '/^$/d' /etc/squid3/squid.txt
+sed -i '/^$/d' /etc/squid3/squid.conf
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+SERVER_IP2="/$SERVER_IP/d";
+sed -i $SERVER_IP2 /etc/squid/squid.txt
+sed -i $SERVER_IP2 /etc/squid/squid.conf
+sed -i '/^$/d' /etc/squid/squid.txt
+sed -i '/^$/d' /etc/squid/squid.conf
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ยกเลิกการเปลียนแปลง ############# "
+exit
+elif [[ $Selet1 = 2 ]]; then
+read -p " ## แน่ใจว่าต้องการลบไอพีทั้งหมด Y/n : " YN
+if [[ $YN = N || $YN = n ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ยกเลิกการเปลียนแปลง ############# "
+ exit
+fi
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+SERVER_IP2="/255.255.255.255/d";
+sed -i $SERVER_IP2 /etc/squid3/squid.txt
+sed -i $SERVER_IP2 /etc/squid3/squid.conf
+sed -i '/^$/d' /etc/squid3/squid.txt
+sed -i '/^$/d' /etc/squid3/squid.conf
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
+sed -i "s/xxxxxxxxxx/$IP/g" /etc/squid3/squid.conf
+echo "" > /etc/squid3/squid.txt
+sed -i '/^$/d' /etc/squid3/squid.txt
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+SERVER_IP2="/255.255.255.255/d";
+sed -i $SERVER_IP2 /etc/squid/squid.txt
+sed -i $SERVER_IP2 /etc/squid/squid.conf
+sed -i '/^$/d' /etc/squid/squid.conf
+sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
+sed -i "s/xxxxxxxxxx/$IP/g" /etc/squid/squid.conf
+echo "" > /etc/squid/squid.txt
+sed -i '/^$/d' /etc/squid/squid.txt
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ลบไอพีทั้งหมด เรียบร้อย ############# "
+exit
+fi
+fi
+elif [[ "3" = "$truepay" ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# เลือกใช้คำสั่ง ############# 
+             ## 1. เพิ่มพอร์ต
+             ## 2. เช็ดพอร์ต
+             ## 3. ลบพอร์ต "
+ read -p "    ## พิมพ์ตัวเลข : " Selet
+ if [[ "$Selet" = "" ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# โปรดพิมพ์คำสั่ง ############# "
+ exit
+fi
+ if [[ $Selet = 1 ]]; then
+ read -p "ใส่พอร์ตที่จะใช้งานกับพร็อกซี่ : " Port
+ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
+fi
+
+if [ $? -eq 0 ]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# Port $Port มีอยู่ในระบบแล้ว ############# "
+exit
+else
+if [[ $Port = 80 || $Port = 443 || $Port = 22 || $Port = 143 || $Port = 444 || $Port = 10000 || $Port = 4468 || $Port = 9000 || $Port = 1 || $Port = 2 || $Port = 3 || $Port = 4 || $Port = 5 || $Port = 6 || $Port = 7 || $Port = 8 || $Port = 9 || $Port = 0 || $Port = 21 || $Port = 70 || $Port = 210 || $Port = 1025 || $Port = 65535 || $Port = 280 || $Port = 488 || $Port = 591 || $Port = 777 || $Port = 255 || $Port = 10 || $Port = 172 || $Port = 127 || $Port = 192 || $Port = 32 || $Port = 12 || $Port = 16 || $Port = 1440 || $Port = 20 || $Port = 10080 || $Port = 4320 || $Port = 3128 || $Port = 5555 ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# Port $Port ไม่สามารถเปิดใช้งานได้ ############# "
+exit
+fi
+read -p "  ## บันทึกการตั้งค่านี้หรือไม่ y/n : " YN
+fi
+ if [[ n = $YN || N = $YN ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# $Port ไม่ได้ยืนยันการใช้งาน ############# "
+exit 
+ fi
+
+
+ 
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+sed -i "/http_port 8080/a http_port xxxx" /etc/squid3/squid.conf
+sed -i "s/xxxx/$Port/g" /etc/squid3/squid.conf
+echo " ┣ http_port $Port " >> /etc/squid3/port.txt
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+sed -i "/http_port 8080/a http_port xxxx" /etc/squid/squid.conf
+sed -i "s/xxxx/$Port/g" /etc/squid/squid.conf
+echo " ┣ http_port $Port  " >> /etc/squid/port.txt
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# Port $Port พร้อมใช้งาน ############# "
+exit 
+elif [[ $Selet = 2 ]]; then
+
+clear
+clear
+echo  " ############# พอร์ตที่เปิดใช้งานอยู่ปัจจุบัน ############# "
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+cat /etc/squid3/port.txt
+echo " ############# "
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+cat /etc/squid/port.txt
+echo " ############# "
+exit
+fi
+
+elif [[ $Selet = 3 ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ลบพอร์ตพร็อกซี ############# "
+echo "        ## 1. ลบบางพอร์ต  "
+echo "        ## 2. รีเซ็ตค่าเดิม  "
+read -p "      ## พิมพ์ตัวเลข : " Selet1
+if [[ $Selet1 = 1 ]]; then
+read -p " ## ใส่เลขพอร์ตที่จะลบ : " Port
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
+fi
+if [ $? -eq 0 ]; then
+if [[ $Port = 8080 ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ไม่อณุญาตให้ลบพอร์ต 8080 ############# "
+ exit
+fi
+ read -p "แน่ใจว่าต้องการลบพอร์ต Y/n : " YN
+else
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ไม่พบ Port $Port ในระบบ ############# "
+exit
+fi
+
+
+if [[ $YN = N || $YN = n ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ยกเลิกการเปลียนแปลง ############# "
+ exit
+fi
+
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+SERVER_IP2="/$Port/d";
+sed -i $SERVER_IP2 /etc/squid3/port.txt
+sed -i $SERVER_IP2 /etc/squid3/squid.conf
+sed -i '/^$/d' /etc/squid3/port.txt
+sed -i '/^$/d' /etc/squid3/squid.conf
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+SERVER_IP2="/$Port/d";
+sed -i $SERVER_IP2 /etc/squid/port.txt
+sed -i $SERVER_IP2 /etc/squid/squid.conf
+sed -i '/^$/d' /etc/squid/port.txt
+sed -i '/^$/d' /etc/squid/squid.conf
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ลบพอร์ต $Port เรียบร้อย ############# "
+exit
+elif [[ $Selet1 = 2 ]]; then
+read -p " ## แน่ใจว่าต้องรีเซ็ตค่าเดิม Y/n : " YN
+if [[ $YN = N || $YN = n ]]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# ยกเลิกการรีเซ็ต ############# "
+ exit
+fi
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+SERVER_IP2="/http_port/d";
+sed -i $SERVER_IP2 /etc/squid3/port.txt
+sed -i $SERVER_IP2 /etc/squid3/squid.conf
+sed -i '/^$/d' /etc/squid3/port.txt
+sed -i '/^$/d' /etc/squid3/squid.conf
+sed -i "/http_access allow SSH/a http_port 8080" /etc/squid3/squid.conf
+echo " ┣ http_port 8080 " > /etc/squid3/port.txt
+sed -i '/^$/d' /etc/squid3/port.txt
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
+service squid3 restart -q > /dev/null 2>&1
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+SERVER_IP2="/http_port/d";
+sed -i $SERVER_IP2 /etc/squid/port.txt
+sed -i $SERVER_IP2 /etc/squid/squid.conf
+sed -i '/^$/d' /etc/squid/squid.conf
+sed -i "/http_access allow SSH/a http_port 8080" /etc/squid/squid.conf
+echo " ┣ http_port 8080 " > /etc/squid/port.txt
+sed -i '/^$/d' /etc/squid/port.txt
+echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
+service squid restart -q > /dev/null 2>&1
+fi
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  " ############# รีเซ็ตพอร์ค่าเดิมเรียบร้อย ############# "
+exit
+fi
+fi
+fi
 exit
 	;;
 esac
