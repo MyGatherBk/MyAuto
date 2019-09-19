@@ -1849,6 +1849,19 @@ if [[ -e /etc/openvpn/server.conf ]]; then
    rm -rf /home/vps/public_html
    rm -rf /etc/openvpn
    rm -rf /usr/local/bin/*
+   echo ""
+		read -p "ต้องการลบข้อมูลบัญชีทั้งหมดหรือไม่ (Y or N) : " -e -i N DELETEACCOUNT
+		if [[ "$DELETEACCOUNT" = "Y" ]]; then
+			UIDN=1000
+			while read CHECKCLIENT
+			do
+				ACCOUNT="$(echo $CHECKCLIENT | cut -d: -f1)"
+				ID="$(echo $CHECKCLIENT | grep -v nobody | cut -d: -f3)"
+				if [[ $ID -ge $UIDN ]]; then
+					userdel $ACCOUNT
+				fi
+			done < /etc/passwd
+		fi
    if [[ "$OS" = 'debian' ]]; then
    apt-get remove --purge -y openvpn
    else
@@ -1857,11 +1870,11 @@ if [[ -e /etc/openvpn/server.conf ]]; then
    rm -rf /etc/openvpn
    rm -f /etc/sysctl.d/30-openvpn-forward.conf
    echo
-   echo "OpenVPN removed!"
+   echo -e "${GRAY}OpenVPN Removed. ${NC} "
 
    else
    echo
-   echo "Removal aborted!"
+   echo -e "${GRAY}Removal Aborted. ${NC} "
    fi
 			exit
 
@@ -2365,8 +2378,8 @@ echo -e "|${GRAY}1${NC}| OPENVPN ไฟล์ต้นแบบการสร�
 echo -e "|${GRAY}2${NC}| OPENVPN ไฟล์ข้อมูลเซิฟเวอร์"
 echo -e "|${GRAY}3${NC}| SQUID PROXY ไฟล์รายละเอียดของพร็อกซี่"
 echo -e "|${GRAY}4${NC}| MENU ไฟล์สคริปท์ของเมนู"
-echo -e "|${GRAY}5${NC}| ใส่ เคดิต LOG SSH {HTTP Injector} Ctrl x เพื่อบันทึก y ออก"
-echo -e "|${GRAY}6${NC}| (service ssh restart) "
+echo -e "|${GRAY}5${NC}| ใส่ เคดิต LOG SSH {HTTP Injector} ${GREEN}Ctrl x เพื่อบันทึก y ออก${NC} "
+echo -e "|${GRAY}6${NC}| (รีสตาร์ท การทำงานของระบบ ssh,Openvpn,SQUID,SQUID3) "
 echo ""
 echo ""
 read -p "เลือกหัวข้อที่ต้องการใช้งาน : " EDIT
@@ -2397,9 +2410,13 @@ exit
 	5)
 apt-get install nano
 nano /etc/bannerssh
+service ssh restart
 exit
 	;;
 	6)
+service openvpn restart
+service squid3 restart
+service squid restart
 service ssh restart
 exit
 	;;
