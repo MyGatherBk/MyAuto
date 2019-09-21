@@ -3481,7 +3481,7 @@ service ssh restart
 
 cd /usr/local/bin
 wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
-chmod +x m
+chmod +x /usr/local/bin/m
 m
 
 	;;
