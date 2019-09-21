@@ -29,6 +29,9 @@ cor[2]="\033[1;33m"
 cor[3]="\033[1;31m"
 cor[5]="\033[1;32m"
 cor[4]="\033[0m"
+color1='\e[031;1m'
+color2='\e[34;1m'
+color3='\e[0m'
 
 # ads
 echo ""
@@ -44,12 +47,6 @@ echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
-color1='\e[031;1m'
-color2='\e[34;1m'
-color3='\e[0m'
-echo "--------------- Welcome To Premium Script Menu ---------------"
-	echo "-----------------  Pirakit Khawpleum  --------------------"
-	echo " "
 	cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
 	cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
 	freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
