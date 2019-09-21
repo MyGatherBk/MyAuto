@@ -46,7 +46,7 @@ echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "]
+echo -e "${NC} "
 chek=$(cat /etc/issue)
 echo "
 $chek
