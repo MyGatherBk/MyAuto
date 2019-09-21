@@ -86,6 +86,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 		fi
 	fi
 	echo "| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
+	echo "| 5| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
 	echo -e "| 6|${BLUE} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${NC} "
 	echo "| 7| Delete บัญชีผู้ใช้ SSH "
 	echo -e "| 8|${cor[3]} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
