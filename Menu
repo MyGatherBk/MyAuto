@@ -3582,7 +3582,7 @@ else
 													gui=$(date "+%d/%m/%Y" -d "+$dias days")
 													pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
 													useradd -e $final -M -s /bin/false -p $pass $username
-													[ $? -eq 0 ] && tput setaf 2 ; tput bold ; echo ""; echo "ผู้ใช้งาน : $username criado" ; echo "วันหมดอายุ: $gui" ; echo "จำนวนการเชื่อมต่อพร้อมกันที่ได้รับอนุญาต: $sshlimiter" ; echo "" || echo "ไม่สามารถสร้างผู้ใช้!" ; tput sgr0
+													[ $? -eq 0 ] && tput setaf 2 ; tput bold ; echo ""; echo "ผู้ใช้งาน : $username " ; echo "วันหมดอายุ: $gui" ; echo "จำนวนการเชื่อมต่อพร้อมกันที่ได้รับอนุญาต: $sshlimiter" ; echo "" || echo "ไม่สามารถสร้างผู้ใช้!" ; tput sgr0
 													echo "$username $sshlimiter" >> /root/usuarios.db
 												fi
 											fi
