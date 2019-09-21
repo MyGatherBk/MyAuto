@@ -97,6 +97,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|18|${GREEN} เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|${GRAY}19${NC}| แก้ไขคอนฟิกต่างๆในระบบ "
 	echo -e "|${GRAY}20${NC}| Update Credits Bannerssh "
+	echo -e "|${GRAY}21${NC}| User/Pass/Day/limit Connect "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
@@ -3494,6 +3495,66 @@ wget -O /etc/bannerssh "https://raw.githubusercontent.com/MyGatherBk/MyAuto/mast
 sed -i 's@#Banner@Banner@g' /etc/ssh/sshd_config
 service ssh restart
 
+	;;
+	
+21) # ==================================================================================================================
+ {
+echo -e "${cor[1]} =================================== ${cor[0]}"
+echo -e "${cor[4]} ${txt[38]}"
+echo -e "${cor[1]} =================================== ${cor[0]}"
+for u in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi system-`; do
+echo -e "${cor[5]} $u"
+done
+echo -e "${cor[1]} =================================== ${cor[0]}"
+echo -e "${cor[4]} ${txt[27]}"
+echo -e "${cor[1]} =================================== ${cor[0]}"
+echo -e "${cor[5]} ${txt[28]}"; read -p " ≈≈≈≈≈> " name
+if [ -z $name ]; then
+echo -e "${cor[5]} ${txt[29]} ${cor[0]}" 
+return
+fi
+if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null
+then
+echo -e "${cor[5]} ${txt[30]} ${cor[0]}"
+return
+fi
+echo -e "${cor[1]} =================================== ${cor[0]}"
+echo -e "${cor[5]} ${txt[31]} $name"
+read -p " ${txt[35]} " pass
+echo -e "${cor[1]} =================================== ${cor[0]}"
+echo -e "${cor[5]} ${txt[32]}  $name"
+read -p " ${txt[37]} " daysrnf
+echo -e "${cor[1]} =================================== ${cor[0]}"
+echo -e "${cor[5]} ${txt[33]}  $name"
+read -p " ${txt[36]} " limit
+echo -e "${cor[1]} =================================== ${cor[0]}"
+meu_ip
+if [ "$OPENVPN" = "on" ]; then
+open_1 $name $pass $daysrnf $limit s
+echo -e "${cor[5]} IP => ${cor[4]}$IP"
+echo -e "${cor[5]} ${txt[34]} ${cor[4]}$name"
+echo -e "${cor[5]} ${txt[35]} ${cor[4]}$pass"
+echo -e "${cor[5]} ${txt[36]} ${cor[4]}$limit"
+echo -e "${cor[5]} ${txt[37]} ${cor[4]}$datexp"
+echo -e "${cor[1]} =================================== ${cor[0]}"
+return
+fi
+valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")
+datexp=$(date "+%d/%m/%Y" -d " +$daysrnf days")
+useradd -M -s /bin/false $name -e $valid
+(echo $pass; echo $pass)|passwd $name 2>/dev/null
+echo -e "${cor[5]} IP => ${cor[4]}$IP"
+echo -e "${cor[5]} ${txt[34]} ${cor[4]}$name"
+echo -e "${cor[5]} ${txt[35]} ${cor[4]}$pass"
+echo -e "${cor[5]} ${txt[36]} ${cor[4]}$limit"
+echo -e "${cor[5]} ${txt[37]} ${cor[4]}$datexp"
+echo -e "${cor[1]} =================================== ${cor[0]}"
+echo "รหัสผ่าน: $pass" > $dir_user/$name
+echo "จำกัด: $limit" >> $dir_user/$name
+echo "วันที่: $valid" >> $dir_user/$name
+echo -ne "${cor[2]}"
+return
+}
 	;;
 	00) # ==================================================================================================================
 
