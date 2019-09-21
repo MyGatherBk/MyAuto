@@ -598,6 +598,15 @@ fi
 		echo -e "$Passwords\n$Passwords\n"|passwd $Usernames &> /dev/null
 		;;
 	esac
+	
+# install stunnel4
+apt-get -y install stunnel4
+wget -O /etc/stunnel/stunnel.pem "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.pem"
+wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.conf"
+sed -i $MYIP2 /etc/stunnel/stunnel.conf
+sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+service stunnel4 restart
+
 	clear
 echo ""
 echo ""
