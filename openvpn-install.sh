@@ -583,8 +583,8 @@ fi
 
 
 # download script
-cd
-wget https://raw.githubusercontent.com/daybreakersx/premscript/master/updates/install-premiumscript.sh -O - -o /dev/null|sh
+	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+	chmod +x /usr/local/bin/m
 	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Client 
 	apt-get -y install vnstat
@@ -645,7 +645,7 @@ echo -e "${NC} "
 	echo ""
 	echo ""
 	echo "===================================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${RED} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
 	echo "===================================================================="
 	echo ""
 	exit
