@@ -583,88 +583,9 @@ fi
 
 
 # download script
-# Download Commands
-cd /usr/local/bin
-wget https://github.com/Clrkz/AutoScriptVPS/raw/master/Files/Menu/AutoScript_Menu.tar.gz
-tar -xzvf AutoScript_Menu.tar.gz
-rm AutoScript_Menu.tar.gz
-sed -i -e 's/\r$//' accounts
-sed -i -e 's/\r$//' bench-network
-sed -i -e 's/\r$//' clearcache
-sed -i -e 's/\r$//' connections
-sed -i -e 's/\r$//' create
-sed -i -e 's/\r$//' create_random
-sed -i -e 's/\r$//' create_trial
-sed -i -e 's/\r$//' delete_expired
-sed -i -e 's/\r$//' diagnose
-sed -i -e 's/\r$//' edit_dropbear
-sed -i -e 's/\r$//' edit_openssh
-sed -i -e 's/\r$//' edit_openvpn
-sed -i -e 's/\r$//' edit_ports
-sed -i -e 's/\r$//' edit_squid3
-sed -i -e 's/\r$//' edit_stunnel4
-sed -i -e 's/\r$//' locked_list
-sed -i -e 's/\r$//' menu
-sed -i -e 's/\r$//' options
-sed -i -e 's/\r$//' ram
-sed -i -e 's/\r$//' reboot_sys
-sed -i -e 's/\r$//' reboot_sys_auto
-sed -i -e 's/\r$//' restart_services
-sed -i -e 's/\r$//' server
-sed -i -e 's/\r$//' set_multilogin_autokill
-sed -i -e 's/\r$//' set_multilogin_autokill_lib
-sed -i -e 's/\r$//' show_ports
-sed -i -e 's/\r$//' speedtest
-sed -i -e 's/\r$//' user_delete
-sed -i -e 's/\r$//' user_details
-sed -i -e 's/\r$//' user_details_lib
-sed -i -e 's/\r$//' user_extend
-sed -i -e 's/\r$//' user_list
-sed -i -e 's/\r$//' user_lock
-sed -i -e 's/\r$//' user_unlock
-
-# AutoReboot Tools
-echo "10 0 * * * root /usr/local/bin/reboot_sys" > /etc/cron.d/reboot_sys
-echo "0 1 * * * root delete_expired" > /etc/cron.d/delete_expired
-echo "*0 */2 * * * root clearcache" > /etc/cron.d/clearcache
-
-# Set Permissions
-cd /usr/local/bin
-chmod +x create
-chmod +x accounts
-chmod +x create
-chmod +x create_random
-chmod +x create_trial
-chmod +x user_list
-chmod +x user_details
-chmod +x user_details_lib
-chmod +x user_extend
-chmod +x user_delete
-chmod +x user_lock
-chmod +x user_unlock
-chmod +x connections
-chmod +x delete_expired
-chmod +x locked_list
-chmod +x options
-chmod +x set_multilogin_autokill
-chmod +x set_multilogin_autokill_lib
-chmod +x restart_services
-chmod +x edit_ports
-chmod +x show_ports
-chmod +x edit_openssh
-chmod +x edit_dropbear
-chmod +x edit_stunnel4
-chmod +x edit_openvpn
-chmod +x edit_squid3
-chmod +x reboot_sys
-chmod +x reboot_sys_auto
-chmod +x clearcache
-chmod +x server
-chmod +x ram
-chmod +x diagnose
-chmod +x bench-network
-chmod +x speedtest
-
+	cd /usr/local/bin
+wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+chmod +x /usr/local/bin/m
 	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Client 
 	apt-get -y install vnstat
