@@ -103,6 +103,8 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY}19${NC}| แก้ไขคอนฟิกต่างๆในระบบ "
 	echo -e "|${GRAY}20${NC}| Update Credits Bannerssh "
 	echo -e "|${GRAY}21${NC}| Ram "
+	echo -e "|${GRAY}22${NC}| show_ports "
+	
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	# vnstat meter
 if [[ -e /etc/vnstat.conf ]]; then
@@ -4141,6 +4143,27 @@ def main():
 if __name__ == '__main__': main()
 
 	;;
+	
+	22) # ==================================================================================================================
+#!/bin/bash
+# Script by : Clrkz
+opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
+clear
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]"
+echo -e "\e[0m                                                   "
+echo -e "         Port OpenSSH    :  "$opensshport
+echo -e "         Port Dropbear   :  "$dropbearport
+echo -e "         Port SSL        :  "$stunnel4port
+echo -e "         Port Squid      :  "$squidport
+echo -e "         Port OpenVPN    :  "$openvpnport
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]\e[0m"
+;;
 	00) # ==================================================================================================================
 
 cd /usr/local/bin
