@@ -93,7 +93,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo "|15| ปรับความเร็วอินเตอร์เน็ต  "
 	echo -e "|16|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
         echo -e "|17|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
-	echo -e "|18|${GREEN} เช็ดแบนวิทที่ใช้งานทั้งหมดวันนี้ ${NC} ${GREEN} ✔ ${NC} "
+	echo -e "|18|${GREEN} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
         echo -e "|${GRAY}19${NC}| MENU ไฟล์สคริปท์ของเมนู"
 	echo -e "|${GRAY}20${NC}| Update Credits Bannerssh "
 	echo -e "|${GRAY}21${NC}| show_PORTs "
@@ -1703,7 +1703,7 @@ printf "%-3s %-6s %-10s\n" "$DATE20" "$CONRX20" "$CONTX20"
 printf "%-3s %-6s %-10s\n" "$DATE21" "$CONRX21" "$CONTX21"
 printf "%-3s %-6s %-10s\n" "$DATE22" "$CONRX22" "$CONTX22"
 printf "%-3s %-6s %-10s\n" "$DATE23" "$CONRX23" "$CONTX23"
-printf "%-3s %-6s %-5s %-5s\n" "$DATE24" "$CONRX24" "$CONTX24" "< $NOW"
+printf "%-3s %-6s %-5s %-5s\n" "$DATE24" "$CONRX24" "$CONTX24" "${GREEN}<$NOW${NC} "
 echo ""
 exit
 
