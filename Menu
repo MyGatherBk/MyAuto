@@ -2679,11 +2679,13 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# การตั้งค่า Proxy ############# 
-              ## 1. เปิดปิดใช้งานไม่จำกัด IP
-              ## 2. ตั้งค่าไอพี 
-              ## 3. ตั้งค่าพอร์ต  "
- read -p "    ##  พิมพ์ตัวเลข  : " zenonnew
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}           การตั้งค่า Proxy${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo "1. เปิดปิดใช้งานไม่จำกัด IP  "
+echo "2. ตั้งค่าไอพี  " 
+echo "3. ตั้งค่าพอร์ต  "
+ read -p "พิมพ์ตัวเลข  : " zenonnew
 
 if [[ "$zenonnew" = "" ]]; then
 clear
@@ -2704,7 +2706,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo -e "${z1} ############# พิมพ์คำสั่งไม่ถูกต้อง ############# ${z7}"
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}            พิมพ์คำสั่งไม่ถูกต้อง${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 echo -e ""
  exit
 fi
@@ -2717,10 +2721,26 @@ fi
  if [ $? -eq 0 ]; then
 clear
 clear
-echo  "    ╭━━━━━━━━━━━━━━━━━━╮  
-           ┣ สถานะปัจจุบัน Proxy ไม่จำกัด IP
-           ╰━━━━┳━━━━━━━━━━━━━╯"
-read -p "          ╰━━ เปลี่ยนเป็น Proxy ใช้ใด้เฉพาะเซิฟร์นี้หรือไม่ Y/n :" selet
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}      สถานะปัจจุบัน Proxy ไม่จำกัด IP${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
+read -p "เปลี่ยนเป็น Proxy ใช้ใด้เฉพาะเซิฟร์นี้หรือไม่ Y/n :" selet
 if [[ "$selet" = "Y" || "$selet" = "y" ]]; then
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 sed -i "s/http_access allow all/http_access allow localhost/g" /etc/squid3/squid.conf
@@ -2749,7 +2769,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้ ############# "
+echo -e "\033[1;31m  =================================== ${NC} "
+echo -e "${GREEN}      สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้${NC} "
+echo -e "\033[1;31m  =================================== ${NC} "
 exit
 fi
 clear
@@ -2770,7 +2792,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# สถานะเปลี่ยนเป็น Proxy ไม่จำกัด IP ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}     สถานะเปลี่ยนเป็น Proxy ไม่จำกัด IP${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
  else
 clear
@@ -2791,7 +2815,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้ ############# "
+echo -e "\033[1;31m  ================================== ${NC} "
+echo -e "${GREEN}     สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้${NC} "
+echo -e "\033[1;31m  ================================== ${NC} "
 
 read -p "เปลี่ยนเป็น Proxy ไม่จำกัด IP หรือไม่ Y/n :" selet
 if [[ "$selet" = "Y" || "$selet" = "y" ]]; then
@@ -2822,7 +2848,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# สถานะเปลี่ยนเป็น Proxy ใช้ใด้หลาย IP ############# "
+echo -e "\033[1;31m  =================================== ${NC} "
+echo -e "${GREEN}      สถานะเปลี่ยนเป็น Proxy ใช้ใด้หลาย IP${NC} "
+echo -e "\033[1;31m  =================================== ${NC} "
 exit
 fi
 clear
@@ -2843,7 +2871,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้ ############# "
+echo -e "\033[1;31m  ================================== ${NC} "
+echo -e "${GREEN}     สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้${NC} "
+echo -e "\033[1;31m  ================================== ${NC} "
 exit
 fi
 elif [[ "2" = "$zenonnew" ]]; then
@@ -2865,11 +2895,13 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# เลือกใช้คำสั่ง #############
-              ## 1. เพิ่มไอพี
-              ## 2. เช็ดไอพี
-              ## 3. ลบไอพี "
- read -p "    ## พิมพ์ตัวเลข : " Selet
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}              เลือกใช้คำสั่ง${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo  "1. เพิ่มไอพี "
+echo  "2. เช็ดไอพี "
+echo  "3. ลบไอพี "
+ read -p " พิมพ์ตัวเลข : " Selet
  if [[ "$Selet" = "" ]]; then
 clear
 clear
@@ -2889,7 +2921,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# โปรดพิมพ์คำสั่ง ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}            โปรดพิมพ์คำสั่ง${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
  exit
 fi
  if [[ $Selet = 1 ]]; then
@@ -2918,7 +2952,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# IP $SERVER_IP มีอยู่ในระบบแล้ว ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}      IP $SERVER_IP มีอยู่ในระบบแล้ว${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 else
 read -p "บันทึกการตั้งค่านี้หรือไม่ y/n : " YN
@@ -2942,7 +2978,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# $SERVER_IP ไม่ได้ยืนยันการใช้งาน ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}      $SERVER_IP ไม่ได้ยืนยันการใช้งาน${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit 
  fi
 
@@ -2951,13 +2989,13 @@ exit
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
 sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid3/squid.conf
-echo " ┣ $SERVER_IP " >> /etc/squid3/squid.txt
+echo " $SERVER_IP " >> /etc/squid3/squid.txt
 echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
 service squid3 restart -q > /dev/null 2>&1
 elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
 sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
 sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid/squid.conf
-echo " ┣ $SERVER_IP " >> /etc/squid/squid.txt
+echo " $SERVER_IP " >> /etc/squid/squid.txt
 echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
 service squid restart -q > /dev/null 2>&1
 fi
@@ -2979,7 +3017,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# $SERVER_IP ใช้งานพร็อกซี่เซิฟร์นี้เรียบร้อย ############# "
+echo -e "\033[1;31m  ===================================== ${NC} "
+echo -e "${GREEN}     $SERVER_IP ใช้งานพร็อกซี่เซิฟร์นี้เรียบร้อย${NC} "
+echo -e "\033[1;31m  ===================================== ${NC} "
 exit 
 elif [[ $Selet = 2 ]]; then
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
@@ -3006,7 +3046,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# สถานะปัจจุบัน Proxy ไม่จำกัด IP ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}        สถานะปัจจุบัน Proxy ไม่จำกัด IP${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 else
 
@@ -3028,7 +3070,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ไอพีที่เปิดใช้งานอยู่ปัจจุบัน ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}         ไอพีที่เปิดใช้งานอยู่ปัจจุบัน${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 echo " $IP  "
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 cat /etc/squid3/squid.txt
@@ -3058,10 +3102,12 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ลบไอพีพร็อกซี่ ############# "
-echo "        ## 1. ลบบางไอพี  "
-echo "        ## 2. รีเซ็ตค่าเดิม  "
-read -p "     ## พิมพ์ตัวเลข : " Selet1
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}             ลบไอพีพร็อกซี่้${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo "1. ลบบางไอพี  "
+echo "2. รีเซ็ตค่าเดิม  "
+read -p "พิมพ์ตัวเลข : " Selet1
 if [[ $Selet1 = 1 ]]; then
 read -p " ┣ ใส่เลขไอพีที่จะลบ : " SERVER_IP
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
@@ -3090,7 +3136,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ไม่อณุญาตให้ลบไอพีของเซิฟร์นี้ ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}        ไม่อณุญาตให้ลบไอพีของเซิฟร์นี้${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 
  exit
 fi
@@ -3114,7 +3162,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ไม่พบ IP $SERVER_IP ในระบบ ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}       ไม่พบ IP $SERVER_IP ในระบบ${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 fi
 
@@ -3137,7 +3187,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ยกเลิกการเปลียนแปลง ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}          ยกเลิกการเปลียนแปลง${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
  exit
 fi
 
@@ -3177,7 +3229,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ยกเลิกการเปลียนแปลง ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}           กเลิกการเปลียนแปลง${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 elif [[ $Selet1 = 2 ]]; then
 read -p " ## แน่ใจว่าต้องการลบไอพีทั้งหมด Y/n : " YN
@@ -3200,7 +3254,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ยกเลิกการเปลียนแปลง ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}          ยกเลิกการเปลียนแปลง${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
  exit
 fi
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
@@ -3245,7 +3301,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ลบไอพีทั้งหมด เรียบร้อย ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}           ลบไอพีทั้งหมด เรียบร้อย ${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 fi
 fi
@@ -3268,11 +3326,13 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# เลือกใช้คำสั่ง ############# 
-             ## 1. เพิ่มพอร์ต
-             ## 2. เช็ดพอร์ต
-             ## 3. ลบพอร์ต "
- read -p "    ## พิมพ์ตัวเลข : " Selet
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}              เลือกใช้คำสั่ง${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo  "1. เพิ่มพอร์ต "
+echo  "2. เช็ดพอร์ต "
+echo  "3. ลบพอร์ต  "
+ read -p " พิมพ์ตัวเลข : " Selet
  if [[ "$Selet" = "" ]]; then
 clear
 clear
@@ -3292,7 +3352,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# โปรดพิมพ์คำสั่ง ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}             โปรดพิมพ์คำสั่ง${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
  exit
 fi
  if [[ $Selet = 1 ]]; then
@@ -3322,7 +3384,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# Port $Port มีอยู่ในระบบแล้ว ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}        Port $Port มีอยู่ในระบบแล้ว${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 else
 if [[ $Port = 80 || $Port = 443 || $Port = 22 || $Port = 143 || $Port = 444 || $Port = 10000 || $Port = 4468 || $Port = 9000 || $Port = 1 || $Port = 2 || $Port = 3 || $Port = 4 || $Port = 5 || $Port = 6 || $Port = 7 || $Port = 8 || $Port = 9 || $Port = 0 || $Port = 21 || $Port = 70 || $Port = 210 || $Port = 1025 || $Port = 65535 || $Port = 280 || $Port = 488 || $Port = 591 || $Port = 777 || $Port = 255 || $Port = 10 || $Port = 172 || $Port = 127 || $Port = 192 || $Port = 32 || $Port = 12 || $Port = 16 || $Port = 1440 || $Port = 20 || $Port = 10080 || $Port = 4320 || $Port = 3128 || $Port = 5555 ]]; then
@@ -3344,7 +3408,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# Port $Port ไม่สามารถเปิดใช้งานได้ ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}      Port $Port ไม่สามารถเปิดใช้งานได้${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 fi
 read -p "  ## บันทึกการตั้งค่านี้หรือไม่ y/n : " YN
@@ -3368,7 +3434,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# $Port ไม่ได้ยืนยันการใช้งาน ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}        $Port ไม่ได้ยืนยันการใช้งาน${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit 
  fi
 
@@ -3377,14 +3445,14 @@ exit
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 sed -i "/http_port 8080/a http_port xxxx" /etc/squid3/squid.conf
 sed -i "s/xxxx/$Port/g" /etc/squid3/squid.conf
-echo " ┣ http_port $Port " >> /etc/squid3/port.txt
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+echo "  http_port $Port " >> /etc/squid3/port.txt
+echo "  กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
 service squid3 restart -q > /dev/null 2>&1
 elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
 sed -i "/http_port 8080/a http_port xxxx" /etc/squid/squid.conf
 sed -i "s/xxxx/$Port/g" /etc/squid/squid.conf
-echo " ┣ http_port $Port  " >> /etc/squid/port.txt
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+echo "  http_port $Port  " >> /etc/squid/port.txt
+echo "  กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
 service squid restart -q > /dev/null 2>&1
 fi
 clear
@@ -3405,7 +3473,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# Port $Port พร้อมใช้งาน ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}         Port $Port พร้อมใช้งาน${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit 
 elif [[ $Selet = 2 ]]; then
 
@@ -3440,7 +3510,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ลบพอร์ตพร็อกซี ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}            ลบพอร์ตพร็อกซี${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 echo "        ## 1. ลบบางพอร์ต  "
 echo "        ## 2. รีเซ็ตค่าเดิม  "
 read -p "      ## พิมพ์ตัวเลข : " Selet1
@@ -3471,7 +3543,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ไม่อณุญาตให้ลบพอร์ต 8080 ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}        ไม่อณุญาตให้ลบพอร์ต 8080${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
  exit
 fi
  read -p "แน่ใจว่าต้องการลบพอร์ต Y/n : " YN
@@ -3494,7 +3568,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ไม่พบ Port $Port ในระบบ ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}         ไม่พบ Port $Port ในระบบ${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 fi
 
@@ -3518,7 +3594,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ยกเลิกการเปลียนแปลง ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}          ยกเลิกการเปลียนแปลง${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
  exit
 fi
 
@@ -3528,7 +3606,7 @@ sed -i $SERVER_IP2 /etc/squid3/port.txt
 sed -i $SERVER_IP2 /etc/squid3/squid.conf
 sed -i '/^$/d' /etc/squid3/port.txt
 sed -i '/^$/d' /etc/squid3/squid.conf
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
+echo " กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
 service squid3 restart -q > /dev/null 2>&1
 elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
 SERVER_IP2="/$Port/d";
@@ -3536,7 +3614,7 @@ sed -i $SERVER_IP2 /etc/squid/port.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
 sed -i '/^$/d' /etc/squid/port.txt
 sed -i '/^$/d' /etc/squid/squid.conf
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
+echo " กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
 service squid restart -q > /dev/null 2>&1
 fi
 clear
@@ -3557,7 +3635,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ลบพอร์ต $Port เรียบร้อย ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}         ลบพอร์ต $Port เรียบร้อย${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 elif [[ $Selet1 = 2 ]]; then
 read -p " ## แน่ใจว่าต้องรีเซ็ตค่าเดิม Y/n : " YN
@@ -3580,7 +3660,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# ยกเลิกการรีเซ็ต ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}                ยกเลิกการรีเซ็ต    ${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
  exit
 fi
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
@@ -3590,7 +3672,7 @@ sed -i $SERVER_IP2 /etc/squid3/squid.conf
 sed -i '/^$/d' /etc/squid3/port.txt
 sed -i '/^$/d' /etc/squid3/squid.conf
 sed -i "/http_access allow SSH/a http_port 8080" /etc/squid3/squid.conf
-echo " ┣ http_port 8080 " > /etc/squid3/port.txt
+echo " http_port 8080 " > /etc/squid3/port.txt
 sed -i '/^$/d' /etc/squid3/port.txt
 echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
 service squid3 restart -q > /dev/null 2>&1
@@ -3600,9 +3682,9 @@ sed -i $SERVER_IP2 /etc/squid/port.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
 sed -i '/^$/d' /etc/squid/squid.conf
 sed -i "/http_access allow SSH/a http_port 8080" /etc/squid/squid.conf
-echo " ┣ http_port 8080 " > /etc/squid/port.txt
+echo " http_port 8080 " > /etc/squid/port.txt
 sed -i '/^$/d' /etc/squid/port.txt
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
+echo " กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
 service squid restart -q > /dev/null 2>&1
 fi
 clear
@@ -3623,7 +3705,9 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
 echo -e "\033[0m       "
 echo ""
-echo  " ############# รีเซ็ตพอร์ค่าเดิมเรียบร้อย ############# "
+echo -e "\033[1;31m  ================================ ${NC} "
+echo -e "${GREEN}            รีเซ็ตพอร์ค่าเดิมเรียบร้อย     ${NC} "
+echo -e "\033[1;31m  ================================ ${NC} "
 exit
 fi
 fi
