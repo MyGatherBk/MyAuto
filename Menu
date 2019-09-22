@@ -2421,7 +2421,7 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 echo ""
-nano /usr/local/bin/menu
+nano /usr/local/bin/m
 exit
 	;;
 	
