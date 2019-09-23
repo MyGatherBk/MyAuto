@@ -426,11 +426,10 @@ verb 3" > /etc/openvpn/client-common.txt
 		;;
 	esac
 echo ""
-echo -e "\033[35;1m { install nginx }${NC} "
+echo -e "\033[35;1m { install nginx }  "
 echo ""
 	cd
-	ok "➡ apt-get install nginx"
-	apt-get install nginx
+	apt-get -y install nginx
 	cat > /etc/nginx/nginx.conf <<END
 user www-data;
 worker_processes 2;
@@ -491,7 +490,9 @@ END
 		if [[ -e /etc/squid3/squid.conf ]]; then
 			apt-get -y remove --purge squid3
 		fi
-ok "➡ apt-get -y install squid3 "
+echo ""
+echo -e "\033[0;32m { Insatll PROXY }  "
+echo ""
 		apt-get -y install squid3
 		cat > /etc/squid3/squid.conf <<END
 http_port $PROXY
@@ -537,10 +538,11 @@ END
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
-		fi	
-
-ok "➡ apt-get -y install squid "
-apt-get -y install squid
+		fi
+echo ""
+echo -e "\033[0;32m { Install PROXY }  "
+echo ""
+		apt-get -y install squid
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
@@ -595,31 +597,8 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 143"/g' /etc/default/drop
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 ok "➡ service dropbear restart"
-service dropbear restart > /dev/null 2>&1
+service dropbear restart > /dev/null 2>&1 
 
-
-# install stunnel
-ok "➡ apt-get install ssl"
-apt-get install -qy stunnel4 > /dev/null 2>&1
-cat > /etc/stunnel/stunnel.conf <<-END
-cert = /etc/stunnel/stunnel.pem
-client = no
-socket = a:SO_REUSEADDR=1
-socket = l:TCP_NODELAY=1
-socket = r:TCP_NODELAY=1
-
-
-[dropbear]
-accept = 444
-connect = 127.0.0.1:3128
-
-END
-
-
-#konfigurasi stunnel
-sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-ok "➡ service ssl restart"
-service stunnel4 restart > /dev/null 2>&1
 # install vnstat gui
 ok "➡ apt-get install vnstat"
 apt-get install -qy vnstat > /dev/null 2>&1
@@ -704,7 +683,6 @@ echo -e "${NC} "
 		echo "Expire : Never"
 		;;
 		3)
-		echo "Vnstat         :   http://$IP/bandwidth "
 		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
 		;;
 	esac
