@@ -59,8 +59,25 @@ echo -e "${NC} "
 	echo -e "\e[032;1mTotal Amount Of Swap:\e[0m $swap MB"
 	echo -e "\e[032;1mSystem Uptime:\e[0m $up"
 	echo -e "-----------------------------------------------------"
-	echo ""
-	echo -e "         Port OpenVPN    :  "$openvpnport
+opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+squid3port="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
+squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
+
+
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]"
+echo -e "\e[0m                                                   "
+echo -e "         Port OpenSSH    :  "$opensshport
+echo -e "         Port Dropbear   :  "$dropbearport
+echo -e "         Port SSL        :  "$stunnel4port
+echo -e "         Port Squid      :  "$squidport
+echo -e "         Port Squid3     :  "$squid3port
+echo -e "         Port OpenVPN    :  "$openvpnport
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]\e[0m"
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
@@ -1838,7 +1855,7 @@ newclient () {
 
 if [[ -e /etc/openvpn/server.conf ]]; then
    echo
-   read -p "Do you really want to remove OpenVPN? [y/N]: " -e REMOVE
+   read -p "คุณต้องการลบ OpenVPN จริง ๆ หรือไม่ [y/N]: " -e REMOVE
    if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
    PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
    PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
