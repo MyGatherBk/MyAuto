@@ -581,49 +581,6 @@ END
 
 fi
 
-# setting port ssh
-cd
-sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port 443' /etc/ssh/sshd_config
-ok "➡ service ssh restart"
-service ssh restart > /dev/null 2>&1
-
-# install dropbear
-ok "➡ apt-get install dropbear"
-apt-get install -qy dropbear > /dev/null 2>&1
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=3128/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 143"/g' /etc/default/dropbear
-echo "/bin/false" >> /etc/shells
-echo "/usr/sbin/nologin" >> /etc/shells
-ok "➡ service dropbear restart"
-service dropbear restart > /dev/null 2>&1 
-
-# install vnstat gui
-ok "➡ apt-get install vnstat"
-apt-get install -qy vnstat > /dev/null 2>&1
-chown -R vnstat:vnstat /var/lib/vnstat
-cd /home/vps/public_html
-wget -q http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
-tar xf vnstat_php_frontend-1.5.1.tar.gz
-rm vnstat_php_frontend-1.5.1.tar.gz
-mv vnstat_php_frontend-1.5.1 bandwidth
-cd bandwidth
-sed -i "s/\$iface_list = array('eth0', 'sixxs');/\$iface_list = array('eth0');/g" config.php
-sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
-sed -i 's/Internal/Internet/g' config.php
-sed -i '/SixXS IPv6/d' config.php
-sed -i "s/\$locale = 'en_US.UTF-8';/\$locale = 'en_US.UTF+8';/g" config.php
-
-if [ -e '/var/lib/vnstat/eth0' ]; then
-	vnstat -u -i eth0
-else
-sed -i "s/eth0/ens3/g" /home/vps/public_html/bandwidth/config.php
-vnstat -u -i ens3
-fi
-
-ok "➡ service vnstat restart"
-service vnstat restart -q > /dev/null 2>&1
 
 # download script
 	cd /usr/local/bin
@@ -689,7 +646,7 @@ echo -e "${NC} "
 	echo ""
 	echo ""
 	echo "===================================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${YELLOW} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${MAGENTA} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
 	echo "===================================================================="
 	echo ""
 	exit
