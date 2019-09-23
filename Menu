@@ -51,7 +51,7 @@ echo -e "${NC} "
 	tram=$( free -m | awk 'NR==2 {print $2}' )
 	swap=$( free -m | awk 'NR==4 {print $2}' )
 	up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
-	echo -e "\e[032;1mSYSTEM OS:\e[0m $chek"
+	echo -e "\e[032;1mSYSTEM OS:\e[0m  $chek"
 	echo -e "\e[032;1mCPU Model:\e[0m $cname"
 	echo -e "\e[032;1mNumber Of Cores:\e[0m $cores"
 	echo -e "\e[032;1mCPU Frequency:\e[0m $freq MHz"
@@ -59,26 +59,7 @@ echo -e "${NC} "
 	echo -e "\e[032;1mTotal Amount Of Swap:\e[0m $swap MB"
 	echo -e "\e[032;1mSystem Uptime:\e[0m $up"
 	echo -e "-----------------------------------------------------"
-opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-squid3port="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
-squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
-nginxport="$(netstat -nlpt | grep -i nginx| grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]"
-echo -e "\e[0m                                                   "
-echo -e "         Port OpenSSH    :  "$opensshport
-echo -e "         Port Dropbear   :  "$dropbearport
-echo -e "         Port SSL        :  "$stunnel4port
-echo -e "         Port Squid      :  "$squidport
-echo -e "         Port Squid3     :  "$squid3port
-echo -e "         Port OpenVPN    :  "$openvpnport
-echo -e "         Port Nginx      :  "$nginxport
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]\e[0m"
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
@@ -115,9 +96,9 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|18|${GREEN} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
         echo -e "|${GRAY}19${NC}| MENU ไฟล์สคริปท์ของเมนู"
 	echo -e "|${GRAY}20${NC}| Update Credits Bannerssh "
-	echo -e "|${GRAY}21${NC}| show_PORTs "
+	echo -e "|${GRAY}21${NC}| SHOW_PORTS "
 	echo -e "|${GRAY}22${NC}| EDIT_PORT OPENVPN "
-        echo -e "|${GRAY}23${NC}| (${GRAY}จัดการตั้งค่าพร็อกซี่ ${NC}) "
+        echo -e "|${GRAY}23${NC}| ( ${GRAY}จัดการตั้งค่าพร็อกซี่ ${NC}) "
 	echo -e "|${GRAY}24${NC}| EDIT_SQUID3 & EDIT_SQUID"
 	echo -e "|${GRAY}25${NC}| EDIT_PORTSSH "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
@@ -2626,6 +2607,7 @@ stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print 
 openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 squid3port="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
 squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
+nginxport="$(netstat -nlpt | grep -i nginx| grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 clear
 clear
 echo ""
@@ -2650,6 +2632,7 @@ echo -e "         Port SSL        :  "$stunnel4port
 echo -e "         Port Squid      :  "$squidport
 echo -e "         Port Squid3     :  "$squid3port
 echo -e "         Port OpenVPN    :  "$openvpnport
+echo -e "         Port Nginx      :  "$nginxport
 echo -e "\e[0m                                                   "
 echo -e "\e[94m[][][]======================================[][][]\e[0m"
 ;;
