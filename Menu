@@ -43,7 +43,6 @@ echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo "Vnstat     :  http://$IP:85/vnstat"
 echo -e "${NC} "
         chek=$(cat /etc/issue.net)
 	cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
@@ -186,7 +185,7 @@ echo ""
 		echo "หมดอายุในวันที่ : $EXP"
 		echo ""
 		echo "IP : $IP"
-		echo "Port : 22,80,143"
+		echo "Port : 22"
 		echo "Proxy Port : $PROXY"
 		exit
 	else
@@ -272,7 +271,7 @@ echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:81/$RANDOMFOLDER/$CLIENT.ovpn "
+	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn "
 	echo ""
 	exit
 
