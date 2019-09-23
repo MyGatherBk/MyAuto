@@ -426,7 +426,7 @@ verb 3" > /etc/openvpn/client-common.txt
 		;;
 	esac
 echo ""
-echo -e "\033[35;1m { install nginx }  "
+echo -e "\033[35;1m { install nginx }${NC} "
 echo ""
 	cd
 	apt-get -y install nginx
@@ -491,7 +491,7 @@ END
 			apt-get -y remove --purge squid3
 		fi
 echo ""
-echo -e "\033[0;32m { Insatll PROXY }  "
+echo -e "\033[0;32m { Install PROXY }${NC} "
 echo ""
 		apt-get -y install squid3
 		cat > /etc/squid3/squid.conf <<END
@@ -540,7 +540,7 @@ END
 			apt-get -y remove --purge squid
 		fi
 echo ""
-echo -e "\033[0;32m { Insatll PROXY }  "
+echo -e "\033[0;32m { Install PROXY }${NC} "
 echo ""
 		apt-get -y install squid
 		cat > /etc/squid/squid.conf <<END
@@ -580,6 +580,20 @@ END
 	fi
 
 fi
+
+# SSH Configuration
+cd
+sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port  81' /etc/ssh/sshd_config
+sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
+
+# Install Dropbear
+apt-get -y install dropbear
+sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=442/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 82 -p 142"/g' /etc/default/dropbear
+echo "/bin/false" >> /etc/shells
+echo "/usr/sbin/nologin" >> /etc/shells
 
 
 # download script
