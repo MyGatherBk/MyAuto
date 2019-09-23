@@ -51,7 +51,7 @@ echo -e "${NC} "
 	tram=$( free -m | awk 'NR==2 {print $2}' )
 	swap=$( free -m | awk 'NR==4 {print $2}' )
 	up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
-	echo -e "\e[032;1mSYSTEM OS:\e[0m $chek "
+	echo -e "\e[032;1mSYSTEM OS:\e[0m $chek"
 	echo -e "\e[032;1mCPU Model:\e[0m $cname"
 	echo -e "\e[032;1mNumber Of Cores:\e[0m $cores"
 	echo -e "\e[032;1mCPU Frequency:\e[0m $freq MHz"
@@ -60,6 +60,7 @@ echo -e "${NC} "
 	echo -e "\e[032;1mSystem Uptime:\e[0m $up"
 	echo -e "-----------------------------------------------------"
 	echo ""
+	echo -e "         Port OpenVPN    :  "$openvpnport
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
@@ -1516,199 +1517,6 @@ esac
 
 	;;
 	
-18) # ==================================================================================================================
-DATE1=$(vnstat -h | sed -n '16p' | awk '{print $1}')
-RX1=$(vnstat -h | sed -n '16p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX1=$(vnstat -h | sed -n '16p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX1=$(echo "scale=2;$RX1 / 1000000" | bc)
-CONTX1=$(echo "scale=2;$TX1 / 1000000" | bc)
-
-DATE2=$(vnstat -h | sed -n '17p' | awk '{print $1}')
-RX2=$(vnstat -h | sed -n '17p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX2=$(vnstat -h | sed -n '17p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX2=$(echo "scale=2;$RX2 / 1000000" | bc)
-CONTX2=$(echo "scale=2;$TX2 / 1000000" | bc)
-
-DATE3=$(vnstat -h | sed -n '18p' | awk '{print $1}')
-RX3=$(vnstat -h | sed -n '18p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX3=$(vnstat -h | sed -n '18p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX3=$(echo "scale=2;$RX3 / 1000000" | bc)
-CONTX3=$(echo "scale=2;$TX3 / 1000000" | bc)
-
-DATE4=$(vnstat -h | sed -n '19p' | awk '{print $1}')
-RX4=$(vnstat -h | sed -n '19p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX4=$(vnstat -h | sed -n '19p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX4=$(echo "scale=2;$RX4 / 1000000" | bc)
-CONTX4=$(echo "scale=2;$TX4 / 1000000" | bc)
-
-DATE5=$(vnstat -h | sed -n '20p' | awk '{print $1}')
-RX5=$(vnstat -h | sed -n '20p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX5=$(vnstat -h | sed -n '20p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX5=$(echo "scale=2;$RX4 / 1000000" | bc)
-CONTX5=$(echo "scale=2;$TX4 / 1000000" | bc)
-
-DATE6=$(vnstat -h | sed -n '21p' | awk '{print $1}')
-RX6=$(vnstat -h | sed -n '21p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX6=$(vnstat -h | sed -n '21p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX6=$(echo "scale=2;$RX6 / 1000000" | bc)
-CONTX6=$(echo "scale=2;$TX6 / 1000000" | bc)
-
-DATE7=$(vnstat -h | sed -n '22p' | awk '{print $1}')
-RX7=$(vnstat -h | sed -n '22p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX7=$(vnstat -h | sed -n '22p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX7=$(echo "scale=2;$RX7 / 1000000" | bc)
-CONTX7=$(echo "scale=2;$TX7 / 1000000" | bc)
-
-DATE8=$(vnstat -h | sed -n '23p' | awk '{print $1}')
-RX8=$(vnstat -h | sed -n '23p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX8=$(vnstat -h | sed -n '23p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX8=$(echo "scale=2;$RX8 / 1000000" | bc)
-CONTX8=$(echo "scale=2;$TX8 / 1000000" | bc)
-
-DATE9=$(vnstat -h | sed -n '16p' | awk '{print $4}')
-RX9=$(vnstat -h | sed -n '16p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX9=$(vnstat -h | sed -n '16p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX9=$(echo "scale=2;$RX9 / 1000000" | bc)
-CONTX9=$(echo "scale=2;$TX9 / 1000000" | bc)
-
-DATE10=$(vnstat -h | sed -n '17p' | awk '{print $4}')
-RX10=$(vnstat -h | sed -n '17p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX10=$(vnstat -h | sed -n '17p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX10=$(echo "scale=2;$RX10 / 1000000" | bc)
-CONTX10=$(echo "scale=2;$TX10 / 1000000" | bc)
-
-DATE11=$(vnstat -h | sed -n '18p' | awk '{print $4}')
-RX11=$(vnstat -h | sed -n '18p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX11=$(vnstat -h | sed -n '18p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX11=$(echo "scale=2;$RX11 / 1000000" | bc)
-CONTX11=$(echo "scale=2;$TX11 / 1000000" | bc)
-
-DATE12=$(vnstat -h | sed -n '19p' | awk '{print $4}')
-RX12=$(vnstat -h | sed -n '19p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX12=$(vnstat -h | sed -n '19p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX12=$(echo "scale=2;$RX12 / 1000000" | bc)
-CONTX12=$(echo "scale=2;$TX12 / 1000000" | bc)
-
-DATE13=$(vnstat -h | sed -n '20p' | awk '{print $4}')
-RX13=$(vnstat -h | sed -n '20p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX13=$(vnstat -h | sed -n '20p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX13=$(echo "scale=2;$RX13 / 1000000" | bc)
-CONTX13=$(echo "scale=2;$TX13 / 1000000" | bc)
-
-DATE14=$(vnstat -h | sed -n '21p' | awk '{print $4}')
-RX14=$(vnstat -h | sed -n '21p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX14=$(vnstat -h | sed -n '21p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX14=$(echo "scale=2;$RX14 / 1000000" | bc)
-CONTX14=$(echo "scale=2;$TX14 / 1000000" | bc)
-
-DATE15=$(vnstat -h | sed -n '22p' | awk '{print $4}')
-RX15=$(vnstat -h | sed -n '22p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX15=$(vnstat -h | sed -n '22p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX15=$(echo "scale=2;$RX15 / 1000000" | bc)
-CONTX15=$(echo "scale=2;$TX15 / 1000000" | bc)
-
-DATE16=$(vnstat -h | sed -n '23p' | awk '{print $4}')
-RX16=$(vnstat -h | sed -n '23p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX16=$(vnstat -h | sed -n '23p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX16=$(echo "scale=2;$RX16 / 1000000" | bc)
-CONTX16=$(echo "scale=2;$TX16 / 1000000" | bc)
-
-DATE17=$(vnstat -h | sed -n '16p' | awk '{print $7}')
-RX17=$(vnstat -h | sed -n '16p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX17=$(vnstat -h | sed -n '16p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX17=$(echo "scale=2;$RX17 / 1000000" | bc)
-CONTX17=$(echo "scale=2;$TX17 / 1000000" | bc)
-
-DATE18=$(vnstat -h | sed -n '17p' | awk '{print $7}')
-RX18=$(vnstat -h | sed -n '17p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX18=$(vnstat -h | sed -n '17p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX18=$(echo "scale=2;$RX18 / 1000000" | bc)
-CONTX18=$(echo "scale=2;$TX18 / 1000000" | bc)
-
-DATE19=$(vnstat -h | sed -n '18p' | awk '{print $7}')
-RX19=$(vnstat -h | sed -n '18p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX19=$(vnstat -h | sed -n '18p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX19=$(echo "scale=2;$RX19 / 1000000" | bc)
-CONTX19=$(echo "scale=2;$TX19 / 1000000" | bc)
-
-DATE20=$(vnstat -h | sed -n '19p' | awk '{print $7}')
-RX20=$(vnstat -h | sed -n '19p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX20=$(vnstat -h | sed -n '19p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX20=$(echo "scale=2;$RX20 / 1000000" | bc)
-CONTX20=$(echo "scale=2;$TX20 / 1000000" | bc)
-
-DATE21=$(vnstat -h | sed -n '20p' | awk '{print $7}')
-RX21=$(vnstat -h | sed -n '20p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX21=$(vnstat -h | sed -n '20p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX21=$(echo "scale=2;$RX21 / 1000000" | bc)
-CONTX21=$(echo "scale=2;$TX21 / 1000000" | bc)
-
-DATE22=$(vnstat -h | sed -n '21p' | awk '{print $7}')
-RX22=$(vnstat -h | sed -n '21p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX22=$(vnstat -h | sed -n '21p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX22=$(echo "scale=2;$RX22 / 1000000" | bc)
-CONTX22=$(echo "scale=2;$TX22 / 1000000" | bc)
-
-DATE23=$(vnstat -h | sed -n '22p' | awk '{print $7}')
-RX23=$(vnstat -h | sed -n '22p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX23=$(vnstat -h | sed -n '22p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX23=$(echo "scale=2;$RX23 / 1000000" | bc)
-CONTX23=$(echo "scale=2;$TX23 / 1000000" | bc)
-
-DATE24=$(vnstat -h | sed -n '23p' | awk '{print $7}')
-RX24=$(vnstat -h | sed -n '23p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
-TX24=$(vnstat -h | sed -n '23p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
-CONRX24=$(echo "scale=2;$RX24 / 1000000" | bc)
-CONTX24=$(echo "scale=2;$TX24 / 1000000" | bc)
-
-clear
-echo ""
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "${RED} #      -----------About Us------------         #    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "${RED} #               { VPN / SSH }                  #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-NOW=`echo -e "${GREEN}เวลาปัจจุบัน${NC}"`
-echo ""
-echo -e "${GRAY}ตัวเลขรับและส่งข้อมูลที่แสดงจะมีหน่วยวัดปริมาณเป็น Gigabyte ทั้งหมด${NC}"
-printf "%-7s %-7s %-10s\n" "เวลา" "รับข้อมูล" "ส่งข้อมูล"
-echo ""
-printf "%-3s %-6s %-10s\n" "$DATE1" "$CONRX1" "$CONTX1"
-printf "%-3s %-6s %-10s\n" "$DATE2" "$CONRX2" "$CONTX2"
-printf "%-3s %-6s %-10s\n" "$DATE3" "$CONRX3" "$CONTX3"
-printf "%-3s %-6s %-10s\n" "$DATE4" "$CONRX4" "$CONTX4"
-printf "%-3s %-6s %-10s\n" "$DATE5" "$CONRX5" "$CONTX5"
-printf "%-3s %-6s %-10s\n" "$DATE6" "$CONRX6" "$CONTX6"
-printf "%-3s %-6s %-10s\n" "$DATE7" "$CONRX7" "$CONTX7"
-printf "%-3s %-6s %-10s\n" "$DATE8" "$CONRX8" "$CONTX8"
-printf "%-3s %-6s %-10s\n" "$DATE9" "$CONRX9" "$CONTX9"
-printf "%-3s %-6s %-10s\n" "$DATE10" "$CONRX10" "$CONTX10"
-printf "%-3s %-6s %-10s\n" "$DATE11" "$CONRX11" "$CONTX11"
-printf "%-3s %-6s %-10s\n" "$DATE12" "$CONRX12" "$CONTX12"
-printf "%-3s %-6s %-10s\n" "$DATE13" "$CONRX13" "$CONTX13"
-printf "%-3s %-6s %-10s\n" "$DATE14" "$CONRX14" "$CONTX14"
-printf "%-3s %-6s %-10s\n" "$DATE15" "$CONRX15" "$CONTX15"
-printf "%-3s %-6s %-10s\n" "$DATE16" "$CONRX16" "$CONTX16"
-printf "%-3s %-6s %-10s\n" "$DATE17" "$CONRX17" "$CONTX17"
-printf "%-3s %-6s %-10s\n" "$DATE18" "$CONRX18" "$CONTX18"
-printf "%-3s %-6s %-10s\n" "$DATE19" "$CONRX19" "$CONTX19"
-printf "%-3s %-6s %-10s\n" "$DATE20" "$CONRX20" "$CONTX20"
-printf "%-3s %-6s %-10s\n" "$DATE21" "$CONRX21" "$CONTX21"
-printf "%-3s %-6s %-10s\n" "$DATE22" "$CONRX22" "$CONTX22"
-printf "%-3s %-6s %-10s\n" "$DATE23" "$CONRX23" "$CONTX23"
-printf "%-3s %-6s %-5s %-5s\n" "$DATE24" "$CONRX24" "$CONTX24" "< $NOW"
-echo ""
-exit
-
-	;;
-	
 	16) # ==================================================================================================================
 echo ""
 echo ""
@@ -2030,7 +1838,7 @@ newclient () {
 
 if [[ -e /etc/openvpn/server.conf ]]; then
    echo
-   read -p "Do you really want to remove OpenVPN? [y/N]: " -e REMOVE
+   read -p "คุณต้องการลบ OpenVPN จริง ๆ หรือไม่ [y/N]: " -e REMOVE
    if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
    PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
    PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
@@ -2091,484 +1899,202 @@ if [[ -e /etc/openvpn/server.conf ]]; then
    echo -e "${GRAY}Removal Aborted. ${NC} "
    fi
 			exit
-
-
-# elif [[ -e /etc/apt/sources.list.d/pritunl.list ]]; then
-# echo ""
-# echo "ไม่สามารถติดตั้ง OpenVPN ได้"
-# echo "เนื่องจาก IP นี้ได้ติดตั้ง OpenVPN ที่ควบคุมการใช้งานผ่าน PRITUNL ไปก่อนหน้านี้แล้ว"
-# exit
-
-else
-	clear
-echo ""
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "${RED} #      -----------About Us------------         #    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "${RED} #               { VPN / SSH }                  #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-# Install openvpn
-cd
-echo " 
-----------------------------------------------
-[√] ระบบสคริป  : Pirakit Khawpleum 
-[√] กรุณารอสักครู่ .....
-[√] Loading .....
-----------------------------------------------
- "
-	read -p "IP Server : " -e -i $IP IP
-	read -p "Port Server : " -e -i 443 PORT
-	read -p "Port Proxy : " -e -i 8080 PROXY
-	echo ""
-	echo " |1| UDP "
-	echo " |2| TCP "
-	echo ""
-	read -p "Protocol : " -e -i 2 PROTOCOL
-	case $PROTOCOL in
-		1) 
-		PROTOCOL=udp
-		;;
-		2) 
-		PROTOCOL=tcp
-		;;
-	esac
-	echo ""
-	echo " |1| DNS Current System "
-	echo " |2| DNS Google "
-	echo ""
-	read -p "DNS : " -e -i 2 DNS
-	echo ""
-	echo "  |1| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น แต่สามารถสร้างไฟล์เพิ่มได้"
-	echo "  |2| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องใช้ชื่อบัญชีและรหัสผ่านเพื่อใช้เชื่อมต่อ"
-	echo "  |3| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดจำนวนเครื่อง"
-	echo ""
-	read -p "Server System : " -e -i 3 OPENVPNSYSTEM
-	echo ""
-	read -p "Server Name: " -e CLIENT
-	echo ""
-	case $OPENVPNSYSTEM in
-		2)
-		read -p "Your Username : " -e Usernames
-		read -p "Your Password : " -e Passwords
-		;;
-	esac
-	echo ""
-	read -n1 -r -p "กด Enter 1 ครั้งเพื่อเริ่มทำการติดตั้ง หรือกด CTRL+C เพื่อยกเลิก"
-
-	apt-get update
-	apt-get install openvpn iptables openssl ca-certificates -y
-
-	# Get easy-rsa
-	EASYRSAURL='https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.5/EasyRSA-nix-3.0.5.tgz'
-	wget -O ~/easyrsa.tgz "$EASYRSAURL" 2>/dev/null || curl -Lo ~/easyrsa.tgz "$EASYRSAURL"
-	tar xzf ~/easyrsa.tgz -C ~/
-	mv ~/EasyRSA-3.0.5/ /etc/openvpn/
-	mv /etc/openvpn/EasyRSA-3.0.5/ /etc/openvpn/easy-rsa/
-	chown -R root:root /etc/openvpn/easy-rsa/
-	rm -f ~/easyrsa.tgz
-	cd /etc/openvpn/easy-rsa/
-	# Create the PKI, set up the CA and the server and client certificates
-	./easyrsa init-pki
-	./easyrsa --batch build-ca nopass
-	EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-server-full server nopass
-	EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full $CLIENT nopass
-	EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
-	# Move the stuff we need
-	cp pki/ca.crt pki/private/ca.key pki/issued/server.crt pki/private/server.key pki/crl.pem /etc/openvpn
-	# CRL is read with each client connection, when OpenVPN is dropped to nobody
-	chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-	# Generate key for tls-auth
-	openvpn --genkey --secret /etc/openvpn/ta.key
-	# Create the DH parameters file using the predefined ffdhe2048 group
-	echo '-----BEGIN DH PARAMETERS-----
-MIIBCAKCAQEA//////////+t+FRYortKmq/cViAnPTzx2LnFg84tNpWp4TZBFGQz
-+8yTnc4kmz75fS/jY2MMddj2gbICrsRhetPfHtXV/WVhJDP1H18GbtCFY2VVPe0a
-87VXE15/V8k1mE8McODmi3fipona8+/och3xWKE2rec1MKzKT0g6eXq8CrGCsyT7
-YdEIqUuyyOP7uWrat2DX9GgdT0Kj3jlN9K5W7edjcrsZCwenyO4KbXCeAvzhzffi
-7MA0BM0oNC9hkXL+nOmFg/+OTxIy7vKBg8P+OxtMb61zO7X8vC7CIAXFjvGDfRaD
-ssbzSibBsu/6iGtCOGEoXJf//////////wIBAg==
------END DH PARAMETERS-----' > /etc/openvpn/dh.pem
-	# Generate server.conf
-	echo "port $PORT
-proto $PROTOCOL
-dev tun
-sndbuf 0
-rcvbuf 0
-ca ca.crt
-cert server.crt
-key server.key
-dh dh.pem
-auth SHA512
-tls-auth ta.key 0
-topology subnet
-server 10.8.0.0 255.255.255.0
-ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
-	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
-	# DNS
-	case $DNS in
-		1)
-		# Locate the proper resolv.conf
-		# Needed for systems running systemd-resolved
-		if grep -q "127.0.0.53" "/etc/resolv.conf"; then
-			RESOLVCONF='/run/systemd/resolve/resolv.conf'
-		else
-			RESOLVCONF='/etc/resolv.conf'
-		fi
-		# Obtain the resolvers from resolv.conf and use them for OpenVPN
-		grep -v '#' $RESOLVCONF | grep 'nameserver' | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | while read line; do
-			echo "push \"dhcp-option DNS $line\"" >> /etc/openvpn/server.conf
-		done
-		;;
-		2)
-		echo 'push "dhcp-option DNS 1.1.1.1"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 1.0.0.1"' >> /etc/openvpn/server.conf
-		;;
-		3)
-		echo 'push "dhcp-option DNS 8.8.8.8"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 8.8.4.4"' >> /etc/openvpn/server.conf
-		;;
-		4)
-		echo 'push "dhcp-option DNS 208.67.222.222"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 208.67.220.220"' >> /etc/openvpn/server.conf
-		;;
-		5)
-		echo 'push "dhcp-option DNS 64.6.64.6"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 64.6.65.6"' >> /etc/openvpn/server.conf
-		;;
-	esac
-	echo "keepalive 10 120
-cipher AES-256-CBC
-user nobody
-group $GROUPNAME
-persist-key
-persist-tun
-status openvpn-status.log
-verb 3
-crl-verify crl.pem" >> /etc/openvpn/server.conf
-	# Enable net.ipv4.ip_forward for the system
-	echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/30-openvpn-forward.conf
-	# Enable without waiting for a reboot or service restart
-	echo 1 > /proc/sys/net/ipv4/ip_forward
-	if pgrep firewalld; then
-		# Using both permanent and not permanent rules to avoid a firewalld
-		# reload.
-		# We don't use --add-service=openvpn because that would only work with
-		# the default port and protocol.
-		firewall-cmd --zone=public --add-port=$PORT/$PROTOCOL
-		firewall-cmd --zone=trusted --add-source=10.8.0.0/24
-		firewall-cmd --permanent --zone=public --add-port=$PORT/$PROTOCOL
-		firewall-cmd --permanent --zone=trusted --add-source=10.8.0.0/24
-		# Set NAT for the VPN subnet
-		firewall-cmd --direct --add-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-		firewall-cmd --permanent --direct --add-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-	else
-		# Needed to use rc.local with some systemd distros
-		if [[ "$OS" = 'debian' && ! -e $RCLOCAL ]]; then
-			echo '#!/bin/sh -e
-exit 0' > $RCLOCAL
-		fi
-		chmod +x $RCLOCAL
-		# Set NAT for the VPN subnet
-		iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-		sed -i "1 a\iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP" $RCLOCAL
-		if iptables -L -n | grep -qE '^(REJECT|DROP)'; then
-			# If iptables has at least one REJECT rule, we asume this is needed.
-			# Not the best approach but I can't think of other and this shouldn't
-			# cause problems.
-			iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
-			iptables -I FORWARD -s 10.8.0.0/24 -j ACCEPT
-			iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-			sed -i "1 a\iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT" $RCLOCAL
-			sed -i "1 a\iptables -I FORWARD -s 10.8.0.0/24 -j ACCEPT" $RCLOCAL
-			sed -i "1 a\iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT" $RCLOCAL
-		fi
-	fi
-	# If SELinux is enabled and a custom port was selected, we need this
-	if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
-		# Install semanage if not already present
-		if ! hash semanage 2>/dev/null; then
-			yum install policycoreutils-python -y
-		fi
-		semanage port -a -t openvpn_port_t -p $PROTOCOL $PORT
-	fi
-	# And finally, restart OpenVPN
-	if [[ "$OS" = 'debian' ]]; then
-		# Little hack to check for systemd
-		if pgrep systemd-journal; then
-			systemctl restart openvpn@server.service
-		else
-			/etc/init.d/openvpn restart
-		fi
-	else
-		if pgrep systemd-journal; then
-			systemctl restart openvpn@server.service
-			systemctl enable openvpn@server.service
-		else
-			service openvpn restart
-			chkconfig openvpn on
-		fi
-	fi
-	# If the server is behind a NAT, use the correct IP address
-	if [[ "$PUBLICIP" != "" ]]; then
-		IP=$PUBLICIP
-	fi
-	# client-common.txt is created so we have a template to add further users later
-	echo "client
-dev tun
-proto $PROTOCOL
-sndbuf 0
-rcvbuf 0
-remote $IP $PORT
-http-proxy $IP $PROXY
-resolv-retry infinite
-nobind
-persist-key
-persist-tun
-remote-cert-tls server
-auth SHA512
-cipher AES-256-CBC
-setenv opt block-outside-dns
-key-direction 1
-verb 3" > /etc/openvpn/client-common.txt
-
-	case $OPENVPNSYSTEM in
-		2)
-		echo "auth-user-pass" >> /etc/openvpn/client-common.txt
-		;;
-	esac
-echo ""
-echo -e "\033[35;1m { install nginx }  "
-echo ""
-	cd
-	apt-get -y install nginx
-	cat > /etc/nginx/nginx.conf <<END
-user www-data;
-worker_processes 2;
-pid /var/run/nginx.pid;
-events {
-	multi_accept on;
-        worker_connections 1024;
-}
-http {
-	autoindex on;
-        sendfile on;
-        tcp_nopush on;
-        tcp_nodelay on;
-        keepalive_timeout 65;
-        types_hash_max_size 2048;
-        server_tokens off;
-        include /etc/nginx/mime.types;
-        default_type application/octet-stream;
-        access_log /var/log/nginx/access.log;
-        error_log /var/log/nginx/error.log;
-        client_max_body_size 32M;
-	client_header_buffer_size 8m;
-	large_client_header_buffers 8 8m;
-	fastcgi_buffer_size 8m;
-	fastcgi_buffers 8 8m;
-	fastcgi_read_timeout 600;
-        include /etc/nginx/conf.d/*.conf;
-}
-END
-	mkdir -p /home/vps/public_html
-	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
-	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
-	args='$args'
-	uri='$uri'
-	document_root='$document_root'
-	fastcgi_script_name='$fastcgi_script_name'
-	cat > /etc/nginx/conf.d/vps.conf <<END
-server {
-    listen       85;
-    server_name  127.0.0.1 localhost;
-    access_log /var/log/nginx/vps-access.log;
-    error_log /var/log/nginx/vps-error.log error;
-    root   /home/vps/public_html;
-    location / {
-        index  index.html index.htm index.php;
-	try_files $uri $uri/ /index.php?$args;
-    }
-    location ~ \.php$ {
-        include /etc/nginx/fastcgi_params;
-        fastcgi_pass  127.0.0.1:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-}
-END
-
-	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ -e /etc/squid3/squid.conf ]]; then
-			apt-get -y remove --purge squid3
-		fi
-echo ""
-echo -e "\033[0;32m { Install PROXY }  "
-echo ""
-		apt-get -y install squid3
-		cat > /etc/squid3/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid3/squid.conf;
-		if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-			service squid3 restart
-			/etc/init.d/openvpn restart
-			/etc/init.d/nginx restart
-		else
-			/etc/init.d/squid3 restart
-			/etc/init.d/openvpn restart
-			/etc/init.d/nginx restart
-		fi
-
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ -e /etc/squid/squid.conf ]]; then
-			apt-get -y remove --purge squid
-		fi
-echo ""
-echo -e "\033[0;32m { Install PROXY }  "
-echo ""
-		apt-get -y install squid
-		cat > /etc/squid/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid/squid.conf;
-		/etc/init.d/squid restart
-		/etc/init.d/openvpn restart
-		/etc/init.d/nginx restart
-	fi
-
-fi
-
-
-	wget -O /usr/local/bin/menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
-	chmod +x /usr/local/bin/menu
-	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
-	chmod +x /usr/local/bin/Auto-Delete-Client 
-	apt-get -y install vnstat
-	cd /etc/openvpn/easy-rsa/
-	./easyrsa build-client-full $CLIENT nopass
-	newclient "$CLIENT"
-	cp /root/$CLIENT.ovpn /home/vps/public_html/
-	rm -f /root/$CLIENT.ovpn
-	case $OPENVPNSYSTEM in
-		2)
-		useradd $Usernames
-		echo -e "$Passwords\n$Passwords\n"|passwd $Usernames &> /dev/null
-		;;
-	esac
-	clear
-echo ""
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "${RED} #      -----------About Us------------         #    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "${RED} #               { VPN / SSH }                  #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
-	echo "IP Server : $IP"
-	echo "Port Server : $PORT"
-	if [[ "$PROTOCOL" = 'udp' ]]; then
-		echo "Protocal : UDP"
-	elif [[ "$PROTOCOL" = 'tcp' ]]; then
-		echo "Protocal : TCP"
-	fi
-	echo "Port Nginx : 85"
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
-	echo ""
-	case $OPENVPNSYSTEM in
-		1)
-		echo "Download My Config : http://$IP:85/$CLIENT.ovpn"
-		;;
-		2)
-		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
-		echo ""
-		echo "Your Username : $Usernames"
-		echo "Your Password : $Passwords"
-		echo "Expire : Never"
-		;;
-		3)
-		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
-		;;
-	esac
-	echo ""
-	echo ""
-	echo "===================================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${GRAY} menu ${NC} เพื่อไปยังขั้นตอนถัดไป"
-	echo "===================================================================="
-	echo ""
-	exit
 	
 ;;
 
+18) # ==================================================================================================================
+DATE1=$(vnstat -h | sed -n '16p' | awk '{print $1}')
+RX1=$(vnstat -h | sed -n '16p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX1=$(vnstat -h | sed -n '16p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX1=$(echo "scale=2;$RX1 / 1000000" | bc)
+CONTX1=$(echo "scale=2;$TX1 / 1000000" | bc)
+
+DATE2=$(vnstat -h | sed -n '17p' | awk '{print $1}')
+RX2=$(vnstat -h | sed -n '17p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX2=$(vnstat -h | sed -n '17p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX2=$(echo "scale=2;$RX2 / 1000000" | bc)
+CONTX2=$(echo "scale=2;$TX2 / 1000000" | bc)
+
+DATE3=$(vnstat -h | sed -n '18p' | awk '{print $1}')
+RX3=$(vnstat -h | sed -n '18p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX3=$(vnstat -h | sed -n '18p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX3=$(echo "scale=2;$RX3 / 1000000" | bc)
+CONTX3=$(echo "scale=2;$TX3 / 1000000" | bc)
+
+DATE4=$(vnstat -h | sed -n '19p' | awk '{print $1}')
+RX4=$(vnstat -h | sed -n '19p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX4=$(vnstat -h | sed -n '19p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX4=$(echo "scale=2;$RX4 / 1000000" | bc)
+CONTX4=$(echo "scale=2;$TX4 / 1000000" | bc)
+
+DATE5=$(vnstat -h | sed -n '20p' | awk '{print $1}')
+RX5=$(vnstat -h | sed -n '20p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX5=$(vnstat -h | sed -n '20p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX5=$(echo "scale=2;$RX4 / 1000000" | bc)
+CONTX5=$(echo "scale=2;$TX4 / 1000000" | bc)
+
+DATE6=$(vnstat -h | sed -n '21p' | awk '{print $1}')
+RX6=$(vnstat -h | sed -n '21p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX6=$(vnstat -h | sed -n '21p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX6=$(echo "scale=2;$RX6 / 1000000" | bc)
+CONTX6=$(echo "scale=2;$TX6 / 1000000" | bc)
+
+DATE7=$(vnstat -h | sed -n '22p' | awk '{print $1}')
+RX7=$(vnstat -h | sed -n '22p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX7=$(vnstat -h | sed -n '22p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX7=$(echo "scale=2;$RX7 / 1000000" | bc)
+CONTX7=$(echo "scale=2;$TX7 / 1000000" | bc)
+
+DATE8=$(vnstat -h | sed -n '23p' | awk '{print $1}')
+RX8=$(vnstat -h | sed -n '23p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX8=$(vnstat -h | sed -n '23p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX8=$(echo "scale=2;$RX8 / 1000000" | bc)
+CONTX8=$(echo "scale=2;$TX8 / 1000000" | bc)
+
+DATE9=$(vnstat -h | sed -n '16p' | awk '{print $4}')
+RX9=$(vnstat -h | sed -n '16p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX9=$(vnstat -h | sed -n '16p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX9=$(echo "scale=2;$RX9 / 1000000" | bc)
+CONTX9=$(echo "scale=2;$TX9 / 1000000" | bc)
+
+DATE10=$(vnstat -h | sed -n '17p' | awk '{print $4}')
+RX10=$(vnstat -h | sed -n '17p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX10=$(vnstat -h | sed -n '17p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX10=$(echo "scale=2;$RX10 / 1000000" | bc)
+CONTX10=$(echo "scale=2;$TX10 / 1000000" | bc)
+
+DATE11=$(vnstat -h | sed -n '18p' | awk '{print $4}')
+RX11=$(vnstat -h | sed -n '18p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX11=$(vnstat -h | sed -n '18p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX11=$(echo "scale=2;$RX11 / 1000000" | bc)
+CONTX11=$(echo "scale=2;$TX11 / 1000000" | bc)
+
+DATE12=$(vnstat -h | sed -n '19p' | awk '{print $4}')
+RX12=$(vnstat -h | sed -n '19p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX12=$(vnstat -h | sed -n '19p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX12=$(echo "scale=2;$RX12 / 1000000" | bc)
+CONTX12=$(echo "scale=2;$TX12 / 1000000" | bc)
+
+DATE13=$(vnstat -h | sed -n '20p' | awk '{print $4}')
+RX13=$(vnstat -h | sed -n '20p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX13=$(vnstat -h | sed -n '20p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX13=$(echo "scale=2;$RX13 / 1000000" | bc)
+CONTX13=$(echo "scale=2;$TX13 / 1000000" | bc)
+
+DATE14=$(vnstat -h | sed -n '21p' | awk '{print $4}')
+RX14=$(vnstat -h | sed -n '21p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX14=$(vnstat -h | sed -n '21p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX14=$(echo "scale=2;$RX14 / 1000000" | bc)
+CONTX14=$(echo "scale=2;$TX14 / 1000000" | bc)
+
+DATE15=$(vnstat -h | sed -n '22p' | awk '{print $4}')
+RX15=$(vnstat -h | sed -n '22p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX15=$(vnstat -h | sed -n '22p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX15=$(echo "scale=2;$RX15 / 1000000" | bc)
+CONTX15=$(echo "scale=2;$TX15 / 1000000" | bc)
+
+DATE16=$(vnstat -h | sed -n '23p' | awk '{print $4}')
+RX16=$(vnstat -h | sed -n '23p' | awk '{print $5}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX16=$(vnstat -h | sed -n '23p' | awk '{print $6}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX16=$(echo "scale=2;$RX16 / 1000000" | bc)
+CONTX16=$(echo "scale=2;$TX16 / 1000000" | bc)
+
+DATE17=$(vnstat -h | sed -n '16p' | awk '{print $7}')
+RX17=$(vnstat -h | sed -n '16p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX17=$(vnstat -h | sed -n '16p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX17=$(echo "scale=2;$RX17 / 1000000" | bc)
+CONTX17=$(echo "scale=2;$TX17 / 1000000" | bc)
+
+DATE18=$(vnstat -h | sed -n '17p' | awk '{print $7}')
+RX18=$(vnstat -h | sed -n '17p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX18=$(vnstat -h | sed -n '17p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX18=$(echo "scale=2;$RX18 / 1000000" | bc)
+CONTX18=$(echo "scale=2;$TX18 / 1000000" | bc)
+
+DATE19=$(vnstat -h | sed -n '18p' | awk '{print $7}')
+RX19=$(vnstat -h | sed -n '18p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX19=$(vnstat -h | sed -n '18p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX19=$(echo "scale=2;$RX19 / 1000000" | bc)
+CONTX19=$(echo "scale=2;$TX19 / 1000000" | bc)
+
+DATE20=$(vnstat -h | sed -n '19p' | awk '{print $7}')
+RX20=$(vnstat -h | sed -n '19p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX20=$(vnstat -h | sed -n '19p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX20=$(echo "scale=2;$RX20 / 1000000" | bc)
+CONTX20=$(echo "scale=2;$TX20 / 1000000" | bc)
+
+DATE21=$(vnstat -h | sed -n '20p' | awk '{print $7}')
+RX21=$(vnstat -h | sed -n '20p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX21=$(vnstat -h | sed -n '20p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX21=$(echo "scale=2;$RX21 / 1000000" | bc)
+CONTX21=$(echo "scale=2;$TX21 / 1000000" | bc)
+
+DATE22=$(vnstat -h | sed -n '21p' | awk '{print $7}')
+RX22=$(vnstat -h | sed -n '21p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX22=$(vnstat -h | sed -n '21p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX22=$(echo "scale=2;$RX22 / 1000000" | bc)
+CONTX22=$(echo "scale=2;$TX22 / 1000000" | bc)
+
+DATE23=$(vnstat -h | sed -n '22p' | awk '{print $7}')
+RX23=$(vnstat -h | sed -n '22p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX23=$(vnstat -h | sed -n '22p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX23=$(echo "scale=2;$RX23 / 1000000" | bc)
+CONTX23=$(echo "scale=2;$TX23 / 1000000" | bc)
+
+DATE24=$(vnstat -h | sed -n '23p' | awk '{print $7}')
+RX24=$(vnstat -h | sed -n '23p' | awk '{print $8}' | cut -d ',' -f 1-20 --output-delimiter='')
+TX24=$(vnstat -h | sed -n '23p' | awk '{print $9}' | cut -d ',' -f 1-20 --output-delimiter='')
+CONRX24=$(echo "scale=2;$RX24 / 1000000" | bc)
+CONTX24=$(echo "scale=2;$TX24 / 1000000" | bc)
+
+clear
+echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "${RED} #      -----------About Us------------         #    "
+echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "${RED} #               { VPN / SSH }                  #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+NOW=`echo -e "${GREEN}เวลาปัจจุบัน${NC}"`
+echo ""
+echo -e "${GRAY}ตัวเลขรับและส่งข้อมูลที่แสดงจะมีหน่วยวัดปริมาณเป็น Gigabyte ทั้งหมด${NC}"
+printf "%-7s %-7s %-10s\n" "เวลา" "รับข้อมูล" "ส่งข้อมูล"
+echo ""
+printf "%-3s %-6s %-10s\n" "$DATE1" "$CONRX1" "$CONTX1"
+printf "%-3s %-6s %-10s\n" "$DATE2" "$CONRX2" "$CONTX2"
+printf "%-3s %-6s %-10s\n" "$DATE3" "$CONRX3" "$CONTX3"
+printf "%-3s %-6s %-10s\n" "$DATE4" "$CONRX4" "$CONTX4"
+printf "%-3s %-6s %-10s\n" "$DATE5" "$CONRX5" "$CONTX5"
+printf "%-3s %-6s %-10s\n" "$DATE6" "$CONRX6" "$CONTX6"
+printf "%-3s %-6s %-10s\n" "$DATE7" "$CONRX7" "$CONTX7"
+printf "%-3s %-6s %-10s\n" "$DATE8" "$CONRX8" "$CONTX8"
+printf "%-3s %-6s %-10s\n" "$DATE9" "$CONRX9" "$CONTX9"
+printf "%-3s %-6s %-10s\n" "$DATE10" "$CONRX10" "$CONTX10"
+printf "%-3s %-6s %-10s\n" "$DATE11" "$CONRX11" "$CONTX11"
+printf "%-3s %-6s %-10s\n" "$DATE12" "$CONRX12" "$CONTX12"
+printf "%-3s %-6s %-10s\n" "$DATE13" "$CONRX13" "$CONTX13"
+printf "%-3s %-6s %-10s\n" "$DATE14" "$CONRX14" "$CONTX14"
+printf "%-3s %-6s %-10s\n" "$DATE15" "$CONRX15" "$CONTX15"
+printf "%-3s %-6s %-10s\n" "$DATE16" "$CONRX16" "$CONTX16"
+printf "%-3s %-6s %-10s\n" "$DATE17" "$CONRX17" "$CONTX17"
+printf "%-3s %-6s %-10s\n" "$DATE18" "$CONRX18" "$CONTX18"
+printf "%-3s %-6s %-10s\n" "$DATE19" "$CONRX19" "$CONTX19"
+printf "%-3s %-6s %-10s\n" "$DATE20" "$CONRX20" "$CONTX20"
+printf "%-3s %-6s %-10s\n" "$DATE21" "$CONRX21" "$CONTX21"
+printf "%-3s %-6s %-10s\n" "$DATE22" "$CONRX22" "$CONTX22"
+printf "%-3s %-6s %-10s\n" "$DATE23" "$CONRX23" "$CONTX23"
+printf "%-3s %-6s %-5s %-5s\n" "$DATE24" "$CONRX24" "$CONTX24" "< $NOW"
+echo ""
+exit
+
+	;;
+	
 	19) # ==================================================================================================================
 
 clear
@@ -2606,7 +2132,8 @@ opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' 
 dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
+squid3port="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
+squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
 clear
 clear
 echo ""
@@ -2629,6 +2156,7 @@ echo -e "         Port OpenSSH    :  "$opensshport
 echo -e "         Port Dropbear   :  "$dropbearport
 echo -e "         Port SSL        :  "$stunnel4port
 echo -e "         Port Squid      :  "$squidport
+echo -e "         Port Squid3     :  "$squid3port
 echo -e "         Port OpenVPN    :  "$openvpnport
 echo -e "\e[0m                                                   "
 echo -e "\e[94m[][][]======================================[][][]\e[0m"
@@ -2756,7 +2284,7 @@ echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
 echo -e "\033[1;31m  #                                              #    "
 echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
 echo -e "\033[1;31m  #      -----------About Us------------         #    "
-echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16-18    #    "
 echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
 echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
 echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
@@ -2780,7 +2308,7 @@ else
 echo "" > /etc/squid3/squid.txt
 sed -i '/^$/d' /etc/squid3/squid.txt
 fi
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 if [ -e '/etc/squid/squid.txt' ]; then
 echo ""
 clear
@@ -2800,7 +2328,7 @@ else
 echo " ┣ http_port 8080  " > /etc/squid3/port.txt
 sed -i '/^$/d' /etc/squid3/squid.txt
 fi
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 if [ -e '/etc/squid/port.txt' ]; then
 echo ""
 clear
@@ -2913,7 +2441,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 sed -i "s/http_access allow all/http_access allow localhost/g" /etc/squid3/squid.conf
 ok "➡ service squid3 restart "
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 sed -i "s/http_access allow all/http_access allow localhost/g" /etc/squid/squid.conf
 ok "➡ service squid restart "
 service squid restart -q > /dev/null 2>&1
@@ -2992,7 +2520,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 sed -i "s/http_access allow localhost/http_access allow all/g" /etc/squid3/squid.conf
 ok "➡ service squid3 restart"
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 sed -i "s/http_access allow localhost/http_access allow all/g" /etc/squid/squid.conf
 ok "➡ service squid restart"
 service squid restart -q > /dev/null 2>&1
@@ -3097,7 +2625,7 @@ fi
  read -p " ## ใส่เลขไอพีที่จะใช้งานพร็อกซี่นี้ : " SERVER_IP
  if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 grep -E "^acl SSH dst $SERVER_IP" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
 fi
 if [ $? -eq 0 ]; then
@@ -3159,7 +2687,7 @@ sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid3/squid.conf
 echo " $SERVER_IP " >> /etc/squid3/squid.txt
 echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
 sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid/squid.conf
 echo " $SERVER_IP " >> /etc/squid/squid.txt
@@ -3191,7 +2719,7 @@ exit
 elif [[ $Selet = 2 ]]; then
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 grep -E "^http_access allow all" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 grep -E "^http_access allow all" /etc/squid/squid.conf >/dev/null
 fi
  if [ $? -eq 0 ]; then
@@ -3244,7 +2772,7 @@ echo " $IP  "
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 cat /etc/squid3/squid.txt
 echo "########################"
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 cat /etc/squid/squid.txt
 echo "########################"
 fi
@@ -3279,7 +2807,7 @@ if [[ $Selet1 = 1 ]]; then
 read -p " ┣ ใส่เลขไอพีที่จะลบ : " SERVER_IP
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 grep -E "^acl SSH dst $SERVER_IP" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
 fi
 
@@ -3369,7 +2897,7 @@ sed -i '/^$/d' /etc/squid3/squid.txt
 sed -i '/^$/d' /etc/squid3/squid.conf
 echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 SERVER_IP2="/$SERVER_IP/d";
 sed -i $SERVER_IP2 /etc/squid/squid.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
@@ -3438,7 +2966,7 @@ echo "" > /etc/squid3/squid.txt
 sed -i '/^$/d' /etc/squid3/squid.txt
 echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 SERVER_IP2="/255.255.255.255/d";
 sed -i $SERVER_IP2 /etc/squid/squid.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
@@ -3528,7 +3056,7 @@ fi
  read -p "ใส่พอร์ตที่จะใช้งานกับพร็อกซี่ : " Port
  if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
 fi
 
@@ -3615,7 +3143,7 @@ sed -i "s/xxxx/$Port/g" /etc/squid3/squid.conf
 echo "  http_port $Port " >> /etc/squid3/port.txt
 echo "  กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 sed -i "/http_port 8080/a http_port xxxx" /etc/squid/squid.conf
 sed -i "s/xxxx/$Port/g" /etc/squid/squid.conf
 echo "  http_port $Port  " >> /etc/squid/port.txt
@@ -3652,7 +3180,7 @@ echo  " ############# พอร์ตที่เปิดใช้งานอ�
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 cat /etc/squid3/port.txt
 echo " ############# "
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 cat /etc/squid/port.txt
 echo " ############# "
 exit
@@ -3687,7 +3215,7 @@ if [[ $Selet1 = 1 ]]; then
 read -p " ## ใส่เลขพอร์ตที่จะลบ : " Port
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
 fi
 if [ $? -eq 0 ]; then
@@ -3775,7 +3303,7 @@ sed -i '/^$/d' /etc/squid3/port.txt
 sed -i '/^$/d' /etc/squid3/squid.conf
 echo " กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 SERVER_IP2="/$Port/d";
 sed -i $SERVER_IP2 /etc/squid/port.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
@@ -3843,7 +3371,7 @@ echo " http_port 8080 " > /etc/squid3/port.txt
 sed -i '/^$/d' /etc/squid3/port.txt
 echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
 service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
 SERVER_IP2="/http_port/d";
 sed -i $SERVER_IP2 /etc/squid/port.txt
 sed -i $SERVER_IP2 /etc/squid/squid.conf
