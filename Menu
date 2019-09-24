@@ -125,8 +125,8 @@ do
 		fi
 		fi
 done < /etc/passwd
-echo ""
 bash Auto-Delete-Client
+echo ""
 echo -e "TOTAL BANDWIDTH ${CYAN}$TOTALBW${NC}${CYAN}B${NC}"
 echo -e "CLIENT ONLINE NOW ${GREEN}$ON${NC} CLIENT "
 echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
