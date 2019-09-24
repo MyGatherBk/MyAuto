@@ -94,7 +94,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|16|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
         echo -e "|17|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|18|${GREEN} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
-        echo -e "|${GRAY}19${NC}| ${CYAN}MENU ไฟล์สคริปท์ของเมนู"
+        echo -e "|${GRAY}19${NC}| ${CYAN}MENU ไฟล์สคริปท์ของเมนู ${NC} "
 	echo -e "|${GRAY}20${NC}| ${CYAN}Update Credits Bannerssh ${NC} "
 	echo -e "|${GRAY}21${NC}| ${CYAN}SHOW_PORTS ${NC} "
 	echo -e "|${GRAY}22${NC}| ${CYAN}EDIT_PORT OPENVPN ${NC} "
@@ -855,7 +855,7 @@ ON=0
 OFF=0
 while read ONOFF
 do
-	CLIENTOFFLINE=$(echo -e "${GRAY}OFFLINE${NC}")
+	CLIENTOFFLINE=$(echo -e "${RED}OFFLINE${NC}")
 	CLIENTONLINE=$(echo -e "${GREEN}ONLINE${NC}")
 	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
 	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
@@ -875,7 +875,7 @@ done < /etc/passwd
 TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 echo ""
 echo ""
-echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${GRAY}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL "
+echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${RED}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL "
 echo ""
 exit
 
@@ -2624,18 +2624,14 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 echo ""
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]"
-echo -e "\e[0m                                                   "
-echo -e "         Port OpenSSH    :  "$opensshport
-echo -e "         Port Dropbear   :  "$dropbearport
-echo -e "         Port SSL        :  "$stunnel4port
-echo -e "         Port Squid      :  "$squidport
-echo -e "         Port Squid3     :  "$squid3port
-echo -e "         Port OpenVPN    :  "$openvpnport
-echo -e "         Port Nginx      :  "$nginxport
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]\e[0m"
+echo -e "${GREEN}         Port OpenSSH  ${NC}   :  "$opensshport
+echo -e "${GREEN}         Port Dropbear${NC}    :  "$dropbearport
+echo -e "${GREEN}         Port SSL  ${NC}       :  "$stunnel4port
+echo -e "${GREEN}         Port Squid  ${NC}     :  "$squidport
+echo -e "${GREEN}         Port Squid3 ${NC}     :  "$squid3port
+echo -e "${GREEN}         Port OpenVPN ${NC}    :  "$openvpnport
+echo -e "${GREEN}         Port Nginx ${NC}      :  "$nginxport
+echo -e "${NC} "
 ;;
 
 	22) # ==================================================================================================================
