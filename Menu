@@ -102,6 +102,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY}24${NC}| ${CYAN}EDIT_SQUID3 & EDIT_SQUID ${NC} "
 	echo -e "|${GRAY}25${NC}| ${CYAN}EDIT_PORTSSH ${NC} "
 	echo -e "|${GRAY}26${NC}| ${GRAY}EDIT_Config Openvpn  ${NC} "
+	echo -e "|${GRAY}27${NC}| ${GRAY}เพิ่มชื่อผู้ใช้งาน OpenVPN[V1}  ${NC} "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -3967,6 +3968,124 @@ exit
 esac
 
 	;;
+	
+27 # ==================================================================================================================
+#!/bin/bash
+#DEV BY PRATYASART THEEJANMART
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo "    ╭━━━━━━━━━━━━━━━━╮ "
+echo "    ┣ เพิ่มผู้ใช้ Openvpn     "
+echo "    ╰━━━━━━━━━━━━━━━━╯   "
+read -p "  ╰━━ UserName : " username
+egrep "^$username" /etc/passwd >/dev/null
+if [ $? -eq 0 ]; then
+clear
+clear
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo  "    ╭━━━━━━━━━━━━━━━━╮"  
+echo  "    ┣ ชื่่่อผู้ใช้  $username มีอยู่แล้ว  "
+echo  "    ╰━━━━━━━━━━━━━━━━╯"
+exit 1
+else
+read -p "  ╰━━ PassWord : " password
+read -p "  ╰━━ Expire   : " AKTIF
+
+	expire=$(date -d "$AKTIF days" +"%Y-%m-%d")
+	Today=$(date -d "$AKTIF days" +"%d-%m-%Y")
+	useradd -M -N -s /bin/false -e $expire $username
+	echo $username:$password | chpasswd
+clear
+clear   
+echo ""
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #       OS  Debian 8-9  OS  Ubuntu 14-16       #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
+echo "    ╭━━━━━━━━━━━━━━━━╮ "
+echo "    ┣ Open VPN พร้อมใช้งาน       "
+echo "    ╰━━━━━━━━━━━━━━━━╯   "
+echo "    ╭ ไอพี     : $IP  "        
+echo "    ╰━━ ชื่อผู้ใช้   : $username "        
+echo "    ╭ รหัสผ่าน  : $password  "         
+echo "    ╰━━ หมดอายุ  : $Today    "  
+echo "    ╭━━━━━━━━━━━━━━━━━━━━━╮ "
+echo "    ┣ ดาวน์โหลดไฟล์ Openvpn      "
+echo "    ┣ http://$IP:85/file/$username.ovpn       "
+echo "    ╰━━━━━━━━━━━━━━━━━━━━━╯"
+echo ""
+ 
+cat > /home/vps/public_html/file/$username.ovpn <<-END
+<auth-user-pass>
+$username
+$password
+</auth-user-pass>
+client
+dev tun
+proto tcp
+sndbuf 0
+rcvbuf 0
+remote $IP $PORT
+http-proxy $IP $PROXY
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+remote-cert-tls server
+auth SHA512
+cipher AES-256-CBC
+setenv opt block-outside-dns
+key-direction 1
+verb 3
+</ca>
+END
+fi
+
+
+exit
+;;
 	00) # ==================================================================================================================
 
 cd /usr/local/bin
