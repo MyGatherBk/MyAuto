@@ -101,6 +101,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
         echo -e "|${GRAY}23${NC}| ( ${CYAN}จัดการตั้งค่าพร็อกซี่ ${NC}) "
 	echo -e "|${GRAY}24${NC}| ${CYAN}EDIT_SQUID3 & EDIT_SQUID ${NC} "
 	echo -e "|${GRAY}25${NC}| ${CYAN}EDIT_PORTSSH ${NC} "
+	echo -e "|${GRAY}26${NC}| ${GRAY}EDIT_Config Openvpn  ${NC} "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -196,7 +197,7 @@ echo ""
 		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
 
 		if [[ "$TOMENU" = 'Y' ]]; then
-			menu
+			m
 			exit
 		elif [[ "$TOMENU" = 'N' ]]; then
 			exit
@@ -330,7 +331,7 @@ echo ""
 		echo "หมดอายุในวันที่ : $EXP"
 		echo ""
 		echo "IP : $IP"
-		echo "Port : 22,80,143"
+		echo "Port : 22"
 		echo "Proxy Port : $PROXY"
 		exit
 	else
@@ -340,7 +341,7 @@ echo ""
 		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
 
 		if [[ "$TOMENU" = 'Y' ]]; then
-			menu
+			m
 			exit
 		elif [[ "$TOMENU" = 'N' ]]; then
 			exit
@@ -3928,6 +3929,44 @@ service ssh restart
 exit
 ;;
 
+	26) # ==================================================================================================================
+
+clear
+echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "${RED} #      -----------About Us------------         #    "
+echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "${RED} #               { VPN / SSH }                  #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo -e "แก้ไขคอนฟิกต่างๆในระบบ ${GRAY}MyGatherBK-VPN${NC}"
+echo ""
+echo -e "|${GRAY}1${NC}| OPENVPN ไฟล์ต้นแบบการสร้างคอนฟิก"
+echo -e "|${GRAY}2${NC}| OPENVPN ไฟล์ข้อมูลเซิฟเวอร์"
+echo ""
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " EDIT
+
+case $EDIT in
+
+	1)
+nano /etc/openvpn/client-common.txt
+exit
+	;;
+	2)
+nano /etc/openvpn/server.conf
+exit
+	;;
+
+esac
+
+	;;
 	00) # ==================================================================================================================
 
 cd /usr/local/bin
