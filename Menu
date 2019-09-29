@@ -102,8 +102,8 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY}24${NC}| ${CYAN}EDIT_SQUID3 & EDIT_SQUID ${NC} "
 	echo -e "|${GRAY}25${NC}| ${CYAN}EDIT_PORTSSH ${NC} "
 	echo -e "|${GRAY}26${NC}| ${GRAY}EDIT_Config Openvpn  ${NC} "
-	echo "|26| Install Stunnel4 " 
-	echo "|27| edit_stunnel4 "
+	echo "|27| Install Stunnel4 " 
+	echo "|28| edit_stunnel4 "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -3972,7 +3972,7 @@ esac
 
 	;;
 	
-	26) # ==================================================================================================================
+	27) # ==================================================================================================================
 
 # Install Stunnel
 apt-get -y install stunnel4
@@ -3985,7 +3985,7 @@ service stunnel4 restart
 
 	;;
 	
-		27) # ==================================================================================================================
+		28) # ==================================================================================================================
 
 #!/bin/bash
 # Script by : Clrkz
