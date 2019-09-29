@@ -103,8 +103,9 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY}25${NC}| ${CYAN}EDIT_PORTSSH ${NC} "
 	echo -e "|${GRAY}26${NC}| ${GRAY}EDIT_Config Openvpn  ${NC} "
 	echo "|27| Install Stunnel4 " 
-	echo "|28| edit_stunnel4 "
-	echo "|29| edit_Dropbear  "
+	echo "|28| EDIT_Stunnel4 "
+	echo "|29| EDIT_Dropbear  "
+	echo "|30| Install_Dropbear  "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -4193,6 +4194,17 @@ else
 	echo -e "\e[0m                                                   "
 	echo -e "\e[94m[][][]======================================[][][]\e[0m"
 fi
+
+	;;
+	
+	30) # ==================================================================================================================
+apt-get -y install dropbear
+sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110"/g' /etc/default/dropbear
+echo "/bin/false" >> /etc/shells
+service ssh restart
+service dropbear restart
 
 	;;
 	
