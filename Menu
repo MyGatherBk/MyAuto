@@ -4492,7 +4492,7 @@ if [ -f "/etc/openvpn/openvpn-status.log" ]; then
         echo "-----=[ OpenVPN User Login ]=-----";
         echo "Username  |  IP Address  |  Connected Since";
         echo "-------------------------------------";
-        cat /etc/openvpn/openvpn-status.log | head -n $a | tail -n $b | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
+        cat /etc/openvpn/openvpn-status.log | head -n $a       | tail -n $b        | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
         cat /tmp/vpn-login-db.txt
 fi
 
