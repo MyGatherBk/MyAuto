@@ -601,6 +601,14 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
+# install stunnel4
+apt-get -y install stunnel4
+wget -O /etc/stunnel/stunnel.pem "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.pem"
+wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.conf"
+sed -i $MYIP2 /etc/stunnel/stunnel.conf
+sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+service stunnel4 restart
+
 # install webmin
 cd
 wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.670_all.deb"
@@ -670,7 +678,7 @@ echo -e "${NC} "
 		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
 		;;
 	esac
-        echo "Webmin   : https://$IP:10000/"
+     echo "Webmin   : https://$IP:10000/"
 	echo ""
 	echo "===================================================================="
 	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${YELLOW} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
