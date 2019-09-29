@@ -425,6 +425,7 @@ verb 3" > /etc/openvpn/client-common.txt
 		echo "auth-user-pass" >> /etc/openvpn/client-common.txt
 		;;
 	esac
+	
 echo ""
 echo -e "\033[35;1m { install nginx }${NC} "
 echo ""
@@ -607,23 +608,6 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
-echo ""
-echo -e "\033[0;32m { install stunnel }${NC} "
-echo ""
-
-# install stunnel4
-apt-get -y install stunnel4
-wget -O /etc/stunnel/stunnel.pem "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.pem"
-wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.conf"
-sed -i $MYIP2 /etc/stunnel/stunnel.conf
-sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-service stunnel4 restart
-
-sudo sed -i -e 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-sudo cp /etc/stunnel/stunnel.pem ~
-# download stunnel.pem from home directory. It is needed by client.
-sudo service stunnel4 restart
 
 echo ""
 echo -e "\033[0;32m { install webmin }${NC} "
@@ -636,7 +620,7 @@ rm /root/webmin_1.670_all.deb
 service webmin restart
 
 echo ""
-echo -e "\033[0;32m { download MENU script }${NC} "
+echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
 echo ""
 	cd /usr/local/bin
 wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
