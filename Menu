@@ -58,7 +58,7 @@ echo -e "${NC} "
 	echo -e "\e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
 	echo -e "\e[032;1mTotal Amount Of Swap:\e[0m $swap MB"
 	echo -e "\e[032;1mSystem Uptime:\e[0m $up"
-	echo -e "-----------------------------------------------------"
+	echo "-------------------------------------------------------" 
 
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
@@ -2632,6 +2632,7 @@ echo -e "${GREEN}         Port Squid  ${NC}     :  "$squidport
 echo -e "${GREEN}         Port Squid3 ${NC}     :  "$squid3port
 echo -e "${GREEN}         Port OpenVPN ${NC}    :  "$openvpnport
 echo -e "${GREEN}         Port Nginx ${NC}      :  "$nginxport
+echo -e "${GREEN}         Webmin ${NC}          :  "https://$IP:10000/
 echo -e "${NC} "
 ;;
 
