@@ -426,7 +426,7 @@ verb 3" > /etc/openvpn/client-common.txt
 		;;
 	esac
 echo ""
-echo -e "\033[35;1m { install nginx }  "
+echo -e "\033[35;1m { install nginx }${NC} "
 echo ""
 	cd
 	apt-get -y install nginx
@@ -491,7 +491,7 @@ END
 			apt-get -y remove --purge squid3
 		fi
 echo ""
-echo -e "\033[0;32m { Insatll PROXY }  "
+echo -e "\033[0;32m { Install PROXY }${NC} "
 echo ""
 		apt-get -y install squid3
 		cat > /etc/squid3/squid.conf <<END
@@ -581,12 +581,16 @@ END
 
 fi
 
-# setting port ssh
+echo ""
+echo -e "\033[0;32m { setting port ssh }${NC} "
+echo ""
 sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
 sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
 service ssh restart
 
-# install dropbear
+echo ""
+echo -e "\033[0;32m { install dropbear }${NC} "
+echo ""
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
@@ -595,21 +599,38 @@ echo "/bin/false" >> /etc/shells
 service ssh restart
 service dropbear restart
 
-# install badvpn
+echo ""
+echo -e "\033[0;32m { install badvpn }${NC} "
+echo ""
 wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/rizal180499/Auto-Installer-VPS/master/conf/badvpn-udpgw"
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
-# install stunnel4
-apt-get -y install stunnel4
-wget -O /etc/stunnel/stunnel.pem "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.pem"
-wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.conf"
-sed -i $MYIP2 /etc/stunnel/stunnel.conf
-sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-service stunnel4 restart
+echo ""
+echo -e "\033[0;32m { install stunnel }${NC} "
+echo ""
+sudo apt update
+sudo apt full-upgrade
+sudo apt install -y stunnel4
+cd /etc/stunnel/
+openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -sha256 -subj '/CN=127.0.0.1/O=localhost/C=US' -keyout /etc/stunnel/stunnel.pem -out /etc/stunnel/stunnel.pem
+sudo touch stunnel.conf
+echo "client = no" | sudo tee -a /etc/stunnel/stunnel.conf
+echo "[openvpn]" | sudo tee -a /etc/stunnel/stunnel.conf
+echo "accept = 442" | sudo tee -a /etc/stunnel/stunnel.conf
+echo "connect = 127.0.0.1:22" | sudo tee -a /etc/stunnel/stunnel.conf
+echo "cert = /etc/stunnel/stunnel.pem" | sudo tee -a /etc/stunnel/stunnel.conf
 
-# install webmin
+sudo sed -i -e 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+sudo cp /etc/stunnel/stunnel.pem ~
+# download stunnel.pem from home directory. It is needed by client.
+sudo service stunnel4 restart
+
+echo ""
+echo -e "\033[0;32m { install webmin }${NC} "
+echo ""
 cd
 wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.670_all.deb"
 dpkg --install webmin_1.670_all.deb;
@@ -617,7 +638,9 @@ apt-get -y -f install;
 rm /root/webmin_1.670_all.deb
 service webmin restart
 
-# download script
+echo ""
+echo -e "\033[0;32m { download MENU script }${NC} "
+echo ""
 	cd /usr/local/bin
 wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
 chmod +x /usr/local/bin/m
