@@ -4215,11 +4215,13 @@ service dropbear restart
 	
 	31) # ==================================================================================================================
 #!/bin/bash
-# Script by : Clrkz
-#!/bin/bash
-clear
-fi
-MAX=1
+# Created by http://www.vps-murah.net
+# Modified by 0123456
+
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+MAX=5
 if [ -e "/var/log/auth.log" ]; then
         OS=1;
         LOG="/var/log/auth.log";
@@ -4228,19 +4230,16 @@ if [ -e "/var/log/secure" ]; then
         OS=2;
         LOG="/var/log/secure";
 fi
-
-if [ $OS -eq 1 ]; then
-	service ssh restart > /dev/null 2>&1;
-fi
-if [ $OS -eq 2 ]; then
-	service sshd restart > /dev/null 2>&1;
-fi
-	service dropbear restart > /dev/null 2>&1;
-				
 if [[ ${1+x} ]]; then
         MAX=$1;
 fi
-
+echo " "
+echo " "
+echo "-------------------------------------------"
+echo "Users Who Login More Than The Limit Of [$MAX]"
+echo "-------------------------------------------"
+while :
+do
         cat /etc/passwd | grep "/home/" | cut -d":" -f1 > /root/user.txt
         username1=( `cat "/root/user.txt" `);
         i="0";
@@ -4295,8 +4294,8 @@ fi
 			do
                 if [ ${jumlah[$i]} -gt $MAX ]; then
                         date=`date +"%Y-%m-%d %X"`;
-                        echo "$date - ${username[$i]} - ${jumlah[$i]}";
-                        echo "$date - ${username[$i]} - ${jumlah[$i]}" >> /root/log-limit.txt;
+                        echo "VPS-Murah.net - $date - ${username[$i]} - ${jumlah[$i]}";
+                        echo "VPS-Murah.net - $date - ${username[$i]} - ${jumlah[$i]}" >> /root/log-limit.txt;
                         kill ${pid[$i]};
                         pid[$i]="";
                         j=`expr $j + 1`;
@@ -4312,6 +4311,8 @@ fi
                 service dropbear restart > /dev/null 2>&1;
                 j=0;
 		fi
+sleep 300;
+done
 ;;
 
 
