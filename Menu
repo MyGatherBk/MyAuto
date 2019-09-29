@@ -106,7 +106,10 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo "|28| EDIT_Stunnel4 "
 	echo "|29| EDIT_Dropbear  "
 	echo "|30| Install_Dropbear  "
-	echo "|31| ดูบัญชีผู้ใช้ทั้งหมด และบัญชีที่ออนไลน์อยู่   "
+	echo "|31| multilogin_autokill  "
+	echo "|32| Reboot SERVER VPS Now "
+	echo "|33| Restart Services "
+	echo "|34| OpenSSH User Login "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -4212,52 +4215,290 @@ service dropbear restart
 	
 	31) # ==================================================================================================================
 #!/bin/bash
+# Script by : Clrkz
+#!/bin/bash
 clear
-clear
-echo ""
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "${RED} #      -----------About Us------------         #    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "${RED} #               { VPN / SSH }                  #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-echo "---------------------------------------------"
-echo "BIL    user           status       expires   "
-echo "---------------------------------------------"
-C=1
-ON=0
-OFF=0
-while read mumetndase
-do
-        acout="$(echo $mumetndase | cut -d: -f1)"
-        ID="$(echo $mumetndase | grep -v nobody | cut -d: -f3)"
-        exp="$(chage -l $acout | grep "Account expires" | awk -F": " '{print $2}')"
-        online="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $acout | grep -Eom 1 $acout)"
-        if [[ $ID -ge 500 ]]; then
-        if [[ -z $online ]]; then
-        printf "%-4s %-15s %-10s %-3s\n" "$C." "$acout" "------" "$exp"
-        OFF=$((OFF+1))
-        else
-        printf "%-4s %-15s %-10s %-3s\n" "$C." "$acout" "online" "$exp"
-        ON=$((ON+1))
-        fi
-        C=$((C+1))
-        fi
-done < /etc/passwd
-echo "---------------------------------------------"
-echo "      online : $ON     ofline : $OFF         "
-echo "---------------------------------------------"
-echo -e "" 
-exit
+fi
+MAX=1
+if [ -e "/var/log/auth.log" ]; then
+        OS=1;
+        LOG="/var/log/auth.log";
+fi
+if [ -e "/var/log/secure" ]; then
+        OS=2;
+        LOG="/var/log/secure";
+fi
+
+if [ $OS -eq 1 ]; then
+	service ssh restart > /dev/null 2>&1;
+fi
+if [ $OS -eq 2 ]; then
+	service sshd restart > /dev/null 2>&1;
+fi
+	service dropbear restart > /dev/null 2>&1;
+				
+if [[ ${1+x} ]]; then
+        MAX=$1;
+fi
+
+        cat /etc/passwd | grep "/home/" | cut -d":" -f1 > /root/user.txt
+        username1=( `cat "/root/user.txt" `);
+        i="0";
+        for user in "${username1[@]}"
+			do
+                username[$i]=`echo $user | sed 's/'\''//g'`;
+                jumlah[$i]=0;
+                i=$i+1;
+			done
+        cat $LOG | grep -i dropbear | grep -i "Password auth succeeded" > /tmp/log-db.txt
+        proc=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+        for PID in "${proc[@]}"
+			do
+                cat /tmp/log-db.txt | grep "dropbear\[$PID\]" > /tmp/log-db-pid.txt
+                NUM=`cat /tmp/log-db-pid.txt | wc -l`;
+                USER=`cat /tmp/log-db-pid.txt | awk '{print $10}' | sed 's/'\''//g'`;
+                IP=`cat /tmp/log-db-pid.txt | awk '{print $12}'`;
+                if [ $NUM -eq 1 ]; then
+                        i=0;
+                        for user1 in "${username[@]}"
+							do
+                                if [ "$USER" == "$user1" ]; then
+                                        jumlah[$i]=`expr ${jumlah[$i]} + 1`;
+                                        pid[$i]="${pid[$i]} $PID"
+                                fi
+                                i=$i+1;
+							done
+                fi
+			done
+        cat $LOG | grep -i sshd | grep -i "Accepted password for" > /tmp/log-db.txt
+        data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+        for PID in "${data[@]}"
+			do
+                cat /tmp/log-db.txt | grep "sshd\[$PID\]" > /tmp/log-db-pid.txt;
+                NUM=`cat /tmp/log-db-pid.txt | wc -l`;
+                USER=`cat /tmp/log-db-pid.txt | awk '{print $9}'`;
+                IP=`cat /tmp/log-db-pid.txt | awk '{print $11}'`;
+                if [ $NUM -eq 1 ]; then
+                        i=0;
+                        for user1 in "${username[@]}"
+							do
+                                if [ "$USER" == "$user1" ]; then
+                                        jumlah[$i]=`expr ${jumlah[$i]} + 1`;
+                                        pid[$i]="${pid[$i]} $PID"
+                                fi
+                                i=$i+1;
+							done
+                fi
+        done
+        j="0";
+        for i in ${!username[*]}
+			do
+                if [ ${jumlah[$i]} -gt $MAX ]; then
+                        date=`date +"%Y-%m-%d %X"`;
+                        echo "$date - ${username[$i]} - ${jumlah[$i]}";
+                        echo "$date - ${username[$i]} - ${jumlah[$i]}" >> /root/log-limit.txt;
+                        kill ${pid[$i]};
+                        pid[$i]="";
+                        j=`expr $j + 1`;
+                fi
+			done
+        if [ $j -gt 0 ]; then
+                if [ $OS -eq 1 ]; then
+                        service ssh restart > /dev/null 2>&1;
+                fi
+                if [ $OS -eq 2 ]; then
+                        service sshd restart > /dev/null 2>&1;
+                fi
+                service dropbear restart > /dev/null 2>&1;
+                j=0;
+		fi
 ;;
 
+
+	32) # ==================================================================================================================
+
+		clear
+		reboot
+		exit
+	;;
+	
+
+	33) # ==================================================================================================================
+
+#!/bin/bash
+# Script by : Clrkz
+clear
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]"
+echo -e "\e[0m                                                   "
+echo -e "\e[93m            [1] Restart All Services"
+echo -e "\e[93m            [2] Restart OpenSSH"
+echo -e "\e[93m            [3] Restart Dropbear"
+echo -e "\e[93m            [4] Restart Stunnel4"
+echo -e "\e[93m            [5] Restart OpenVPN"
+echo -e "\e[93m            [6] Restart Squid"
+echo -e "\e[93m            [7] Restart Nginx"
+echo -e "\e[93m            [x] Exit"
+echo -e "\e[0m                                                   "
+read -p "       Select From Options [1-7 or x] :  " Restart
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]\e[0m"
+sleep 3
+clear
+case $Restart in
+		1)
+		clear
+		service ssh restart
+		service dropbear restart
+		service stunnel4 restart
+		service openvpn restart
+		service squid3 restart
+		service nginx restart
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m                Service/s Restarted               "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		;;
+		2)
+		clear
+		service ssh restart
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m              SSH Service Restarted               "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		;;
+		3)
+		clear
+		service dropbear restart
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m            Dropbear Service Restarted            "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		;;
+		4)
+		clear
+		service stunnel4 restart
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m            Stunnel4 Service Restarted            "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		;;
+		5)
+		clear
+		service openvpn restart
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m            OpenVPN Service Restarted             "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		;;
+		6)
+		clear
+		service squid3 restart
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m             Squid3 Service Restarted             "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		;;
+		7)
+		clear
+		service nginx restart
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m             Nginx Service Restarted              "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		;;
+		x)
+		clear
+		exit
+		;;
+	esac
+	;;
+	
+	
+		34) # ==================================================================================================================
+
+#!/bin/bash
+# Script by : Clrkz
+clear
+echo " "
+echo " "
+
+if [ -e "/var/log/auth.log" ]; then
+        LOG="/var/log/auth.log";
+fi
+if [ -e "/var/log/secure" ]; then
+        LOG="/var/log/secure";
+fi
+                
+data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
+echo "-----=[ Dropbear User Login ]=-----";
+echo "ID  |  Username  |  IP Address";
+echo "-------------------------------------";
+cat $LOG | grep -i dropbear | grep -i "Password auth succeeded" > /tmp/login-db.txt;
+for PID in "${data[@]}"
+do
+        cat /tmp/login-db.txt | grep "dropbear\[$PID\]" > /tmp/login-db-pid.txt;
+        NUM=`cat /tmp/login-db-pid.txt | wc -l`;
+        USER=`cat /tmp/login-db-pid.txt | awk '{print $10}'`;
+        IP=`cat /tmp/login-db-pid.txt | awk '{print $12}'`;
+        if [ $NUM -eq 1 ]; then
+                echo "$PID - $USER - $IP";
+                fi
+done
+echo " "
+echo "-----=[ OpenSSH User Login ]=-----";
+echo "ID  |  Username  |  IP Address";
+echo "-------------------------------------";
+cat $LOG | grep -i sshd | grep -i "Accepted password for" > /tmp/login-db.txt
+data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+
+for PID in "${data[@]}"
+do
+        cat /tmp/login-db.txt | grep "sshd\[$PID\]" > /tmp/login-db-pid.txt;
+        NUM=`cat /tmp/login-db-pid.txt | wc -l`;
+        USER=`cat /tmp/login-db-pid.txt | awk '{print $9}'`;
+        IP=`cat /tmp/login-db-pid.txt | awk '{print $11}'`;
+        if [ $NUM -eq 1 ]; then
+                echo "$PID - $USER - $IP";
+        fi
+done
+if [ -f "/etc/openvpn/openvpn-status.log" ]; then
+        line=`cat /etc/openvpn/openvpn-status.log | wc -l`
+        a=$((3+((line-8)/2)))
+        b=$(((line-8)/2))
+        echo " "
+        echo "-----=[ OpenVPN User Login ]=-----";
+        echo "Username  |  IP Address  |  Connected Since";
+        echo "-------------------------------------";
+        cat /etc/openvpn/openvpn-status.log | head -n $a | tail -n $b | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
+        cat /tmp/vpn-login-db.txt
+fi
+
+echo " "
+echo " "
+
+	;;
 	
 	00) # ==================================================================================================================
 
