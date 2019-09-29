@@ -104,6 +104,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${GRAY}26${NC}| ${GRAY}EDIT_Config Openvpn  ${NC} "
 	echo "|27| Install Stunnel4 " 
 	echo "|28| edit_stunnel4 "
+	echo "|29| edit_Dropbear  "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -328,13 +329,14 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 echo ""
-		echo "ชื่อบัญชี : $CLIENT"
-		echo "รหัสผ่าน : $PASSWORD"
-		echo "หมดอายุในวันที่ : $EXP"
-		echo ""
-		echo "IP : $IP"
-		echo "Port : 22"
-		echo "Proxy Port : $PROXY"
+		echo "ชื่อบัญชี        : $CLIENT"
+		echo "รหัสผ่าน        : $PASSWORD"
+		echo "หมดอายุในวันที่   : $EXP "
+		echo "IP            : $IP"
+		echo "Port OpenSSH  : 22,143 "
+		echo "Port Dropbear : 80,109,110 "
+		echo "Port SSL      : 442 "
+		echo "Proxy Port    : 8080 "
 		exit
 	else
 		echo ""
@@ -4086,6 +4088,111 @@ else
 fi
 
 
+
+	;;
+	
+	29) # ==================================================================================================================
+#!/bin/bash
+# Script by : Clrkz
+rm -f /root/opensshport
+rm -f /root/dropbearport
+rm -f /root/stunnel4port
+rm -f /root/openvpnport
+rm -f /root/squidport
+opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
+echo $opensshport > /root/opensshport
+cat > /root/opensshport <<-END
+$opensshport
+END
+echo $dropbearport > /root/dropbearport
+cat > /root/dropbearport <<-END
+$dropbearport
+END
+echo $stunnel4port > /root/stunnel4port
+cat > /root/stunnel4port <<-END
+$stunnel4port
+END
+echo $openvpnport > /root/openvpnport
+cat > /root/openvpnport <<-END
+$openvpnport
+END
+echo $squidport > /root/squidport
+cat > /root/squidport <<-END
+$squidport
+END
+
+cd
+clear
+echo -e "\e[0m                                                   "
+echo -e "\e[94m[][][]======================================[][][]"
+echo -e "\e[0m                                                   "
+echo -e "\e[93m                  Dropbear  Ports                 "
+echo -e "\e[93m                   "$dropbearport
+echo -e "\e[0m                                                   "
+read -p "       Which Port Should Be Changed? :  " Port
+egrep "^$Port" /root/dropbearport >/dev/null
+if [ $? -eq 0 ]; then
+	read -p "            From Port $Port -> Port " Port_New
+	if grep -Fxq $Port_New /root/opensshport; then
+		echo -e "\e[0m                                                   "
+		echo -e "\e[91m              OpenSSH Port Conflict              "
+		echo -e "\e[91m              Port Is Already In Use              "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+	fi
+	if grep -Fxq $Port_New /root/stunnel4port; then
+		echo -e "\e[0m                                                   "
+		echo -e "\e[91m              Stunnel4 Port Conflict              "
+		echo -e "\e[91m              Port Is Already In Use              "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+	fi
+	if grep -Fxq $Port_New /root/openvpnport; then
+		echo -e "\e[0m                                                   "
+		echo -e "\e[91m              Openvpn Port Conflict               "
+		echo -e "\e[91m              Port Is Already In Use              "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+	fi
+	if grep -Fxq $Port_New /root/squidport; then
+		echo -e "\e[0m                                                   "
+		echo -e "\e[91m               Squid3 Port Conflict               "
+		echo -e "\e[91m              Port Is Already In Use              "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+	fi
+	Port_Change="s/$Port/$Port_New/g";
+	sed -i $Port_Change /etc/default/dropbear
+
+	service dropbear restart > /dev/null
+	rm -f /root/dropbear
+	dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+	clear
+	echo -e "\e[0m                                                   "
+	echo -e "\e[94m[][][]======================================[][][]"
+	echo -e "\e[0m                                                   "
+	echo -e "\e[93m           AutoScriptVPS by  Clrkz           "
+	echo -e "\e[0m                                                   "
+	echo -e "\e[93m                  Dropbear  Ports                 "
+	echo -e "\e[93m                   "$dropbearport
+	echo -e "\e[0m                                                   "
+	echo -e "\e[94m[][][]======================================[][][]\e[0m"
+
+else
+	clear
+	echo -e "\e[0m                                                   "
+	echo -e "\e[91m                 Port Doesnt Exit                 "
+	echo -e "\e[0m                                                   "
+	echo -e "\e[94m[][][]======================================[][][]\e[0m"
+fi
 
 	;;
 	
