@@ -79,37 +79,34 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 			echo -e "| 3|${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 	fi
-	echo "| 4| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
-	echo "| 5| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
-	echo -e "| 6|${BLUE} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${NC} "
-	echo "| 7| Delete บัญชีผู้ใช้ SSH "
-	echo -e "| 8|${cor[3]} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
-	echo -e "| 9|${cor[3]} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
-        echo "|10| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
-	echo -e "|11|${YELLOW} ตรวจสอบแบนด์วิดท์ต่อบัญชี ${NC} "
-	echo -e "|12|${z5} เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${NC} "
-	echo -e "|13|${z2} เปลี่ยนวันหมดอายุบัญชีผู้ใช้ ${NC} "
-	echo "|14| เช็ดการใช้งานแบนวิท " 
-	echo "|15| ปรับความเร็วอินเตอร์เน็ต  "
-	echo -e "|16|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
-        echo -e "|17|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
-	echo -e "|18|${GREEN} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
-        echo -e "|${GRAY}19${NC}| ${CYAN}MENU ไฟล์สคริปท์ของเมนู ${NC} "
-	echo -e "|${GRAY}20${NC}| ${CYAN}Update Credits Bannerssh ${NC} "
-	echo -e "|${GRAY}21${NC}| ${CYAN}SHOW_PORTS ${NC} "
-	echo -e "|${GRAY}22${NC}| ${CYAN}EDIT_PORT OPENVPN ${NC} "
-        echo -e "|${GRAY}23${NC}| ( ${CYAN}จัดการตั้งค่าพร็อกซี่ ${NC}) "
-	echo -e "|${GRAY}24${NC}| ${CYAN}EDIT_SQUID3 & EDIT_SQUID ${NC} "
-	echo -e "|${GRAY}25${NC}| ${CYAN}EDIT_PORTSSH ${NC} "
-	echo -e "|${GRAY}26${NC}| ${GRAY}EDIT_Config Openvpn  ${NC} "
-	echo "|27| Install Stunnel4 " 
-	echo "|28| EDIT_Stunnel4 "
-	echo "|29| EDIT_Dropbear  "
-	echo "|30| Install_Dropbear  "
-	echo "|31| multilogin_autokill  "
-	echo "|32| Reboot SERVER VPS Now "
-	echo "|33| Restart Services "
-	echo "|34| OpenSSH User Login "
+	echo -e "|${z1} 4${NC}| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
+	echo -e "|${z1} 5${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
+	echo -e "|${z1} 6${NC}|${BLUE} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${NC} "
+	echo -e "|${z1} 7${NC}| Delete บัญชีผู้ใช้ SSH "
+	echo -e "|${z1} 8${NC}|${cor[3]} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
+	echo -e "|${z1} 9${NC}|${cor[3]} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
+	echo -e "|${z1}10${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
+	echo -e "|${z1}11${NC}|${YELLOW} ตรวจสอบแบนด์วิดท์ต่อบัญชี ${NC} "
+	echo -e "|${z1}12${NC}|${z5} เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${NC} "
+	echo -e "|${z1}13${NC}|${z2} เปลี่ยนวันหมดอายุบัญชีผู้ใช้ ${NC} "
+	echo -e "|${z1}14${NC}| เช็ดการใช้งานแบนวิท " 
+	echo -e "|${z1}15${NC}| ปรับความเร็วอินเตอร์เน็ต  "
+	echo -e "|${z1}16${NC}|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
+	echo -e "|${z1}17${NC}|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
+	echo -e "|${z1}18${NC}|${GREEN} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
+	echo -e "|${z1}19${NC}| ${CYAN}MENU ไฟล์สคริปท์ของเมนู ${NC} "
+	echo -e "|${z1}20${NC}| ${CYAN}Update Credits Bannerssh ${NC} "
+	echo -e "|${z1}21${NC}| ${CYAN}SHOW_PORTS ${NC} "
+	echo -e "|${z1}22${NC}| ${CYAN}EDIT_PORT OPENVPN ${NC} "
+    echo -e "|${z1}23${NC}| ( ${CYAN}จัดการตั้งค่าพร็อกซี่ ${NC}) "
+	echo -e "|${z1}24${NC}| ${CYAN}EDIT_SQUID3 & EDIT_SQUID ${NC} "
+	echo -e "|${z1}25${NC}| ${CYAN}EDIT_PORTSSH ${NC} "
+	echo -e "|${z1}26${NC}| ${GRAY}EDIT_Config Openvpn  ${NC} "
+	echo -e "|${z1}27${NC}| ${GREEN}Install_Dropbear  ${NC} "
+	echo -e "|${z1}28${NC}| ${CYAN}EDIT_Dropbear  ${NC} "
+	echo -e "|${z1}29${NC}| Restart Openvpn  ${NC} "
+	echo -e "|${z1}30${NC}| ตรวจสอบ TIME LOGIN  ${NC} "
+	echo -e "|${z1}31${NC}|${GREEN} Reboot SERVER VPS  ${NC} "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -1024,14 +1021,14 @@ passwd
 cat > /etc/ssh/sshd_config <<-END
 Port 22
 Port 143
-Port 80
 Protocol 2
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
 UsePrivilegeSeparation yes
 KeyRegenerationInterval 3600
-ServerKeyBits 768
+ServerKeyBits 1024
 SyslogFacility AUTH
 LogLevel INFO
 LoginGraceTime 120
@@ -2640,13 +2637,10 @@ echo -e "${NC} "
 echo ""
 echo -e "${GREEN}         Port OpenSSH  ${NC}   :  "$opensshport
 echo -e "${GREEN}         Port Dropbear${NC}    :  "$dropbearport
-echo -e "${GREEN}         Port SSL  ${NC}       :  "$stunnel4port
 echo -e "${GREEN}         Port Squid  ${NC}     :  "$squidport
 echo -e "${GREEN}         Port Squid3 ${NC}     :  "$squid3port
 echo -e "${GREEN}         Port OpenVPN ${NC}    :  "$openvpnport
 echo -e "${GREEN}         Port Nginx ${NC}      :  "$nginxport
-echo -e "${GREEN}         Port badvpn ${NC}     :   7300 "
-echo -e "${GREEN}         Webmin ${NC}          :  "https://$IP:10000/
 echo -e "${NC} "
 ;;
 
@@ -3983,124 +3977,20 @@ esac
 
 	;;
 	
+	
 	27) # ==================================================================================================================
-# Install Stunnel
-apt-get -y install stunnel4
-wget -O /etc/stunnel/stunnel.pem "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.pem"
-wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/stunnel.conf"
-sed -i $MYIP2 /etc/stunnel/stunnel.conf
-sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-service stunnel4 restart
-	;;
-	
-		28) # ==================================================================================================================
-
-#!/bin/bash
-# Script by : Clrkz
-rm -f /root/opensshport
-rm -f /root/dropbearport
-rm -f /root/stunnel4port
-rm -f /root/openvpnport
-rm -f /root/squidport
-opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
-echo $opensshport > /root/opensshport
-cat > /root/opensshport <<-END
-$opensshport
-END
-echo $dropbearport > /root/dropbearport
-cat > /root/dropbearport <<-END
-$dropbearport
-END
-echo $stunnel4port > /root/stunnel4port
-cat > /root/stunnel4port <<-END
-$stunnel4port
-END
-echo $openvpnport > /root/openvpnport
-cat > /root/openvpnport <<-END
-$openvpnport
-END
-echo $squidport > /root/squidport
-cat > /root/squidport <<-END
-$squidport
-END
-
-cd
-clear
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]"
-echo -e "\e[0m                                                   "
-echo -e "\e[93m                  Stunnel4  Port                  "
-echo -e "\e[93m                        "$stunnel4port
-echo -e "\e[0m                                                   "
-read -p "       Which Port Should Be Changed? :  " Port
-egrep "^$Port" /root/stunnel4port >/dev/null
-if [ $? -eq 0 ]; then
-	read -p "            From Port $Port -> Port " Port_New
-	if grep -Fxq $Port_New /root/opensshport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              OpenSSH Port Conflict              "
-		echo -e "\e[91m              Port Is Already In Use              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	if grep -Fxq $Port_New /root/dropbearport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              Dropbear Port Conflict              "
-		echo -e "\e[91m              Port Is Already In Use              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	if grep -Fxq $Port_New /root/openvpnport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              Openvpn Port Conflict               "
-		echo -e "\e[91m              Port Is Already In Use              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	if grep -Fxq $Port_New /root/squidport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m               Squid3 Port Conflict               "
-		echo -e "\e[91m              Port Is Already In Use              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	Port_Change="s/$Port/$Port_New/g";
-	sed -i $Port_Change /etc/stunnel/stunnel.conf
-	service stunnel4 restart > /dev/null
-	rm -f /root/stunnel4port
-	stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-	clear
-	echo -e "\e[0m                                                   "
-	echo -e "\e[94m[][][]======================================[][][]"
-	echo -e "\e[0m                                                   "
-	echo -e "\e[93m           AutoScriptVPS by  Clrkz           "
-	echo -e "\e[0m                                                   "
-	echo -e "\e[93m                  Stunnel4  Port                  "
-	echo -e "\e[93m                        "$stunnel4port
-	echo -e "\e[0m                                                   "
-	echo -e "\e[94m[][][]======================================[][][]\e[0m"
-
-else
-	clear
-	echo -e "\e[0m                                                   "
-	echo -e "\e[91m                 Port Doesnt Exit                 "
-	echo -e "\e[0m                                                   "
-	echo -e "\e[94m[][][]======================================[][][]\e[0m"
-fi
-
-
+apt-get -y install dropbear
+sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110"/g' /etc/default/dropbear
+echo "/bin/false" >> /etc/shells
+echo "/usr/sbin/nologin" >> /etc/shells
+service ssh restart
+service dropbear restart
 
 	;;
 	
-	29) # ==================================================================================================================
+	28) # ==================================================================================================================
 #!/bin/bash
 # Script by : Clrkz
 rm -f /root/opensshport
@@ -4204,207 +4094,25 @@ else
 fi
 
 	;;
-	
-	30) # ==================================================================================================================
-apt-get -y install dropbear
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110"/g' /etc/default/dropbear
-echo "/bin/false" >> /etc/shells
-echo "/usr/sbin/nologin" >> /etc/shells
-service ssh restart
-service dropbear restart
 
-	;;
-	
-	31) # ==================================================================================================================
-#!/bin/bash
-# Created by http://www.vps-murah.net
-# Modified by 0123456
-
-red='\e[1;31m'
-green='\e[0;32m'
-NC='\e[0m'
-MAX=5
-if [ -e "/var/log/auth.log" ]; then
-        OS=1;
-        LOG="/var/log/auth.log";
-fi
-if [ -e "/var/log/secure" ]; then
-        OS=2;
-        LOG="/var/log/secure";
-fi
-if [[ ${1+x} ]]; then
-        MAX=$1;
-fi
-echo " "
-echo " "
-echo "-------------------------------------------"
-echo " ผู้ใช้ที่เข้าสู่ระบบมากกว่าขีด จำกัด [$MAX]"
-echo "-------------------------------------------"
-while :
-do
-        cat /etc/passwd | grep "/home/" | cut -d":" -f1 > /root/user.txt
-        username1=( `cat "/root/user.txt" `);
-        i="0";
-        for user in "${username1[@]}"
-			do
-                username[$i]=`echo $user | sed 's/'\''//g'`;
-                jumlah[$i]=0;
-                i=$i+1;
-			done
-        cat $LOG | grep -i dropbear | grep -i "Password auth succeeded" > /tmp/log-db.txt
-        proc=( `ps aux | grep -i dropbear | awk '{print $2}'`);
-        for PID in "${proc[@]}"
-			do
-                cat /tmp/log-db.txt | grep "dropbear\[$PID\]" > /tmp/log-db-pid.txt
-                NUM=`cat /tmp/log-db-pid.txt | wc -l`;
-                USER=`cat /tmp/log-db-pid.txt | awk '{print $10}' | sed 's/'\''//g'`;
-                IP=`cat /tmp/log-db-pid.txt | awk '{print $12}'`;
-                if [ $NUM -eq 1 ]; then
-                        i=0;
-                        for user1 in "${username[@]}"
-							do
-                                if [ "$USER" == "$user1" ]; then
-                                        jumlah[$i]=`expr ${jumlah[$i]} + 1`;
-                                        pid[$i]="${pid[$i]} $PID"
-                                fi
-                                i=$i+1;
-							done
-                fi
-			done
-        cat $LOG | grep -i sshd | grep -i "Accepted password for" > /tmp/log-db.txt
-        data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
-        for PID in "${data[@]}"
-			do
-                cat /tmp/log-db.txt | grep "sshd\[$PID\]" > /tmp/log-db-pid.txt;
-                NUM=`cat /tmp/log-db-pid.txt | wc -l`;
-                USER=`cat /tmp/log-db-pid.txt | awk '{print $9}'`;
-                IP=`cat /tmp/log-db-pid.txt | awk '{print $11}'`;
-                if [ $NUM -eq 1 ]; then
-                        i=0;
-                        for user1 in "${username[@]}"
-							do
-                                if [ "$USER" == "$user1" ]; then
-                                        jumlah[$i]=`expr ${jumlah[$i]} + 1`;
-                                        pid[$i]="${pid[$i]} $PID"
-                                fi
-                                i=$i+1;
-							done
-                fi
-        done
-        j="0";
-        for i in ${!username[*]}
-			do
-                if [ ${jumlah[$i]} -gt $MAX ]; then
-                        date=`date +"%Y-%m-%d %X"`;
-                        echo "VPS-Murah.net - $date - ${username[$i]} - ${jumlah[$i]}";
-                        echo "VPS-Murah.net - $date - ${username[$i]} - ${jumlah[$i]}" >> /root/log-limit.txt;
-                        kill ${pid[$i]};
-                        pid[$i]="";
-                        j=`expr $j + 1`;
-                fi
-			done
-        if [ $j -gt 0 ]; then
-                if [ $OS -eq 1 ]; then
-                        service ssh restart > /dev/null 2>&1;
-                fi
-                if [ $OS -eq 2 ]; then
-                        service sshd restart > /dev/null 2>&1;
-                fi
-                service dropbear restart > /dev/null 2>&1;
-                j=0;
-		fi
-sleep 300;
-done
-
-exit
-
-;;
-
-
-	32) # ==================================================================================================================
-
-		clear
-		reboot
-		exit
-	;;
-	
-
-	33) # ==================================================================================================================
+	29) # ==================================================================================================================
 
 #!/bin/bash
-# Script by : Clrkz
-clear
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]"
-echo -e "\e[0m                                                   "
-echo -e "\e[93m            [1] Restart All Services"
-echo -e "\e[93m            [2] Restart OpenSSH"
-echo -e "\e[93m            [3] Restart Dropbear"
-echo -e "\e[93m            [4] Restart Stunnel4"
-echo -e "\e[93m            [5] Restart OpenVPN"
-echo -e "\e[93m            [6] Restart Squid"
-echo -e "\e[93m            [7] Restart Nginx"
-echo -e "\e[93m            [x] Exit"
-echo -e "\e[0m                                                   "
-read -p "       Select From Options [1-7 or x] :  " Restart
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]\e[0m"
-sleep 3
-clear
-case $Restart in
-		1)
 		clear
-		service ssh restart
-		service dropbear restart
-		service stunnel4 restart
-		service openvpn restart
-		service squid3 restart
-		service nginx restart
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m                Service/s Restarted               "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		;;
-		2)
-		clear
-		service ssh restart
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m              SSH Service Restarted               "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		;;
-		3)
-		clear
-		service dropbear restart
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m            Dropbear Service Restarted            "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		;;
-		4)
-		clear
-		service stunnel4 restart
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m            Stunnel4 Service Restarted            "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		;;
-		5)
-		clear
+echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "${RED} #      -----------About Us------------         #    "
+echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "${RED} #               { VPN / SSH }                  #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
 		service openvpn restart
 		echo -e "\e[0m                                                   "
 		echo -e "\e[94m[][][]======================================[][][]"
@@ -4414,43 +4122,26 @@ case $Restart in
 		echo -e "\e[94m[][][]======================================[][][]\e[0m"
 		exit
 		;;
-		6)
-		clear
-		service squid3 restart
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m             Squid3 Service Restarted             "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		;;
-		7)
-		clear
-		service nginx restart
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m             Nginx Service Restarted              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		;;
-		x)
-		clear
-		exit
-		;;
-	esac
-	;;
 	
 	
-		34) # ==================================================================================================================
+		30) # ==================================================================================================================
 
 #!/bin/bash
-# Script by : Clrkz
 clear
-echo " "
-echo " "
+echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "${RED} #      -----------About Us------------         #    "
+echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "${RED} #               { VPN / SSH }                  #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
 
 if [ -e "/var/log/auth.log" ]; then
         LOG="/var/log/auth.log";
@@ -4499,7 +4190,7 @@ if [ -f "/etc/openvpn/openvpn-status.log" ]; then
         echo "-----=[ OpenVPN User Login ]=-----";
         echo "Username  |  IP Address  |  Connected Since";
         echo "-------------------------------------";
-        cat /etc/openvpn/openvpn-status.log | head -n $a       | tail -n $b        | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
+        cat /etc/openvpn/openvpn-status.log | head -n $a | tail -n $b | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
         cat /tmp/vpn-login-db.txt
 fi
 
@@ -4507,6 +4198,28 @@ echo " "
 echo " "
 
 	;;
+	
+		31) # ==================================================================================================================
+
+		clear
+		echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "${RED} #      -----------About Us------------         #    "
+echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "${RED} #               { VPN / SSH }                  #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
+		reboot
+		exit
+	;;
+	
 	
 	00) # ==================================================================================================================
 
