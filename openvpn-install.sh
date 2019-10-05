@@ -8,6 +8,12 @@ if [[ "$EUID" -ne 0 ]]; then
 	exit
 fi
 
+if [[ ! -e /dev/net/tun ]]; then
+	echo ""
+	echo "TUN ไม่สามารถใช้งานได้"
+	exit
+fi
+
 
 # Set Localtime GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
@@ -634,8 +640,14 @@ sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
 sed -i 's/Internal/Internet/g' config.php
 sed -i '/SixXS IPv6/d' config.php
 sed -i "s/\$locale = 'en_US.UTF-8';/\$locale = 'en_US.UTF+8';/g" config.php
-cd
 
+if [ -e '/var/lib/vnstat/eth0' ]; then
+	vnstat -u -i eth0
+else
+sed -i "s/eth0/ens3/g" /home/vps/public_html/vnstat/config.php
+vnstat -u -i ens3
+fi
+service vnstat restart
 
 echo ""
 echo -e "\033[0;32m { install webmin }${NC} "
