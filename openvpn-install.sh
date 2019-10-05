@@ -583,81 +583,6 @@ END
 
 fi
 
-echo ""
-echo -e "\033[0;32m { disable ipv6 }${NC} "
-echo ""
-echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
-sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
-
-echo ""
-echo -e "\033[0;32m { Setting Vnstat }${NC} "
-echo ""
-vnstat -u -i eth0
-chown -R vnstat:vnstat /var/lib/vnstat
-service vnstat restart
-
-echo ""
-echo -e "\033[0;32m { badvpn-udpgw }${NC} "
-echo ""
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/badvpn-udpgw"
-sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
-chmod +x /usr/bin/badvpn-udpgw
-screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
-
-
-echo ""
-echo -e "\033[0;32m { setting port ssh }${NC} "
-echo ""
-# setting port ssh
-sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
-sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
-service ssh restart
-
-echo ""
-echo -e "\033[0;32m { install dropbear }${NC} "
-echo ""
-apt-get -y install dropbear
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=443/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110 -p 443 -p 80"/g' /etc/default/dropbear
-echo "/bin/false" >> /etc/shells
-service ssh restart
-service dropbear restart
-
-
-echo ""
-echo -e "\033[0;32m { install vnstat gui }${NC} "
-echo ""
-# install vnstat gui
-cd /home/vps/public_html/
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/vnstat_php_frontend-1.5.1.tar.gz
-tar xf vnstat_php_frontend-1.5.1.tar.gz
-rm vnstat_php_frontend-1.5.1.tar.gz
-mv vnstat_php_frontend-1.5.1 vnstat
-cd vnstat
-sed -i "s/\$iface_list = array('eth0', 'sixxs');/\$iface_list = array('eth0');/g" config.php
-sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
-sed -i 's/Internal/Internet/g' config.php
-sed -i '/SixXS IPv6/d' config.php
-sed -i "s/\$locale = 'en_US.UTF-8';/\$locale = 'en_US.UTF+8';/g" config.php
-
-if [ -e '/var/lib/vnstat/eth0' ]; then
-	vnstat -u -i eth0
-else
-sed -i "s/eth0/ens3/g" /home/vps/public_html/vnstat/config.php
-vnstat -u -i ens3
-fi
-service vnstat restart
-
-echo ""
-echo -e "\033[0;32m { install webmin }${NC} "
-echo ""
-cd
-wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.670_all.deb"
-dpkg --install webmin_1.670_all.deb;
-apt-get -y -f install;
-rm /root/webmin_1.670_all.deb
-service webmin restart
 
 echo ""
 echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
@@ -722,8 +647,6 @@ echo -e "${NC} "
 		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
 		;;
 	esac
-	 echo "vnstat   : https://$IP:85/vnstat/"
-         echo "Webmin   : https://$IP:10000/"
 	echo ""
 	echo "===================================================================="
 	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${YELLOW} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
