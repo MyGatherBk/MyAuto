@@ -63,20 +63,20 @@ echo -e "${NC} "
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
-	echo -e "| 1|${BLUE} เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)${NC} "
-	echo -e "| 2|${BLUE} เพิ่มชื่อผู้ใช้งาน {User/Pass}  SSH (HTTP) VPN (OPENVPN)${NC} "
+	echo -e "|${z1} 1${NC}|${BLUE} เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)${NC} "
+	echo -e "|${z1} 2${NC}|${BLUE} เพิ่มชื่อผู้ใช้งาน {User/Pass}  SSH (HTTP) VPN (OPENVPN)${NC} "
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "| 3|${GREEN} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
+	echo -e "|${z1} 3${NC}|${GREEN} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "| 3|${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
+	echo -e "|${z1} 3${NC}||${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "| 3|${GREEN} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
+	echo -e "|${z1} 3${NC}|${GREEN} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "| 3|${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
+	echo -e "|${z1} 3${NC}|${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 	fi
 	echo -e "|${z1} 4${NC}| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
@@ -138,7 +138,7 @@ echo -e "CLIENT ONLINE NOW ${GREEN}$ON${NC} CLIENT "
 echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
 echo ""
 echo "[][][]======================================[][][]"
-echo "[][][]    Update menu Script 30/09/2019     [][][]"
+echo "[][][]    Update menu Script 06/10/2019     [][][]"
 echo "[][][]======================================[][][]"
 echo ""
         read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
