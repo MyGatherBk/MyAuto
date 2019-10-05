@@ -69,7 +69,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
 	echo -e "|${z1} 3${NC}|${GREEN} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-	echo -e "|${z1} 3${NC}||${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
+	echo -e "|${z1} 3${NC}|${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
