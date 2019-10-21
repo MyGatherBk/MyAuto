@@ -8,6 +8,7 @@ CHECKSYSTEM=$(tail -n +2 /etc/openvpn/server.conf | grep "^username-as-common-na
 # if [[ "$IP" = "" ]]; thenN
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 #
+
 # Color
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
@@ -167,7 +168,7 @@ if [[ $CHECKSYSTEM ]]; then
 	if [ $? -eq 0 ]; then
 		read -p "รหัสผ่าน : " -e PASSWORD
 		echo ""
-		echo -e " ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน "
+		echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
 		read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
 		PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
@@ -206,7 +207,7 @@ echo ""
 		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
 
 		if [[ "$TOMENU" = 'Y' ]]; then
-			m
+			menu
 			exit
 		elif [[ "$TOMENU" = 'N' ]]; then
 			exit
@@ -233,25 +234,24 @@ else
 	fi
 
 	echo ""
-	echo -e " ะบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน "
+	echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
 	read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
-newclient () {
-	# Generates the custom client.ovpn
-	cp /etc/openvpn/client-common.txt ~/$1.ovpn
-	echo "<ca>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-	echo "</ca>" >> ~/$1.ovpn
-	echo "<cert>" >> ~/$1.ovpn
-	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-	echo "</cert>" >> ~/$1.ovpn
-	echo "<key>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-	echo "</key>" >> ~/$1.ovpn
-	echo "<tls-auth>" >> ~/$1.ovpn
-	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
-	echo "</tls-auth>" >> ~/$1.ovpn
-}
+	newclient () {
+		cp /etc/openvpn/client-common.txt ~/$1.ovpn
+		echo "<ca>" >> ~/$1.ovpn
+		cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
+		echo "</ca>" >> ~/$1.ovpn
+		echo "<cert>" >> ~/$1.ovpn
+		cat /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
+		echo "</cert>" >> ~/$1.ovpn
+		echo "<key>" >> ~/$1.ovpn
+		cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
+		echo "</key>" >> ~/$1.ovpn
+		echo "<tls-auth>" >> ~/$1.ovpn
+		cat /etc/openvpn/ta.key >> ~/$1.ovpn
+		echo "</tls-auth>" >> ~/$1.ovpn
+	}
 
 	RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
 	mkdir /home/vps/public_html/$RANDOMFOLDER
@@ -282,7 +282,7 @@ echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn "
+	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn"
 	echo ""
 	exit
 
