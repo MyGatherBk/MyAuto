@@ -64,50 +64,50 @@ echo -e "${NC} "
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
-	echo -e "|${z1} 1${NC}|${BLUE} เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)${NC} "
-	echo -e "|${z1} 2${NC}|${BLUE} เพิ่มชื่อผู้ใช้งาน {User/Pass}  SSH (HTTP) VPN (OPENVPN)${NC} "
+	echo -e "|${z1} 1${NC}|${z2} เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)${NC} "
+	echo -e "|${z1} 2${NC}|${z2} เพิ่มชื่อผู้ใช้งาน {User/Pass}  SSH (HTTP) VPN (OPENVPN)${NC} "
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-	echo -e "|${z1} 3${NC}|${GREEN} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
+	echo -e "|${z1} 3${NC}|${z2} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-	echo -e "|${z1} 3${NC}|${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
+	echo -e "|${z1} 3${NC}|${z2} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-	echo -e "|${z1} 3${NC}|${GREEN} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
+	echo -e "|${z1} 3${NC}|${z2} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
 		elif [[ -e /etc/squid/squid.conf ]]; then
-	echo -e "|${z1} 3${NC}|${RED} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
+	echo -e "|${z1} 3${NC}|${z2} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 	fi
 	echo -e "|${z1} 4${NC}| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
 	echo -e "|${z1} 5${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
-	echo -e "|${z1} 6${NC}|${BLUE} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${NC} "
+	echo -e "|${z1} 6${NC}|${z2} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${NC} "
 	echo -e "|${z1} 7${NC}| Delete บัญชีผู้ใช้ SSH "
-	echo -e "|${z1} 8${NC}|${cor[3]} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
-	echo -e "|${z1} 9${NC}|${cor[3]} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
+	echo -e "|${z1} 8${NC}|${z2} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
+	echo -e "|${z1} 9${NC}|${z2} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
 	echo -e "|${z1}10${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
-	echo -e "|${z1}11${NC}|${YELLOW} ตรวจสอบแบนด์วิดท์ต่อบัญชี ${NC} "
-	echo -e "|${z1}12${NC}|${z5} เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${NC} "
+	echo -e "|${z1}11${NC}|${z2} ตรวจสอบแบนด์วิดท์ต่อบัญชี ${NC} "
+	echo -e "|${z1}12${NC}|${z2} เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${NC} "
 	echo -e "|${z1}13${NC}|${z2} เปลี่ยนวันหมดอายุบัญชีผู้ใช้ ${NC} "
 	echo -e "|${z1}14${NC}| เช็ดการใช้งานแบนวิท " 
 	echo -e "|${z1}15${NC}| ปรับความเร็วอินเตอร์เน็ต  "
 	echo -e "|${z1}16${NC}|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
-	echo -e "|${z1}17${NC}|${RED} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
-	echo -e "|${z1}18${NC}|${GREEN} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
-	echo -e "|${z1}19${NC}| ${CYAN}MENU ไฟล์สคริปท์ของเมนู ${NC} "
-	echo -e "|${z1}20${NC}| ${CYAN}Update Credits Bannerssh ${NC} "
-	echo -e "|${z1}21${NC}| ${CYAN}SHOW_PORTS ${NC} "
-	echo -e "|${z1}22${NC}| ${CYAN}EDIT_PORT OPENVPN ${NC} "
-    echo -e "|${z1}23${NC}| ( ${CYAN}จัดการตั้งค่าพร็อกซี่ ${NC}) "
-	echo -e "|${z1}24${NC}| ${CYAN}EDIT_SQUID3 & EDIT_SQUID ${NC} "
-	echo -e "|${z1}25${NC}| ${CYAN}EDIT_PORTSSH ${NC} "
-	echo -e "|${z1}26${NC}| ${GRAY}EDIT_Config Openvpn  ${NC} "
-	echo -e "|${z1}27${NC}| ${GREEN}Install_Dropbear  ${NC} "
-	echo -e "|${z1}28${NC}| ${CYAN}EDIT_Dropbear  ${NC} "
-	echo -e "|${z1}29${NC}| Restart Openvpn  ${NC} "
-	echo -e "|${z1}30${NC}| ตรวจสอบ TIME LOGIN  ${NC} "
-	echo -e "|${z1}31${NC}|${GREEN} Reboot SERVER VPS  ${NC} "
+	echo -e "|${z1}17${NC}|${z2} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
+	echo -e "|${z1}18${NC}|${z2} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
+	echo -e "|${z1}19${NC}|${z2} MENU ไฟล์สคริปท์ของเมนู ${NC} "
+	echo -e "|${z1}20${NC}|${z2} Update Credits Bannerssh ${NC} "
+	echo -e "|${z1}21${NC}|${z2} SHOW_PORTS ${NC} "
+	echo -e "|${z1}22${NC}|${z2} EDIT_PORT OPENVPN ${NC} "
+        echo -e "|${z1}23${NC}|${z2} จัดการตั้งค่าพร็อกซี่ ${NC}) "
+	echo -e "|${z1}24${NC}|${z2} EDIT_SQUID3 & EDIT_SQUID ${NC} "
+	echo -e "|${z1}25${NC}|${z2} EDIT_PORTSSH ${NC} "
+	echo -e "|${z1}26${NC}|${z2} EDIT_Config Openvpn  ${NC} "
+	echo -e "|${z1}27${NC}|${z2} Install_Dropbear  ${NC} "
+	echo -e "|${z1}28${NC}|${z2} EDIT_Dropbear  ${NC} "
+	echo -e "|${z1}29${NC}|${z2} Restart Openvpn  ${NC} "
+	echo -e "|${z1}30${NC}|${z2} ตรวจสอบ TIME LOGIN  ${NC} "
+	echo -e "|${z1}31${NC}|${z2} Reboot SERVER VPS  ${NC} "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -1020,37 +1020,94 @@ echo "    กำหนดรหัสผ่านสำหรับล็อก�
 echo " ====================================="
 passwd
 cat > /etc/ssh/sshd_config <<-END
+# Package generated configuration file
+# See the sshd_config(5) manpage for details
+
+# What ports, IPs and protocols we listen for
 Port 22
-Port 143
+# Use these options to restrict which interfaces/protocols sshd will bind to
+#ListenAddress ::
+#ListenAddress 0.0.0.0
 Protocol 2
+# HostKeys for protocol version 2
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
+#Privilege Separation is turned on for security
 UsePrivilegeSeparation yes
+
+# Lifetime and size of ephemeral version 1 server key
 KeyRegenerationInterval 3600
 ServerKeyBits 1024
+
+# Logging
 SyslogFacility AUTH
 LogLevel INFO
+
+# Authentication:
 LoginGraceTime 120
 PermitRootLogin yes
 StrictModes yes
+
 RSAAuthentication yes
 PubkeyAuthentication yes
+#AuthorizedKeysFile	%h/.ssh/authorized_keys
+
+# Don't read the user's ~/.rhosts and ~/.shosts files
 IgnoreRhosts yes
+# For this to work you will also need host keys in /etc/ssh_known_hosts
 RhostsRSAAuthentication no
+# similar for protocol version 2
 HostbasedAuthentication no
+# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication
+#IgnoreUserKnownHosts yes
+
+# To enable empty passwords, change to yes (NOT RECOMMENDED)
 PermitEmptyPasswords no
+
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
 ChallengeResponseAuthentication no
+
+# Change to no to disable tunnelled clear text passwords
+PasswordAuthentication yes
+
+# Kerberos options
+#KerberosAuthentication no
+#KerberosGetAFSToken no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+
+# GSSAPI options
+#GSSAPIAuthentication no
+#GSSAPICleanupCredentials yes
+
 X11Forwarding yes
 X11DisplayOffset 10
 PrintMotd no
 PrintLastLog yes
 TCPKeepAlive yes
+#UseLogin no
+
+#MaxStartups 10:30:60
+#Banner /etc/issue.net
+
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+
 Subsystem sftp /usr/lib/openssh/sftp-server
+
+# Set this to 'yes' to enable PAM authentication, account processing,
+# and session processing. If this is enabled, PAM authentication will
+# be allowed through the ChallengeResponseAuthentication and
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of "PermitRootLogin without-password".
+# If you just want the PAM account and session checks to run without
+# PAM authentication, then enable this but set PasswordAuthentication
+# and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
-ClientAliveInterval 120
-ClientAliveCountMax 2
 END
 service ssh restart
 exit
