@@ -42,13 +42,8 @@ if [[ -e /etc/debian_version ]]; then
 
 	if [[ "$VERSION_ID" != 'VERSION_ID="7"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
 echo ""
-echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "${RED} #      -----------About Us------------         #    "
 echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "${RED} #               { VPN / SSH }                  #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -64,13 +59,8 @@ echo -e "${NC} "
 	fi
 else
 echo ""
-echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "${RED} #      -----------About Us------------         #    "
 echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "${RED} #               { VPN / SSH }                  #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -88,13 +78,8 @@ fi
 
 # ads
 echo ""
-echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "${RED} #      -----------About Us------------         #    "
 echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "${RED} #               { VPN / SSH }                  #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -185,13 +170,8 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 else
 	clear
 echo ""
-echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "${RED} #      -----------About Us------------         #    "
 echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "${RED} #               { VPN / SSH }                  #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -611,13 +591,8 @@ chmod +x /usr/local/bin/m
 
 	clear
 echo ""
-echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "${RED} #      -----------About Us------------         #    "
 echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "${RED} #               { VPN / SSH }                  #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
