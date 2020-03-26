@@ -225,6 +225,9 @@ ${NC} "
 	echo ""
 	echo -e " |${GRAY}1${NC}| DNS Current System"
 	echo -e " |${GRAY}2${NC}| DNS Google"
+	echo -e " |${GRAY}3${NC}| DNS OpenDNS Home"
+	echo -e " |${GRAY}4${NC}| DNS TCPVPN.COM"
+	echo -e " |${GRAY}5${NC}| DNS FreeDNS"
 	echo ""
 	read -p "DNS : " -e -i 2 DNS
 	echo ""
@@ -310,20 +313,20 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 		done
 		;;
 		2)
-		echo 'push "dhcp-option DNS 1.1.1.1"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 1.0.0.1"' >> /etc/openvpn/server.conf
-		;;
-		3)
 		echo 'push "dhcp-option DNS 8.8.8.8"' >> /etc/openvpn/server.conf
 		echo 'push "dhcp-option DNS 8.8.4.4"' >> /etc/openvpn/server.conf
 		;;
-		4)
+		3)
 		echo 'push "dhcp-option DNS 208.67.222.222"' >> /etc/openvpn/server.conf
 		echo 'push "dhcp-option DNS 208.67.220.220"' >> /etc/openvpn/server.conf
 		;;
+		4)
+		echo 'push "dhcp-option DNS 45.55.147.169"' >> /etc/openvpn/server.conf
+		echo 'push "dhcp-option DNS 204.12.225.226"' >> /etc/openvpn/server.conf
+		;;
 		5)
-		echo 'push "dhcp-option DNS 64.6.64.6"' >> /etc/openvpn/server.conf
-		echo 'push "dhcp-option DNS 64.6.65.6"' >> /etc/openvpn/server.conf
+		echo 'push "dhcp-option DNS 45.33.97.5"' >> /etc/openvpn/server.conf
+		echo 'push "dhcp-option DNS 37.235.1.177"' >> /etc/openvpn/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
