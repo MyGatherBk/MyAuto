@@ -172,7 +172,7 @@ ok "➡ service nginx restart "
 cd /etc/openvpn/
 wget -O /etc/openvpn/client.ovpn "https://raw.githubusercontent.com/jiraphaty/auto-script-vpn/master/client.ovpn"
 sed -i $MYIP2 /etc/openvpn/client.ovpn;
-cp /root/client.ovpn /home/vps/public_html/
+cp /etc/openvpn/client.ovpn /home/vps/public_html/
 rm -f /root/client.ovpn
 
 
