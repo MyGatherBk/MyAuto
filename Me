@@ -6,7 +6,8 @@ VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 CHECKSYSTEM=$(tail -n +2 /etc/openvpn/server.conf | grep "^username-as-common-name")
 # IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 # if [[ "$IP" = "" ]]; thenN
-MYIP=$(wget -4qO- "http://whatismyip.akamai.com/")
+MYIP=$(wget -qO- ipv4.icanhazip.com);
+MYIP2="s/xxxxxxxxx/$MYIP/g";
 #
 # Color
 BLUE='\033[0;34m'
@@ -37,7 +38,7 @@ echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${GREEN} ไอพีเซิฟ: $MYIP "
 echo -e "${NC} "
 	echo "-------------------------------------------------------" 
         chek=$(cat /etc/issue.net)
@@ -60,6 +61,7 @@ echo -e "${NC} "
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
 	echo -e "|${z1} 1${NC}|${z2} User Add)${NC} "
+	echo -e "|${z1}00${NC}|${z2} Up Menu Script)${NC} "
     read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 echo ""
 case $MENU in
@@ -83,12 +85,18 @@ useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
 echo -e ""
-echo -e "====สร้าง User===="
-echo -e "Host: $MYIP" 
-echo -e "Squid: 8080"
-echo -e "Config OpenVPN (TCP 1194): http://$MYIP:85/client.ovpn"
+echo "====สร้าง User===="
+echo "<<<<<Openvpn/ssh>>>>>"
+echo "IP Server : $MYIP"
+echo "Port Openvpn : 1194"
+echo "Port ssh: 22"
+echo "Protocal : TCP"
+echo "IP Proxy : $MYIP"
+echo "Port Proxy : 8080"
 echo -e "Username: $Login "
 echo -e "Password: $Pass"
+echo "Download My Config : http://$MYIP:85/client.ovpn"
+echo ""
 echo -e "-----------------------------"
 echo -e "วันหมดอายุ : $exp"
 echo -e "============================="
@@ -100,7 +108,7 @@ echo -e ""
 	00) # ==================================================================================================================
 
 cd /usr/local/bin
-wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Me"
 chmod +x /usr/local/bin/m
 m
 
