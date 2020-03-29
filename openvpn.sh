@@ -31,10 +31,85 @@ rm before.rules
 rm ufw
 service openvpn restart
 
-echo ""
-echo -e "\033[35;1m { install nginx }${NC} "
-echo ""
-	cd
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+#install squid3
+ok "➡ apt-get install squid3 "
+apt-get install -qy squid3 > /dev/null 2>&1
+cp /etc/squid3/squid.conf /etc/squid3/squid.conf.orig
+echo "http_port 8080
+http_port 3128
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst $SERVER_IP-$SERVER_IP/255.255.255.255                 
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320" > /etc/squid3/squid.conf
+ok "➡ service squid3 restart "
+service squid3 restart -q > /dev/null 2>&1
+
+elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
+#install squid3
+ok "➡ apt-get install squid "
+apt-get install -qy squid > /dev/null 2>&1
+cp /etc/squid/squid.conf /etc/squid/squid.conf.orig
+cat > /etc/squid/squid.conf <<END
+http_port 8080
+http_port 3128
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst $SERVER_IP-$SERVER_IP/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+ok "➡ service squid restart "
+service squid restart -q > /dev/null 2>&1
+fi
+
+
+
+#install Nginx
+ok "➡ apt-get install nginx "
 	apt-get -y install nginx
 	cat > /etc/nginx/nginx.conf <<END
 user www-data;
@@ -66,7 +141,7 @@ http {
 }
 END
 	mkdir -p /home/vps/public_html
-	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
+	echo "<pre>Source by Mnm Ami | Donate via TrueMoney Walle 096-746-2879 </pre>" > /home/vps/public_html/index.html
 	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
 	args='$args'
 	uri='$uri'
@@ -91,102 +166,7 @@ server {
     }
 }
 END
-
-	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ -e /etc/squid3/squid.conf ]]; then
-			apt-get -y remove --purge squid3
-		fi
-echo ""
-echo -e "\033[0;32m { Install PROXY }${NC} "
-echo ""
-		apt-get -y install squid3
-		cat > /etc/squid3/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-		MYIP2="s/xxxxxxxxx/$MYIP/g";
-		sed -i $MYIP2 /etc/squid3/squid.conf;
-		if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-			service squid3 restart
-			/etc/init.d/openvpn restart
-			/etc/init.d/nginx restart
-		else
-			/etc/init.d/squid3 restart
-			/etc/init.d/openvpn restart
-			/etc/init.d/nginx restart
-		fi
-
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ -e /etc/squid/squid.conf ]]; then
-			apt-get -y remove --purge squid
-		fi
-echo ""
-echo -e "\033[0;32m { Install PROXY }${NC} "
-echo ""
-		apt-get -y install squid
-		cat > /etc/squid/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-		MYIP2="s/xxxxxxxxx/$MYIP/g";
-		sed -i $MYIP2 /etc/squid/squid.conf;
-		/etc/init.d/squid restart
-		/etc/init.d/openvpn restart
-		/etc/init.d/nginx restart
-	fi
-
-fi
-
+ok "➡ service nginx restart "
 
 #config client
 cd /etc/openvpn/
