@@ -1,4 +1,5 @@
 #!/bin/bash
+#script by jiraphat yuenying for ubuntu 14.04
 
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root" 
@@ -176,6 +177,13 @@ cp /etc/openvpn/client.ovpn /home/vps/public_html/
 rm -f /root/client.ovpn
 
 
+ufw allow ssh
+ufw allow 1194/tcp
+ufw allow 8080/tcp
+ufw allow 3128/tcp
+ufw allow 80/tcp
+yes | sudo ufw enable
+
 echo ""
 echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
 echo ""
@@ -201,15 +209,16 @@ echo -e "${NC} "
 	echo "IP Proxy : $MYIP"
 	echo "Port Proxy : 8080"
 	echo "Download My Config : http://$MYIP:85/client.ovpn"
-	echo ""
-	echo "===================================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${YELLOW} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
-	echo "===================================================================="
-	echo ""
-	exit
+	echo "คุณจำเป็นต้องรีสตาร์ทระบบหนึ่งรอบ (y/n)"
+read a
 if [ $a == 'y' ]
 then
 reboot
 else
 exit
 fi
+	echo "===================================================================="
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${YELLOW} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo "===================================================================="
+	echo ""
+	exit
