@@ -201,7 +201,7 @@ echo ""
 echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
 echo ""
 	cd /usr/local/bin
-wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Me"
 chmod +x /usr/local/bin/m
 clear
 
@@ -215,19 +215,14 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $MYIP "
 echo -e "${NC} "
 	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
-	echo "IP Server : $IP"
-	echo "Port Server : $PORT"
-	if [[ "$PROTOCOL" = 'udp' ]]; then
-		echo "Protocal : UDP"
-	elif [[ "$PROTOCOL" = 'tcp' ]]; then
-		echo "Protocal : TCP"
-	fi
+	echo "IP Server : $MYIP"
+	echo "Port Server : 1194"
+	echo "Protocal : TCP"
 	echo "Port Nginx : 85"
 	echo "IP Proxy : $MYIP"
-	echo "Port Proxy : $PROXY"
-	echo "Download My Config : http://$MYIP:85/CLIENT.ovpn"
+	echo "Port Proxy : 8080"
+	echo "Download My Config : http://$MYIP:85/client.ovpn"
 	echo ""
-	]
 	echo "===================================================================="
 	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${YELLOW} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
 	echo "===================================================================="
