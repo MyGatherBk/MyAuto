@@ -75,18 +75,18 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${z1} 3${NC}|${z2} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 	fi
-	echo -e "|${z1} 4${NC}| ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
-	echo -e "|${z1} 5${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
+	echo -e "|${z1} 4${NC}|${z2} ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
+	echo -e "|${z1} 5${NC}|${z2} เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
 	echo -e "|${z1} 6${NC}|${z2} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${NC} "
-	echo -e "|${z1} 7${NC}| Delete บัญชีผู้ใช้ SSH "
+	echo -e "|${z1} 7${NC}|${z2} Delete บัญชีผู้ใช้ SSH "
 	echo -e "|${z1} 8${NC}|${z2} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
 	echo -e "|${z1} 9${NC}|${z2} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
-	echo -e "|${z1}10${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
+	echo -e "|${z1}10${NC}|${z2} ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
 	echo -e "|${z1}11${NC}|${z2} ตรวจสอบแบนด์วิดท์ต่อบัญชี ${NC} "
 	echo -e "|${z1}12${NC}|${z2} เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${NC} "
 	echo -e "|${z1}13${NC}|${z2} เปลี่ยนวันหมดอายุบัญชีผู้ใช้ ${NC} "
-	echo -e "|${z1}14${NC}| เช็ดการใช้งานแบนวิท " 
-	echo -e "|${z1}15${NC}| ปรับความเร็วอินเตอร์เน็ต  "
+	echo -e "|${z1}14${NC}|${z2} เช็ดการใช้งานแบนวิท " 
+	echo -e "|${z1}15${NC}|${z2} ปรับความเร็วอินเตอร์เน็ต  "
 	echo -e "|${z1}16${NC}|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
 	echo -e "|${z1}17${NC}|${z2} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|${z1}18${NC}|${z2} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
@@ -94,15 +94,15 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${z1}20${NC}|${z2} Update Credits Bannerssh ${NC} "
 	echo -e "|${z1}21${NC}|${z2} SHOW_PORTS ${NC} "
 	echo -e "|${z1}22${NC}|${z2} EDIT_PORT OPENVPN ${NC} "
-        echo -e "|${z1}23${NC}|${z2} จัดการตั้งค่าพร็อกซี่ ${NC}) "
-	echo -e "|${z1}24${NC}|${z2} EDIT_SQUID3 & EDIT_SQUID ${NC} "
-	echo -e "|${z1}25${NC}|${z2} EDIT_PORTSSH ${NC} "
-	echo -e "|${z1}26${NC}|${z2} EDIT_Config Openvpn  ${NC} "
-	echo -e "|${z1}27${NC}|${z2} Install_Dropbear  ${NC} "
-	echo -e "|${z1}28${NC}|${z2} EDIT_Dropbear  ${NC} "
-	echo -e "|${z1}29${NC}|${z2} Restart Openvpn  ${NC} "
-	echo -e "|${z1}30${NC}|${z2} ตรวจสอบ TIME LOGIN  ${NC} "
-	echo -e "|${z1}31${NC}|${z2} Reboot SERVER VPS  ${NC} "
+	echo -e "|${z1}23${NC}|${z2} EDIT_SQUID3 & EDIT_SQUID ${NC} "
+	echo -e "|${z1}24${NC}|${z2} EDIT_PORTSSH ${NC} "
+	echo -e "|${z1}25${NC}|${z2} EDIT_Config Openvpn  ${NC} "
+	echo -e "|${z1}26${NC}|${z2} Install_Dropbear  ${NC} "
+	echo -e "|${z1}27${NC}|${z2} EDIT_Dropbear  ${NC} "
+	echo -e "|${z1}28${NC}|${z2} Restart Openvpn  ${NC} "
+	echo -e "|${z1}29${NC}|${z2} ตรวจสอบ TIME LOGIN  ${NC} "
+	echo -e "|${z1}30${NC}|${z2} Reboot SERVER VPS  ${NC} "
+	echo -e "|${z1}31${NC}|${z2} Restart SQUID+SQUID3  ${NC} "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -2606,892 +2606,6 @@ fi
 
 	23) # ==================================================================================================================
 	
-#!/bin/bash
-#DEV BY PRATYASART THEEJANMART
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-if [[ -e /etc/debian_version ]]; then
-VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
-fi
-
-# IP Address
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-if [ -e '/etc/squid3/squid.txt' ]; then
-echo ""
-clear
-clear
-else
-echo "" > /etc/squid3/squid.txt
-sed -i '/^$/d' /etc/squid3/squid.txt
-fi
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-if [ -e '/etc/squid/squid.txt' ]; then
-echo ""
-clear
-clear
-else
-echo "" > /etc/squid/squid.txt
-sed -i '/^$/d' /etc/squid/squid.txt
-fi
-fi
-
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-if [ -e '/etc/squid3/port.txt' ]; then
-echo ""
-clear
-clear
-else
-echo " ┣ http_port 8080  " > /etc/squid3/port.txt
-sed -i '/^$/d' /etc/squid3/squid.txt
-fi
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-if [ -e '/etc/squid/port.txt' ]; then
-echo ""
-clear
-clear
-else
-echo " ┣ http_port 8080  " > /etc/squid/port.txt
-sed -i '/^$/d' /etc/squid/squid.txt
-fi
-fi
-
-IP=$(wget -qO- ipv4.icanhazip.com);
-if [[ "$IP" = "" ]]; then
-    IP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | grep -v '192.168'`;
-fi
-
-
-ok() {
-    echo -e '\e[32m'$1'\e[m';
-}
-
-die() {
-    echo -e '\e[1;35m'$1'\e[m';
-}
-
-des() {
-    echo -e '\e[1;31m'$1'\e[m'; exit 1;
-}
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}           การตั้งค่า Proxy${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-echo "1. เปิดปิดใช้งานไม่จำกัด IP  "
-echo "2. ตั้งค่าไอพี  " 
-echo "3. ตั้งค่าพอร์ต  "
- read -p "พิมพ์ตัวเลข  : " zenonnew
-
-if [[ "$zenonnew" = "" ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}            พิมพ์คำสั่งไม่ถูกต้อง${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e ""
- exit
-fi
-if [[ "1" = "$zenonnew" ]]; then
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-grep -E "^http_access allow all" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' ]]; then
-grep -E "^http_access allow all" /etc/squid/squid.conf >/dev/null
-fi
- if [ $? -eq 0 ]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}      สถานะปัจจุบัน Proxy ไม่จำกัด IP${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-read -p "เปลี่ยนเป็น Proxy ใช้ใด้เฉพาะเซิฟร์นี้หรือไม่ Y/n :" selet
-if [[ "$selet" = "Y" || "$selet" = "y" ]]; then
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-sed -i "s/http_access allow all/http_access allow localhost/g" /etc/squid3/squid.conf
-ok "➡ service squid3 restart "
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-sed -i "s/http_access allow all/http_access allow localhost/g" /etc/squid/squid.conf
-ok "➡ service squid restart "
-service squid restart -q > /dev/null 2>&1
-fi
-clear
-clear
-echo ""
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  =================================== ${NC} "
-echo -e "${GREEN}      สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้ ${NC} "
-echo -e "\033[1;31m  =================================== ${NC} "
-exit
-fi
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}     สถานะเปลี่ยนเป็น Proxy ไม่จำกัด IP${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
- else
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================== ${NC} "
-echo -e "${GREEN}     สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้ ${NC} "
-echo -e "\033[1;31m  ================================== ${NC} "
-
-read -p "เปลี่ยนเป็น Proxy ไม่จำกัด IP หรือไม่ Y/n :" selet
-if [[ "$selet" = "Y" || "$selet" = "y" ]]; then
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-sed -i "s/http_access allow localhost/http_access allow all/g" /etc/squid3/squid.conf
-ok "➡ service squid3 restart"
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-sed -i "s/http_access allow localhost/http_access allow all/g" /etc/squid/squid.conf
-ok "➡ service squid restart"
-service squid restart -q > /dev/null 2>&1
-fi
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  =================================== ${NC} "
-echo -e "${GREEN}      สถานะเปลี่ยนเป็น Proxy ใช้ใด้หลาย IP${NC} "
-echo -e "\033[1;31m  =================================== ${NC} "
-exit
-fi
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================== ${NC} "
-echo -e "${GREEN}     สถานะปัจจุบัน Proxy ใช้ใด้เฉพาะเซิฟร์นี้ ${NC} "
-echo -e "\033[1;31m  ================================== ${NC} "
-exit
-fi
-elif [[ "2" = "$zenonnew" ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}              เลือกใช้คำสั่ง${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-echo  "1. เพิ่มไอพี "
-echo  "2. เช็ดไอพี "
-echo  "3. ลบไอพี "
- read -p " พิมพ์ตัวเลข : " Selet
- if [[ "$Selet" = "" ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}            โปรดพิมพ์คำสั่ง${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
- exit
-fi
- if [[ $Selet = 1 ]]; then
- read -p " ## ใส่เลขไอพีที่จะใช้งานพร็อกซี่นี้ : " SERVER_IP
- if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-grep -E "^acl SSH dst $SERVER_IP" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
-fi
-if [ $? -eq 0 ]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}      IP $SERVER_IP มีอยู่ในระบบแล้ว${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-else
-read -p "บันทึกการตั้งค่านี้หรือไม่ y/n : " YN
-fi
- if [[ n = $YN || N = $YN ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}      $SERVER_IP ไม่ได้ยืนยันการใช้งาน${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit 
- fi
-
-
- 
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
-sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid3/squid.conf
-echo " $SERVER_IP " >> /etc/squid3/squid.txt
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
-sed -i "s/xxxxxxxxxx/$SERVER_IP/g" /etc/squid/squid.conf
-echo " $SERVER_IP " >> /etc/squid/squid.txt
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
-service squid restart -q > /dev/null 2>&1
-fi
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ===================================== ${NC} "
-echo -e "${GREEN}     $SERVER_IP ใช้งานพร็อกซี่เซิฟร์นี้เรียบร้อย${NC} "
-echo -e "\033[1;31m  ===================================== ${NC} "
-exit 
-elif [[ $Selet = 2 ]]; then
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-grep -E "^http_access allow all" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-grep -E "^http_access allow all" /etc/squid/squid.conf >/dev/null
-fi
- if [ $? -eq 0 ]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}        สถานะปัจจุบัน Proxy ไม่จำกัด IP${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-else
-
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}         ไอพีที่เปิดใช้งานอยู่ปัจจุบัน${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-echo " $IP  "
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-cat /etc/squid3/squid.txt
-echo "########################"
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-cat /etc/squid/squid.txt
-echo "########################"
-fi
-exit
-fi
-elif [[ $Selet = 3 ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}             ลบไอพีพร็อกซี่้${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-echo "1. ลบบางไอพี  "
-echo "2. รีเซ็ตค่าเดิม  "
-read -p "พิมพ์ตัวเลข : " Selet1
-if [[ $Selet1 = 1 ]]; then
-read -p " ┣ ใส่เลขไอพีที่จะลบ : " SERVER_IP
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-grep -E "^acl SSH dst $SERVER_IP" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-grep -E "^acl SSH dst $SERVER_IP" /etc/squid/squid.conf >/dev/null
-fi
-
-if [ $? -eq 0 ]; then
-if [[ $SERVER_IP = $IP ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}        ไม่อณุญาตให้ลบไอพีของเซิฟร์นี้${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-
- exit
-fi
- read -p "       ## แน่ใจว่าต้องการลบไอพี Y/n : " YN
-else
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}       ไม่พบ IP $SERVER_IP ในระบบ${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-fi
-
-if [[ $YN = N || $YN = n ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}          ยกเลิกการเปลียนแปลง${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
- exit
-fi
-
-
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-SERVER_IP2="/$SERVER_IP/d";
-sed -i $SERVER_IP2 /etc/squid3/squid.txt
-sed -i $SERVER_IP2 /etc/squid3/squid.conf
-sed -i '/^$/d' /etc/squid3/squid.txt
-sed -i '/^$/d' /etc/squid3/squid.conf
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-SERVER_IP2="/$SERVER_IP/d";
-sed -i $SERVER_IP2 /etc/squid/squid.txt
-sed -i $SERVER_IP2 /etc/squid/squid.conf
-sed -i '/^$/d' /etc/squid/squid.txt
-sed -i '/^$/d' /etc/squid/squid.conf
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
-service squid restart -q > /dev/null 2>&1
-fi
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}           กเลิกการเปลียนแปลง${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-elif [[ $Selet1 = 2 ]]; then
-read -p " ## แน่ใจว่าต้องการลบไอพีทั้งหมด Y/n : " YN
-if [[ $YN = N || $YN = n ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}          ยกเลิกการเปลียนแปลง${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
- exit
-fi
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-SERVER_IP2="/255.255.255.255/d";
-sed -i $SERVER_IP2 /etc/squid3/squid.txt
-sed -i $SERVER_IP2 /etc/squid3/squid.conf
-sed -i '/^$/d' /etc/squid3/squid.txt
-sed -i '/^$/d' /etc/squid3/squid.conf
-sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid3/squid.conf
-sed -i "s/xxxxxxxxxx/$IP/g" /etc/squid3/squid.conf
-echo "" > /etc/squid3/squid.txt
-sed -i '/^$/d' /etc/squid3/squid.txt
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-SERVER_IP2="/255.255.255.255/d";
-sed -i $SERVER_IP2 /etc/squid/squid.txt
-sed -i $SERVER_IP2 /etc/squid/squid.conf
-sed -i '/^$/d' /etc/squid/squid.conf
-sed -i "/acl CONNECT method CONNECT/a acl SSH dst xxxxxxxxxx-xxxxxxxxxx\/255.255.255.255" /etc/squid/squid.conf
-sed -i "s/xxxxxxxxxx/$IP/g" /etc/squid/squid.conf
-echo "" > /etc/squid/squid.txt
-sed -i '/^$/d' /etc/squid/squid.txt
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
-service squid restart -q > /dev/null 2>&1
-fi
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}           ลบไอพีทั้งหมด เรียบร้อย ${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-fi
-fi
-elif [[ "3" = "$truepay" ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}              เลือกใช้คำสั่ง${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-echo  "1. เพิ่มพอร์ต "
-echo  "2. เช็ดพอร์ต "
-echo  "3. ลบพอร์ต  "
- read -p " พิมพ์ตัวเลข : " Selet
- if [[ "$Selet" = "" ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}             โปรดพิมพ์คำสั่ง${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
- exit
-fi
- if [[ $Selet = 1 ]]; then
- read -p "ใส่พอร์ตที่จะใช้งานกับพร็อกซี่ : " Port
- if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
-fi
-
-if [ $? -eq 0 ]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}        Port $Port มีอยู่ในระบบแล้ว${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-else
-if [[ $Port = 80 || $Port = 443 || $Port = 22 || $Port = 143 || $Port = 444 || $Port = 10000 || $Port = 4468 || $Port = 9000 || $Port = 1 || $Port = 2 || $Port = 3 || $Port = 4 || $Port = 5 || $Port = 6 || $Port = 7 || $Port = 8 || $Port = 9 || $Port = 0 || $Port = 21 || $Port = 70 || $Port = 210 || $Port = 1025 || $Port = 65535 || $Port = 280 || $Port = 488 || $Port = 591 || $Port = 777 || $Port = 255 || $Port = 10 || $Port = 172 || $Port = 127 || $Port = 192 || $Port = 32 || $Port = 12 || $Port = 16 || $Port = 1440 || $Port = 20 || $Port = 10080 || $Port = 4320 || $Port = 3128 || $Port = 5555 ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}      Port $Port ไม่สามารถเปิดใช้งานได้${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-fi
-read -p "  ## บันทึกการตั้งค่านี้หรือไม่ y/n : " YN
-fi
- if [[ n = $YN || N = $YN ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}        $Port ไม่ได้ยืนยันการใช้งาน${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit 
- fi
-
-
- 
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-sed -i "/http_port 8080/a http_port xxxx" /etc/squid3/squid.conf
-sed -i "s/xxxx/$Port/g" /etc/squid3/squid.conf
-echo "  http_port $Port " >> /etc/squid3/port.txt
-echo "  กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-sed -i "/http_port 8080/a http_port xxxx" /etc/squid/squid.conf
-sed -i "s/xxxx/$Port/g" /etc/squid/squid.conf
-echo "  http_port $Port  " >> /etc/squid/port.txt
-echo "  กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
-service squid restart -q > /dev/null 2>&1
-fi
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}         Port $Port พร้อมใช้งาน${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit 
-elif [[ $Selet = 2 ]]; then
-
-clear
-clear
-echo  " ############# พอร์ตที่เปิดใช้งานอยู่ปัจจุบัน ############# "
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-cat /etc/squid3/port.txt
-echo " ############# "
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-cat /etc/squid/port.txt
-echo " ############# "
-exit
-fi
-
-elif [[ $Selet = 3 ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}            ลบพอร์ตพร็อกซี${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-echo "        ## 1. ลบบางพอร์ต  "
-echo "        ## 2. รีเซ็ตค่าเดิม  "
-read -p "      ## พิมพ์ตัวเลข : " Selet1
-if [[ $Selet1 = 1 ]]; then
-read -p " ## ใส่เลขพอร์ตที่จะลบ : " Port
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-grep -E "^http_port $Port" /etc/squid3/squid.conf >/dev/null
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-grep -E "^http_port $Port" /etc/squid/squid.conf >/dev/null
-fi
-if [ $? -eq 0 ]; then
-if [[ $Port = 8080 ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}        ไม่อณุญาตให้ลบพอร์ต 8080${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
- exit
-fi
- read -p "แน่ใจว่าต้องการลบพอร์ต Y/n : " YN
-else
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}         ไม่พบ Port $Port ในระบบ${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-fi
-
-
-if [[ $YN = N || $YN = n ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}          ยกเลิกการเปลียนแปลง${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
- exit
-fi
-
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-SERVER_IP2="/$Port/d";
-sed -i $SERVER_IP2 /etc/squid3/port.txt
-sed -i $SERVER_IP2 /etc/squid3/squid.conf
-sed -i '/^$/d' /etc/squid3/port.txt
-sed -i '/^$/d' /etc/squid3/squid.conf
-echo " กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่..."
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-SERVER_IP2="/$Port/d";
-sed -i $SERVER_IP2 /etc/squid/port.txt
-sed -i $SERVER_IP2 /etc/squid/squid.conf
-sed -i '/^$/d' /etc/squid/port.txt
-sed -i '/^$/d' /etc/squid/squid.conf
-echo " กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
-service squid restart -q > /dev/null 2>&1
-fi
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}         ลบพอร์ต $Port เรียบร้อย${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-elif [[ $Selet1 = 2 ]]; then
-read -p " ## แน่ใจว่าต้องรีเซ็ตค่าเดิม Y/n : " YN
-if [[ $YN = N || $YN = n ]]; then
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}                ยกเลิกการรีเซ็ต    ${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
- exit
-fi
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-SERVER_IP2="/http_port/d";
-sed -i $SERVER_IP2 /etc/squid3/port.txt
-sed -i $SERVER_IP2 /etc/squid3/squid.conf
-sed -i '/^$/d' /etc/squid3/port.txt
-sed -i '/^$/d' /etc/squid3/squid.conf
-sed -i "/http_access allow SSH/a http_port 8080" /etc/squid3/squid.conf
-echo " http_port 8080 " > /etc/squid3/port.txt
-sed -i '/^$/d' /etc/squid3/port.txt
-echo " ╰ กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
-service squid3 restart -q > /dev/null 2>&1
-elif [[ "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.4"' ]]; then
-SERVER_IP2="/http_port/d";
-sed -i $SERVER_IP2 /etc/squid/port.txt
-sed -i $SERVER_IP2 /etc/squid/squid.conf
-sed -i '/^$/d' /etc/squid/squid.conf
-sed -i "/http_access allow SSH/a http_port 8080" /etc/squid/squid.conf
-echo " http_port 8080 " > /etc/squid/port.txt
-sed -i '/^$/d' /etc/squid/port.txt
-echo " กำลังเปิดใช้งานตั้งค่าใหม่ รอสัครู่... "
-service squid restart -q > /dev/null 2>&1
-fi
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
-echo ""
-echo -e "\033[1;31m  ================================ ${NC} "
-echo -e "${GREEN}         รีเซ็ตพอร์ค่าเดิมเรียบร้อย${NC} "
-echo -e "\033[1;31m  ================================ ${NC} "
-exit
-fi
-fi
-fi
-exit
-	;;
-	
-	24) # ==================================================================================================================
 	clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -3513,7 +2627,7 @@ elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || 
 fi
 	;;
 	
-	25) # ==================================================================================================================
+	24) # ==================================================================================================================
 	clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -3529,7 +2643,7 @@ service ssh restart
 exit
 ;;
 
-	26) # ==================================================================================================================
+	25) # ==================================================================================================================
 
 clear
 echo ""
@@ -3564,7 +2678,7 @@ esac
 	;;
 	
 	
-	27) # ==================================================================================================================
+	26) # ==================================================================================================================
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
@@ -3576,7 +2690,7 @@ service dropbear restart
 
 	;;
 	
-	28) # ==================================================================================================================
+	27) # ==================================================================================================================
 #!/bin/bash
 # Script by : Clrkz
 rm -f /root/opensshport
@@ -3681,7 +2795,7 @@ fi
 
 	;;
 
-	29) # ==================================================================================================================
+	28) # ==================================================================================================================
 
 #!/bin/bash
 		clear
@@ -3705,7 +2819,7 @@ echo ""
 		;;
 	
 	
-		30) # ==================================================================================================================
+		29) # ==================================================================================================================
 
 #!/bin/bash
 clear
@@ -3775,7 +2889,7 @@ echo " "
 
 	;;
 	
-		31) # ==================================================================================================================
+		30) # ==================================================================================================================
 
 		clear
 echo ""
@@ -3790,6 +2904,58 @@ echo ""
 		reboot
 		exit
 	;;
+	
+	
+	31) # ==================================================================================================================
+
+#!/bin/bash
+		clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
+if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
+			echo ""
+			exit
+		else
+		service squid restart
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m            Squid Proxy Restarted             "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		fi
+	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid3 Proxy"
+			echo ""
+			exit
+		else
+		service squid3 restart
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]"
+		echo -e "\e[0m                                                   "
+		echo -e "\e[93m            Squid3 Proxy Restarted             "
+		echo -e "\e[0m                                                   "
+		echo -e "\e[94m[][][]======================================[][][]\e[0m"
+		exit
+		fi
+	fi
+		;;
+
+	esac
+;;
 	
 	
 	00) # ==================================================================================================================
