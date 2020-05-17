@@ -77,7 +77,7 @@ echo ""
 echo ""
 echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${RED}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL "
 echo ""
-echo "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
@@ -86,14 +86,11 @@ squid3port="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')
 squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
 nginxport="$(netstat -nlpt | grep -i nginx| grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 echo ""
-echo -e "${GREEN}         Port OpenSSH  ${NC}   :  "$opensshport
-echo -e "${GREEN}         Port Dropbear${NC}    :  "$dropbearport
-echo -e "${GREEN}         Port Squid  ${NC}     :  "$squidport
-echo -e "${GREEN}         Port Squid3 ${NC}     :  "$squid3port
-echo -e "${GREEN}         Port OpenVPN ${NC}    :  "$openvpnport
-echo -e "${GREEN}         Port Nginx ${NC}      :  "$nginxport
+echo -e "${GREEN}Port OpenSSH  ${NC}   :  "$opensshport${NC}  ${RED} |${NC} Port Squid3 ${NC}     :  "$squid3port"
+echo -e "${GREEN}Port Dropbear${NC}    :  "$dropbearport${NC} ${RED} |${NC} Port OpenVPN ${NC}    :  "$openvpnport"
+echo -e "${GREEN}Port Squid  ${NC}     :  "$squidport${NC}    ${RED} |${NC} Port Nginx ${NC}      :  "$nginxport"
 echo -e "${NC} "
-echo "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
