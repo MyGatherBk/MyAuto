@@ -47,11 +47,13 @@ echo -e "${NC} "
 	tram=$( free -m | awk 'NR==2 {print $2}' )
 	swap=$( free -m | awk 'NR==4 {print $2}' )
 	up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
-echo -e "
-\e[032;1mSYSTEM OS:\e[0m  $chek        \e[032;1mTotal Amount Of RAM:\e[0m $tram MB
-\e[032;1mCPU Model:\e[0m $cname        \e[032;1mTotal Amount Of Swap:\e[0m $swap MB
-\e[032;1mNumber Of Cores:\e[0m $core   \e[032;1mSystem Uptime:\e[0m $up
-\e[032;1mCPU Frequency:\e[0m $freq MHz"
+	echo -e "\e[032;1mSYSTEM OS:\e[0m  $chek"
+	echo -e "\e[032;1mCPU Model:\e[0m $cname"
+	echo -e "\e[032;1mNumber Of Cores:\e[0m $cores"
+	echo -e "\e[032;1mCPU Frequency:\e[0m $freq MHz"
+	echo -e "\e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
+	echo -e "\e[032;1mTotal Amount Of Swap:\e[0m $swap MB"
+	echo -e "\e[032;1mSystem Uptime:\e[0m $up"
 echo "-------------------------------------------------------" 
 echo "============================================= "
 echo "ลำดับ   ชื่อบัญชีผู้ใช้       สถานะ     วันหมดอายุ "
@@ -83,7 +85,6 @@ echo ""
 echo ""
 echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${RED}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL "
 echo ""
-exit
 echo "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
 opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
@@ -94,7 +95,7 @@ squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
 nginxport="$(netstat -nlpt | grep -i nginx| grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 clear
 clear
-echecho ""
+echo ""
 echo -e "${GREEN}         Port OpenSSH  ${NC}   :  "$opensshport
 echo -e "${GREEN}         Port Dropbear${NC}    :  "$dropbearport
 echo -e "${GREEN}         Port Squid  ${NC}     :  "$squidport
