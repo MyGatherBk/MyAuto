@@ -48,9 +48,9 @@ echo -e "${NC} "
 	swap=$( free -m | awk 'NR==4 {print $2}' )
 	up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
 	echo -e "\e[032;1mSYSTEM OS:\e[0m  $chek          \e[032;1mTotal Amount Of RAM:\e[0m $tram MB
-	echo -e "\e[032;1mCPU Model:\e[0m $cname          \e[032;1mTotal Amount Of Swap:\e[0m $swap MB
-	echo -e "\e[032;1mNumber Of Cores:\e[0m $core     \e[032;1mSystem Uptime:\e[0m $up
-	echo -e "\e[032;1mCPU Frequency:\e[0m $freq MHz"
+	\e[032;1mCPU Model:\e[0m $cname                   \e[032;1mTotal Amount Of Swap:\e[0m $swap MB
+	\e[032;1mNumber Of Cores:\e[0m $core              \e[032;1mSystem Uptime:\e[0m $up
+	\e[032;1mCPU Frequency:\e[0m $freq MHz"
 	echo "-------------------------------------------------------" 
 echo "============================================= "
 echo "ลำดับ   ชื่อบัญชีผู้ใช้       สถานะ     วันหมดอายุ "
