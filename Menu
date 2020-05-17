@@ -53,9 +53,56 @@ echo -e "${NC} "
 	echo -e "\e[032;1mCPU Frequency:\e[0m $freq MHz"
 	echo -e "\e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
 	echo -e "\e[032;1mTotal Amount Of Swap:\e[0m $swap MB"
-	echo -e "\e[032;1mSystem Uptime:\e[0m $up"
-	echo "-------------------------------------------------------" 
-
+	echo -e "\e[032;1mSystem Uptime:\e[0m $up" 
+echo "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+echo "============================================= "
+echo "ลำดับ   ชื่อบัญชีผู้ใช้       สถานะ     วันหมดอายุ "
+echo "============================================= "
+C=1
+ON=0
+OFF=0
+while read ONOFF
+do
+	CLIENTOFFLINE=$(echo -e "${RED}OFFLINE${NC}")
+	CLIENTONLINE=$(echo -e "${GREEN}ONLINE${NC}")
+	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
+	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
+	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
+	ONLINE="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $ACCOUNT | grep -Eom 1 $ACCOUNT)"
+	if [[ $ID -ge 1000 ]]; then
+		if [[ -z $ONLINE ]]; then
+			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTOFFLINE" "$EXP"
+			OFF=$((OFF+1))
+		else
+			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTONLINE" "$EXP"
+			ON=$((ON+1))
+		fi
+			C=$((C+1))
+        fi
+done < /etc/passwd
+TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
+echo ""
+echo ""
+echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${RED}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL "
+echo "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+squid3port="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
+squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
+nginxport="$(netstat -nlpt | grep -i nginx| grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+clear
+clear
+echecho ""
+echo -e "${GREEN}         Port OpenSSH  ${NC}   :  "$opensshport
+echo -e "${GREEN}         Port Dropbear${NC}    :  "$dropbearport
+echo -e "${GREEN}         Port Squid  ${NC}     :  "$squidport
+echo -e "${GREEN}         Port Squid3 ${NC}     :  "$squid3port
+echo -e "${GREEN}         Port OpenVPN ${NC}    :  "$openvpnport
+echo -e "${GREEN}         Port Nginx ${NC}      :  "$nginxport
+echo -e "${NC} "
+echo "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
@@ -77,7 +124,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	fi
 	echo -e "|${z1} 4${NC}|${z2} ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
 	echo -e "|${z1} 5${NC}|${z2} เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
-	echo -e "|${z1} 6${NC}|${z2} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${NC} "
+	echo -e "|${z1} 6${NC}|${z2} ------- ${NC} "
 	echo -e "|${z1} 7${NC}|${z2} Delete บัญชีผู้ใช้ SSH "
 	echo -e "|${z1} 8${NC}|${z2} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
 	echo -e "|${z1} 9${NC}|${z2} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
@@ -92,13 +139,13 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${z1}18${NC}|${z2} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
 	echo -e "|${z1}19${NC}|${z2} MENU ไฟล์สคริปท์ของเมนู ${NC} "
 	echo -e "|${z1}20${NC}|${z2} Update Credits Bannerssh ${NC} "
-	echo -e "|${z1}21${NC}|${z2} SHOW_PORTS ${NC} "
+	echo -e "|${z1}21${NC}|${z2} ------- ${NC} "
 	echo -e "|${z1}22${NC}|${z2} EDIT_PORT OPENVPN ${NC} "
 	echo -e "|${z1}23${NC}|${z2} EDIT_SQUID3 & EDIT_SQUID ${NC} "
 	echo -e "|${z1}24${NC}|${z2} EDIT_PORTSSH ${NC} "
 	echo -e "|${z1}25${NC}|${z2} EDIT_Config Openvpn  ${NC} "
-	echo -e "|${z1}26${NC}|${z2} Install_Dropbear  ${NC} "
-	echo -e "|${z1}27${NC}|${z2} EDIT_Dropbear  ${NC} "
+	echo -e "|${z1}26${NC}|${z2} ------- ${NC} "
+	echo -e "|${z1}27${NC}|${z2} -------  ${NC} "
 	echo -e "|${z1}28${NC}|${z2} Restart Openvpn  ${NC} "
 	echo -e "|${z1}29${NC}|${z2} ตรวจสอบ TIME LOGIN  ${NC} "
 	echo -e "|${z1}30${NC}|${z2} Reboot SERVER VPS  ${NC} "
@@ -129,7 +176,6 @@ do
 done < /etc/passwd
 bash Auto-Delete-Client
 echo -e "TOTAL BANDWIDTH ${CYAN}$TOTALBW${NC}${CYAN}B${NC}"
-echo -e "CLIENT ONLINE NOW ${GREEN}$ON${NC} CLIENT "
 echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
         read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 echo ""
@@ -777,49 +823,6 @@ esac
 	;;
 	
 6) # ==================================================================================================================
-
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-echo "============================================= "
-echo "ลำดับ   ชื่อบัญชีผู้ใช้       สถานะ     วันหมดอายุ "
-echo "============================================= "
-C=1
-ON=0
-OFF=0
-while read ONOFF
-do
-	CLIENTOFFLINE=$(echo -e "${RED}OFFLINE${NC}")
-	CLIENTONLINE=$(echo -e "${GREEN}ONLINE${NC}")
-	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
-	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
-	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
-	ONLINE="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $ACCOUNT | grep -Eom 1 $ACCOUNT)"
-	if [[ $ID -ge 1000 ]]; then
-		if [[ -z $ONLINE ]]; then
-			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTOFFLINE" "$EXP"
-			OFF=$((OFF+1))
-		else
-			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTONLINE" "$EXP"
-			ON=$((ON+1))
-		fi
-			C=$((C+1))
-        fi
-done < /etc/passwd
-TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
-echo ""
-echo ""
-echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${RED}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL "
-echo ""
-exit
-
 	;;
 	
 7) # ==================================================================================================================
@@ -2459,33 +2462,6 @@ service ssh restart
 	;;
 	
 	21) # ==================================================================================================================
-#!/bin/bash
-# Script by : Clrkz
-opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-squid3port="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
-squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
-nginxport="$(netstat -nlpt | grep -i nginx| grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-clear
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-echo -e "${GREEN}         Port OpenSSH  ${NC}   :  "$opensshport
-echo -e "${GREEN}         Port Dropbear${NC}    :  "$dropbearport
-echo -e "${GREEN}         Port Squid  ${NC}     :  "$squidport
-echo -e "${GREEN}         Port Squid3 ${NC}     :  "$squid3port
-echo -e "${GREEN}         Port OpenVPN ${NC}    :  "$openvpnport
-echo -e "${GREEN}         Port Nginx ${NC}      :  "$nginxport
-echo -e "${NC} "
 ;;
 
 	22) # ==================================================================================================================
@@ -2673,121 +2649,10 @@ esac
 	
 	
 	26) # ==================================================================================================================
-apt-get -y install dropbear
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=80/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110"/g' /etc/default/dropbear
-echo "/bin/false" >> /etc/shells
-echo "/usr/sbin/nologin" >> /etc/shells
-service ssh restart
-service dropbear restart
-
 	;;
 	
 	27) # ==================================================================================================================
-#!/bin/bash
-# Script by : Clrkz
-rm -f /root/opensshport
-rm -f /root/dropbearport
-rm -f /root/stunnel4port
-rm -f /root/openvpnport
-rm -f /root/squidport
-opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
-echo $opensshport > /root/opensshport
-cat > /root/opensshport <<-END
-$opensshport
-END
-echo $dropbearport > /root/dropbearport
-cat > /root/dropbearport <<-END
-$dropbearport
-END
-echo $stunnel4port > /root/stunnel4port
-cat > /root/stunnel4port <<-END
-$stunnel4port
-END
-echo $openvpnport > /root/openvpnport
-cat > /root/openvpnport <<-END
-$openvpnport
-END
-echo $squidport > /root/squidport
-cat > /root/squidport <<-END
-$squidport
-END
-
-cd
-clear
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]"
-echo -e "\e[0m                                                   "
-echo -e "\e[93m                  Dropbear  Ports                 "
-echo -e "\e[93m                   "$dropbearport
-echo -e "\e[0m                                                   "
-read -p "       Which Port Should Be Changed? :  " Port
-egrep "^$Port" /root/dropbearport >/dev/null
-if [ $? -eq 0 ]; then
-	read -p "            From Port $Port -> Port " Port_New
-	if grep -Fxq $Port_New /root/opensshport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              OpenSSH Port Conflict              "
-		echo -e "\e[91m              Port Is Already In Use              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	if grep -Fxq $Port_New /root/stunnel4port; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              Stunnel4 Port Conflict              "
-		echo -e "\e[91m              Port Is Already In Use              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	if grep -Fxq $Port_New /root/openvpnport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              Openvpn Port Conflict               "
-		echo -e "\e[91m              Port Is Already In Use              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	if grep -Fxq $Port_New /root/squidport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m               Squid3 Port Conflict               "
-		echo -e "\e[91m              Port Is Already In Use              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	Port_Change="s/$Port/$Port_New/g";
-	sed -i $Port_Change /etc/default/dropbear
-
-	service dropbear restart > /dev/null
-	rm -f /root/dropbear
-	dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-	clear
-	echo -e "\e[0m                                                   "
-	echo -e "\e[94m[][][]======================================[][][]"
-	echo -e "\e[0m                                                   "
-	echo -e "\e[93m           AutoScriptVPS by  Clrkz           "
-	echo -e "\e[0m                                                   "
-	echo -e "\e[93m                  Dropbear  Ports                 "
-	echo -e "\e[93m                   "$dropbearport
-	echo -e "\e[0m                                                   "
-	echo -e "\e[94m[][][]======================================[][][]\e[0m"
-
-else
-	clear
-	echo -e "\e[0m                                                   "
-	echo -e "\e[91m                 Port Doesnt Exit                 "
-	echo -e "\e[0m                                                   "
-	echo -e "\e[94m[][][]======================================[][][]\e[0m"
-fi
-
-	;;
+    ;;
 
 	28) # ==================================================================================================================
 
