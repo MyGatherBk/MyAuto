@@ -129,7 +129,6 @@ do
 done < /etc/passwd
 bash Auto-Delete-Client
 echo ""
-echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
 echo -e "TOTAL BANDWIDTH ${CYAN}$TOTALBW${NC}${CYAN}B${NC}"
 echo -e "CLIENT ONLINE NOW ${GREEN}$ON${NC} CLIENT "
 echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -2949,8 +2948,6 @@ if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' |
 		fi
 	fi
 		;;
-
-;;
 	
 	
 	00) # ==================================================================================================================
