@@ -143,7 +143,7 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${z1}26${NC}|${z2} ------- ${NC} "
 	echo -e "|${z1}27${NC}|${z2} -------  ${NC} "
 	echo -e "|${z1}28${NC}|${z2} Restart Openvpn  ${NC} "
-	echo -e "|${z1}29${NC}|${z2} ตรวจสอบ TIME LOGIN  ${NC} "
+	echo -e "|${z1}M${NC}|${z2} MUNU M RETRUN  ${NC} "
 	echo -e "|${z1}30${NC}|${z2} Reboot SERVER VPS  ${NC} "
 	echo -e "|${z1}31${NC}|${z2} Restart SQUID+SQUID3  ${NC} "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
@@ -172,7 +172,6 @@ do
 done < /etc/passwd
 bash Auto-Delete-Client
 echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
-echo -e "TOTAL BANDWIDTH ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  CLIENT ONLINE NOW ${GRAY}$ON${NC} CLIENT"
 echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
         read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 echo ""
@@ -347,9 +346,7 @@ echo ""
 		echo "รหัสผ่าน        : $PASSWORD"
 		echo "หมดอายุในวันที่   : $EXP "
 		echo "IP            : $IP"
-		echo "Port OpenSSH  : 22,143 "
-		echo "Port Dropbear : 80,109,110 "
-		echo "Port SSL      : 442 "
+		echo "Port OpenSSH  : 22 "
 		echo "Proxy Port    : 8080 "
 		exit
 	else
@@ -2719,58 +2716,7 @@ echo ""
 	
 	
 		29) # ==================================================================================================================
-
-#!/bin/bash
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-
-if [ -e "/var/log/auth.log" ]; then
-        LOG="/var/log/auth.log";
-fi
-if [ -e "/var/log/secure" ]; then
-        LOG="/var/log/secure";
-fi
-               
-echo " "
-echo "-----=[ OpenSSH User Login ]=-----";
-echo "ID  |  Username  |  IP Address";
-echo "-------------------------------------";
-cat $LOG | grep -i sshd | grep -i "Accepted password for" > /tmp/login-db.txt
-data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
-
-for PID in "${data[@]}"
-do
-        cat /tmp/login-db.txt | grep "sshd\[$PID\]" > /tmp/login-db-pid.txt;
-        NUM=`cat /tmp/login-db-pid.txt | wc -l`;
-        USER=`cat /tmp/login-db-pid.txt | awk '{print $9}'`;
-        IP=`cat /tmp/login-db-pid.txt | awk '{print $11}'`;
-        if [ $NUM -eq 1 ]; then
-                echo "$PID - $USER - $IP";
-        fi
-done
-if [ -f "/etc/openvpn/openvpn-status.log" ]; then
-        line=`cat /etc/openvpn/openvpn-status.log | wc -l`
-        a=$((3+((line-8)/2)))
-        b=$(((line-8)/2))
-        echo " "
-        echo "-----=[ OpenVPN User Login ]=-----";
-        echo "Username  |  IP Address  |  Connected Since";
-        echo "-------------------------------------";
-        cat /etc/openvpn/openvpn-status.log | head -n $a | tail -n $b | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
-        cat /tmp/vpn-login-db.txt
-fi
-
-echo " "
-echo " "
-
+m
 	;;
 	
 		30) # ==================================================================================================================
