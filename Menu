@@ -43,8 +43,9 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 chek=$(cat /etc/issue.net)
 tram=$( free -m | awk 'NR==2 {print $2}' )
 up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
-echo -e "\033[1;32mSYSTEM          หน่วยความจำ RAM      SRVER Open "
-echo -e "\e[032;1mSYSTEM OS:\e[0m  $chek \e[032;1mTotal Amount Of RAM:\e[0m $tram MB \e[032;1mSystem Uptime:\e[0m $up" 
+echo -e "\e[032;1mSYSTEM OS:\e[0m  $chek" 
+echo -e "\e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
+echo -e "\e[032;1mSystem Uptime:\e[0m $up"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" 
 echo "============================================= "
 echo "ลำดับ   ชื่อบัญชีผู้ใช้       สถานะ     วันหมดอายุ "
