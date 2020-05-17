@@ -94,35 +94,51 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
-	echo -e "|${z1} 1${NC}|${z2} เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)${NC}  |${z1}17${NC}|${z2} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} 
-${NC}  |${z1} 2${NC}|${z2} เพิ่มชื่อผู้ใช้งาน {User/Pass}  SSH (HTTP) VPN (OPENVPN)${NC}  |${z1}18${NC}|${z2} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} 
+echo -e "|${z1} 1${NC}|${z2} เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)${NC} "
+	echo -e "|${z1} 2${NC}|${z2} เพิ่มชื่อผู้ใช้งาน {User/Pass}  SSH (HTTP) VPN (OPENVPN)${NC} "
 if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-${NC}  |${z1} 3${NC}|${z2} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
+	echo -e "|${z1} 3${NC}|${z2} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-${NC}  |${z1} 3${NC}|${z2} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC}  |${z1}19${NC}|${z2} MENU ไฟล์สคริปท์ของเมนู  ${NC} 
+	echo -e "|${z1} 3${NC}|${z2} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-${NC}  |${z1} 3${NC}|${z2} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
+	echo -e "|${z1} 3${NC}|${z2} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
 		elif [[ -e /etc/squid/squid.conf ]]; then
-${NC}  |${z1} 3${NC}|${z2} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC}  |${z1}21${NC}|${z2} -------  ${NC} 
+	echo -e "|${z1} 3${NC}|${z2} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
 		fi
 	fi
-	echo -e "|${z1} 4${NC}|${z2} ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง${NC}  |${z1}22${NC}|${z2} EDIT_PORT OPENVPN ${NC} 
-${NC}  |${z1} 5${NC}|${z2} เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${NC}  |${z1}23${NC}|${z2} EDIT_SQUID3 & EDIT_SQUID ${NC}                                                                   
-${NC}  |${z1} 6${NC}|${z2} ------- ${NC}${NC}  |${z1}24${NC}|${z2} EDIT_PORTSSH ${NC}                                                 	                                                                 
-${NC}  |${z1} 7${NC}|${z2} Delete บัญชีผู้ใช้ SSH${NC}  |${z1}25${NC}|${z2} EDIT_Config Openvpn  ${NC}                                                            
-${NC}  |${z1} 8${NC}|${z2} Delete บัญชีผู้ใช้ OPENVPN${NC}  |${z1}26${NC}|${z2} -------  ${NC}                                                                     
-${NC}  |${z1} 9${NC}|${z2} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC}  |${z1}27${NC}|${z2} ------- ${NC}                                                        
-${NC}  |${z1}10${NC}|${z2} ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ ${NC}  |${z1}28${NC}|${z2} Restart Openvpn ${NC}                                          
-${NC}  |${z1}11${NC}|${z2} ตรวจสอบแบนด์วิดท์ต่อบัญชี ${NC}  |${z1}29${NC}|${z2} ตรวจสอบ TIME LOGIN ${NC}                                                              
-${NC}  |${z1}12${NC}|${z2} เปลี่ยนรหัสผ่านบัญชีผู้ใช้${NC}  |${z1}30${NC}|${z2} Reboot SERVER VPS  ${NC}                                  
-${NC}  |${z1}13${NC}|${z2} เปลี่ยนวันหมดอายุบัญชีผู้ใช้${NC}  |${z1}31${NC}|${z2} Restart SQUID+SQUID3  ${NC}                                     
-${NC}  |${z1}14${NC}|${z2} เช็ดการใช้งานแบนวิท ${NC}  |00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔  ${NC}              
-${NC}  |${z1}15${NC}|${z2} ปรับความเร็วอินเตอร์เน็ต  ${NC}                                      
-${NC}  |${z1}16${NC}|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "	
+	echo -e "|${z1} 4${NC}|${z2} ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
+	echo -e "|${z1} 5${NC}|${z2} เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
+	echo -e "|${z1} 6${NC}|${z2} ------- ${NC} "
+	echo -e "|${z1} 7${NC}|${z2} Delete บัญชีผู้ใช้ SSH "
+	echo -e "|${z1} 8${NC}|${z2} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
+	echo -e "|${z1} 9${NC}|${z2} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
+	echo -e "|${z1}10${NC}|${z2} ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
+	echo -e "|${z1}11${NC}|${z2} ตรวจสอบแบนด์วิดท์ต่อบัญชี ${NC} "
+	echo -e "|${z1}12${NC}|${z2} เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${NC} "
+	echo -e "|${z1}13${NC}|${z2} เปลี่ยนวันหมดอายุบัญชีผู้ใช้ ${NC} "
+	echo -e "|${z1}14${NC}|${z2} เช็ดการใช้งานแบนวิท " 
+	echo -e "|${z1}15${NC}|${z2} ปรับความเร็วอินเตอร์เน็ต  "
+	echo -e "|${z1}16${NC}|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
+	echo -e "|${z1}17${NC}|${z2} REMOVE OPENVPN SCRIPT ${NC} ${GREEN} ✔ ${NC} "
+	echo -e "|${z1}18${NC}|${z2} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
+	echo -e "|${z1}19${NC}|${z2} MENU ไฟล์สคริปท์ของเมนู ${NC} "
+	echo -e "|${z1}20${NC}|${z2} Update Credits Bannerssh ${NC} "
+	echo -e "|${z1}21${NC}|${z2} ------- ${NC} "
+	echo -e "|${z1}22${NC}|${z2} EDIT_PORT OPENVPN ${NC} "
+	echo -e "|${z1}23${NC}|${z2} EDIT_SQUID3 & EDIT_SQUID ${NC} "
+	echo -e "|${z1}24${NC}|${z2} EDIT_PORTSSH ${NC} "
+	echo -e "|${z1}25${NC}|${z2} EDIT_Config Openvpn  ${NC} "
+	echo -e "|${z1}26${NC}|${z2} ------- ${NC} "
+	echo -e "|${z1}27${NC}|${z2} -------  ${NC} "
+	echo -e "|${z1}28${NC}|${z2} Restart Openvpn  ${NC} "
+	echo -e "|${z1}29${NC}|${z2} ตรวจสอบ TIME LOGIN  ${NC} "
+	echo -e "|${z1}30${NC}|${z2} Reboot SERVER VPS  ${NC} "
+	echo -e "|${z1}31${NC}|${z2} Restart SQUID+SQUID3  ${NC} "
+        echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
 	# vnstat meter
