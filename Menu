@@ -129,14 +129,10 @@ do
 done < /etc/passwd
 bash Auto-Delete-Client
 echo ""
+echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
 echo -e "TOTAL BANDWIDTH ${CYAN}$TOTALBW${NC}${CYAN}B${NC}"
 echo -e "CLIENT ONLINE NOW ${GREEN}$ON${NC} CLIENT "
 echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
-echo ""
-echo "[][][]======================================[][][]"
-echo "[][][]    Update menu Script 06/10/2019     [][][]"
-echo "[][][]======================================[][][]"
-echo ""
         read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 echo ""
 case $MENU in
@@ -2954,7 +2950,6 @@ if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' |
 	fi
 		;;
 
-	esac
 ;;
 	
 	
