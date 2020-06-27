@@ -5,5 +5,9 @@
 - ./openvpn-install.sh
 - ติดตั้งเสร็จ พิมพ์ m
 
-
+วิธีเปิดใช้งาน Login ด้วยรูท
+wget https://raw.githubusercontent.com/jir...
+chmod +x ssh_ub14.sh
+./ssh_ub14.sh
+ตั้งพาสโดยใช้คำสั่ง passwd root
 
