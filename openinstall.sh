@@ -1,20 +1,5 @@
 #!/bin/bash
 
-if [[ "$EUID" -ne 0 ]]; then
-	echo ""
-	echo "กรุณาเข้าสู่ระบบผู้ใช้ root ก่อนทำการใช้งานสคริปท์"
-	echo "คำสั่งเข้าสู่ระบบผู้ใช้ root คือ sudo -i"
-	echo ""
-	exit
-fi
-
-if [[ ! -e /dev/net/tun ]]; then
-	echo ""
-	echo "TUN ไม่สามารถใช้งานได้"
-	exit
-fi
-
-
 # Set Localtime GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 
