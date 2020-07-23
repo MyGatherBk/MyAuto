@@ -51,8 +51,8 @@ fi
 
 
 
-if [[ "$os" == "debian" && "$os_version" -lt 9 ]]; then
-	echo "จำเป็นต้องมี Debian 9 หรือสูงกว่าเพื่อใช้โปรแกรมติดตั้งนี้
+if [[ "$os" == "debian" && "$os_version" -lt 10 ]]; then
+	echo "จำเป็นต้องมี Debian 10 หรือสูงกว่าเพื่อใช้โปรแกรมติดตั้งนี้
 Debian รุ่นนี้เก่าเกินไปและไม่รองรับ "
 	exit
 fi
