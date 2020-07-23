@@ -18,57 +18,19 @@ if [[ $(uname -r | cut -d "." -f 1) -eq 2 ]]; then
 	echo "ระบบกำลังใช้เคอร์เนลเก่าซึ่งเข้ากันไม่ได้กับโปรแกรมติดตั้งนี้"
 	exit
 fi
+if [[ -e /etc/debian_version ]]; then
+	OS=debian
+	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+	GROUPNAME=nogroup
+	RCLOCAL='/etc/rc.local'
 
-# Detect OS
-# $os_version variables aren't always in use, but are kept here for convenience
-if grep -qs "ubuntu" /etc/os-release; then
-	os="ubuntu"
-	os_version=$(grep 'VERSION_ID' /etc/os-release | cut -d '"' -f 2 | tr -d '.')
-	group_name="nogroup"
-elif [[ -e /etc/debian_version ]]; then
-	os="debian"
-	os_version=$(grep -oE '[0-9]+' /etc/debian_version | head -1)
-	group_name="nogroup"
-elif [[ -e /etc/centos-release ]]; then
-	os="centos"
-	os_version=$(grep -oE '[0-9]+' /etc/centos-release | head -1)
-	group_name="nobody"
-elif [[ -e /etc/fedora-release ]]; then
-	os="fedora"
-	os_version=$(grep -oE '[0-9]+' /etc/fedora-release | head -1)
-	group_name="nobody"
-else
-	echo "ดูเหมือนว่าตัวติดตั้งนี้กำลังทำงานบนการกระจายที่ไม่ได้รับการสนับสนุน
-การแจกแจงที่รองรับคือ Ubuntu, Debian, CentOS และ Fedora "
-	exit
-fi
-
-if [[ "$os" == "ubuntu" && "$os_version" -lt 1404 ]]; then
-	echo "จำเป็นต้องใช้ Ubuntu 14.04 ขึ้นไปเพื่อใช้โปรแกรมติดตั้งนี้
-Ubuntu รุ่นนี้เก่าเกินไปและไม่รองรับ"
-	exit
-fi
-
-
-
-if [[ "$os" == "debian" && "$os_version" -lt 10 ]]; then
-	echo "จำเป็นต้องมี Debian 10 หรือสูงกว่าเพื่อใช้โปรแกรมติดตั้งนี้
-Debian รุ่นนี้เก่าเกินไปและไม่รองรับ "
-	exit
-fi
-
-
-if [[ "$os" == "centos" && "$os_version" -lt 7 ]]; then
-	echo "CentOS 7 หรือสูงกว่าจำเป็นต้องใช้โปรแกรมติดตั้งนี้
-CentOS รุ่นนี้เก่าเกินไปและไม่รองรับ "
-	exit
-fi
+	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]]; then 
 
 # Detect environments where $PATH does not include the sbin directories
 if ! grep -q sbin <<< "$PATH"; then
 	echo '$PATH ไม่รวม sbin. ลองใช้ดู "su -" แทนที่ "su".'
-	exit
 fi
+	exit
 
 if [[ "$EUID" -ne 0 ]]; then
 	echo ""
@@ -109,7 +71,7 @@ new_client () {
 	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/server/easy-rsa/pki/issued/"$client".crt
 	echo "</cert>"
 	echo "<key>"
-	cat /etc/openvpn/server/easy-rsa/pki/private/"$client".key
+	cat /etc/openvpn/server/easy-rsa/pki/private/"$client".key            
 	echo "</key>"
 	echo "<tls-crypt>"
 	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/server/tc.key
