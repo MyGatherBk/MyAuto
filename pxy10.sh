@@ -10,6 +10,6 @@ MYIP2="s/xxxxxxxxx/$MYIP/g";
 # Install Squid3
 cd
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/squid.conf"
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/squid.conf"
 sed -i $MYIP2 /etc/squid/squid.conf;
 systemctl squid restart
