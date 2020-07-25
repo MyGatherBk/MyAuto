@@ -123,10 +123,9 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${z1}23${NC}|${z2} EDIT_SQUID3 & EDIT_SQUID ${NC} "
 	echo -e "|${z1}24${NC}|${z2} EDIT_PORTSSH ${NC} "
 	echo -e "|${z1}25${NC}|${z2} EDIT_Config Openvpn  ${NC} "
-	echo -e "|${z1}28${NC}|${z2} Restart Openvpn  ${NC} "
-	echo -e "|${z1}29${NC}|${z2} MUNU M RETRUN  ${NC} "
-	echo -e "|${z1}30${NC}|${z2} Reboot SERVER VPS  ${NC} "
-	echo -e "|${z1}31${NC}|${z2} Restart SQUID+SQUID3  ${NC} "
+	echo -e "|${z1}26${NC}|${z2} Restart Openvpn  ${NC} "
+	echo -e "|${z1}27${NC}|${z2} Reboot SERVER VPS  ${NC} "
+	echo -e "|${z1}28${NC}|${z2} Restart SQUID+SQUID3  ${NC} "
         echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
@@ -2530,32 +2529,32 @@ if [ $? -eq 0 ]; then
 	read -p "            From Port $Port -> Port " Port_New
 	if grep -Fxq $Port_New /root/opensshport; then
 		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              OpenSSH Port Conflict               "
-		echo -e "\e[91m              Port Is Already In Use              "
+		echo -e "\e[91m              OpenSSH Port แก้ไข              "
+		echo -e "\e[91m              Port พร้อมใช้งาน             "
 		echo -e "\e[0m                                                   "
 		echo -e "\e[94m[][][]======================================[][][]\e[0m"
 		exit
 	fi
 	if grep -Fxq $Port_New /root/dropbearport; then
 		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              Dropbear Port Conflict              "
-		echo -e "\e[91m              Port Is Already In Use              "
+		echo -e "\e[91m              Dropbear Port แก้ไข              "
+		echo -e "\e[91m              Port พร้อมใช้งาน              "
 		echo -e "\e[0m                                                   "
 		echo -e "\e[94m[][][]======================================[][][]\e[0m"
 		exit
 	fi
 	if grep -Fxq $Port_New /root/stunnel4port; then
 		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              Stunnel4 Port Conflict              "
-		echo -e "\e[91m              Port Is Already In Use              "
+		echo -e "\e[91m              Stunnel4 Port แก้ไข               "
+		echo -e "\e[91m              Port Is พร้อมใช้งาน              "
 		echo -e "\e[0m                                                   "
 		echo -e "\e[94m[][][]======================================[][][]\e[0m"
 		exit
 	fi
 	if grep -Fxq $Port_New /root/squidport; then
 		echo -e "\e[0m                                                   "
-		echo -e "\e[91m               Squid3 Port Conflict               "
-		echo -e "\e[91m              Port Is Already In Use              "
+		echo -e "\e[91m               Squid3 Port แก้ไข                "
+		echo -e "\e[91m              Port พร้อมใช้งาน             "
 		echo -e "\e[0m                                                   "
 		echo -e "\e[94m[][][]======================================[][][]\e[0m"
 		exit
@@ -2691,11 +2690,8 @@ echo ""
 		;;
 	
 	
-		27) # ==================================================================================================================
-                m
-	       ;;
 	
-		28) # ==================================================================================================================
+		27) # ==================================================================================================================
 
 		clear
 echo ""
@@ -2712,7 +2708,7 @@ echo ""
 	;;
 	
 	
-	29) # ==================================================================================================================
+	28) # ==================================================================================================================
 
 #!/bin/bash
 		clear
