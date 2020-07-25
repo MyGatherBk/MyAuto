@@ -2523,7 +2523,7 @@ echo -e "\e[0m                                                   "
 echo -e "\e[93m                   OpenVPN Port                   "
 echo -e "\e[93m                       "$openvpnport
 echo -e "\e[0m                                                   "
-read -p "       Which Port Should Be Changed? :  " Port
+read -p "       ควรเปลี่ยนพอร์ตใด? :  " Port
 egrep "^$Port" /root/openvpnport >/dev/null
 if [ $? -eq 0 ]; then
 	read -p "            From Port $Port -> Port " Port_New
