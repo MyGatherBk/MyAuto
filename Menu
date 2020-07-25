@@ -82,20 +82,6 @@ if [ -f "/etc/openvpn/openvpn-status.log" ]; then
         cat /etc/openvpn/openvpn-status.log | head -n $a | tail -n $b | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
         cat /tmp/vpn-login-db.txt
 fi
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-squid3port="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
-squidport="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}')"
-nginxport="$(netstat -nlpt | grep -i nginx| grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-echo ""
-echo -e "${GREEN}Port OpenSSH  ${NC}   :  $opensshport${NC}  ${RED} |${NC}${GREEN} Port Squid3 ${NC}     :  $squid3port"
-echo -e "${GREEN}Port Dropbear${NC}    :  $dropbearport${NC}  ${RED} |${NC}${GREEN} Port OpenVPN ${NC}    :  $openvpnport"
-echo -e "${GREEN}Port Squid  ${NC}     :  $squidport${NC}    ${RED} |${NC}${GREEN} Port Nginx ${NC}      :  $nginxport"
-echo -e "${NC} "
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
@@ -137,8 +123,6 @@ if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$
 	echo -e "|${z1}23${NC}|${z2} EDIT_SQUID3 & EDIT_SQUID ${NC} "
 	echo -e "|${z1}24${NC}|${z2} EDIT_PORTSSH ${NC} "
 	echo -e "|${z1}25${NC}|${z2} EDIT_Config Openvpn  ${NC} "
-	echo -e "|${z1}26${NC}|${z2} ------- ${NC} "
-	echo -e "|${z1}27${NC}|${z2} -------  ${NC} "
 	echo -e "|${z1}28${NC}|${z2} Restart Openvpn  ${NC} "
 	echo -e "|${z1}29${NC}|${z2} MUNU M RETRUN  ${NC} "
 	echo -e "|${z1}30${NC}|${z2} Reboot SERVER VPS  ${NC} "
@@ -2682,13 +2666,8 @@ esac
 	;;
 	
 	
-	26) # ==================================================================================================================
-	;;
-	
-	27) # ==================================================================================================================
-    ;;
 
-	28) # ==================================================================================================================
+	26) # ==================================================================================================================
 
 #!/bin/bash
 		clear
@@ -2712,11 +2691,11 @@ echo ""
 		;;
 	
 	
-		29) # ==================================================================================================================
+		27) # ==================================================================================================================
                 m
 	       ;;
 	
-		30) # ==================================================================================================================
+		28) # ==================================================================================================================
 
 		clear
 echo ""
@@ -2733,7 +2712,7 @@ echo ""
 	;;
 	
 	
-	31) # ==================================================================================================================
+	29) # ==================================================================================================================
 
 #!/bin/bash
 		clear
