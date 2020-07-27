@@ -40,22 +40,51 @@ if [[ -e /etc/debian_version ]]; then
 	GROUPNAME=nogroup
 	RCLOCAL='/etc/rc.local'
 
+	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
 echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
+		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
+		echo ""
+		echo "Ubuntu 14.04 - 16.04 - 18.04"
+		echo "Debian 7 - 8 - 9"
+		echo ""
+		exit
+	fi
+else
 echo ""
-echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;31m  #                                              #    "
-echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
-echo -e "\033[1;31m  #      -----------About Us------------         #    "
-echo -e "\033[1;31m  #    OS  Debian 8-9-10  OS  Ubuntu 14-16-18    #    "
-echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
-echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
-echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "\033[1;31m  #                                              #    "
-echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
-echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
-echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
-echo -e "\033[0m       "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
+	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
+	echo ""
+	echo "Ubuntu 14.04 - 16.04 - 18.04"
+	echo "Debian 7 - 8 - 9"
+	echo ""
+	exit
+fi
+
+
+# ads
 echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 # Install openvpn
 cd
 echo -e "\033[35;1m
@@ -65,6 +94,7 @@ echo -e "\033[35;1m
 [√] Loading .....
 ----------------------------------------------
 ${NC} "
+
 newclient () {
 	# Generates the custom client.ovpn
 	cp /etc/openvpn/client-common.txt ~/$1.ovpn
