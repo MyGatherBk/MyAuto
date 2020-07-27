@@ -1,48 +1,44 @@
-
-  
-
 #!/bin/bash
+
+if [[ "$EUID" -ne 0 ]]; then
+	echo ""
+	echo "กรุณาเข้าสู่ระบบผู้ใช้ root ก่อนทำการใช้งานสคริปท์"
+	echo "คำสั่งเข้าสู่ระบบผู้ใช้ root คือ sudo -i"
+	echo ""
+	exit
+fi
+
+if [[ ! -e /dev/net/tun ]]; then
+	echo ""
+	echo "TUN ไม่สามารถใช้งานได้"
+	exit
+fi
+
 
 # Set Localtime GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+
 clear
 # IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 # if [[ "$IP" = "" ]]; then
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 # fi
 
-if [[ $(id -g) != "0" ]] ; then
-    echo ""
-    echo "Scrip : สั่งรูทคำสั่ง [ sudo -i ] ก่อนรันสคริปนี้  "
-    echo ""
-    exit
-fi
-
-if [[  ! -e /dev/net/tun ]] ; then
-    echo "Scrip : TUN/TAP device is not available."
-fi
-cd
-if [[ -e /etc/debian_version ]]; then
-VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
-fi
-
-cd
-
-MYIP=$(wget -qO- ipv4.icanhazip.com);
-
-
-clear
-cd
-echo
-
-
 # Color
 GRAY='\033[1;33m'
-NC='\033[0m'
 GREEN='\033[0;32m'
+NC='\033[0m'
 YELLOW='\033[33;1m'
 RED='\033[31;1m'
-clear
+BLUE='\033[34;1m'
+MAGENTA='\033[35;1m'
+CYAN='\033[36;1m'
+
+if [[ -e /etc/debian_version ]]; then
+	OS=debian
+	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+	GROUPNAME=nogroup
+	RCLOCAL='/etc/rc.local'
 
 echo ""
 echo ""
