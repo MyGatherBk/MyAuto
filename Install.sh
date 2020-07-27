@@ -1,90 +1,65 @@
+
+  
+
 #!/bin/bash
-
-if [[ "$EUID" -ne 0 ]]; then
-	echo ""
-	echo "กรุณาเข้าสู่ระบบผู้ใช้ root ก่อนทำการใช้งานสคริปท์"
-	echo "คำสั่งเข้าสู่ระบบผู้ใช้ root คือ sudo -i"
-	echo ""
-	exit
-fi
-
-if [[ ! -e /dev/net/tun ]]; then
-	echo ""
-	echo "TUN ไม่สามารถใช้งานได้"
-	exit
-fi
-
 
 # Set Localtime GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-
 clear
 # IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 # if [[ "$IP" = "" ]]; then
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 # fi
 
-# Color
-GRAY='\033[1;33m'
-GREEN='\033[0;32m'
-NC='\033[0m'
-YELLOW='\033[33;1m'
-RED='\033[31;1m'
-BLUE='\033[34;1m'
-MAGENTA='\033[35;1m'
-CYAN='\033[36;1m'
-
-if [[ -e /etc/debian_version ]]; then
-	OS=debian
-	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
-	GROUPNAME=nogroup
-	RCLOCAL='/etc/rc.local'
-
-	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
-		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
-		echo ""
-		echo "Ubuntu 14.04 - 16.04 - 18.04"
-		echo "Debian 7 - 8 - 9"
-		echo ""
-		exit
-	fi
-else
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
-	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
-	echo ""
-	echo "Ubuntu 14.04 - 16.04 - 18.04"
-	echo "Debian 7 - 8 - 9"
-	echo ""
-	exit
+if [[ $(id -g) != "0" ]] ; then
+    echo ""
+    echo "Scrip : สั่งรูทคำสั่ง [ sudo -i ] ก่อนรันสคริปนี้  "
+    echo ""
+    exit
 fi
 
+if [[  ! -e /dev/net/tun ]] ; then
+    echo "Scrip : TUN/TAP device is not available."
+fi
+cd
+if [[ -e /etc/debian_version ]]; then
+VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+fi
 
-# ads
+cd
+
+MYIP=$(wget -qO- ipv4.icanhazip.com);
+
+
+clear
+cd
+echo
+
+
+# Color
+GRAY='\033[1;33m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+YELLOW='\033[33;1m'
+RED='\033[31;1m'
+clear
+
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #    OS  Debian 8-9-10  OS  Ubuntu 14-16-18    #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
 # Install openvpn
 cd
 echo -e "\033[35;1m
@@ -111,72 +86,24 @@ newclient () {
 	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
-if [[ -e /etc/openvpn/server.conf ]]; then
-			echo
-			read -p "คุณต้องการลบ OpenVPN จริงๆหรือ? [y/N]: " -e REMOVE
-			if [[ "$REMOVE" = 'y' || "$REMOVE" = 'Y' ]]; then
-				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
-				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
-				if pgrep firewalld; then
-					IP=$(firewall-cmd --direct --get-rules ipv4 nat POSTROUTING | grep '\-s 10.8.0.0/24 '"'"'!'"'"' -d 10.8.0.0/24 -j SNAT --to ' | cut -d " " -f 10)
-					# Using both permanent and not permanent rules to avoid a firewalld reload.
-					firewall-cmd --zone=public --remove-port=$PORT/$PROTOCOL
-					firewall-cmd --zone=trusted --remove-source=10.8.0.0/24
-					firewall-cmd --permanent --zone=public --remove-port=$PORT/$PROTOCOL
-					firewall-cmd --permanent --zone=trusted --remove-source=10.8.0.0/24
-					firewall-cmd --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-					firewall-cmd --permanent --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-				else
-					IP=$(grep 'iptables -t nat -A POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to ' $RCLOCAL | cut -d " " -f 14)
-					iptables -t nat -D POSTROUTING -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to $IP
-					sed -i '/iptables -t nat -A POSTROUTING -s 10.8.0.0\/24 ! -d 10.8.0.0\/24 -j SNAT --to /d' $RCLOCAL
-					if iptables -L -n | grep -qE '^ACCEPT'; then
-						iptables -D INPUT -p $PROTOCOL --dport $PORT -j ACCEPT
-						iptables -D FORWARD -s 10.8.0.0/24 -j ACCEPT
-						iptables -D FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-						sed -i "/iptables -I INPUT -p $PROTOCOL --dport $PORT -j ACCEPT/d" $RCLOCAL
-						sed -i "/iptables -I FORWARD -s 10.8.0.0\/24 -j ACCEPT/d" $RCLOCAL
-						sed -i "/iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT/d" $RCLOCAL
-					fi
-				fi
-				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$PORT" != '1194' ]]; then
-					semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
-				fi
-				apt-get remove --purge -y nginx
-				rm -rf /home/vps/public_html
-				rm -rf /etc/openvpn
-				rm -rf /usr/local/bin/*
-				if [[ "$OS" = 'debian' ]]; then
-					apt-get remove --purge -y openvpn
-				else
-					yum remove openvpn -y
-				fi
-				rm -rf /etc/openvpn
-				rm -f /etc/sysctl.d/30-openvpn-forward.conf
-				echo
-				echo "OpenVPN removed!"
-			else
-				echo
-				echo "Removal aborted!"
-			fi
-			exit
 
-# elif [[ -e /etc/apt/sources.list.d/pritunl.list ]]; then
-# echo ""
-# echo "ไม่สามารถติดตั้ง OpenVPN ได้"
-# echo "เนื่องจาก IP นี้ได้ติดตั้ง OpenVPN ที่ควบคุมการใช้งานผ่าน PRITUNL ไปก่อนหน้านี้แล้ว"
-# exit
-
-else
 	clear
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo ""
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #        AUTOSCRIPT CREATED BY PIRAKIT         #    "
+echo -e "\033[1;31m  #      -----------About Us------------         #    "
+echo -e "\033[1;31m  #    OS  Debian 8-9-10  OS  Ubuntu 14-16-18    #    "
+echo -e "\033[1;31m  #               { VPN / SSH }                  #    "
+echo -e "\033[1;31m  #         BY : Pirakit Khawpleum               #    "
+echo -e "\033[1;31m  #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "\033[1;31m  #                                              #    "
+echo -e "\033[1;31m  #       Truemoney Wallet : 096-746-2978        #    "
+echo -e "\033[1;31m  =============== OS-32 & 64-bit =================    "
+echo -e "\033[1;36m  ไอพีเซิฟ:$IP "
+echo -e "\033[0m       "
+echo ""
 # Install openvpn
 cd
 echo -e "\033[35;1m
