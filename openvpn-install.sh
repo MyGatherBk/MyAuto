@@ -43,7 +43,7 @@ if [[ -e /etc/debian_version ]]; then
 	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -53,14 +53,14 @@ echo -e "${NC} "
 		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
 		echo ""
 		echo "Ubuntu 14.04 - 16.04 - 18.04"
-		echo "Debian 7 - 8 - 9"
+		echo "Debian 8 - 9 -10"
 		echo ""
 		exit
 	fi
 else
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -70,7 +70,7 @@ echo -e "${NC} "
 	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
 	echo ""
 	echo "Ubuntu 14.04 - 16.04 - 18.04"
-	echo "Debian 7 - 8 - 9"
+	echo "Debian 8 - 9 -10"
 	echo ""
 	exit
 fi
@@ -79,7 +79,7 @@ fi
 # ads
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -171,7 +171,7 @@ else
 	clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -471,7 +471,7 @@ server {
 }
 END
 
-	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ -e /etc/squid3/squid.conf ]]; then
 			apt-get -y remove --purge squid3
 		fi
@@ -520,7 +520,7 @@ END
 			/etc/init.d/nginx restart
 		fi
 
-	elif [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="9" || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
 		fi
@@ -591,8 +591,9 @@ chmod +x /usr/local/bin/m
 
 	clear
 echo ""
+echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -631,5 +632,3 @@ echo -e "${NC} "
 	echo "===================================================================="
 	echo ""
 	exit
-	
-	
