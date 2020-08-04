@@ -632,6 +632,7 @@ echo -e "${NC} "
 	echo "Port Nginx : 85"
 	echo "IP Proxy : $IP"
 	echo "Port Proxy : $PROXY"
+	echo "port SSl"
 	echo ""
 	case $OPENVPNSYSTEM in
 		1)
