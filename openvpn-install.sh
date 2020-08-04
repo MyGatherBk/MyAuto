@@ -565,6 +565,16 @@ END
 	fi
 
 fi
+echo ""
+echo -e "\033[0;32m { stunnel4 }${NC} "
+echo ""
+# Install Stunnel
+apt-get -y install stunnel4
+wget -O /etc/stunnel/stunnel.pem "https://raw.githubusercontent.com/Dreyannz/AutoScriptVPS/master/Files/Stunnel/stunnel.pem"
+wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/Dreyannz/AutoScriptVPS/master/Files/Stunnel/stunnel.conf"
+sed -i $MYIP2 /etc/stunnel/stunnel.conf
+sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+service stunnel4 restart
 
 
 echo ""
@@ -587,24 +597,7 @@ chmod +x /usr/local/bin/m
 		echo -e "$Passwords\n$Passwords\n"|passwd $Usernames &> /dev/null
 		;;
 	esac
-echo ""
-echo -e "\033[0;32m { stunnel4 }${NC} "
-echo ""
-apt-get install -qy stunnel4 > /dev/null 2>&1
-cat > /etc/stunnel/stunnel.conf <<-END
-cert = /etc/stunnel/stunnel.pem
-client = no
-socket = a:SO_REUSEADDR=1
-socket = l:TCP_NODELAY=1
-socket = r:TCP_NODELAY=1
-[stunnel]
-accept = 444
-connect = 127.0.0.1:22
-END
 
-#konfigurasi stunnel
-sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-service stunnel4 restart > /dev/null 2>&1
 	
 	
 	
