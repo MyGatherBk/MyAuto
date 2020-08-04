@@ -590,7 +590,7 @@ chmod +x /usr/local/bin/m
 echo ""
 echo -e "\033[0;32m { stunnel4 }${NC} "
 echo ""
-apt-get install -qy stunnel4 > /dev/null
+apt-get install -qy stunnel4 > /dev/null 2>&1
 cat > /etc/stunnel/stunnel.conf <<-END
 cert = /etc/stunnel/stunnel.pem
 client = no
@@ -602,12 +602,9 @@ accept = 444
 connect = 127.0.0.1:22
 END
 
-#membuat sertifikat
-cat /etc/openvpn/client-key.pem /etc/openvpn/client-cert.pem > /etc/stunnel/stunnel.pem
-
 #konfigurasi stunnel
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-service stunnel4 restart > /dev/null	
+service stunnel4 restart > /dev/null 2>&1
 	
 	
 	
