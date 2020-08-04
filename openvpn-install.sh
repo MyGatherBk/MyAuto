@@ -630,9 +630,9 @@ echo -e "${NC} "
 		echo "Protocal : TCP"
 	fi
 	echo "Port Nginx : 85"
-	echo "IP Proxy : $IP"
+	echo "IP Proxy   : $IP"
 	echo "Port Proxy : $PROXY"
-	echo "port SSl"
+	echo "port SSl"  :444
 	echo ""
 	case $OPENVPNSYSTEM in
 		1)
