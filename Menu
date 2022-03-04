@@ -85,51 +85,63 @@ fi
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
-echo -e "|${z1} 1${NC}|${z2} เพิ่มชื่อผู้ใช้งาน OpenVPN (Config)${NC} "
-	echo -e "|${z1} 2${NC}|${z2} เพิ่มชื่อผู้ใช้งาน {User/Pass}  SSH (HTTP) VPN (OPENVPN)${NC} "
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-	echo -e "|${z1} 3${NC}|${z2} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
-		elif [[ -e /etc/squid3/squid.conf ]]; then
-	echo -e "|${z1} 3${NC}|${z2} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
-		fi
-
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-	echo -e "|${z1} 3${NC}|${z2} ติดตั้ง SQUID PROXY${NC} ${RED}Install NO${NC} "
-		elif [[ -e /etc/squid/squid.conf ]]; then
-	echo -e "|${z1} 3${NC}|${z2} ถอนการติดตั้ง SQUID PROXY${NC} ${GREEN}Install YES${NC} "
-		fi
-	fi
-	echo -e "|${z1} 4${NC}|${z2} ปิด-เปิดใช้งาน Openvpn เชื่อมได้ไม่จำกัดเครื่อง  "
-	echo -e "|${z1} 5${NC}|${z2} เปิด-ปิด-รีสตาร์ท การทำงานของระบบ "
-	echo -e "|${z1} 6${NC}|${z2} ตรวจสอบบัญชีผู้ใช้ SSH ทั้งหมด ${NC} "
-	echo -e "|${z1} 7${NC}|${z2} Delete บัญชีผู้ใช้ SSH "
-	echo -e "|${z1} 8${NC}|${z2} Delete บัญชีผู้ใช้ OPENVPN ${NC} "
-	echo -e "|${z1} 9${NC}|${z2} User Root TO Pass เปลื่ยนรหัสผ่านเซิฟร์เวอร์ ${NC} "
-	echo -e "|${z1}10${NC}|${z2} ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  "
-	echo -e "|${z1}11${NC}|${z2} ตรวจสอบแบนด์วิดท์ต่อบัญชี ${NC} "
-	echo -e "|${z1}12${NC}|${z2} เปลี่ยนรหัสผ่านบัญชีผู้ใช้ ${NC} "
-	echo -e "|${z1}13${NC}|${z2} เปลี่ยนวันหมดอายุบัญชีผู้ใช้ ${NC} "
-	echo -e "|${z1}14${NC}|${z2} เช็ดการใช้งานแบนวิท " 
-	echo -e "|${z1}15${NC}|${z2} ปรับความเร็วอินเตอร์เน็ต  "
-	echo -e "|${z1}16${NC}|${z2} แบนและปลดแบนบัญชีผู้ใช้ {User/Pass} ${NC} "
-	echo -e "|${z1}17${NC}|${z2} ------- ${NC} "
-	echo -e "|${z1}18${NC}|${z2} ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง ${NC} ${GREEN} ✔ ${NC} "
-	echo -e "|${z1}19${NC}|${z2} MENU ไฟล์สคริปท์ของเมนู ${NC} "
-	echo -e "|${z1}20${NC}|${z2} Update Credits Bannerssh ${NC} "
-	echo -e "|${z1}21${NC}|${z2} ------- ${NC} "
-	echo -e "|${z1}22${NC}|${z2} EDIT_PORT OPENVPN ${NC} "
-	echo -e "|${z1}23${NC}|${z2} EDIT_SQUID3 & EDIT_SQUID ${NC} "
-	echo -e "|${z1}24${NC}|${z2} EDIT_PORTSSH ${NC} "
-	echo -e "|${z1}25${NC}|${z2} EDIT_Config Openvpn  ${NC} "
-	echo -e "|${z1}26${NC}|${z2} Restart Openvpn  ${NC} "
-	echo -e "|${z1}27${NC}|${z2} Reboot SERVER VPS  ${NC} "
-	echo -e "|${z1}28${NC}|${z2} Restart SQUID+SQUID3  ${NC} "
-        echo -e "|00|${cor[2]} Update MENU SCRIPT ${NC} ${GREEN} ✔ ${NC} "
+	echo -e "เมนูสคริปท์ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
 	echo ""
-	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
-	# vnstat meter
+	echo -e "|${GRAY} 1${NC}| เพิ่มบัญชีผู้ใช้ OpenVPN"
+	echo -e "|${GRAY} 2${NC}| เพิ่มบัญชีผู้ใช้ SSH (HTTP)"
+	echo -e "|${GRAY} 3${NC}| ลบบัญชีผู้ใช้"
+	echo -e "|${GRAY} 4${NC}| ตรวจสอบบัญชีผู้ใช้ทั้งหมด และตรวจสอบบัญชีที่กำลังเชื่อมต่อ"
+	echo -e "|${GRAY} 5${NC}| เปลี่ยนรหัสผ่านบัญชีผู้ใช้"
+	echo -e "|${GRAY} 6${NC}| เปลี่ยนวันหมดอายุบัญชีผู้ใช้"
+	echo -e "|${GRAY} 7${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ"
+	echo -e "|${GRAY} 8${NC}| ทดสอบความเร็วอินเตอร์เน็ต"
+	echo -e "|${GRAY} 9${NC}| -"
+	echo -e "|${GRAY}10${NC}| ตรวจสอบแบนด์วิดท์"
+	echo -e "|${GRAY}11${NC}| ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง"
+	echo -e "|${GRAY}12${NC}| ตรวจสอบแบนด์วิดท์ต่อบัญชี"
+	echo -e "|${GRAY}13${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์"
+	if [[ $CHECKSYSTEM ]]; then
+		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้"
+	else
+		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${GRAY}ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน  ${NC}"
+	fi
+	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
+	echo -e "|${GRAY}16${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
+	echo -e "|${GRAY}17${NC}| แก้ไขคอนฟิกต่างๆในระบบ"
+	echo ""
+	echo -e "|${GRAY} 0${NC}| อัพเดตเมนูสคริปท์"
+	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาอังกฤษ"
+
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "MENU SCRIPT ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
+	echo ""
+	echo -e "|${GRAY} 1${NC}| ADD NEW CLIENT FOR OPENVPN"
+	echo -e "|${GRAY} 2${NC}| ADD NEW CLIENT FOR SSH (HTTP)"
+	echo -e "|${GRAY} 3${NC}| REMOVE CLIENT"
+	echo -e "|${GRAY} 4${NC}| CHECK ALL CLIENT AND CHECK ALL CLIENT ONLINE"
+	echo -e "|${GRAY} 5${NC}| CHANGE PASSWORD OF CLIENT"
+	echo -e "|${GRAY} 6${NC}| RENEW EXPIRE DATE OF CLIENT"
+	echo -e "|${GRAY} 7${NC}| SET TIME AUTO REBOOT SERVER"
+	echo -e "|${GRAY} 8${NC}| SPEEDTEST"
+	echo -e "|${GRAY} 9${NC}| -"
+	echo -e "|${GRAY}10${NC}| CHECK ALL BANDWIDTH"
+	echo -e "|${GRAY}11${NC}| CHECK BANDWIDTH PER HOUR"
+	echo -e "|${GRAY}12${NC}| CHECK BANDWIDTH PER USER"
+	echo -e "|${GRAY}13${NC}| CHANGE SYSTEM SERVER"
+	if [[ $CHECKSYSTEM ]]; then
+		echo -e "|${GRAY}14${NC}| BAN AND UNBAN CLIENT"
+	else
+		echo -e "|${GRAY}14${NC}| BAN AND UNBAN CLIENT ${GRAY}Not available with current server.  ${NC}"
+	fi
+	echo -e "|${GRAY}15${NC}| UP-DOWN SPEED INTERNET"
+	echo -e "|${GRAY}16${NC}| START-STOP-RESTART OPERATION SYSTEM"
+	echo -e "|${GRAY}17${NC}| EDIT CONFIG"
+	echo ""
+	echo -e "|${GRAY} 0${NC}| UPDATE MENU SCRIPT"
+	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาไทย"
+fi
+
+echo ""
 if [[ -e /etc/vnstat.conf ]]; then
 	INTERFACE=`vnstat -m | head -n2 | awk '{print $1}'`
 	TOTALBW=$(vnstat -i $INTERFACE --nick local | grep "total:" | awk '{print $8" "substr ($9, 1, 1)}')
@@ -150,23 +162,25 @@ do
 		fi
 		fi
 done < /etc/passwd
+
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "TOTAL BANDWIDTH ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  CLIENT ONLINE NOW ${GRAY}$ON${NC} CLIENT"
+fi
+echo ""
 bash Auto-Delete-Client
-echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
-echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
-        read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 echo ""
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	read -p "Select a Menu Script : " MENU
+fi
+
 case $MENU in
-1) # ==================================================================================================================
-	
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
+
+	1) # ==================================================================================================================
+
 if [[ $CHECKSYSTEM ]]; then
 	echo ""
 	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
@@ -174,7 +188,7 @@ if [[ $CHECKSYSTEM ]]; then
 	if [ $? -eq 0 ]; then
 		read -p "รหัสผ่าน : " -e PASSWORD
 		echo ""
-		echo -e " ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน "
+		echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
 		read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
 		PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
@@ -184,15 +198,7 @@ if [[ $CHECKSYSTEM ]]; then
 		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
 
 		clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
+		echo ""
 		echo "ชื่อบัญชี : $CLIENT"
 		echo "รหัสผ่าน : $PASSWORD"
 		echo "หมดอายุในวันที่ : $EXP"
@@ -208,7 +214,7 @@ echo ""
 		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
 
 		if [[ "$TOMENU" = 'Y' ]]; then
-			m
+			menu
 			exit
 		elif [[ "$TOMENU" = 'N' ]]; then
 			exit
@@ -235,25 +241,24 @@ else
 	fi
 
 	echo ""
-	echo -e " ะบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน "
+	echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
 	read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
-newclient () {
-	# Generates the custom client.ovpn
-	cp /etc/openvpn/client-common.txt ~/$1.ovpn
-	echo "<ca>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-	echo "</ca>" >> ~/$1.ovpn
-	echo "<cert>" >> ~/$1.ovpn
-	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-	echo "</cert>" >> ~/$1.ovpn
-	echo "<key>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-	echo "</key>" >> ~/$1.ovpn
-	echo "<tls-auth>" >> ~/$1.ovpn
-	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
-	echo "</tls-auth>" >> ~/$1.ovpn
-}
+	newclient () {
+		cp /etc/openvpn/client-common.txt ~/$1.ovpn
+		echo "<ca>" >> ~/$1.ovpn
+		cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
+		echo "</ca>" >> ~/$1.ovpn
+		echo "<cert>" >> ~/$1.ovpn
+		cat /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
+		echo "</cert>" >> ~/$1.ovpn
+		echo "<key>" >> ~/$1.ovpn
+		cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
+		echo "</key>" >> ~/$1.ovpn
+		echo "<tls-auth>" >> ~/$1.ovpn
+		cat /etc/openvpn/ta.key >> ~/$1.ovpn
+		echo "</tls-auth>" >> ~/$1.ovpn
+	}
 
 	RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
 	mkdir /home/vps/public_html/$RANDOMFOLDER
@@ -267,19 +272,11 @@ newclient () {
 	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
 
 	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
+	echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn "
+	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn"
 	echo ""
 	exit
 
@@ -287,17 +284,9 @@ fi
 
 	;;
 
-2) # ==================================================================================================================
+	2) # ==================================================================================================================
 
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
+	echo ""
 	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
 
 	if [ $? -eq 0 ]; then
@@ -313,21 +302,14 @@ echo ""
 		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
 
 		clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-		echo "ชื่อบัญชี        : $CLIENT"
-		echo "รหัสผ่าน        : $PASSWORD"
-		echo "หมดอายุในวันที่   : $EXP "
-		echo "IP            : $IP"
-		echo "Port OpenSSH  : 22 "
-		echo "Proxy Port    : 8080 "
+		echo ""
+		echo "ชื่อบัญชี : $CLIENT"
+		echo "รหัสผ่าน : $PASSWORD"
+		echo "หมดอายุในวันที่ : $EXP"
+		echo ""
+		echo "IP : $IP"
+		echo "Port : 22"
+		echo "Proxy Port : $PROXY"
 		exit
 	else
 		echo ""
@@ -336,7 +318,7 @@ echo ""
 		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
 
 		if [[ "$TOMENU" = 'Y' ]]; then
-			m
+			menu
 			exit
 		elif [[ "$TOMENU" = 'N' ]]; then
 			exit
@@ -345,513 +327,8 @@ echo ""
 
 	;;
 
-3) # =================================================================================================================
-	
-if [[ -e /etc/squid3/squid.conf ]]; then
-	apt-get -y remove --purge squid3
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo "Squid Proxy .....Removed."
-	exit
-elif [[ -e /etc/squid/squid.conf ]]; then
-	apt-get -y remove --purge squid
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo "Squid Proxy .....Removed."
-	exit
-fi
+	3) # ==================================================================================================================
 
-read -p "Port Proxy : " -e -i 8080 PROXY
-
-if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-	apt-get -y install squid3
-	cat > /etc/squid3/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-	IP2="s/xxxxxxxxx/$IP/g";
-	sed -i $IP2 /etc/squid3/squid.conf;
-	if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		service squid3 restart
-	else
-		/etc/init.d/squid3 restart
-	fi
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo "Squid Proxy .....Install finish."
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
-	echo ""
-	exit
-
-elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-	apt-get -y install squid
-	cat > /etc/squid/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access deny all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-	IP2="s/xxxxxxxxx/$IP/g";
-	sed -i $IP2 /etc/squid/squid.conf;
-	/etc/init.d/squid restart
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo "Squid Proxy .....Install finish."
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
-	echo ""
-	exit
-
-fi
-
-	;;
-
-
-4) # ==================================================================================================================
-
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-echo " ปรับเปลี่ยนระบบของเซิฟเวอร์ "
-echo ""
-echo "|1| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น สามารถสร้างไฟล์เพิ่มได้ "
-echo "|2| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องสร้างบัญชีเพื่อใช้เชื่อมต่อ "
-echo "|3| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดเครื่อง "
-echo ""
-read -p "เลือกหัวข้อที่ต้องการใช้งาน : " CHANGESYSTEMSERVER
-
-case $CHANGESYSTEMSERVER in
-
-	1)
-
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '20d' /etc/openvpn/client-common.txt
-echo "client-to-client" >> /etc/openvpn/server.conf
-echo ""
-echo " ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 1 เรียบร้อย "
-echo ""
-service openvpn restart
-
-	;;
-
-	2)
-
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '20d' /etc/openvpn/client-common.txt
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
-	echo "plugin /usr/lib/openvpn/openvpn-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
-	echo "client-cert-not-required" >> /etc/openvpn/server.conf
-	echo "username-as-common-name" >> /etc/openvpn/server.conf
-else
-	echo "plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
-	echo "client-cert-not-required" >> /etc/openvpn/server.conf
-	echo "username-as-common-name" >> /etc/openvpn/server.conf
-fi
-echo "auth-user-pass" >> /etc/openvpn/client-common.txt
-echo ""
-echo " ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 2 เรียบร้อย "
-echo ""
-service openvpn restart
-
-	;;
-
-	3)
-
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '20d' /etc/openvpn/client-common.txt
-echo "duplicate-cn" >> /etc/openvpn/server.conf
-echo ""
-echo " ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 3 เรียบร้อย "
-echo ""
-service openvpn restart
-
-	;;
-	
-esac
-
-	;;
-
-5) # ==================================================================================================================
-	
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-echo " เปิด-ปิด-รีสตาร์ท การทำงานของระบบ Admin MyGatherBK VPN "
-echo ""
-echo "|1| OPENVPN"
-echo "|2| SSH DROPBEAR"
-echo "|3| SQUID PROXY"
-echo ""
-read -p "เลือกหัวข้อที่ต้องการใช้งาน : " SERVICE
-
-case $SERVICE in
-
-	1)
-
-	echo ""
-	echo "|1| เปิด"
-	echo "|2| ปิด"
-	echo "|3| รีสตาร์ท"
-	echo ""
-	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEOPENVPN
-
-	case $SERVICEOPENVPN in
-
-		1)
-	service openvpn start
-	echo ""
-	echo "	OpenVPN STARTED "
-	echo ""
-	exit
-		;;
-
-		2)
-	service openvpn stop
-	echo ""
-	echo "	OpenVPN STOPPED "
-	echo ""
-	exit
-		;;
-
-		3)
-	service openvpn restart
-	echo ""
-	echo "	OpenVPN RESTARTED "
-	echo ""
-	exit
-		;;
-
-	esac
-
-	;;
-
-	2)
-
-	echo ""
-	echo -e "	|${GRAY}1${NC}| เปิด"
-	echo -e "	|${GRAY}2${NC}| ปิด ${GRAY}หากปิดการทำงานจะไม่สามารถเข้าสู่เทอมินอลได้ ${NC} "
-	echo -e "	|${GRAY}3${NC}| รีสตาร์ท"
-	echo ""
-	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEDROPBEAR
-
-	case $SERVICEDROPBEAR in
-
-		1)
-
-	if [[ -e /etc/default/dropbear ]]; then
-		service ssh start
-		echo ""
-		echo -e "	SSH Dropbear ${GRAY}STARTED${NC}"
-		echo ""
-		exit
-	elif [[ ! -e /etc/default/dropbear ]]; then
-		echo ""
-		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
-		echo ""
-		exit
-	fi
-		;;
-
-		2)
-	if [[ -e /etc/default/dropbear ]]; then
-		service ssh stop
-		echo ""
-		echo -e "	SSH Dropbear ${GRAY}STOPPED${NC}"
-		echo ""
-		exit
-	elif [[ ! -e /etc/default/dropbear ]]; then
-		echo ""
-		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
-		echo ""
-		exit
-	fi
-		;;
-
-		3)
-	if [[ -e /etc/default/dropbear ]]; then
-		service ssh restart
-		echo ""
-		echo -e "	SSH Dropbear ${GRAY}RESTARTED${NC}"
-		echo ""
-		exit
-	elif [[ ! -e /etc/default/dropbear ]]; then
-		echo ""
-		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
-		echo ""
-		exit
-	fi
-		;;
-
-	esac
-
-	;;
-
-	3)
-
-	echo ""
-	echo -e "	|${GRAY}1${NC}| เปิด"
-	echo -e "	|${GRAY}2${NC}| ปิด"
-	echo -e "	|${GRAY}3${NC}| รีสตาร์ท"
-	echo ""
-	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEPROXY
-
-	case $SERVICEPROXY in
-
-		1)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid start
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
-			echo ""
-			exit
-		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid3 start
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
-			echo ""
-			exit
-		fi
-	fi
-		;;
-
-		2)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid stop
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STOPPED${NC}"
-			echo ""
-			exit
-		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid3 stop
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STOPPED${NC}"
-			echo ""
-			exit
-		fi
-	fi
-		;;
-
-		3)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid restart
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
-			echo ""
-			exit
-		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid3 restart
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
-			echo ""
-			exit
-		fi
-	fi
-		;;
-
-	esac
-
-	;;
-
-esac
-
-	;;
-	
-6) # ==================================================================================================================
-
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-echo "============================================= "
-echo "ลำดับ   ชื่อบัญชีผู้ใช้       สถานะ     วันหมดอายุ "
-echo "============================================= "
-C=1
-ON=0
-OFF=0
-while read ONOFF
-do
-	CLIENTOFFLINE=$(echo -e "${RED}OFFLINE${NC}")
-	CLIENTONLINE=$(echo -e "${GREEN}ONLINE${NC}")
-	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
-	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
-	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
-	ONLINE="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $ACCOUNT | grep -Eom 1 $ACCOUNT)"
-	if [[ $ID -ge 1000 ]]; then
-		if [[ -z $ONLINE ]]; then
-			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTOFFLINE" "$EXP"
-			OFF=$((OFF+1))
-		else
-			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTONLINE" "$EXP"
-			ON=$((ON+1))
-		fi
-			C=$((C+1))
-        fi
-done < /etc/passwd
-TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
-echo ""
-echo ""
-echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${RED}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL "
-echo ""
-exit
-
-	;;
-	
-7) # ==================================================================================================================
-
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
 echo ""
 read -p "ชื่อบัญชีที่ต้องการลบ : " CLIENT
 egrep "^$CLIENT" /etc/passwd >/dev/null
@@ -889,167 +366,132 @@ else
 fi
 
 	;;
-8) # ==================================================================================================================
 
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-			NUMBEROFCLIENTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c "^V")
-			if [[ "$NUMBEROFCLIENTS" = '0' ]]; then
-				echo
-				echo "no existing clients!ที่มีอยู่!"
-				exit
-			fi
-			echo
-			echo "เลือกใบรับรองไคลเอ็นต์ที่มีอยู่ที่คุณต้องการเพิกถอน:"
-			tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
-			if [[ "$NUMBEROFCLIENTS" = '1' ]]; then
-				read -p "Select one client [1]: " CLIENTNUMBER
-			else
-				read -p "Select one client [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
-			fi
-			CLIENT=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$CLIENTNUMBER"p)
-			echo
-			read -p "คุณต้องการยกเลิกการเข้าถึงสำหรับหรือไม่ client $CLIENT? [y/N]: " -e REVOKE
-			if [[ "$REVOKE" = 'y' || "$REVOKE" = 'Y' ]]; then
-				cd /etc/openvpn/easy-rsa/
-				./easyrsa --batch revoke $CLIENT
-				EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
-				rm -f pki/reqs/$CLIENT.req
-				rm -f pki/private/$CLIENT.key
-				rm -f pki/issued/$CLIENT.crt
-				rm -f /etc/openvpn/crl.pem
-				cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
-				# CRL is read with each client connection, when OpenVPN is dropped to nobody
-				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-				echo
-				echo "ใบรับรองสำหรับ $CLIENT เพิกถอนเรียบร้อย!"
-			else
-				echo
-				echo "การเพิกถอนใบรับรองสำหรับ $CLIENT ยกเลิก!"
-			fi
-			exit
-			;;
-9) # ==================================================================================================================
-#!/bin/bash
+	4) # ==================================================================================================================
+
 clear
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo "  (\_(\ "
+echo " (=’ :’) :* Script by Mnm Ami"
+echo "  (,(”)(”) °.¸¸.•"
 echo ""
-echo "             === WELLCOM === "
-echo " ======================================"
-echo "    กำหนดรหัสผ่านสำหรับล็อกอินด้วยชื่อ root  "
-echo " ====================================="
-passwd
-cat > /etc/ssh/sshd_config <<-END
-# Package generated configuration file
-# See the sshd_config(5) manpage for details
-
-# What ports, IPs and protocols we listen for
-Port 22
-# Use these options to restrict which interfaces/protocols sshd will bind to
-#ListenAddress ::
-#ListenAddress 0.0.0.0
-Protocol 2
-# HostKeys for protocol version 2
-HostKey /etc/ssh/ssh_host_rsa_key
-HostKey /etc/ssh/ssh_host_dsa_key
-HostKey /etc/ssh/ssh_host_ecdsa_key
-HostKey /etc/ssh/ssh_host_ed25519_key
-#Privilege Separation is turned on for security
-UsePrivilegeSeparation yes
-
-# Lifetime and size of ephemeral version 1 server key
-KeyRegenerationInterval 3600
-ServerKeyBits 1024
-
-# Logging
-SyslogFacility AUTH
-LogLevel INFO
-
-# Authentication:
-LoginGraceTime 120
-PermitRootLogin yes
-StrictModes yes
-
-RSAAuthentication yes
-PubkeyAuthentication yes
-#AuthorizedKeysFile	%h/.ssh/authorized_keys
-
-# Don't read the user's ~/.rhosts and ~/.shosts files
-IgnoreRhosts yes
-# For this to work you will also need host keys in /etc/ssh_known_hosts
-RhostsRSAAuthentication no
-# similar for protocol version 2
-HostbasedAuthentication no
-# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication
-#IgnoreUserKnownHosts yes
-
-# To enable empty passwords, change to yes (NOT RECOMMENDED)
-PermitEmptyPasswords no
-
-# Change to yes to enable challenge-response passwords (beware issues with
-# some PAM modules and threads)
-ChallengeResponseAuthentication no
-
-# Change to no to disable tunnelled clear text passwords
-PasswordAuthentication yes
-
-# Kerberos options
-#KerberosAuthentication no
-#KerberosGetAFSToken no
-#KerberosOrLocalPasswd yes
-#KerberosTicketCleanup yes
-
-# GSSAPI options
-#GSSAPIAuthentication no
-#GSSAPICleanupCredentials yes
-
-X11Forwarding yes
-X11DisplayOffset 10
-PrintMotd no
-PrintLastLog yes
-TCPKeepAlive yes
-#UseLogin no
-
-#MaxStartups 10:30:60
-#Banner /etc/issue.net
-
-# Allow client to pass locale environment variables
-AcceptEnv LANG LC_*
-
-Subsystem sftp /usr/lib/openssh/sftp-server
-
-# Set this to 'yes' to enable PAM authentication, account processing,
-# and session processing. If this is enabled, PAM authentication will
-# be allowed through the ChallengeResponseAuthentication and
-# PasswordAuthentication.  Depending on your PAM configuration,
-# PAM authentication via ChallengeResponseAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
-# If you just want the PAM account and session checks to run without
-# PAM authentication, then enable this but set PasswordAuthentication
-# and ChallengeResponseAuthentication to 'no'.
-UsePAM yes
-END
-service ssh restart
+echo ""
+echo "ลำดับ   ชื่อบัญชีผู้ใช้        สถานะ      วันหมดอายุ"
+echo ""
+C=1
+ON=0
+OFF=0
+while read ONOFF
+do
+	CLIENTOFFLINE=$(echo -e "${GRAY}OFFLINE${NC}")
+	CLIENTONLINE=$(echo -e "${GREEN}ONLINE${NC}")
+	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
+	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
+	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
+	ONLINE="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $ACCOUNT | grep -Eom 1 $ACCOUNT)"
+	if [[ $ID -ge 1000 ]]; then
+		if [[ -z $ONLINE ]]; then
+			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTOFFLINE" "$EXP"
+			OFF=$((OFF+1))
+		else
+			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTONLINE" "$EXP"
+			ON=$((ON+1))
+		fi
+			C=$((C+1))
+        fi
+done < /etc/passwd
+TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
+echo ""
+echo ""
+echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${GRAY}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL"
+echo ""
 exit
-;;
 
-10) # ==================================================================================================================
- 
-  if [ ! -e /usr/local/bin/Reboot-Server ]; then
+	;;
+
+	5) # ==================================================================================================================
+
+	echo ""
+	read -p "ชื่อบัญชีที่ต้องการเปลี่ยนรหัสผ่าน : " CLIENTNAME
+	egrep "^$CLIENTNAME" /etc/passwd >/dev/null
+
+	if [ $? -eq 0 ]; then
+		echo ""
+		read -p "รหัสผ่านที่ต้องการปลี่ยน : " NEWPASSWORD
+		read -p "ยืนยันรหัสผ่านอีกครั้ง : " RETYPEPASSWORD
+
+		if [[ $NEWPASSWORD = $RETYPEPASSWORD ]]; then
+			echo ""
+			echo "ระบบได้ทำการเปลี่ยนรหัสผ่านเรียบร้อยแล้ว"
+			echo ""
+			echo "ชื่อบัญชีผู้ใข้ : $CLIENTNAME"
+			echo "รหัสผ่านใหม่ : $NEWPASSWORD"
+			echo ""
+			exit
+		else
+			echo ""
+			echo "เปลี่ยนรหัสผ่านไม่สำเร็จ การยืนยันรหัสผ่านไม่สอดคล้อง"
+			echo ""
+			exit
+		fi
+	else
+
+		echo ""
+		echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+		echo ""
+		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+		if [[ "$TOMENU" = 'Y' ]]; then
+			menu
+			exit
+		elif [[ "$TOMENU" = 'N' ]]; then
+			exit
+		fi
+	fi
+
+	;;
+
+	6) # ==================================================================================================================
+
+echo ""
+read -p "ชื่อบัญชีที่ต้องการเปลี่ยนวันหมดอายุ : " -e CLIENT
+
+if [ $? -eq 0 ]; then
+	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+	echo ""
+	echo -e "ชื่อบัญชีนี้หมดอายุในวันที่ ${GRAY}$EXP${NC}"
+	echo ""
+	read -p "เปลี่ยนวันหมดอายุ : " -e TimeActive
+	userdel $CLIENT
+	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
+	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
+	echo ""
+	echo "ชื่อบัญชี : $CLIENT"
+	echo "หมดวันหมดในวันที่ : $EXP"
+	echo ""
+	exit
+
+else
+
+	echo ""
+	echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+	echo ""
+	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+	if [[ "$TOMENU" = 'Y' ]]; then
+		menu
+		exit
+	elif [[ "$TOMENU" = 'N' ]]; then
+		exit
+	fi
+fi
+
+	;;
+
+	7) # ==================================================================================================================
+
+ if [ ! -e /usr/local/bin/Reboot-Server ]; then
 	echo '#!/bin/bash' > /usr/local/bin/Reboot-Server
 	echo '' >> /usr/local/bin/Reboot-Server
 	echo 'DATE=$(date +"%m-%d-%Y")' >> /usr/local/bin/Reboot-Server
@@ -1061,13 +503,9 @@ fi
 
 clear
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo "  (\_(\ "
+echo " (=’ :’) :* Script by Mnm Ami"
+echo "  (,(”)(”) °.¸¸.•"
 echo ""
 echo -e "${GRAY}ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ ${NC} "
 echo ""
@@ -1184,163 +622,27 @@ exit
 esac
 
 	;;
-	
-11) # ==================================================================================================================
 
-if [[ ! -e /usr/local/bin/Banwidth-Per-Client ]]; then
-	apt-get install python
-	wget -O /usr/local/bin/Banwidth-Per-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Banwidth-Per-Client"
-	chmod +x /usr/local/bin/Banwidth-Per-Client
+	8) # ==================================================================================================================
+
+if [[ -e /usr/local/bin/speedtest ]]; then
 	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo ""
-	Banwidth-Per-Client
-	echo ""
-else
+	speedtest --share
+elif [[ ! -e /usr/local/bin/speedtest ]]; then
+	wget -O /usr/local/bin/speedtest "https://raw.githubusercontent.com/nwqionm/OPENEXTRA/master/Speedtest"
+	chmod +x /usr/local/bin/speedtest
 	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	Banwidth-Per-Client
-	echo ""
+	speedtest --share
 fi
 
 	;;
-	
-12) # ==================================================================================================================
 
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	read -p "ชื่อบัญชีที่ต้องการเปลี่ยนรหัสผ่าน : " CLIENTNAME
-	egrep "^$CLIENTNAME" /etc/passwd >/dev/null
-
-	if [ $? -eq 0 ]; then
-		echo ""
-		read -p "รหัสผ่านที่ต้องการปลี่ยน : " NEWPASSWORD
-		read -p "ยืนยันรหัสผ่านอีกครั้ง : " RETYPEPASSWORD
-
-		if [[ $NEWPASSWORD = $RETYPEPASSWORD ]]; then
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-			echo "ระบบได้ทำการเปลี่ยนรหัสผ่านเรียบร้อยแล้ว"
-			echo ""
-			echo "ชื่อบัญชีผู้ใข้ : $CLIENTNAME"
-			echo "รหัสผ่านใหม่ : $NEWPASSWORD"
-			echo ""
-			exit
-		else
-			echo ""
-			echo "เปลี่ยนรหัสผ่านไม่สำเร็จ การยืนยันรหัสผ่านไม่สอดคล้อง"
-			echo ""
-			exit
-		fi
-	else
-
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-		echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
-		echo ""
-		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
-
-		if [[ "$TOMENU" = 'Y' ]]; then
-			menu
-			exit
-		elif [[ "$TOMENU" = 'N' ]]; then
-			exit
-		fi
-	fi
+	9) # ==================================================================================================================
 
 	;;
-	
-13) # ==================================================================================================================
 
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-read -p "ชื่อบัญชีที่ต้องการเปลี่ยนวันหมดอายุ : " -e CLIENT
 
-if [ $? -eq 0 ]; then
-	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
-	echo ""
-	echo -e "ชื่อบัญชีนี้หมดอายุในวันที่ ${GRAY}$EXP${NC}"
-	echo ""
-	read -p "เปลี่ยนวันหมดอายุ : " -e TimeActive
-	userdel $CLIENT
-	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
-	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
-	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo "ชื่อบัญชี : $CLIENT"
-	echo "หมดวันหมดในวันที่ : $EXP"
-	echo ""
-	exit
-
-else
-
-	echo ""
-	echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
-	echo ""
-	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
-
-	if [[ "$TOMENU" = 'Y' ]]; then
-		menu
-		exit
-	elif [[ "$TOMENU" = 'N' ]]; then
-		exit
-	fi
-fi
-
-	;;
-14) # ==================================================================================================================
+	10) # ==================================================================================================================
 
 INTERFACE=`ifconfig | head -n1 | awk '{print $1}' | cut -d ':' -f 1`
 TODAY=$(vnstat -i $INTERFACE | grep "today" | awk '{print $8" "substr ($9, 1, 1)}')
@@ -1357,15 +659,12 @@ TXTOTAL=$(vnstat -i $INTERFACE | grep "tx:" | awk '{print $5" "substr ($9, 1, 1)
 
 clear
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo "  (\_(\ "
+echo " (=’ :’) :* Script by Mnm Ami"
+echo "  (,(”)(”) °.¸¸.•"
 echo ""
-	echo -e "แบนด์วิดท์ ${GRAY}MyGatherBK-VPN${NC}"
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "แบนด์วิดท์ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
 	echo ""
 	echo -e "วันนี้ ${GRAY}$TODAY${NC}"
 	echo -e "เมื่อวานนี้ ${GRAY}$YESTERDAY${NC}"
@@ -1381,250 +680,28 @@ echo ""
 	echo ""
 	exit
 
-	;;
-	
-	15) # ==================================================================================================================
-
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-echo " ปรับความเร็วอินเตอร์เน็ต  "
-echo ""
-echo "|1| เปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
-echo "|2| ปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
-echo ""
-read -p "เลือกหัวข้อที่ต้องการใช้งาน : " LIMITINTERNET
-
-case $LIMITINTERNET in
-
-	1)
-
-echo ""
-echo "|1| Megabyte (Mbps)"
-echo "|2| Kilobyte (Kbps)"
-echo ""
-read -p "กรุณาเลือกหน่วยวัดความเร็วอินเทอร์เน็ต : " -e PERSECOND
-case $PERSECOND in
-	1)
-	PERSECOND=mbit
-	;;
-	2)
-	PERSECOND=kbit
-	;;
-esac
-
-echo ""
-echo ""
-echo " วิธีการใส่ : เช่นต้องการให้มีความเร็ว 10Mbps ให้ใส่เลข 10 "
-echo " หากต้องการให้มีความเร็ว 512Kbps ให้ใส่เลข 512 "
-echo ""
-read -p "ใส่จำนวนความเร็วการดาวน์โหลด : " -e CHDL
-read -p "ใส่จำนวนความเร็วการอัพโหลด : " -e CHUL
-
-DNLD=$CHDL$PERSECOND
-UPLD=$CHUL$PERSECOND
-
-TC=/sbin/tc
-
-IF="$(ip ro | awk '$1 == "default" { print $5 }')"
-IP="$(ip -o ro get $(ip ro | awk '$1 == "default" { print $3 }') | awk '{print $5}')/32"     # Host IP
-
-U32="$TC filter add dev $IF protocol ip parent 1: prio 1 u32"
-
-    $TC qdisc add dev $IF root handle 1: htb default 30
-    $TC class add dev $IF parent 1: classid 1:1 htb rate $DNLD
-    $TC class add dev $IF parent 1: classid 1:2 htb rate $UPLD
-    $U32 match ip dst $IP flowid 1:1
-    $U32 match ip src $IP flowid 1:2
-    echo ""
-    echo " ความเร็วดาวน์โหลด $CHDL $PERSECOND "
-    echo " ความเร็วอัพโหลด $CHUL $PERSECOND"
-    echo ""
-    echo "เปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
-    echo ""
-    exit
-
-	;;
-
-	2)
-
-TC=/sbin/tc
-IF="$(ip ro | awk '$1 == "default" { print $5 }')"
-
-    $TC qdisc del dev $IF root
-    echo ""
-    echo " ปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
-    echo ""
-    exit
-
-	;;
-
-esac
-
-	;;
-	
-	16) # ==================================================================================================================
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-if [[ ! $CHECKSYSTEM ]]; then
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo -e "BANDWIDTH ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
 	echo ""
-	echo "ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน"
+	echo -e "TODAY ${GRAY}$TODAY${NC}"
+	echo -e "YESTERDAY ${GRAY}$YESTERDAY${NC}"
+	echo ""
+	echo -e "RECEIVE (rx) ${GRAY}$RXWEEK${NC} TRANSMIT (tx) ${GRAY}$TXWEEK${NC}"
+	echo -e "CURRENT WEEK ${GRAY}$WEEK${NC}"
+	echo ""
+	echo -e "RECEIVE (rx) ${GRAY}$RXMOUNT${NC} TRANSMIT (tx) ${GRAY}$TXMOUNT${NC}"
+	echo -e "THIS MOUNT TOTAL ${GRAY}$MOUNT${NC}"
+	echo ""
+	echo -e "RECEIVE (rx) ${GRAY}$RXTOTAL${NC} TRANSMIT (tx) ${GRAY}$TXTOTAL${NC}"
+	echo -e "TOTAL ${GRAY}$TOTAL${NC}"
 	echo ""
 	exit
 fi
 
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-echo " แบนและปลดแบนบัญชีผู้ใช้  "
-echo ""
-echo " |1| แบนบัญชีผู้ใช้"
-echo " |2| ปลดแบนบัญชีผู้ใช้"
-echo ""
-read -p "เลือกหัวข้อที่ต้องการใช้งาน : " BandUB
-case $BandUB in
-
-	1)
-
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-read -p "ชื่อบัญชีที่ต้องการแบน : " CLIENT
-
-egrep "^$CLIENT" /etc/passwd >/dev/null
-if [ $? -eq 0 ]; then
-	echo "V=$CLIENT" >> /usr/local/bin/Ban-Unban
-	passwd -l $CLIENT
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo "บัญชีชื่อ $CLIENT ได้ถูกแบนเรียบร้อยแล้ว"
-	echo ""
-	exit
-elif [ $? -eq 1 ]; then
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
-	echo ""
-	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
-
-	if [[ "$TOMENU" = 'Y' ]]; then
-		menu
-		exit
-	elif [[ "$TOMENU" = 'N' ]]; then
-		exit
-	fi
-fi
-
 	;;
 
-	2)
+	11) # ==================================================================================================================
 
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-read -p "ชื่อบัญชีที่ต้องการปลดแบน : " CLIENT
-
-egrep "^$CLIENT" /etc/passwd >/dev/null
-if [ $? -eq 0 ]; then
-	sed -i 's/V=$CLIENT/R=$CLIENT/g' /usr/local/bin/Ban-Unban
-	passwd -u $CLIENT
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo " บัญชีชื่อ $CLIENT ได้ถูกปลดแบนเรียบร้อยแล้ว "
-	echo ""
-	exit
-
-elif [ $? -eq 1 ]; then
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo " ชื่อบัญชีที่ระบุไม่ได้ถูกแบน หรือไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ "
-	echo ""
-	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
-
-	if [[ "$TOMENU" = 'Y' ]]; then
-		menu
-		exit
-	elif [[ "$TOMENU" = 'N' ]]; then
-		exit
-	fi
-fi
-
-	;;
-
-esac
-
-	;;
-
-
-17) # ================================================================================================================== 
-
-;;
-18) # ==================================================================================================================
 DATE1=$(vnstat -h | sed -n '16p' | awk '{print $1}')
 RX1=$(vnstat -h | sed -n '16p' | awk '{print $2}' | cut -d ',' -f 1-20 --output-delimiter='')
 TX1=$(vnstat -h | sed -n '16p' | awk '{print $3}' | cut -d ',' -f 1-20 --output-delimiter='')
@@ -1770,15 +847,7 @@ CONRX24=$(echo "scale=2;$RX24 / 1000000" | bc)
 CONTX24=$(echo "scale=2;$TX24 / 1000000" | bc)
 
 clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-NOW=`echo -e "${GREEN}เวลาปัจจุบัน${NC}"`
+NOW=`echo -e "${GRAY}เวลาปัจจุบัน${NC}"`
 echo ""
 echo -e "${GRAY}ตัวเลขรับและส่งข้อมูลที่แสดงจะมีหน่วยวัดปริมาณเป็น Gigabyte ทั้งหมด${NC}"
 printf "%-7s %-7s %-10s\n" "เวลา" "รับข้อมูล" "ส่งข้อมูล"
@@ -1811,200 +880,520 @@ echo ""
 exit
 
 	;;
-	
-	19) # ==================================================================================================================
 
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-nano /usr/local/bin/m
-exit
-	;;
-	
-	20) # ==================================================================================================================
+	12) # ==================================================================================================================
 
-# Banner
-rm /etc/bannerssh
-wget -O /etc/bannerssh "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/issue.net"
-echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
-service ssh restart
-
-	;;
-	
-	21) # ==================================================================================================================
-;;
-
-	22) # ==================================================================================================================
-#!/bin/bash
-# Script by : Clrkz
-rm -f /root/opensshport
-rm -f /root/dropbearport
-rm -f /root/stunnel4port
-rm -f /root/openvpnport
-rm -f /root/squidport
-opensshport="$(netstat -ntlp | grep -i ssh | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-dropbearport="$(netstat -nlpt | grep -i dropbear | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-stunnel4port="$(netstat -nlpt | grep -i stunnel | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-squidport="$(cat /etc/squid3/squid.conf | grep -i http_port | awk '{print $2}')"
-echo $opensshport > /root/opensshport
-cat > /root/opensshport <<-END
-$opensshport
-END
-echo $dropbearport > /root/dropbearport
-cat > /root/dropbearport <<-END
-$dropbearport
-END
-echo $stunnel4port > /root/stunnel4port
-cat > /root/stunnel4port <<-END
-$stunnel4port
-END
-echo $openvpnport > /root/openvpnport
-cat > /root/openvpnport <<-END
-$openvpnport
-END
-echo $squidport > /root/squidport
-cat > /root/squidport <<-END
-$squidport
-END
-
-cd
-clear
-echo -e "\e[0m                                                   "
-echo -e "\e[94m[][][]======================================[][][]"
-echo -e "\e[0m                                                   "
-echo -e "\e[93m                   OpenVPN Port                   "
-echo -e "\e[93m                       "$openvpnport
-echo -e "\e[0m                                                   "
-read -p "       ควรเปลี่ยนพอร์ตใด? :  " Port
-egrep "^$Port" /root/openvpnport >/dev/null
-if [ $? -eq 0 ]; then
-	read -p "            From Port $Port -> Port " Port_New
-	if grep -Fxq $Port_New /root/opensshport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              OpenSSH Port แก้ไข              "
-		echo -e "\e[91m              Port พร้อมใช้งาน             "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	if grep -Fxq $Port_New /root/dropbearport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              Dropbear Port แก้ไข              "
-		echo -e "\e[91m              Port พร้อมใช้งาน              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	if grep -Fxq $Port_New /root/stunnel4port; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m              Stunnel4 Port แก้ไข               "
-		echo -e "\e[91m              Port Is พร้อมใช้งาน              "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	if grep -Fxq $Port_New /root/squidport; then
-		echo -e "\e[0m                                                   "
-		echo -e "\e[91m               Squid3 Port แก้ไข                "
-		echo -e "\e[91m              Port พร้อมใช้งาน             "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-	fi
-	Port_Change="s/$Port/$Port_New/g";
-	sed -i $Port_Change /etc/openvpn/server.conf
-	sed -i $Port_Change /home/vps/public_html/client.ovpn
-	sed -i $Port_Change /root/openvpnport
-	openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-	echo $openvpnport > /root/openvpnport
-	cat > /root/openvpnport <<-END
-	$openvpnport
-	END
-	service openvpn restart
-	sleep 4
-	openvpnport="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
+if [[ ! -e /usr/local/bin/Banwidth-Per-Client ]]; then
+	apt-get install python
+	wget -O /usr/local/bin/Banwidth-Per-Client "https://raw.githubusercontent.com/nwqionm/OPENEXTRA/master/Banwidth-Per-Client"
+	chmod +x /usr/local/bin/Banwidth-Per-Client
 	clear
-	echo -e "\e[0m                                                   "
-	echo -e "\e[94m[][][]======================================[][][]"
-	echo -e "\e[0m                                                   "
-	echo -e "\e[93m           AutoScriptVPS by  MyGatherBK           "
-	echo -e "\e[0m                                                   "
-	echo -e "\e[93m                   OpenVPN Port                   "
-	echo -e "\e[93m                       "$openvpnport
-	echo -e "\e[0m                                                   "
-	echo -e "\e[94m[][][]======================================[][][]\e[0m"
-
+	echo ""
+	echo -e "Script by ${GRAY}Weerawat Khlaolamom (P'Beer) ${NC}"
+	echo -e "FB Group : ${GRAY}https://www.facebook.com/groups/143457819538014/ ${NC}"
+	echo ""
+	Banwidth-Per-Client
+	echo ""
 else
-	echo -e "\e[0m                                                   "
-	echo -e "\e[91m                 Port Doesnt Exit                 "
-	echo -e "\e[0m                                                   "
-	echo -e "\e[94m[][][]======================================[][][]\e[0m"
-fi
-
-;;
-
-	23) # ==================================================================================================================
-	
 	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-	nano /etc/squid/squid.conf
-	service squid restart
-	exit
-elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-	nano /etc/squid3/squid.conf
-	service squid3 restart
-	exit
+	echo ""
+	echo -e "Script by ${GRAY}Weerawat Khlaolamom (P'Beer) ${NC}"
+	echo -e "FB Group : ${GRAY}https://www.facebook.com/groups/143457819538014/ ${NC}"
+	echo ""
+	Banwidth-Per-Client
+	echo ""
 fi
+
 	;;
-	
-	24) # ==================================================================================================================
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-nano /etc/ssh/sshd_config
-service ssh restart
-exit
-;;
 
-	25) # ==================================================================================================================
+	13) # ==================================================================================================================
 
 clear
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo -e "แก้ไขคอนฟิกต่างๆในระบบ ${GRAY}MyGatherBK-VPN${NC}"
+echo "  (\_(\ "
+echo " (=’ :’) :* Script by Mnm Ami"
+echo "  (,(”)(”) °.¸¸.•"
+echo ""
+echo -e "${GRAY}ปรับเปลี่ยนระบบของเซิฟเวอร์ ${NC} "
+echo ""
+echo -e "|${GRAY}1${NC}| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น สามารถสร้างไฟล์เพิ่มได้"
+echo -e "|${GRAY}2${NC}| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องสร้างบัญชีเพื่อใช้เชื่อมต่อ"
+echo -e "|${GRAY}3${NC}| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดเครื่อง"
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " CHANGESYSTEMSERVER
+
+case $CHANGESYSTEMSERVER in
+
+	1)
+
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '20d' /etc/openvpn/client-common.txt
+echo "client-to-client" >> /etc/openvpn/server.conf
+echo ""
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 1 เรียบร้อย"
+echo ""
+service openvpn restart
+
+	;;
+
+	2)
+
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '20d' /etc/openvpn/client-common.txt
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
+	echo "plugin /usr/lib/openvpn/openvpn-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
+	echo "client-cert-not-required" >> /etc/openvpn/server.conf
+	echo "username-as-common-name" >> /etc/openvpn/server.conf
+else
+	echo "plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
+	echo "client-cert-not-required" >> /etc/openvpn/server.conf
+	echo "username-as-common-name" >> /etc/openvpn/server.conf
+fi
+echo "auth-user-pass" >> /etc/openvpn/client-common.txt
+echo ""
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 2 เรียบร้อย"
+echo ""
+service openvpn restart
+
+	;;
+
+	3)
+
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '20d' /etc/openvpn/client-common.txt
+echo "duplicate-cn" >> /etc/openvpn/server.conf
+echo ""
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 3 เรียบร้อย"
+echo ""
+service openvpn restart
+
+	;;
+
+esac
+
+	;;
+
+	14) # ==================================================================================================================
+
+if [[ ! $CHECKSYSTEM ]]; then
+	echo ""
+	echo "ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน"
+	echo ""
+	exit
+fi
+
+clear
+echo ""
+echo "  (\_(\ "
+echo " (=’ :’) :* Script by Mnm Ami"
+echo "  (,(”)(”) °.¸¸.•"
+echo ""
+echo -e "${GRAY}แบนและปลดแบนบัญชีผู้ใช้ ${NC} "
+echo ""
+echo -e "|${GRAY}1${NC}| แบนบัญชีผู้ใช้"
+echo -e "|${GRAY}2${NC}| ปลดแบนบัญชีผู้ใช้"
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " BandUB
+
+case $BandUB in
+
+	1)
+
+echo ""
+read -p "ชื่อบัญชีที่ต้องการแบน : " CLIENT
+
+egrep "^$CLIENT" /etc/passwd >/dev/null
+if [ $? -eq 0 ]; then
+	echo "V=$CLIENT" >> /usr/local/bin/Ban-Unban
+	passwd -l $CLIENT
+	clear
+	echo ""
+	echo "บัญชีชื่อ $CLIENT ได้ถูกแบนเรียบร้อยแล้ว"
+	echo ""
+	exit
+elif [ $? -eq 1 ]; then
+	clear
+	echo ""
+	echo "ไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+	echo ""
+	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+	if [[ "$TOMENU" = 'Y' ]]; then
+		menu
+		exit
+	elif [[ "$TOMENU" = 'N' ]]; then
+		exit
+	fi
+fi
+
+	;;
+
+	2)
+
+echo ""
+read -p "ชื่อบัญชีที่ต้องการปลดแบน : " CLIENT
+
+egrep "^$CLIENT" /etc/passwd >/dev/null
+if [ $? -eq 0 ]; then
+	sed -i 's/V=$CLIENT/R=$CLIENT/g' /usr/local/bin/Ban-Unban
+	passwd -u $CLIENT
+	clear
+	echo ""
+	echo "บัญชีชื่อ $CLIENT ได้ถูกปลดแบนเรียบร้อยแล้ว"
+	echo ""
+	exit
+
+elif [ $? -eq 1 ]; then
+	clear
+	echo ""
+	echo "ชื่อบัญชีที่ระบุไม่ได้ถูกแบน หรือไม่มีชื่อบัญชีที่ระบุอยู่ในระบบ"
+	echo ""
+	read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
+
+	if [[ "$TOMENU" = 'Y' ]]; then
+		menu
+		exit
+	elif [[ "$TOMENU" = 'N' ]]; then
+		exit
+	fi
+fi
+
+	;;
+
+esac
+
+	;;
+
+	15) # ==================================================================================================================
+
+clear
+echo ""
+echo "  (\_(\ "
+echo " (=’ :’) :* Script by Apiwat Panyoi"
+echo "  (,(”)(”) °.¸¸.• Edit the Script by Mnm Ami"
+echo ""
+echo -e "${GRAY}ปรับความเร็วอินเตอร์เน็ต ${NC} "
+echo ""
+echo -e "|${GRAY}1${NC}| เปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
+echo -e "|${GRAY}2${NC}| ปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " LIMITINTERNET
+
+case $LIMITINTERNET in
+
+	1)
+
+echo ""
+echo -e "|${GRAY}1${NC}| Megabyte (Mbps)"
+echo -e "|${GRAY}2${NC}| Kilobyte (Kbps)"
+echo ""
+read -p "กรุณาเลือกหน่วยวัดความเร็วอินเทอร์เน็ต : " -e PERSECOND
+case $PERSECOND in
+	1)
+	PERSECOND=mbit
+	;;
+	2)
+	PERSECOND=kbit
+	;;
+esac
+
+echo ""
+echo ""
+echo -e "วิธีการใส่ : เช่นต้องการให้มีความเร็ว 10Mbps ให้ใส่เลข ${GRAY}10${NC}"
+echo -e "         หากต้องการให้มีความเร็ว 512Kbps ให้ใส่เลข ${GRAY}512${NC}"
+echo ""
+read -p "ใส่จำนวนความเร็วการดาวน์โหลด : " -e CHDL
+read -p "ใส่จำนวนความเร็วการอัพโหลด : " -e CHUL
+
+DNLD=$CHDL$PERSECOND
+UPLD=$CHUL$PERSECOND
+
+TC=/sbin/tc
+
+IF="$(ip ro | awk '$1 == "default" { print $5 }')"
+IP="$(ip -o ro get $(ip ro | awk '$1 == "default" { print $3 }') | awk '{print $5}')/32"     # Host IP
+
+U32="$TC filter add dev $IF protocol ip parent 1: prio 1 u32"
+
+    $TC qdisc add dev $IF root handle 1: htb default 30
+    $TC class add dev $IF parent 1: classid 1:1 htb rate $DNLD
+    $TC class add dev $IF parent 1: classid 1:2 htb rate $UPLD
+    $U32 match ip dst $IP flowid 1:1
+    $U32 match ip src $IP flowid 1:2
+    echo ""
+    echo -e "ความเร็วดาวน์โหลด ${GRAY}$CHDL $PERSECOND${NC}"
+    echo -e "ความเร็วอัพโหลด ${GRAY}$CHUL $PERSECOND${NC}"
+    echo ""
+    echo "เปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
+    echo ""
+    exit
+
+	;;
+
+	2)
+
+TC=/sbin/tc
+IF="$(ip ro | awk '$1 == "default" { print $5 }')"
+
+    $TC qdisc del dev $IF root
+    echo ""
+    echo "ปิดใช้งานการปรับแต่งความเร็วอินเทอร์เน็ต"
+    echo ""
+    exit
+
+	;;
+
+esac
+
+	;;
+
+	16) # ==================================================================================================================
+
+clear
+echo ""
+echo "  (\_(\ "
+echo " (=’ :’) :* Script by Mnm Ami"
+echo "  (,(”)(”) °.¸¸.•"
+echo ""
+echo -e "เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
+echo ""
+echo -e "|${GRAY}1${NC}| OPENVPN"
+echo -e "|${GRAY}2${NC}| SSH DROPBEAR"
+echo -e "|${GRAY}3${NC}| SQUID PROXY"
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " SERVICE
+
+case $SERVICE in
+
+	1)
+
+	echo ""
+	echo -e "	|${GRAY}1${NC}| เปิด"
+	echo -e "	|${GRAY}2${NC}| ปิด"
+	echo -e "	|${GRAY}3${NC}| รีสตาร์ท"
+	echo ""
+	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEOPENVPN
+
+	case $SERVICEOPENVPN in
+
+		1)
+	service openvpn start
+	echo ""
+	echo -e "	OpenVPN ${GRAY}STARTED${NC}"
+	echo ""
+	exit
+		;;
+
+		2)
+	service openvpn stop
+	echo ""
+	echo -e "	OpenVPN ${GRAY}STOPPED${NC}"
+	echo ""
+	exit
+		;;
+
+		3)
+	service openvpn restart
+	echo ""
+	echo -e "	OpenVPN ${GRAY}RESTARTED${NC}"
+	echo ""
+	exit
+		;;
+
+	esac
+
+	;;
+
+	2)
+
+	echo ""
+	echo -e "	|${GRAY}1${NC}| เปิด"
+	echo -e "	|${GRAY}2${NC}| ปิด ${GRAY}หากปิดการทำงานจะไม่สามารถเข้าสู่เทอมินอลได้ ${NC} "
+	echo -e "	|${GRAY}3${NC}| รีสตาร์ท"
+	echo ""
+	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEDROPBEAR
+
+	case $SERVICEDROPBEAR in
+
+		1)
+
+	if [[ -e /etc/default/dropbear ]]; then
+		service ssh start
+		echo ""
+		echo -e "	SSH Dropbear ${GRAY}STARTED${NC}"
+		echo ""
+		exit
+	elif [[ ! -e /etc/default/dropbear ]]; then
+		echo ""
+		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
+		echo ""
+		exit
+	fi
+		;;
+
+		2)
+	if [[ -e /etc/default/dropbear ]]; then
+		service ssh stop
+		echo ""
+		echo -e "	SSH Dropbear ${GRAY}STOPPED${NC}"
+		echo ""
+		exit
+	elif [[ ! -e /etc/default/dropbear ]]; then
+		echo ""
+		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
+		echo ""
+		exit
+	fi
+		;;
+
+		3)
+	if [[ -e /etc/default/dropbear ]]; then
+		service ssh restart
+		echo ""
+		echo -e "	SSH Dropbear ${GRAY}RESTARTED${NC}"
+		echo ""
+		exit
+	elif [[ ! -e /etc/default/dropbear ]]; then
+		echo ""
+		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
+		echo ""
+		exit
+	fi
+		;;
+
+	esac
+
+	;;
+
+	3)
+
+	echo ""
+	echo -e "	|${GRAY}1${NC}| เปิด"
+	echo -e "	|${GRAY}2${NC}| ปิด"
+	echo -e "	|${GRAY}3${NC}| รีสตาร์ท"
+	echo ""
+	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEPROXY
+
+	case $SERVICEPROXY in
+
+		1)
+	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
+			echo ""
+			exit
+		else
+			service squid start
+			echo ""
+			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
+			echo ""
+			exit
+		fi
+	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
+			echo ""
+			exit
+		else
+			service squid3 start
+			echo ""
+			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
+			echo ""
+			exit
+		fi
+	fi
+		;;
+
+		2)
+	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
+			echo ""
+			exit
+		else
+			service squid stop
+			echo ""
+			echo -e "	Squid Proxy ${GRAY}STOPPED${NC}"
+			echo ""
+			exit
+		fi
+	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
+			echo ""
+			exit
+		else
+			service squid3 stop
+			echo ""
+			echo -e "	Squid Proxy ${GRAY}STOPPED${NC}"
+			echo ""
+			exit
+		fi
+	fi
+		;;
+
+		3)
+	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
+			echo ""
+			exit
+		else
+			service squid restart
+			echo ""
+			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
+			echo ""
+			exit
+		fi
+	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo ""
+			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
+			echo ""
+			exit
+		else
+			service squid3 restart
+			echo ""
+			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
+			echo ""
+			exit
+		fi
+	fi
+		;;
+
+	esac
+
+	;;
+
+esac
+
+	;;
+
+	17) # ==================================================================================================================
+
+clear
+echo ""
+echo "  (\_(\ "
+echo " (=’ :’) :* Script by Mnm Ami"
+echo "  (,(”)(”) °.¸¸.•"
+echo ""
+echo -e "แก้ไขคอนฟิกต่างๆในระบบ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
 echo ""
 echo -e "|${GRAY}1${NC}| OPENVPN ไฟล์ต้นแบบการสร้างคอนฟิก"
 echo -e "|${GRAY}2${NC}| OPENVPN ไฟล์ข้อมูลเซิฟเวอร์"
+echo -e "|${GRAY}3${NC}| SQUID PROXY ไฟล์รายละเอียดของพร็อกซี่"
+echo -e "|${GRAY}4${NC}| MENU ไฟล์สคริปท์ของเมนู"
 echo ""
 echo ""
 read -p "เลือกหัวข้อที่ต้องการใช้งาน : " EDIT
@@ -2019,105 +1408,25 @@ exit
 nano /etc/openvpn/server.conf
 exit
 	;;
+	3)
+if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+	nano /etc/squid/squid.conf
+	exit
+elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	nano /etc/squid3/squid.conf
+	exit
+fi
+	;;
+	4)
+nano /usr/local/bin/menu
+exit
+	;;
 
 esac
 
 	;;
-	
-	
 
-	26) # ==================================================================================================================
-
-#!/bin/bash
-		clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-		service openvpn restart
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m            OpenVPN Service Restarted             "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		;;
-	
-	
-	
-		27) # ==================================================================================================================
-
-		clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 7-8-9  OS  UBUNTU 14-16-18     #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-		reboot
-		exit
-	;;
-	
-	
-	28) # ==================================================================================================================
-
-#!/bin/bash
-		clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-		service squid restart
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m            Squid Proxy Restarted             "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid3 Proxy"
-			echo ""
-			exit
-		else
-		service squid3 restart
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]"
-		echo -e "\e[0m                                                   "
-		echo -e "\e[93m            Squid3 Proxy Restarted             "
-		echo -e "\e[0m                                                   "
-		echo -e "\e[94m[][][]======================================[][][]\e[0m"
-		exit
-		fi
-	fi
-		;;
-	
-	
-	00) # ==================================================================================================================
+		00) # ==================================================================================================================
 
 cd /usr/local/bin
 wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
@@ -2125,4 +1434,17 @@ chmod +x /usr/local/bin/m
 m
 
 	;;
+
+	00) # ==================================================================================================================
+
+if [[ -e /usr/local/bin/Check-Thai ]]; then
+	rm -f /usr/local/bin/Check-Thai
+	menu
+elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
+	echo "Check Thai" >> /usr/local/bin/Check-Thai
+	menu
+fi
+
+	;;
+
 esac
