@@ -75,7 +75,6 @@ if [ -f "/etc/openvpn/openvpn-status.log" ]; then
         line=`cat /etc/openvpn/openvpn-status.log | wc -l`
         a=$((3+((line-8)/2)))
         b=$(((line-8)/2))
-        echo " "
         echo "-----=[ OpenVPN User Login ]=-----";
         echo "Username  |  IP Address  |  Connected Since";
         echo "-------------------------------------";
@@ -95,7 +94,7 @@ fi
 	echo -e "|${GRAY} 6${NC}| เปลี่ยนวันหมดอายุบัญชีผู้ใช้"
 	echo -e "|${GRAY} 7${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ"
 	echo -e "|${GRAY} 8${NC}| ทดสอบความเร็วอินเตอร์เน็ต"
-	echo -e "|${GRAY} 9${NC}| -"
+	echo -e "|${GRAY} 9${NC}| Credits Banner HTTP INJECTOR"
 	echo -e "|${GRAY}10${NC}| ตรวจสอบแบนด์วิดท์"
 	echo -e "|${GRAY}11${NC}| ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง"
 	echo -e "|${GRAY}12${NC}| ตรวจสอบแบนด์วิดท์ต่อบัญชี"
@@ -108,7 +107,7 @@ fi
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
 	echo -e "|${GRAY}16${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
 	echo -e "|${GRAY}17${NC}| แก้ไขคอนฟิกต่างๆในระบบ"
-	echo -e "|${GRAY} 0${NC}| อัพเดตเมนูสคริปท์"
+	echo -e "|${GRAY}00${NC}| อัพเดตเมนูสคริปท์"
 	
 
 
@@ -144,7 +143,6 @@ case $MENU in
 
 	1) # ==================================================================================================================
 
-		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
@@ -161,7 +159,7 @@ if [[ $CHECKSYSTEM ]]; then
 	if [ $? -eq 0 ]; then
 		read -p "รหัสผ่าน : " -e PASSWORD
 		echo ""
-		echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
+		echo -e " ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน "
 		read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
 		PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
@@ -171,7 +169,15 @@ if [[ $CHECKSYSTEM ]]; then
 		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
 
 		clear
-		echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
 		echo "ชื่อบัญชี : $CLIENT"
 		echo "รหัสผ่าน : $PASSWORD"
 		echo "หมดอายุในวันที่ : $EXP"
@@ -187,7 +193,7 @@ if [[ $CHECKSYSTEM ]]; then
 		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
 
 		if [[ "$TOMENU" = 'Y' ]]; then
-			menu
+			m
 			exit
 		elif [[ "$TOMENU" = 'N' ]]; then
 			exit
@@ -214,24 +220,25 @@ else
 	fi
 
 	echo ""
-	echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
+	echo -e " ะบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน "
 	read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
-	newclient () {
-		cp /etc/openvpn/client-common.txt ~/$1.ovpn
-		echo "<ca>" >> ~/$1.ovpn
-		cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-		echo "</ca>" >> ~/$1.ovpn
-		echo "<cert>" >> ~/$1.ovpn
-		cat /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-		echo "</cert>" >> ~/$1.ovpn
-		echo "<key>" >> ~/$1.ovpn
-		cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-		echo "</key>" >> ~/$1.ovpn
-		echo "<tls-auth>" >> ~/$1.ovpn
-		cat /etc/openvpn/ta.key >> ~/$1.ovpn
-		echo "</tls-auth>" >> ~/$1.ovpn
-	}
+newclient () {
+	# Generates the custom client.ovpn
+	cp /etc/openvpn/client-common.txt ~/$1.ovpn
+	echo "<ca>" >> ~/$1.ovpn
+	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
+	echo "</ca>" >> ~/$1.ovpn
+	echo "<cert>" >> ~/$1.ovpn
+	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
+	echo "</cert>" >> ~/$1.ovpn
+	echo "<key>" >> ~/$1.ovpn
+	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
+	echo "</key>" >> ~/$1.ovpn
+	echo "<tls-auth>" >> ~/$1.ovpn
+	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
+	echo "</tls-auth>" >> ~/$1.ovpn
+}
 
 	RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
 	mkdir /home/vps/public_html/$RANDOMFOLDER
@@ -245,11 +252,19 @@ else
 	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
 
 	clear
-	echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
 	echo "ชื่อบัญชี : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn"
+	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn "
 	echo ""
 	exit
 
@@ -665,7 +680,14 @@ fi
 
 	9) # ==================================================================================================================
 
+# Banner
+rm /etc/bannerssh
+wget -O /etc/bannerssh "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/issue.net"
+echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
+service ssh restart
+
 	;;
+	
 
 
 	10) # ==================================================================================================================
