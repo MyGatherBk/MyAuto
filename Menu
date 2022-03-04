@@ -110,12 +110,12 @@ fi
 	echo -e "|${GRAY}17${NC}| แก้ไขคอนฟิกต่างๆในระบบ"
 	echo ""
 	echo -e "|${GRAY} 0${NC}| อัพเดตเมนูสคริปท์"
-	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาอังกฤษ"
+	
 
 
 
-ON=0
-OFF=0
+ON=1
+OFF=1
 while read ONOFF
 do
 	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
@@ -252,8 +252,16 @@ fi
 	;;
 
 	2) # ==================================================================================================================
-
-	echo ""
+		clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
 	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
 
 	if [ $? -eq 0 ]; then
@@ -296,6 +304,15 @@ fi
 
 	3) # ==================================================================================================================
 
+		clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 read -p "ชื่อบัญชีที่ต้องการลบ : " CLIENT
 egrep "^$CLIENT" /etc/passwd >/dev/null
@@ -336,11 +353,15 @@ fi
 
 	4) # ==================================================================================================================
 
-clear
+		clear
 echo ""
-echo "  (\_(\ "
-echo " (=’ :’) :* Script by Mnm Ami"
-echo "  (,(”)(”) °.¸¸.•"
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 echo ""
 echo "ลำดับ   ชื่อบัญชีผู้ใช้        สถานะ      วันหมดอายุ"
@@ -378,7 +399,16 @@ exit
 
 	5) # ==================================================================================================================
 
-	echo ""
+		clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
 	read -p "ชื่อบัญชีที่ต้องการเปลี่ยนรหัสผ่าน : " CLIENTNAME
 	egrep "^$CLIENTNAME" /etc/passwd >/dev/null
 
@@ -420,6 +450,15 @@ exit
 
 	6) # ==================================================================================================================
 
+		clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 read -p "ชื่อบัญชีที่ต้องการเปลี่ยนวันหมดอายุ : " -e CLIENT
 
@@ -458,6 +497,16 @@ fi
 
 	7) # ==================================================================================================================
 
+		clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
  if [ ! -e /usr/local/bin/Reboot-Server ]; then
 	echo '#!/bin/bash' > /usr/local/bin/Reboot-Server
 	echo '' >> /usr/local/bin/Reboot-Server
@@ -468,11 +517,15 @@ fi
 	chmod +x /usr/local/bin/Reboot-Server
 fi
 
-clear
+		clear
 echo ""
-echo "  (\_(\ "
-echo " (=’ :’) :* Script by Mnm Ami"
-echo "  (,(”)(”) °.¸¸.•"
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 echo -e "${GRAY}ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ ${NC} "
 echo ""
@@ -624,11 +677,15 @@ TOTAL=$(vnstat -i $INTERFACE | grep "total:" | awk '{print $8" "substr ($9, 1, 1
 RXTOTAL=$(vnstat -i $INTERFACE | grep "rx:" | awk '{print $2" "substr ($9, 1, 1)}')
 TXTOTAL=$(vnstat -i $INTERFACE | grep "tx:" | awk '{print $5" "substr ($9, 1, 1)}')
 
-clear
+		clear
 echo ""
-echo "  (\_(\ "
-echo " (=’ :’) :* Script by Mnm Ami"
-echo "  (,(”)(”) °.¸¸.•"
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 if [[ -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "แบนด์วิดท์ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
@@ -813,7 +870,16 @@ TX24=$(vnstat -h | sed -n '23p' | awk '{print $9}' | cut -d ',' -f 1-20 --output
 CONRX24=$(echo "scale=2;$RX24 / 1000000" | bc)
 CONTX24=$(echo "scale=2;$TX24 / 1000000" | bc)
 
-clear
+		clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
 NOW=`echo -e "${GRAY}เวลาปัจจุบัน${NC}"`
 echo ""
 echo -e "${GRAY}ตัวเลขรับและส่งข้อมูลที่แสดงจะมีหน่วยวัดปริมาณเป็น Gigabyte ทั้งหมด${NC}"
@@ -850,6 +916,16 @@ exit
 
 	12) # ==================================================================================================================
 
+		clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
 if [[ ! -e /usr/local/bin/Banwidth-Per-Client ]]; then
 	apt-get install python
 	wget -O /usr/local/bin/Banwidth-Per-Client "https://raw.githubusercontent.com/nwqionm/OPENEXTRA/master/Banwidth-Per-Client"
@@ -875,11 +951,15 @@ fi
 
 	13) # ==================================================================================================================
 
-clear
+		clear
 echo ""
-echo "  (\_(\ "
-echo " (=’ :’) :* Script by Mnm Ami"
-echo "  (,(”)(”) °.¸¸.•"
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 echo -e "${GRAY}ปรับเปลี่ยนระบบของเซิฟเวอร์ ${NC} "
 echo ""
@@ -948,6 +1028,16 @@ esac
 
 	14) # ==================================================================================================================
 
+		clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
 if [[ ! $CHECKSYSTEM ]]; then
 	echo ""
 	echo "ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน"
@@ -955,11 +1045,15 @@ if [[ ! $CHECKSYSTEM ]]; then
 	exit
 fi
 
-clear
+		clear
 echo ""
-echo "  (\_(\ "
-echo " (=’ :’) :* Script by Mnm Ami"
-echo "  (,(”)(”) °.¸¸.•"
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 echo -e "${GRAY}แบนและปลดแบนบัญชีผู้ใช้ ${NC} "
 echo ""
@@ -1039,11 +1133,15 @@ esac
 
 	15) # ==================================================================================================================
 
-clear
+		clear
 echo ""
-echo "  (\_(\ "
-echo " (=’ :’) :* Script by Apiwat Panyoi"
-echo "  (,(”)(”) °.¸¸.• Edit the Script by Mnm Ami"
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 echo -e "${GRAY}ปรับความเร็วอินเตอร์เน็ต ${NC} "
 echo ""
@@ -1122,11 +1220,15 @@ esac
 
 	16) # ==================================================================================================================
 
-clear
+		clear
 echo ""
-echo "  (\_(\ "
-echo " (=’ :’) :* Script by Mnm Ami"
-echo "  (,(”)(”) °.¸¸.•"
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 echo -e "เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
 echo ""
@@ -1351,11 +1453,13 @@ esac
 
 clear
 echo ""
-echo "  (\_(\ "
-echo " (=’ :’) :* Script by Mnm Ami"
-echo "  (,(”)(”) °.¸¸.•"
-echo ""
-echo -e "แก้ไขคอนฟิกต่างๆในระบบ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
 echo ""
 echo -e "|${GRAY}1${NC}| OPENVPN ไฟล์ต้นแบบการสร้างคอนฟิก"
 echo -e "|${GRAY}2${NC}| OPENVPN ไฟล์ข้อมูลเซิฟเวอร์"
@@ -1379,13 +1483,13 @@ exit
 if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
 	nano /etc/squid/squid.conf
 	exit
-elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 	nano /etc/squid3/squid.conf
 	exit
 fi
 	;;
 	4)
-nano /usr/local/bin/menu
+nano /usr/local/bin/m
 exit
 	;;
 
@@ -1402,16 +1506,6 @@ m
 
 	;;
 
-	00) # ==================================================================================================================
 
-if [[ -e /usr/local/bin/Check-Thai ]]; then
-	rm -f /usr/local/bin/Check-Thai
-	menu
-elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
-	echo "Check Thai" >> /usr/local/bin/Check-Thai
-	menu
-fi
-
-	;;
 
 esac
