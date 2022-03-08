@@ -159,10 +159,10 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 		ip6=$(ip -6 addr | grep 'inet6 [23]' | cut -d '/' -f 1 | grep -oE '([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}' | sed -n "$ip6_number"p)
 	fi
 	echo
-	echo "Which protocol should OpenVPN use?"
+	echo "OpenVPN ควรใช้โปรโตคอลใด?"
 	echo "   1) UDP (recommended)"
 	echo "   2) TCP"
-	read -p "Protocol [1]: " protocol
+	read -p "Protocol [2]: " Protocol
 	until [[ -z "$protocol" || "$protocol" =~ ^[12]$ ]]; do
 		echo "$protocol: invalid selection."
 		read -p "Protocol [1]: " protocol
@@ -176,8 +176,10 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 		;;
 	esac
 	echo
-	echo "What port should OpenVPN listen to?"
-	read -p "Port [1194]: " port
+	echo "OpenVPN ควรไปที่พอร์ตใด"
+	echo "Proxy ควรไปที่พอร์ตใด"
+	read -p "Port [443]: " port
+	read -p "Port Proxy : " PROXY
 	until [[ -z "$port" || "$port" =~ ^[0-9]+$ && "$port" -le 65535 ]]; do
 		echo "$port: invalid port."
 		read -p "Port [1194]: " port
