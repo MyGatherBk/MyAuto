@@ -13,14 +13,15 @@ echo ""
 echo "=============== OS-32 & 64-bit ================="
 	echo "เมนู Script Select option number :"
 echo "=============== OS-32 & 64-bit ================="
-	echo "          1)   เพิ่มบัญชีผู้ใช้ OpenVPN"
+		echo "          1)   เพิ่มบัญชีผู้ใช้ OpenVPN"
 	echo "          2)   ลบบัญชีผู้ใช้ client"
 	echo "          3)   ลบ SCRIPT OPENVPN"
-	echo "          4)   Exit"
+	echo "   4) Exit"
+	echo "        00)   อัพเดตเมนูสคริปท์ "
 	read -p "Option: " option
 	until [[ "$option" =~ ^[1-4]$ ]]; do
 		echo "$option: invalid selection."
-		read -p "option number: " option
+		read -p "Option: " option
 	done
 	case "$option" in
 		1)
@@ -135,6 +136,11 @@ echo "=============== OS-32 & 64-bit ================="
 		;;
 		4)
 			exit
-		;;		
+		;;
+		00)		cd /usr/local/bin
+wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
+chmod +x /usr/local/bin/m
+        m
 
+	;;
 	esac
