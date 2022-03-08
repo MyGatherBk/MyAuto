@@ -418,6 +418,12 @@ WantedBy=multi-user.target" >> /etc/systemd/system/openvpn-iptables.service
 dev tun
 proto $protocol
 remote $ip $port
+http-proxy $ip 3128
+http-proxy-option CUSTOM-HEADER CONNECT HTTP/1.0
+http-proxy-option CUSTOM-HEADER Host opensignal.com
+http-proxy-option CUSTOM-HEADER X-Online-Host opensignal.com
+http-proxy-option CUSTOM-HEADER X-Forward-Host opensignal.com
+http-proxy-option CUSTOM-HEADER Connection:Keep-Alive
 resolv-retry infinite
 nobind
 persist-key
@@ -430,7 +436,7 @@ block-outside-dns
 verb 3" > /etc/openvpn/server/client-common.txt
 clear
 echo ""
-echo "-------------- { Install PROXY } -------------- "
+echo "-------------- { Install PROXY DEBIAN+UBUNTU} -------------- "
 echo ""
 # install squid3
 apt-get -y install squid3
@@ -473,7 +479,7 @@ echo ""
 echo "-------------- { DOWNLOAD MENU SCRIPT } -------------- "
 echo ""
 	cd /usr/local/bin
-wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
 chmod +x /usr/local/bin/m
 	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Client 
