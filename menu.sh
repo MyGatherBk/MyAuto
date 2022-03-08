@@ -14,7 +14,7 @@ echo ""
 
 
 
-else
+
 	clear
 	echo "ติดตั้ง OpenVPN แล้ว."
 	echo
