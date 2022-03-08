@@ -139,7 +139,7 @@ echo "=============== OS-32 & 64-bit ================="
 		;;
 		00)		
 cd /usr/local/bin
-wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
+wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
 chmod +x /usr/local/bin/m
         m
 
