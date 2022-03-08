@@ -2,7 +2,6 @@
 clear
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 IP2="s/xxxxxxxxx/$IP/g";
-
 echo ""
 echo "=============== OS-32 & 64-bit ================="
 echo "#          OS  DEBIAN   OS  UBUNTU             #"
@@ -11,23 +10,18 @@ echo "#          BY : Pirakit Khawpleum              #"
 echo "=============== OS-32 & 64-bit ================="
 echo " ไอพีเซิฟ: $IP"
 echo ""
-
-
-
-
-	clear
-	echo "ติดตั้ง OpenVPN แล้ว."
-	echo
+echo "=============== OS-32 & 64-bit ================="
 	echo "เมนู Script Select option number :"
+echo "=============== OS-32 & 64-bit ================="
 	echo "          1)   เพิ่มบัญชีผู้ใช้ OpenVPN"
 	echo "          2)   ลบบัญชีผู้ใช้ client"
 	echo "          3)   ลบ SCRIPT OPENVPN"
-	echo "   4) Exit"
-	echo "        00)   อัพเดตเมนูสคริปท์ "
+	echo "          4)   Exit"
+	echo "         00)   อัพเดตเมนูสคริปท์ "
 	read -p "Option: " option
 	until [[ "$option" =~ ^[1-4]$ ]]; do
 		echo "$option: invalid selection."
-		read -p "Option: " option
+		read -p "option number: " option
 	done
 	case "$option" in
 		1)
