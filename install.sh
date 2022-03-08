@@ -434,16 +434,76 @@ cipher AES-256-CBC
 ignore-unknown-option block-outside-dns
 block-outside-dns
 verb 3" > /etc/openvpn/server/client-common.txt
-clear
+# install nginx
 echo ""
-echo "-------------- { Install PROXY DEBIAN+UBUNTU} -------------- "
+echo "-------------- { install nginx } -------------- "
+echo ""
+	cd
+	apt-get -y install nginx
+	cat > /etc/nginx/nginx.conf <<END
+user www-data;
+worker_processes 2;
+pid /var/run/nginx.pid;
+events {
+	multi_accept on;
+        worker_connections 1024;
+}
+http {
+	autoindex on;
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        server_tokens off;
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+        client_max_body_size 32M;
+	client_header_buffer_size 8m;
+	large_client_header_buffers 8 8m;
+	fastcgi_buffer_size 8m;
+	fastcgi_buffers 8 8m;
+	fastcgi_read_timeout 600;
+        include /etc/nginx/conf.d/*.conf;
+}
+END
+	mkdir -p /home/vps/public_html
+	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
+	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
+	args='$args'
+	uri='$uri'
+	document_root='$document_root'
+	fastcgi_script_name='$fastcgi_script_name'
+	cat > /etc/nginx/conf.d/vps.conf <<END
+server {
+    listen       85;
+    server_name  127.0.0.1 localhost;
+    access_log /var/log/nginx/vps-access.log;
+    error_log /var/log/nginx/vps-error.log error;
+    root   /home/vps/public_html;
+    location / {
+        index  index.html index.htm index.php;
+	try_files $uri $uri/ /index.php?$args;
+    }
+    location ~ \.php$ {
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass  127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
+END
+echo ""
+echo "-------------- { Install PROXY } -------------- "
 echo ""
 # install squid3
 apt-get -y install squid3
 cat > /etc/squid3/squid.conf <<-END
 
-http-proxy $PROXY
-http_port 80
+http_port 8080
+http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -465,7 +525,7 @@ acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
 http_access allow SSH
 http_access allow localnet
 http_access allow localhost
-http_access allow all
+http_access deny all
 refresh_pattern ^ftp:           1440    20%     10080
 refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
@@ -473,7 +533,6 @@ refresh_pattern .               0       20%     4320
 END
 sed -i $IP2 /etc/squid3/squid.conf;
 service squid3 restart
-
 echo ""
 echo "-------------- { DOWNLOAD MENU SCRIPT } -------------- "
 echo ""
@@ -506,6 +565,7 @@ chmod +x SetRPW.sh
 	echo "ดาวน์โหลด Config ได้ในแอพมือถือ Android AndFTP:" ~/"$client.ovpn"
 	echo "https://www.mediafire.com/file/fydoidb5y8p5wpk/AndFTP_your_FTP_v5.6.apk/file"
 	echo "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง (m) เพื่อไปยังขั้นตอนถัดไป."
+	echo "Download Config : http://$IP:85/$CLIENT.ovpn"
 echo "=============================Finished!============================="
 exit
 fi
