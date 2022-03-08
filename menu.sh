@@ -17,7 +17,7 @@ echo "=============== OS-32 & 64-bit ================="
 	echo "          2)   ลบบัญชีผู้ใช้ client"
 	echo "          3)   ลบ SCRIPT OPENVPN"
 	echo "          4)   Exit"
-	echo "         00)   อัพเดตเมนูสคริปท์ "
+	echo "          0)   อัพเดตเมนูสคริปท์ "
 	read -p "Option: " option
 	until [[ "$option" =~ ^[1-4]$ ]]; do
 		echo "$option: invalid selection."
@@ -41,6 +41,19 @@ echo "=============== OS-32 & 64-bit ================="
 			echo
 			echo "$client added. Configuration available in:" ~/"$client.ovpn"
 			exit
+				RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
+	mkdir /home/vps/public_html/$RANDOMFOLDER
+	cd /etc/openvpn/easy-rsa/
+	./easyrsa build-client-full $CLIENT nopass
+	newclient "$CLIENT"
+	cp /root/$CLIENT.ovpn /home/vps/public_html/$RANDOMFOLDER/$CLIENT.ovpn
+	rm -f /root/$CLIENT.ovpn
+	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
+	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
+	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
+
+	clear
+	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn "
 		;;
 		2)
 			# This option could be documented a bit better and maybe even be simplified
@@ -136,12 +149,13 @@ echo "=============== OS-32 & 64-bit ================="
 		;;
 		4)
 			exit
-		;;
-		00)		
+		;;		
+
+	esac
+			0)		
 cd /usr/local/bin
-wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
+wget -O /usr/local/bin/m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
 chmod +x /usr/local/bin/m
         m
-
 	;;
 	esac
