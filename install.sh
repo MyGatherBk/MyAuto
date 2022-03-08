@@ -414,9 +414,9 @@ ignore-unknown-option block-outside-dns
 block-outside-dns
 verb 3" > /etc/openvpn/server/client-common.txt
 
-# install squid3
-apt-get -y install squid3
-cat > /etc/squid3/squid.conf <<-END
+# install squid
+apt-get -y install squid
+cat > /etc/squid/squid.conf <<-END
 
 http_port 8080
 http_port 3128
@@ -447,8 +447,17 @@ refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
-sed -i $IP2 /etc/squid3/squid.conf;
-service squid3 restart
+sed -i $IP2 /etc/squid/squid.conf;
+service squid restart
+echo ""
+echo "-------------- { DOWNLOAD MENU SCRIPT } -------------- "
+echo ""
+	cd /usr/local/bin
+wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
+chmod +x /usr/local/bin/m
+	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
+	chmod +x /usr/local/bin/Auto-Delete-Client 
+	
 	# Enable and start the OpenVPN service
 	systemctl enable --now openvpn-server@server.service
 	# Generates the custom client.ovpn
