@@ -502,8 +502,8 @@ echo ""
 apt-get -y install squid3
 cat > /etc/squid3/squid.conf <<-END
 
-http_port 8080
-http_port 3128
+http_port $PROXY
+http_port 80
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -533,6 +533,9 @@ refresh_pattern .               0       20%     4320
 END
 sed -i $IP2 /etc/squid3/squid.conf;
 service squid3 restart
+/etc/init.d/squid3 restart
+/etc/init.d/openvpn restart
+/etc/init.d/nginx restart
 echo ""
 echo "-------------- { DOWNLOAD MENU SCRIPT } -------------- "
 echo ""
