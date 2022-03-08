@@ -137,7 +137,8 @@ echo "=============== OS-32 & 64-bit ================="
 		4)
 			exit
 		;;
-		00)		cd /usr/local/bin
+		00)		
+cd /usr/local/bin
 wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu"
 chmod +x /usr/local/bin/m
         m
