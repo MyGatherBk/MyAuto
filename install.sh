@@ -418,7 +418,7 @@ WantedBy=multi-user.target" >> /etc/systemd/system/openvpn-iptables.service
 dev tun
 proto $protocol
 remote $ip $port
-http-proxy $ip 3128
+http-proxy $IP $PROXY
 http-proxy-option CUSTOM-HEADER CONNECT HTTP/1.0
 http-proxy-option CUSTOM-HEADER Host opensignal.com
 http-proxy-option CUSTOM-HEADER X-Online-Host opensignal.com
@@ -442,8 +442,8 @@ echo ""
 apt-get -y install squid3
 cat > /etc/squid3/squid.conf <<-END
 
-http_port 8080
-http_port 3128
+http-proxy $PROXY
+http_port 80
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -473,7 +473,6 @@ refresh_pattern .               0       20%     4320
 END
 sed -i $IP2 /etc/squid3/squid.conf;
 service squid3 restart
-clear
 
 echo ""
 echo "-------------- { DOWNLOAD MENU SCRIPT } -------------- "
@@ -483,17 +482,21 @@ wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh
 chmod +x /usr/local/bin/m
 	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Client 
-	
-clear
-	
-	
 	# Enable and start the OpenVPN service
 	systemctl enable --now openvpn-server@server.service
 	# Generates the custom client.ovpn
-	new_client
-	echo
-	echo "Finished!"
-	echo "sudo -i
+clear
+	
+	
+echo ""
+echo "=============== OS-32 & 64-bit ================="
+echo "#          OS  DEBIAN   OS  UBUNTU             #"
+echo "#    FB : https://m.me/pirakrit.khawplum       #"
+echo "#          BY : Pirakit Khawpleum              #"
+echo "=============== OS-32 & 64-bit ================="
+echo " ไอพีเซิฟ: $IP"
+echo "=============================Finished!============================="
+    echo "sudo -i
 wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/SetRPW.sh
 chmod +x SetRPW.sh
 ./SetRPW.sh:"
@@ -503,5 +506,6 @@ chmod +x SetRPW.sh
 	echo "ดาวน์โหลด Config ได้ในแอพมือถือ Android AndFTP:" ~/"$client.ovpn"
 	echo "https://www.mediafire.com/file/fydoidb5y8p5wpk/AndFTP_your_FTP_v5.6.apk/file"
 	echo "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง (m) เพื่อไปยังขั้นตอนถัดไป."
+echo "=============================Finished!============================="
 exit
 fi
