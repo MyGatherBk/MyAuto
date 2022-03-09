@@ -486,6 +486,7 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 	echo "   3) Remove OpenVPN"
 	echo "   4) Exit"
 	echo "   5) best server system"
+	echo "   6) sudo _i"
 	read -p "Option: " option
 	until [[ "$option" =~ ^[1-4]$ ]]; do
 		echo "$option: invalid selection."
@@ -679,6 +680,15 @@ service openvpn restart
 esac
 
 	;;
+        6)
+sudo -i
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/install.sh
+chmod +x install.sh
+./install.sh
+
+	;;
 
 
+
+esac
 
