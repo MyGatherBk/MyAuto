@@ -5,7 +5,7 @@
 # Copyright (c) 2013 Nyr. Released under the MIT License.
 
 clear
-apt-get update
+
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 IP2="s/xxxxxxxxx/$IP/g";
 
@@ -680,15 +680,6 @@ service openvpn restart
 esac
 
 	;;
-        6)
-sudo -i
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/install.sh
-chmod +x install.sh
-./install.sh
-
-	;;
-
-
-
 esac
+fi
 
