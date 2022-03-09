@@ -481,12 +481,11 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 	echo "-------------------------------------------------------"
     echo "เมนูสคริปท์ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
 	echo ""
-	echo "   1) Add a new client"
+        echo "   1) Add a new client"
 	echo "   2) Revoke an existing client"
 	echo "   3) Remove OpenVPN"
 	echo "   4) Exit"
-	echo "   5) best server system"
-	echo "   6) sudo _i"
+	echo "   5)OPENVPN configuration master file"
 	read -p "Option: " option
 	until [[ "$option" =~ ^[1-4]$ ]]; do
 		echo "$option: invalid selection."
@@ -606,79 +605,11 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 		4)
 			exit
 		;;
-		5)
-clear
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo "ไอพีเซิฟ: $IP "
-echo ""
-echo ""
-echo "ปรับเปลี่ยนระบบของเซิฟเวอร์ "
-echo ""
-echo "1| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น สามารถสร้างไฟล์เพิ่มได้"
-echo "2| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องสร้างบัญชีเพื่อใช้เชื่อมต่อ"
-echo "3| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดเครื่อง"
-echo ""
-read -p "เลือกหัวข้อที่ต้องการใช้งาน : " CHANGESYSTEMSERVER
-
-case $CHANGESYSTEMSERVER in
-
-	1)
-
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '20d' /etc/openvpn/client-common.txt
-echo "client-to-client" >> /etc/openvpn/server.conf
-echo ""
-echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 1 เรียบร้อย"
-echo ""
-service openvpn restart
-
-	;;
-
-	2)
-
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '20d' /etc/openvpn/client-common.txt
-if [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
-	echo "plugin /usr/lib/openvpn/openvpn-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
-	echo "client-cert-not-required" >> /etc/openvpn/server.conf
-	echo "username-as-common-name" >> /etc/openvpn/server.conf
-else
-	echo "plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
-	echo "client-cert-not-required" >> /etc/openvpn/server.conf
-	echo "username-as-common-name" >> /etc/openvpn/server.conf
+	esac
 fi
-echo "auth-user-pass" >> /etc/openvpn/client-common.txt
-echo ""
-echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 2 เรียบร้อย"
-echo ""
-service openvpn restart
-
-	;;
-
-	3)
-
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '28d' /etc/openvpn/server.conf
-sed -i '20d' /etc/openvpn/client-common.txt
-echo "duplicate-cn" >> /etc/openvpn/server.conf
-echo ""
-echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 3 เรียบร้อย"
-echo ""
-service openvpn restart
-	;;
-
-esac
-
+		5)
+nano /etc/openvpn/client-common.txt
+exit
 	;;
 
 
