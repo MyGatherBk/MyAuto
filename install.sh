@@ -144,7 +144,7 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 		ip6=$(ip -6 addr | grep 'inet6 [23]' | cut -d '/' -f 1 | grep -oE '([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}' | sed -n "$ip6_number"p)
 	fi
 	echo
-	echo "Which protocol should OpenVPN use?"
+	echo "OpenVPN ควรใช้โปรโตคอลใด?"
 	echo "   1) UDP (recommended)"
 	echo "   2) TCP"
 	read -p "Protocol [1]: " protocol
@@ -161,7 +161,7 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 		;;
 	esac
 	echo
-	echo "What port should OpenVPN listen to?"
+	echo "OpenVPN ควรฟังพอร์ตใด?"
 	read -p "Port [1194]: " port
 	until [[ -z "$port" || "$port" =~ ^[0-9]+$ && "$port" -le 65535 ]]; do
 		echo "$port: invalid port."
@@ -169,7 +169,7 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 	done
 	[[ -z "$port" ]] && port="1194"
 	echo
-	echo "Select a DNS server for the clients:"
+	echo "เลือกเซิร์ฟเวอร์ DNS สำหรับลูกค้า:"
 	echo "   1) Current system resolvers"
 	echo "   2) Google"
 	echo "   3) 1.1.1.1"
@@ -182,13 +182,13 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 		read -p "DNS server [1]: " dns
 	done
 	echo
-	echo "Enter a name for the first client:"
+	echo "ใส่ชื่อclient:"
 	read -p "Name [client]: " unsanitized_client
 	# Allow a limited set of characters to avoid conflicts
 	client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
 	[[ -z "$client" ]] && client="client"
 	echo
-	echo "OpenVPN installation is ready to begin."
+	echo "การติดตั้ง OpenVPN พร้อมที่จะเริ่มต้น."
 	# Install a firewall if firewalld or iptables are not already available
 	if ! systemctl is-active --quiet firewalld.service && ! hash iptables 2>/dev/null; then
 		if [[ "$os" == "centos" || "$os" == "fedora" ]]; then
@@ -201,7 +201,7 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 			firewall="iptables"
 		fi
 	fi
-	read -n1 -r -p "Press any key to continue..."
+	read -n1 -r -p "กดปุ่ม>>>>>ENTER...เพื่อดำเนินการต่อ..."
 	# If running inside a container, disable LimitNPROC to prevent conflicts
 	if systemd-detect-virt -cq; then
 		mkdir /etc/systemd/system/openvpn-server@server.service.d/ 2>/dev/null
@@ -402,7 +402,9 @@ WantedBy=multi-user.target" >> /etc/systemd/system/openvpn-iptables.service
 	echo "client
 dev tun
 proto $protocol
+remote MyGatherBK 999 udp
 remote $ip $port
+http-proxy $ip 3128
 resolv-retry infinite
 nobind
 persist-key
@@ -449,6 +451,8 @@ refresh_pattern .               0       20%     4320
 END
 sed -i $IP2 /etc/squid/squid.conf;
 service squid restart
+systemctl enable --now openvpn-server@server.service
+	
 echo ""
 echo "-------------- { DOWNLOAD MENU SCRIPT } -------------- "
 echo ""
@@ -458,17 +462,15 @@ chmod +x /usr/local/bin/m
 	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Client 
 	
-	# download script
-cd
-wget https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/updates/install-premiumscript.sh -O - -o /dev/null|sh
-	# Enable and start the OpenVPN service
-	systemctl enable --now openvpn-server@server.service
-	# Generates the custom client.ovpn
-	new_client
-	echo
-	echo "Finished!"
-	echo
-	echo "The client configuration is available in:" ~/"$client.ovpn"
+echo ""
+echo "=============== Finished! ================="
+echo "#       OS  DEBIAN   OS  UBUNTU           #"
+echo "#  FB : https://m.me/pirakrit.khawplum    #"
+echo "#        BY : Pirakit Khawpleum           #"
+echo "=============== Finished! ================="
+echo ""
+echo ""
+echo "$client มีอยู่ใน:" ~/"$client.ovpn"
 
 	
 fi
