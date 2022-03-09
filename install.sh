@@ -605,11 +605,11 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 		4)
 			exit
 		;;
-	esac
-fi
+
 		5)
 nano /etc/openvpn/client-common.txt
 exit
 	;;
-
+	esac
+fi
 
