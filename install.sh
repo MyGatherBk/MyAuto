@@ -450,39 +450,42 @@ refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
 sed -i $IP2 /etc/squid/squid.conf;
-	
-	
-echo ""
-echo "-------------- { DOWNLOAD MENU SCRIPT } -------------- "
-echo ""
-cd /usr/local/bin
-wget -O menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
-wget -O addc "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/addc.sh"
-wget -O dec "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/dec.sh"
-wget -O deo "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/deo.sh"
-wget -O speedtest "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/speedtest_cli.py"
-chmod +x menu
-chmod +x addc
-chmod +x dec
-chmod +x deo
-chmod +x speedtest_cli.py
-clear
-	systemctl enable --now openvpn-server@server.service
+		systemctl enable --now openvpn-server@server.service
 	# Generates the custom client.ovpn
 	new_client
 	echo
 	echo "Finished!"
 	echo
-	echo "ดาวน์โหลดไฟล์ :" ~/"$client.ovpn"
+	echo "The client configuration is available in:" ~/"$client.ovpn"
+	echo "New clients can be added by running this script again."
 else
 	clear
-	echo "OpenVPN is already installed."
-	echo
-	echo "Select an option:"
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo "ไอพีเซิฟ: $IP "
+echo ""
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+chek=$(cat /etc/issue.net)
+tram=$( free -m | awk 'NR==2 {print $2}' )
+up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
+echo -e "\e[032;1mSYSTEM OS:\e[0m  $chek" 
+echo -e "\e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
+echo -e "\e[032;1mSystem Uptime:\e[0m $up"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" 
+	echo "-------------------------------------------------------" 
+	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
+	echo "-------------------------------------------------------"
+    echo "เมนูสคริปท์ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
+	echo ""
 	echo "   1) Add a new client"
 	echo "   2) Revoke an existing client"
 	echo "   3) Remove OpenVPN"
 	echo "   4) Exit"
+	echo "   5) best server system"
 	read -p "Option: " option
 	until [[ "$option" =~ ^[1-4]$ ]]; do
 		echo "$option: invalid selection."
@@ -602,5 +605,78 @@ else
 		4)
 			exit
 		;;
-	esac
+		5)
+clear
+echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo "ไอพีเซิฟ: $IP "
+echo ""
+echo ""
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์ "
+echo ""
+echo "1| 1 ไฟล์เชื่อมต่อได้ 1 เครื่องเท่านั้น สามารถสร้างไฟล์เพิ่มได้"
+echo "2| 1 ไฟล์เชื่อมต่อได้หลายเครื่อง แต่ต้องสร้างบัญชีเพื่อใช้เชื่อมต่อ"
+echo "3| 1 ไฟล์เชื่อมต่อได้ไม่จำกัดเครื่อง"
+echo ""
+read -p "เลือกหัวข้อที่ต้องการใช้งาน : " CHANGESYSTEMSERVER
+
+case $CHANGESYSTEMSERVER in
+
+	1)
+
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '20d' /etc/openvpn/client-common.txt
+echo "client-to-client" >> /etc/openvpn/server.conf
+echo ""
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 1 เรียบร้อย"
+echo ""
+service openvpn restart
+
+	;;
+
+	2)
+
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '20d' /etc/openvpn/client-common.txt
+if [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
+	echo "plugin /usr/lib/openvpn/openvpn-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
+	echo "client-cert-not-required" >> /etc/openvpn/server.conf
+	echo "username-as-common-name" >> /etc/openvpn/server.conf
+else
+	echo "plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so /etc/pam.d/login" >> /etc/openvpn/server.conf
+	echo "client-cert-not-required" >> /etc/openvpn/server.conf
+	echo "username-as-common-name" >> /etc/openvpn/server.conf
+fi
+echo "auth-user-pass" >> /etc/openvpn/client-common.txt
+echo ""
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 2 เรียบร้อย"
+echo ""
+service openvpn restart
+
+	;;
+
+	3)
+
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '28d' /etc/openvpn/server.conf
+sed -i '20d' /etc/openvpn/client-common.txt
+echo "duplicate-cn" >> /etc/openvpn/server.conf
+echo ""
+echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 3 เรียบร้อย"
+echo ""
+service openvpn restart
+
+	;;
+
+esac
+
 fi
