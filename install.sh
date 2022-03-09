@@ -405,11 +405,6 @@ proto $protocol
 remote MyGatherBK 999 udp
 remote $ip $port
 http-proxy $ip 3128
-http-proxy-option CUSTOM-HEADER CONNECT HTTP/1.0
-http-proxy-option CUSTOM-HEADER Host opensignal.com
-http-proxy-option CUSTOM-HEADER X-Online-Host opensignal.com
-http-proxy-option CUSTOM-HEADER X-Forward-Host opensignal.com
-http-proxy-option CUSTOM-HEADER Connection:Keep-Alive
 resolv-retry infinite
 nobind
 persist-key
