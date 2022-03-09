@@ -6,28 +6,7 @@ VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 CHECKSYSTEM=$(tail -n +2 /etc/openvpn/server.conf | grep "^username-as-common-name")
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 IP2="s/xxxxxxxxx/$IP/g";
-#
-# Color
-BLUE='\033[0;34m'
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-CYAN='\033[0;36m'
-NC='\033[0m'
-z1='\e[31;1m'  #red
-z2='\e[34;1m'  #blue
-z3='\e[32;1m'  #green
-z4='\e[35;1m'  #magenta
-z5='\e[36;1m'  #cyan
-z6='\e[33;1m'  #yellow
-z7='\e[0m'
-cor[1]="\033[1;36m"
-cor[2]="\033[1;33m"
-cor[3]="\033[1;31m"
-cor[5]="\033[1;32m"
-cor[4]="\033[0m"
-color1='\e[031;1m'
-color2='\e[34;1m'
-color3='\e[0m'
+
 
 # ads
 echo ""
@@ -46,101 +25,20 @@ echo -e "\e[032;1mSYSTEM OS:\e[0m  $chek"
 echo -e "\e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
 echo -e "\e[032;1mSystem Uptime:\e[0m $up"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" 
-if [ -e "/var/log/auth.log" ]; then
-        LOG="/var/log/auth.log";
-fi
-if [ -e "/var/log/secure" ]; then
-        LOG="/var/log/secure";
-fi
-               
-echo " "
-echo "-----=[ OpenSSH User Login ]=-----";
-echo "ID  |  Username  |  IP Address";
-echo "-------------------------------------";
-cat $LOG | grep -i sshd | grep -i "Accepted password for" > /tmp/login-db.txt
-data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+echo ""
+echo ""              
 
-for PID in "${data[@]}"
-do
-        cat /tmp/login-db.txt | grep "sshd\[$PID\]" > /tmp/login-db-pid.txt;
-        NUM=`cat /tmp/login-db-pid.txt | wc -l`;
-        USER=`cat /tmp/login-db-pid.txt | awk '{print $9}'`;
-        IP=`cat /tmp/login-db-pid.txt | awk '{print $11}'`;
-        if [ $NUM -eq 1 ]; then
-                echo "$PID - $USER - $IP";
-        fi
-done
-if [ -f "/etc/openvpn/openvpn-status.log" ]; then
-        line=`cat /etc/openvpn/openvpn-status.log | wc -l`
-        a=$((3+((line-8)/2)))
-        b=$(((line-8)/2))
-        echo "-----=[ OpenVPN User Login ]=-----";
-        echo "Username  |  IP Address  |  Connected Since";
-        echo "-------------------------------------";
-        cat /etc/openvpn/openvpn-status.log | head -n $a | tail -n $b | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
-        cat /tmp/vpn-login-db.txt
-fi
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
 	echo -e "เมนูสคริปท์ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
 	echo ""
-	echo -e "|${GRAY} 1${NC}| เพิ่มบัญชีผู้ใช้ OpenVPN"
-	echo -e "|${GRAY} 2${NC}| เพิ่มบัญชีผู้ใช้ SSH (HTTP)"
-	echo -e "|${GRAY} 3${NC}| ลบบัญชีผู้ใช้"
-	echo -e "|${GRAY} 4${NC}| ตรวจสอบบัญชีผู้ใช้ทั้งหมด และตรวจสอบบัญชีที่กำลังเชื่อมต่อ"
-	echo -e "|${GRAY} 5${NC}| เปลี่ยนรหัสผ่านบัญชีผู้ใช้"
-	echo -e "|${GRAY} 6${NC}| เปลี่ยนวันหมดอายุบัญชีผู้ใช้"
-	echo -e "|${GRAY} 7${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ"
-	echo -e "|${GRAY} 8${NC}| ทดสอบความเร็วอินเตอร์เน็ต"
-	echo -e "|${GRAY} 9${NC}| Credits Banner HTTP INJECTOR"
-	echo -e "|${GRAY}10${NC}| ตรวจสอบแบนด์วิดท์"
-	echo -e "|${GRAY}11${NC}| ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง"
-	echo -e "|${GRAY}12${NC}| ตรวจสอบแบนด์วิดท์ต่อบัญชี"
-	echo -e "|${GRAY}13${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์"
-	if [[ $CHECKSYSTEM ]]; then
-		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้"
-	else
-		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${GRAY}ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน  ${NC}"
-	fi
-	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
-	echo -e "|${GRAY}16${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
-	echo -e "|${GRAY}17${NC}| แก้ไขคอนฟิกต่างๆในระบบ"
-	echo -e "|${GRAY}18${NC}| ลบบัญชีผู้ใช้ client "
-	echo -e "|${GRAY}00${NC}| อัพเดตเมนูสคริปท์"
+	echo "   1) Add a new client"
+	echo "   2) Revoke an existing client"
+	echo "   3) Remove OpenVPN"
+	echo "   4) Exit"
+	echo "  00) up"
 	
-
-
-	echo ""
-	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
-	# vnstat meter
-if [[ -e /etc/vnstat.conf ]]; then
-	INTERFACE=`vnstat -m | head -n2 | awk '{print $1}'`
-	TOTALBW=$(vnstat -i $INTERFACE --nick local | grep "total:" | awk '{print $8" "substr ($9, 1, 1)}')
-fi
-
-ON=0
-OFF=0
-while read ONOFF
-do
-	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
-	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
-	ONLINE="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $ACCOUNT | grep -Eom 1 $ACCOUNT)"
-	if [[ $ID -ge 1000 ]]; then
-		if [[ -z $ONLINE ]]; then
-			OFF=$((OFF+1))
-		else
-			ON=$((ON+1))
-		fi
-		fi
-done < /etc/passwd
-bash Auto-Delete-Client
-echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
-echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
-        read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
-echo ""
-case $MENU in
-
 	1) # ==================================================================================================================
 
 echo ""
@@ -170,151 +68,101 @@ echo ""
 		;;
 
 	2) # ==================================================================================================================
-		clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
-
-	if [ $? -eq 0 ]; then
-		read -p "รหัสผ่าน : " -e PASSWORD
-		echo ""
-		echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
-		read -p "กำหนดวันหมดอายุ : " -e TimeActive
-
-		PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
-		PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
-		useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
-		EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
-		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
-
-		clear
-		echo ""
-		echo "ชื่อบัญชี : $CLIENT"
-		echo "รหัสผ่าน : $PASSWORD"
-		echo "หมดอายุในวันที่ : $EXP"
-		echo ""
-		echo "IP : $IP"
-		echo "Port : 22"
-		echo "Proxy Port : $PROXY"
-		exit
-	else
-		echo ""
-		echo "ชื่อบัญชีที่ระบุอยู่ในระบบแล้ว"
-		echo ""
-		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
-
-		if [[ "$TOMENU" = 'Y' ]]; then
-			menu
+			# This option could be documented a bit better and maybe even be simplified
+			# ...but what can I say, I want some sleep too
+			number_of_clients=$(tail -n +2 /etc/openvpn/server/easy-rsa/pki/index.txt | grep -c "^V")
+			if [[ "$number_of_clients" = 0 ]]; then
+				echo
+				echo "There are no existing clients!"
+				exit
+			fi
+			echo
+			echo "Select the client to revoke:"
+			tail -n +2 /etc/openvpn/server/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
+			read -p "Client: " client_number
+			until [[ "$client_number" =~ ^[0-9]+$ && "$client_number" -le "$number_of_clients" ]]; do
+				echo "$client_number: invalid selection."
+				read -p "Client: " client_number
+			done
+			client=$(tail -n +2 /etc/openvpn/server/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$client_number"p)
+			echo
+			read -p "Confirm $client revocation? [y/N]: " revoke
+			until [[ "$revoke" =~ ^[yYnN]*$ ]]; do
+				echo "$revoke: invalid selection."
+				read -p "Confirm $client revocation? [y/N]: " revoke
+			done
+			if [[ "$revoke" =~ ^[yY]$ ]]; then
+				cd /etc/openvpn/server/easy-rsa/
+				./easyrsa --batch revoke "$client"
+				EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
+				rm -f /etc/openvpn/server/crl.pem
+				cp /etc/openvpn/server/easy-rsa/pki/crl.pem /etc/openvpn/server/crl.pem
+				# CRL is read with each client connection, when OpenVPN is dropped to nobody
+				chown nobody:"$group_name" /etc/openvpn/server/crl.pem
+				echo
+				echo "$client revoked!"
+			else
+				echo
+				echo "$client revocation aborted!"
+			fi
 			exit
-		elif [[ "$TOMENU" = 'N' ]]; then
-			exit
-		fi
-	fi
-
-	;;
+		;;
 
 	3) # ==================================================================================================================
-
-		clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-read -p "ชื่อบัญชีที่ต้องการลบ : " CLIENT
-egrep "^$CLIENT" /etc/passwd >/dev/null
-
-if [ $? -eq 0 ]; then
-	if [[ $CHECKSYSTEM ]]; then
-		echo ""
-		userdel -f $CLIENT
-		echo ""
-		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
-		echo ""
-		exit
-	else
-		echo ""
-		userdel -f $CLIENT
-		cd /etc/openvpn/easy-rsa/
-		./easyrsa --batch revoke $CLIENT
-		EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
-		rm -rf pki/reqs/$CLIENT.req
-		rm -rf pki/private/$CLIENT.key
-		rm -rf pki/issued/$CLIENT.crt
-		rm -rf /etc/openvpn/crl.pem
-		cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
-		chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-		echo ""
-		echo -e "ชื่อบัญชี ${GRAY}$CLIENT${NC} ถูกลบออกจากระบบเรียบร้อยแล้ว"
-		echo ""
-		exit
-	fi
-else
-	echo ""
-	echo "ไม่มีชื่อบัญชีที่ระบุ"
-	echo ""
-	exit
-fi
-
-	;;
-
+echo
+			read -p "Confirm OpenVPN removal? [y/N]: " remove
+			until [[ "$remove" =~ ^[yYnN]*$ ]]; do
+				echo "$remove: invalid selection."
+				read -p "Confirm OpenVPN removal? [y/N]: " remove
+			done
+			if [[ "$remove" =~ ^[yY]$ ]]; then
+				port=$(grep '^port ' /etc/openvpn/server/server.conf | cut -d " " -f 2)
+				protocol=$(grep '^proto ' /etc/openvpn/server/server.conf | cut -d " " -f 2)
+				if systemctl is-active --quiet firewalld.service; then
+					ip=$(firewall-cmd --direct --get-rules ipv4 nat POSTROUTING | grep '\-s 10.8.0.0/24 '"'"'!'"'"' -d 10.8.0.0/24' | grep -oE '[^ ]+$')
+					# Using both permanent and not permanent rules to avoid a firewalld reload.
+					firewall-cmd --remove-port="$port"/"$protocol"
+					firewall-cmd --zone=trusted --remove-source=10.8.0.0/24
+					firewall-cmd --permanent --remove-port="$port"/"$protocol"
+					firewall-cmd --permanent --zone=trusted --remove-source=10.8.0.0/24
+					firewall-cmd --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to "$ip"
+					firewall-cmd --permanent --direct --remove-rule ipv4 nat POSTROUTING 0 -s 10.8.0.0/24 ! -d 10.8.0.0/24 -j SNAT --to "$ip"
+					if grep -qs "server-ipv6" /etc/openvpn/server/server.conf; then
+						ip6=$(firewall-cmd --direct --get-rules ipv6 nat POSTROUTING | grep '\-s fddd:1194:1194:1194::/64 '"'"'!'"'"' -d fddd:1194:1194:1194::/64' | grep -oE '[^ ]+$')
+						firewall-cmd --zone=trusted --remove-source=fddd:1194:1194:1194::/64
+						firewall-cmd --permanent --zone=trusted --remove-source=fddd:1194:1194:1194::/64
+						firewall-cmd --direct --remove-rule ipv6 nat POSTROUTING 0 -s fddd:1194:1194:1194::/64 ! -d fddd:1194:1194:1194::/64 -j SNAT --to "$ip6"
+						firewall-cmd --permanent --direct --remove-rule ipv6 nat POSTROUTING 0 -s fddd:1194:1194:1194::/64 ! -d fddd:1194:1194:1194::/64 -j SNAT --to "$ip6"
+					fi
+				else
+					systemctl disable --now openvpn-iptables.service
+					rm -f /etc/systemd/system/openvpn-iptables.service
+				fi
+				if sestatus 2>/dev/null | grep "Current mode" | grep -q "enforcing" && [[ "$port" != 1194 ]]; then
+					semanage port -d -t openvpn_port_t -p "$protocol" "$port"
+				fi
+				systemctl disable --now openvpn-server@server.service
+				rm -f /etc/systemd/system/openvpn-server@server.service.d/disable-limitnproc.conf
+				rm -f /etc/sysctl.d/99-openvpn-forward.conf
+				if [[ "$os" = "debian" || "$os" = "ubuntu" ]]; then
+					rm -rf /etc/openvpn/server
+					apt-get remove --purge -y openvpn
+				else
+					# Else, OS must be CentOS or Fedora
+					yum remove -y openvpn
+					rm -rf /etc/openvpn/server
+				fi
+				echo
+				echo "OpenVPN removed!"
+			else
+				echo
+				echo "OpenVPN removal aborted!"
+			fi
+			exit
+		;;
 	4) # ==================================================================================================================
-
-		clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-echo ""
-echo "ลำดับ   ชื่อบัญชีผู้ใช้        สถานะ      วันหมดอายุ"
-echo ""
-C=1
-ON=0
-OFF=0
-while read ONOFF
-do
-	CLIENTOFFLINE=$(echo -e "${GRAY}OFFLINE${NC}")
-	CLIENTONLINE=$(echo -e "${GREEN}ONLINE${NC}")
-	ACCOUNT="$(echo $ONOFF | cut -d: -f1)"
-	ID="$(echo $ONOFF | grep -v nobody | cut -d: -f3)"
-	EXP="$(chage -l $ACCOUNT | grep "Account expires" | awk -F": " '{print $2}')"
-	ONLINE="$(cat /etc/openvpn/openvpn-status.log | grep -Eom 1 $ACCOUNT | grep -Eom 1 $ACCOUNT)"
-	if [[ $ID -ge 1000 ]]; then
-		if [[ -z $ONLINE ]]; then
-			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTOFFLINE" "$EXP"
-			OFF=$((OFF+1))
-		else
-			printf "%-6s %-15s %-20s %-3s\n" "$C" "$ACCOUNT" "$CLIENTONLINE" "$EXP"
-			ON=$((ON+1))
-		fi
-			C=$((C+1))
-        fi
-done < /etc/passwd
-TOTAL="$(awk -F: '$3 >= '1000' && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
-echo ""
-echo ""
-echo -e "กำลังเชื่อมต่อ ${GREEN}$ON${NC}  |  ไม่ได้เชื่อมต่อ ${GRAY}$OFF${NC}  |  บัญชีทั้งหมด $TOTAL"
-echo ""
-exit
-
-	;;
-
+			exit
+		;;
 	5) # ==================================================================================================================
 
 		clear
