@@ -680,6 +680,5 @@ service openvpn restart
 esac
 
 	;;
-esac
-fi
+
 
