@@ -71,4 +71,3 @@ service openvpn restart
 
 esac
 
-	;;
