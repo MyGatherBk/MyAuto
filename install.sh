@@ -485,7 +485,6 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 	echo "   2) Revoke an existing client"
 	echo "   3) Remove OpenVPN"
 	echo "   4) Exit"
-	echo "   5)OPENVPN configuration master file"
 	read -p "Option: " option
 	until [[ "$option" =~ ^[1-4]$ ]]; do
 		echo "$option: invalid selection."
@@ -606,10 +605,6 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 			exit
 		;;
 
-		5)
-nano /etc/openvpn/client-common.txt
-exit
-	;;
 	esac
 fi
 
