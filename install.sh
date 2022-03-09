@@ -674,6 +674,9 @@ echo ""
 echo "ปรับเปลี่ยนระบบของเซิฟเวอร์เป็นรูปแบบที่ 3 เรียบร้อย"
 echo ""
 service openvpn restart
+	;;
+
+esac
 
 	;;
 
