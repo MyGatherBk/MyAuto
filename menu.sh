@@ -106,7 +106,7 @@ fi
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
 	echo -e "|${GRAY}16${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
 	echo -e "|${GRAY}17${NC}| แก้ไขคอนฟิกต่างๆในระบบ"
-	echo -e "|${GRAY}18${NC}| - ${NC} "
+	echo -e "|${GRAY}18${NC}| ลบบัญชีผู้ใช้ client "
 	echo -e "|${GRAY}00${NC}| อัพเดตเมนูสคริปท์"
 	
 
@@ -152,125 +152,22 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 echo ""
-if [[ $CHECKSYSTEM ]]; then
-	echo ""
-	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
-
-	if [ $? -eq 0 ]; then
-		read -p "รหัสผ่าน : " -e PASSWORD
-		echo ""
-		echo -e " ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน "
-		read -p "กำหนดวันหมดอายุ : " -e TimeActive
-
-		PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
-		PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
-		useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
-		EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
-		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
-
-		clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-		echo "ชื่อบัญชี : $CLIENT"
-		echo "รหัสผ่าน : $PASSWORD"
-		echo "หมดอายุในวันที่ : $EXP"
-		echo ""
-		echo "IP : $IP"
-		echo "Port : 22"
-		echo "Proxy Port : $PROXY"
-		exit
-	else
-		echo ""
-		echo "ชื่อบัญชีที่ระบุอยู่ในระบบแล้ว"
-		echo ""
-		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
-
-		if [[ "$TOMENU" = 'Y' ]]; then
-			m
+			echo
+			echo "ระบุชื่อ client:"
+			read -p "Name: " unsanitized_client
+			client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
+			while [[ -z "$client" || -e /etc/openvpn/server/easy-rsa/pki/issued/"$client".crt ]]; do
+				echo "$client: ชื่อไม่ถูกต้อง."
+				read -p "Name: " unsanitized_client
+				client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
+			done
+			cd /etc/openvpn/server/easy-rsa/
+			EASYRSA_CERT_EXPIRE=3650 ./easyrsa build-client-full "$client" nopass
+			# Generates the custom client.ovpn
+			echo
+			echo "$client มีอยู่ใน:" ~/"$client.ovpn"
 			exit
-		elif [[ "$TOMENU" = 'N' ]]; then
-			exit
-		fi
-	fi
-
-else
-
-	echo ""
-	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
-
-	if [[ -e /etc/openvpn/easy-rsa/pki/private/$CLIENT.key ]]; then
-		echo ""
-		echo "ชื่อบัญชีที่ระบุอยู่ในระบบแล้ว"
-		echo ""
-		read -p "กลับไปที่เมนู (Y or N) : " -e -i Y TOMENU
-
-		if [[ "$TOMENU" = 'Y' ]]; then
-			menu
-			exit
-		elif [[ "$TOMENU" = 'N' ]]; then
-			exit
-		fi
-	fi
-
-	echo ""
-	echo -e " ะบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน "
-	read -p "กำหนดวันหมดอายุ : " -e TimeActive
-
-newclient () {
-	# Generates the custom client.ovpn
-	cp /etc/openvpn/client-common.txt ~/$1.ovpn
-	echo "<ca>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-	echo "</ca>" >> ~/$1.ovpn
-	echo "<cert>" >> ~/$1.ovpn
-	sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-	echo "</cert>" >> ~/$1.ovpn
-	echo "<key>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-	echo "</key>" >> ~/$1.ovpn
-	echo "<tls-auth>" >> ~/$1.ovpn
-	sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/ta.key >> ~/$1.ovpn
-	echo "</tls-auth>" >> ~/$1.ovpn
-}
-
-	RANDOMFOLDER=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)
-	mkdir /home/vps/public_html/$RANDOMFOLDER
-	cd /etc/openvpn/easy-rsa/
-	./easyrsa build-client-full $CLIENT nopass
-	newclient "$CLIENT"
-	cp /root/$CLIENT.ovpn /home/vps/public_html/$RANDOMFOLDER/$CLIENT.ovpn
-	rm -f /root/$CLIENT.ovpn
-	useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
-	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
-	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
-
-	clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
-	echo "ชื่อบัญชี : $CLIENT"
-	echo "หมดอายุในวันที่ : $EXP"
-	echo ""
-	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn "
-	echo ""
-	exit
-
-fi
-
-	;;
+		;;
 
 	2) # ==================================================================================================================
 		clear
@@ -1529,6 +1426,48 @@ exit
 esac
 
 	;;
+	
+	18) # ==================================================================================================================
+	
+				# This option could be documented a bit better and maybe even be simplified
+			# ...but what can I say, I want some sleep too
+			number_of_clients=$(tail -n +2 /etc/openvpn/server/easy-rsa/pki/index.txt | grep -c "^V")
+			if [[ "$number_of_clients" = 0 ]]; then
+				echo
+				echo " >>>clients<<< ไม่มีอยู่แล้ว!"
+				exit
+			fi
+			echo
+			echo "เลือก >>>clients<<<ที่จะเพิกถอน:"
+			tail -n +2 /etc/openvpn/server/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
+			read -p "Client: " client_number
+			until [[ "$client_number" =~ ^[0-9]+$ && "$client_number" -le "$number_of_clients" ]]; do
+				echo "$client_number: invalid selection."
+				read -p "Client: " client_number
+			done
+			client=$(tail -n +2 /etc/openvpn/server/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | sed -n "$client_number"p)
+			echo
+			read -p "ยืนยันการเพิกถอน $client ? [y/N]: " revoke
+			until [[ "$revoke" =~ ^[yYnN]*$ ]]; do
+				echo "$revoke: invalid selection."
+				read -p "ยืนยัน $client เพิกถอน? [y/N]: " revoke
+			done
+			if [[ "$revoke" =~ ^[yY]$ ]]; then
+				cd /etc/openvpn/server/easy-rsa/
+				./easyrsa --batch revoke "$client"
+				EASYRSA_CRL_DAYS=3650 ./easyrsa gen-crl
+				rm -f /etc/openvpn/server/crl.pem
+				cp /etc/openvpn/server/easy-rsa/pki/crl.pem /etc/openvpn/server/crl.pem
+				# CRL is read with each client connection, when OpenVPN is dropped to nobody
+				chown nobody:"$group_name" /etc/openvpn/server/crl.pem
+				echo
+				echo "$client เพิกถอนแลัว!"
+			else
+				echo
+				echo "$client การเพิกถอนถูกยกเลิก!"
+			fi
+			exit
+		;;
 
 	00) # ==================================================================================================================
 
