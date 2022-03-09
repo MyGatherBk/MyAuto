@@ -34,47 +34,29 @@ BLUE='\033[34;1m'
 MAGENTA='\033[35;1m'
 CYAN='\033[36;1m'
 
-if [[ -e /etc/debian_version ]]; then
-	OS=debian
-	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
-	GROUPNAME=nogroup
-	RCLOCAL='/etc/rc.local'
-
-	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
-		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
-		echo ""
-		echo "Ubuntu 14.04 - 16.04 - 18.04"
-		echo "Debian 8 - 9 -10"
-		echo ""
-		exit
-	fi
+# Detect OS
+# $os_version variables aren't always in use, but are kept here for convenience
+if grep -qs "ubuntu" /etc/os-release; then
+	os="ubuntu"
+	os_version=$(grep 'VERSION_ID' /etc/os-release | cut -d '"' -f 2 | tr -d '.')
+	group_name="nogroup"
+elif [[ -e /etc/debian_version ]]; then
+	os="debian"
+	os_version=$(grep -oE '[0-9]+' /etc/debian_version | head -1)
+	group_name="nogroup"
+elif [[ -e /etc/almalinux-release || -e /etc/rocky-release || -e /etc/centos-release ]]; then
+	os="centos"
+	os_version=$(grep -shoE '[0-9]+' /etc/almalinux-release /etc/rocky-release /etc/centos-release | head -1)
+	group_name="nobody"
+elif [[ -e /etc/fedora-release ]]; then
+	os="fedora"
+	os_version=$(grep -oE '[0-9]+' /etc/fedora-release | head -1)
+	group_name="nobody"
 else
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
-	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
-	echo ""
-	echo "Ubuntu 14.04 - 16.04 - 18.04"
-	echo "Debian 8 - 9 -10"
-	echo ""
+	echo "This installer seems to be running on an unsupported distribution.
+Supported distros are Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS and Fedora."
 	exit
 fi
-
 
 # ads
 echo ""
@@ -188,7 +170,6 @@ echo -e "\033[35;1m
 ${NC} "
 	read -p "IP Server : " -e -i $IP IP
 	read -p "Port Server : " -e -i 443 PORT
-	read -p "Port Proxy : " -e -i 8080 PROXY
 	echo ""
 	echo -e " |${GRAY}1${NC}| UDP"
 	echo -e " |${GRAY}2${NC}| TCP"
@@ -378,11 +359,10 @@ exit 0' > $RCLOCAL
 	# client-common.txt is created so we have a template to add further users later
 	echo "client
 dev tun
-proto $PROTOCOL
-sndbuf 0
-rcvbuf 0
-remote $IP $PORT
-http-proxy $IP $PROXY
+proto $protocol
+remote MyGatherBK 999 udp
+remote $ip $port
+http-proxy $ip 3128
 resolv-retry infinite
 nobind
 persist-key
@@ -390,8 +370,8 @@ persist-tun
 remote-cert-tls server
 auth SHA512
 cipher AES-256-CBC
-setenv opt block-outside-dns
-key-direction 1
+ignore-unknown-option block-outside-dns
+block-outside-dns
 verb 3" > /etc/openvpn/client-common.txt
 
 	case $OPENVPNSYSTEM in
@@ -400,77 +380,17 @@ verb 3" > /etc/openvpn/client-common.txt
 		;;
 	esac
 	
-echo ""
-echo -e "\033[35;1m { install nginx }${NC} "
-echo ""
-	cd
-	apt-get -y install nginx
-	cat > /etc/nginx/nginx.conf <<END
-user www-data;
-worker_processes 2;
-pid /var/run/nginx.pid;
-events {
-	multi_accept on;
-        worker_connections 1024;
-}
-http {
-	autoindex on;
-        sendfile on;
-        tcp_nopush on;
-        tcp_nodelay on;
-        keepalive_timeout 65;
-        types_hash_max_size 2048;
-        server_tokens off;
-        include /etc/nginx/mime.types;
-        default_type application/octet-stream;
-        access_log /var/log/nginx/access.log;
-        error_log /var/log/nginx/error.log;
-        client_max_body_size 32M;
-	client_header_buffer_size 8m;
-	large_client_header_buffers 8 8m;
-	fastcgi_buffer_size 8m;
-	fastcgi_buffers 8 8m;
-	fastcgi_read_timeout 600;
-        include /etc/nginx/conf.d/*.conf;
-}
-END
-	mkdir -p /home/vps/public_html
-	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
-	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
-	args='$args'
-	uri='$uri'
-	document_root='$document_root'
-	fastcgi_script_name='$fastcgi_script_name'
-	cat > /etc/nginx/conf.d/vps.conf <<END
-server {
-    listen       85;
-    server_name  127.0.0.1 localhost;
-    access_log /var/log/nginx/vps-access.log;
-    error_log /var/log/nginx/vps-error.log error;
-    root   /home/vps/public_html;
-    location / {
-        index  index.html index.htm index.php;
-	try_files $uri $uri/ /index.php?$args;
-    }
-    location ~ \.php$ {
-        include /etc/nginx/fastcgi_params;
-        fastcgi_pass  127.0.0.1:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-}
-END
 
-	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ -e /etc/squid3/squid.conf ]]; then
-			apt-get -y remove --purge squid3
-		fi
+
 echo ""
 echo -e "\033[0;32m { Install PROXY }${NC} "
 echo ""
-		apt-get -y install squid3
-		cat > /etc/squid3/squid.conf <<END
-http_port $PROXY
+
+apt-get -y install squid
+cat > /etc/squid/squid.conf <<-END
+# install squid
+http_port 8080
+http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -498,28 +418,13 @@ refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
-		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid3/squid.conf;
-		if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-			service squid3 restart
-			/etc/init.d/openvpn restart
-			/etc/init.d/nginx restart
-		else
-			/etc/init.d/squid3 restart
-			/etc/init.d/openvpn restart
-			/etc/init.d/nginx restart
-		fi
+sed -i $IP2 /etc/squid/squid.conf;
 
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ -e /etc/squid/squid.conf ]]; then
-			apt-get -y remove --purge squid
-		fi
-echo ""
-echo -e "\033[0;32m { Install PROXY }${NC} "
-echo ""
-		apt-get -y install squid
-		cat > /etc/squid/squid.conf <<END
-http_port $PROXY
+apt-get -y install squid3
+cat > /etc/squid3/squid.conf <<-END
+# install squid3
+http_port 8080
+http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -547,15 +452,7 @@ refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
-		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid/squid.conf;
-		/etc/init.d/squid restart
-		/etc/init.d/openvpn restart
-		/etc/init.d/nginx restart
-	fi
-
-fi
-
+sed -i $IP2 /etc/squid3/squid.conf;
 
 echo ""
 echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
@@ -599,24 +496,12 @@ echo -e "${NC} "
 	elif [[ "$PROTOCOL" = 'tcp' ]]; then
 		echo "Protocal : TCP"
 	fi
-	echo "Port Nginx : 85"
 	echo "IP Proxy   : $IP"
-	echo "Port Proxy : $PROXY"
-	echo "port SSl"  :444
+	echo "Port Proxy : 8080,3128"
 	echo ""
 	case $OPENVPNSYSTEM in
-		1)
-		echo "Download My Config : http://$IP:85/$CLIENT.ovpn"
-		;;
-		2)
-		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
-		echo ""
-		echo "Your Username : $Usernames"
-		echo "Your Password : $Passwords"
-		echo "Expire : Never"
-		;;
-		3)
-		echo "Download Config : http://$IP:85/$CLIENT.ovpn"
+
+		echo "Download Config : root/$CLIENT.ovpn"
 		;;
 	esac
 	echo ""
