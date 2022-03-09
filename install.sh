@@ -450,31 +450,34 @@ refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
 sed -i $IP2 /etc/squid/squid.conf;
-service squid restart
 
+	systemctl enable --now openvpn-server@server.service
+	
 	
 echo ""
 echo "-------------- { DOWNLOAD MENU SCRIPT } -------------- "
 echo ""
-	cd /usr/local/bin
-wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
-chmod +x /usr/local/bin/m
-	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
-	chmod +x /usr/local/bin/Auto-Delete-Client 
-
-echo ""
-echo "=============== Finished! ================="
-echo "#       OS  DEBIAN   OS  UBUNTU           #"
-echo "#  FB : https://m.me/pirakrit.khawplum    #"
-echo "#        BY : Pirakit Khawpleum           #"
-echo "=============== Finished! ================="
-echo ""
-echo "systemctl enable --now openvpn-server@server.service"
-echo "$client มีอยู่ใน:" ~/"$client.ovpn"
-echo ""
-echo "===================================================="
-echo " "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง m  เพื่อไปยังขั้นตอนถัดไป"
-echo "===================================================="
-echo ""
+cd /usr/local/bin
+wget -O menu "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh"
+wget -O addc "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/addc.sh"
+wget -O dec "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/dec.sh"
+wget -O deo "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/deo.sh"
+wget -O speedtest "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/speedtest_cli.py"
+chmod +x menu
+chmod +x addc
+chmod +x dec
+chmod +x deo
+chmod +x speedtest_cli.py
+clear
+echo -e "ดาวน์โหลดไฟล์  : /root/client.ovpn\n\n"
+printf '\n\nเพิ่ม user โดยใช้คำสั่ง addc'
+printf '\n\nคุณจำเป็นต้องรีสตาร์ทระบบหนึ่งรอบ (y/n):'
+read a
+if [ $a == 'y' ]
+then
+reboot
+else
+exit
+fi
 	
 
