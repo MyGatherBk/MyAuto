@@ -461,7 +461,7 @@ wget -q -O m "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/menu.sh
 chmod +x /usr/local/bin/m
 	wget -O /usr/local/bin/Auto-Delete-Client "https://raw.githubusercontent.com/MyGatherBk/PURE/master/Auto-Delete-Client"
 	chmod +x /usr/local/bin/Auto-Delete-Client 
-	
+clear
 echo ""
 echo "=============== Finished! ================="
 echo "#       OS  DEBIAN   OS  UBUNTU           #"
@@ -471,6 +471,10 @@ echo "=============== Finished! ================="
 echo ""
 echo ""
 echo "$client มีอยู่ใน:" ~/"$client.ovpn"
-
+	echo ""
+	echo "===================================================="
+	echo " "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง m  เพื่อไปยังขั้นตอนถัดไป"
+	echo "===================================================="
+	echo ""
 	
 fi
