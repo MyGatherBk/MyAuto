@@ -501,7 +501,7 @@ echo -e "${NC} "
 	echo ""
 	case $OPENVPNSYSTEM in
 
-		echo "Download Config : root/$CLIENT.ovpn"
+		echo "Download Config :~/"$client.ovpn"
 		;;
 	esac
 	echo ""
