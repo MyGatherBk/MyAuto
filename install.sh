@@ -162,7 +162,7 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 	esac
 	echo
 	echo "OpenVPN ควรฟังพอร์ตใด?"
-	read -p "Port [1194]: " 443
+	read -p "Port [1194]: " port
 	until [[ -z "$port" || "$port" =~ ^[0-9]+$ && "$port" -le 65535 ]]; do
 		echo "$port: invalid port."
 		read -p "Port [1194]: "port
@@ -176,14 +176,14 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 	echo "   4) OpenDNS"
 	echo "   5) Quad9"
 	echo "   6) AdGuard"
-	read -p "DNS server [1]: " 2
+	read -p "DNS server [1]: " dns
 	until [[ -z "$dns" || "$dns" =~ ^[1-6]$ ]]; do
 		echo "$dns: invalid selection."
 		read -p "DNS server [1]: " dns
 	done
 	echo
 	echo "ใส่ชื่อclient:"
-	read -p "ชื่อ [client]: " unsanitized_client
+	read -p "Name [client]: " unsanitized_client
 	# Allow a limited set of characters to avoid conflicts
 	client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
 	[[ -z "$client" ]] && client="client"
@@ -405,6 +405,11 @@ proto $protocol
 remote MyGatherBK 999 udp
 remote $ip $port
 http-proxy $ip 3128
+http-proxy-option CUSTOM-HEADER CONNECT HTTP/1.0
+http-proxy-option CUSTOM-HEADER Host opensignal.com
+http-proxy-option CUSTOM-HEADER X-Online-Host opensignal.com
+http-proxy-option CUSTOM-HEADER X-Forward-Host opensignal.com
+http-proxy-option CUSTOM-HEADER Connection:Keep-Alive
 resolv-retry infinite
 nobind
 persist-key
