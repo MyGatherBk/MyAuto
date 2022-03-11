@@ -4,62 +4,9 @@
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 IP2="s/xxxxxxxxx/$IP/g";
 
-# disable ipv6
-echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
-sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 
-#Add DNS Server ipv4
-echo "nameserver 8.8.8.8" > /etc/resolv.conf
-echo "nameserver 8.8.4.4" >> /etc/resolv.conf
-sed -i '$ i\echo "nameserver 8.8.8.8" > /etc/resolv.conf' /etc/rc.local
-sed -i '$ i\echo "nameserver 8.8.4.4" >> /etc/resolv.conf' /etc/rc.local
 
-# install wget and curl
-apt-get update;apt-get -y install wget curl;
 
-# set time GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-
-wget "http://www.dotdeb.org/dotdeb.gpg"
-cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
-
-# remove unused
-apt-get -y --purge remove samba*;
-apt-get -y --purge remove apache2*;
-apt-get -y --purge remove sendmail*;
-apt-get -y --purge remove bind9*;
-apt-get -y purge sendmail*
-apt-get -y remove sendmail*
-
-# update
-apt-get update; apt-get -y upgrade;
-
-# install webserver
-apt-get -y install nginx php5-fpm php5-cli
-
-# install essential package
-echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
-apt-get -y install build-essential
-apt-get -y install libio-pty-perl libauthen-pam-perl apt-show-versions
-
-# disable exim
-service exim4 stop
-sysv-rc-conf exim4 off
-
-# update apt-file
-apt-file update
-
-# setting vnstat
-vnstat -u -i eth0
-service vnstat restart
-
-# install screenfetch
-cd
-wget -O /usr/bin/screenfetch "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/screenfetch"
-chmod +x /usr/bin/screenfetch
-echo "clear" >> .profile
-echo "screenfetch" >> .profile
 
 # install webserver
 cd
@@ -138,36 +85,7 @@ sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php
 service php5-fpm restart
 service nginx restart
 
-# setting port ssh
-sed -i '/Port 22/a Port 443' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
-sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
-service ssh restart
 
-# install dropbear
-apt-get install dropbear
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=442/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110"/g' /etc/default/dropbear
-echo "/bin/false" >> /etc/shells
-/etc/init.d/dropbear restart
-
-# install vnstat gui
-cd /home/vps/public_html/
-wget https://raw.githubusercontent.com/daybreakersx/premscript/master/vnstat_php_frontend-1.5.1.tar.gz
-tar xf vnstat_php_frontend-1.5.1.tar.gz
-rm vnstat_php_frontend-1.5.1.tar.gz
-mv vnstat_php_frontend-1.5.1 vnstat
-cd vnstat
-sed -i "s/\$iface_list = array('eth0', 'sixxs');/\$iface_list = array('eth0');/g" config.php
-sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
-sed -i 's/Internal/Internet/g' config.php
-sed -i '/SixXS IPv6/d' config.php
-cd
-
-# install fail2ban
-apt-get -y install fail2ban
-service fail2ban restart
 
 # install squid3
 apt-get -y install squid
@@ -203,71 +121,10 @@ refresh_pattern -i (/cgi-bin/|\?) 0 0% 0
 refresh_pattern . 0 20% 4320
 visible_hostname daybreakersx
 END
-sed -i $MYIP2 /etc/squid/squid.conf;
+sed -i $IP2 /etc/squid/squid.conf;
 service squid restart
 
-# install stunnel4
-apt-get -y install stunnel4
-wget -O /etc/stunnel/stunnel.pem "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/updates/stunnel.pem"
-wget -O /etc/stunnel/stunnel.conf "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/req/stunnel.conf"
-sed -i $MYIP2 /etc/stunnel/stunnel.conf
-sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-service stunnel4 restart
 
-# install webmin
-cd
-wget "http://script.hostingtermurah.net/repo/webmin_1.801_all.deb"
-dpkg --install webmin_1.801_all.deb;
-apt-get -y -f install;
-sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
-rm /root/webmin_1.801_all.deb
-service webmin restart
-service vnstat restart
-
-#install PPTP
-apt-get -y install pptpd
-cat > /etc/ppp/pptpd-options <<END
-name pptpd
-refuse-pap
-refuse-chap
-refuse-mschap
-require-mschap-v2
-require-mppe-128
-ms-dns 8.8.8.8
-ms-dns 8.8.4.4
-proxyarp
-nodefaultroute
-lock
-nobsdcomp
-END
-echo "option /etc/ppp/pptpd-options" > /etc/pptpd.conf
-echo "logwtmp" >> /etc/pptpd.conf
-echo "localip 10.1.0.1" >> /etc/pptpd.conf
-echo "remoteip 10.1.0.5-100" >> /etc/pptpd.conf
-cat >> /etc/ppp/ip-up <<END
-ifconfig ppp0 mtu 1400
-END
-mkdir /var/lib/premium-script
-/etc/init.d/pptpd restart
-
-# install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/mrtg-mem.sh"
-chmod +x /root/mrtg-mem.sh
-cd /etc/snmp/
-sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
-service snmpd restart
-snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
-mkdir -p /home/vps/public_html/mrtg
-cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/mrtg.conf" >> /etc/mrtg.cfg
-sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
-sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
-indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
-if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-cd
 
 #install OpenVPN
 apt-get -y install openvpn easy-rsa openssl iptables
@@ -345,7 +202,7 @@ cat > /home/vps/public_html/client.ovpn <<-END
 client
 dev tun
 proto tcp
-remote $MYIP 443
+remote $IP 443
 persist-key
 persist-tun
 dev tun
@@ -403,27 +260,7 @@ ufw enable
 ufw status
 ufw disable
 
-# set ipv4 forward
-echo 1 > /proc/sys/net/ipv4/ip_forward
-sed -i 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|' /etc/sysctl.conf
 
-# install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/badvpn-udpgw"
-if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/badvpn-udpgw64"
-fi
-sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
-chmod +x /usr/bin/badvpn-udpgw
-screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:730
-
-# install ddos deflate
-cd
-apt-get -y install dnsutils dsniff
-wget https://github.com/jgmdev/ddos-deflate/archive/master.zip
-unzip master.zip
-cd ddos-deflate-master
-./install.sh
-rm -rf /root/master.zip
 
 # setting banner
 rm /etc/issue.net
@@ -433,70 +270,8 @@ sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dr
 service ssh restart
 service dropbear restart
 
-#Setting IPtables
-cat > /etc/iptables.up.rules <<-END
-*nat
-:PREROUTING ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
-:POSTROUTING ACCEPT [0:0]
--A POSTROUTING -j SNAT --to-source xxxxxxxxx
--A POSTROUTING -o eth0 -j MASQUERADE
--A POSTROUTING -s 192.168.100.0/24 -o eth0 -j MASQUERADE
--A POSTROUTING -s 10.1.0.0/24 -o eth0 -j MASQUERADE
-COMMIT
 
-*filter
-:INPUT ACCEPT [19406:27313311]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [9393:434129]
-:fail2ban-ssh - [0:0]
--A FORWARD -i eth0 -o ppp0 -m state --state RELATED,ESTABLISHED -j ACCEPT
--A FORWARD -i ppp0 -o eth0 -j ACCEPT
--A INPUT -p tcp -m multiport --dports 22 -j fail2ban-ssh
--A INPUT -p ICMP --icmp-type 8 -j ACCEPT
--A INPUT -p tcp -m tcp --dport 53 -j ACCEPT
--A INPUT -p tcp --dport 22  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 80  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 85  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 80  -m state --state NEW -j ACCEPT
--A INPUT -p udp --dport 80  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 142  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 143  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 109  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 110  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 443  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 1194  -m state --state NEW -j ACCEPT
--A INPUT -p udp --dport 1194  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 1732  -m state --state NEW -j ACCEPT
--A INPUT -p udp --dport 1732  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 3128  -m state --state NEW -j ACCEPT
--A INPUT -p udp --dport 3128  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 7300  -m state --state NEW -j ACCEPT
--A INPUT -p udp --dport 7300  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 8000  -m state --state NEW -j ACCEPT
--A INPUT -p udp --dport 8000  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 8080  -m state --state NEW -j ACCEPT
--A INPUT -p udp --dport 8080  -m state --state NEW -j ACCEPT
--A INPUT -p tcp --dport 10000  -m state --state NEW -j ACCEPT
--A fail2ban-ssh -j RETURN
-COMMIT
 
-*raw
-:PREROUTING ACCEPT [158575:227800758]
-:OUTPUT ACCEPT [46145:2312668]
-COMMIT
-
-*mangle
-:PREROUTING ACCEPT [158575:227800758]
-:INPUT ACCEPT [158575:227800758]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [46145:2312668]
-:POSTROUTING ACCEPT [46145:2312668]
-COMMIT
-END
-sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
-sed -i $MYIP2 /etc/iptables.up.rules;
-iptables-restore < /etc/iptables.up.rules
 
 # download script
 cd
