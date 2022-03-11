@@ -1,22 +1,8 @@
 #!/bin/sh
 # Modified by Ekkachai Chompoowiset
 
-#Requirement
-if [ ! -e /usr/bin/curl ]; then
-    apt-get -y update && apt-get -y upgrade
-	apt-get -y install curl
-fi
-# initializing var
-export DEBIAN_FRONTEND=noninteractive
-OS=`uname -m`;
-MYIP=$(curl -4 icanhazip.com)
-if [ $MYIP = "" ]; then
-   MYIP=`ifconfig | grep 'inet addr:' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | cut -d: -f2 | awk '{ print $1}' | head -1`;
-fi
-MYIP2="s/xxxxxxxxx/$MYIP/g";
-
-# go to root
-cd
+IP=$(wget -4qO- "http://whatismyip.akamai.com/")
+IP2="s/xxxxxxxxx/$IP/g";
 
 # disable ipv6
 echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
