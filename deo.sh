@@ -827,5 +827,3 @@ chmod +x deo.sh
 ./deo.sh
 
 	;;
-
-exit
