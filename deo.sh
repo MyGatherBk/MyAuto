@@ -829,6 +829,4 @@ wget https://raw.githubusercontent.com/MyGatherBk/PURE/master/deo.sh && chmod +x
 
 
 esac
-	;;
-
 
