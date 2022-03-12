@@ -821,12 +821,15 @@ fi
 	;;
 
 	0) # ==================================================================================================================
+rm -rf deo.sh	
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/deo.sh
+chmod +x deo.sh
+./deo.sh
 
-rm -rf Install
-wget https://raw.githubusercontent.com/MyGatherBk/PURE/master/deo.sh && chmod +x deo.sh && bash deo.sh
 	;;
 
 
-
 esac
+
+
 
