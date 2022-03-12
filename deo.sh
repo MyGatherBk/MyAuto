@@ -111,9 +111,6 @@ echo -e "${NC} "
 		fi
 	fi
 	echo ""
-	echo -e "|${GRAY} 0${NC}| อัพเดตฟังก์ชั่นสคริปท์"
-	echo ""
-	echo ""
         read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 echo ""
 case $MENU in
@@ -820,10 +817,3 @@ fi
 
 	;;
 
-	0) # ==================================================================================================================
-rm -rf deo.sh	
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/deo.sh
-chmod +x deo.sh
-./deo.sh
-
-	;;
