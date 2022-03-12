@@ -462,9 +462,9 @@ server {
 END
 
 echo ""
-echo -e "\033[0;32m { Install PROXY DEBIAN 8-10/UBUNTU 14 }${NC} "
+echo -e "\033[0;32m { Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18 }${NC} "
 echo ""
-
+#Install squid3
 	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ -e /etc/squid3/squid.conf ]]; then
 			apt-get -y remove --purge squid3
@@ -517,9 +517,7 @@ END
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
 		fi
-echo ""
-echo -e "\033[0;32m { Install PROXY DEBIAN 9/UBUNTU 16/18 }${NC} "
-echo ""
+#Install squid
 		apt-get -y install squid
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
@@ -606,7 +604,6 @@ echo -e "${NC} "
 	echo "Port Nginx : 85"
 	echo "IP Proxy   : $IP"
 	echo "Port Proxy : $PROXY"
-	echo "port SSl"  :444
 	echo ""
 	case $OPENVPNSYSTEM in
 		1)
