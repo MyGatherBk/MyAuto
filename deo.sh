@@ -461,7 +461,7 @@ server {
 }
 END
 echo ""
-echo -e "\033[0;32m { Install PROXY }${NC} "
+echo -e "\033[0;32m { Install PROXY DEBIAN 8-10/UBUNTU 14 }${NC} "
 echo ""
 
 	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
@@ -516,7 +516,7 @@ END
 			apt-get -y remove --purge squid
 		fi
 echo ""
-echo -e "\033[0;32m { Install PROXY }${NC} "
+echo -e "\033[0;32m { Install PROXY DEBIAN 9/UBUNTU 16/18 }${NC} "
 echo ""
 		apt-get -y install squid
 		cat > /etc/squid/squid.conf <<END
@@ -593,16 +593,16 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
-	echo "IP Server : $IP"
-	echo "Port Server : $PORT"
+	echo "IP Server         : $IP"
+	echo "Port Server       : $PORT"
 	if [[ "$PROTOCOL" = 'udp' ]]; then
-		echo "Protocal : UDP"
+	echo "Protocal          : UDP"
 	elif [[ "$PROTOCOL" = 'tcp' ]]; then
-		echo "Protocal : TCP"
+	echo "Protocal          : TCP"
 	fi
-	echo "Port Nginx : 85"
-	echo "IP Proxy   : $IP"
-	echo "Port Proxy : $PROXY"
+	echo "Port Nginx        : 85"
+	echo "IP Proxy          : $IP"
+	echo "Port Proxy        : $PROXY"
 	echo ""
 	case $OPENVPNSYSTEM in
 		1)
