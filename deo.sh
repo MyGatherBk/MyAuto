@@ -186,9 +186,9 @@ echo -e "\033[35;1m
 [√] Loading .....
 ----------------------------------------------
 ${NC} "
-	read -p "IP Server : " -e -i $IP IP
-	read -p "Port Server : " -e -i 443 PORT
-	read -p "Port Proxy : " -e -i 8080 PROXY
+	read -p "IP Server         : " -e -i $IP IP
+	read -p "Port Server       : " -e -i 443 PORT
+	read -p "Port Proxy[3128]  : " -e -i 8080 PROXY
 	echo ""
 	echo -e " |${GRAY}1${NC}| UDP"
 	echo -e " |${GRAY}2${NC}| TCP"
@@ -472,6 +472,7 @@ echo ""
 		apt-get -y install squid3
 		cat > /etc/squid3/squid.conf <<END
 http_port $PROXY
+http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -493,7 +494,7 @@ acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
 http_access allow SSH
 http_access allow localnet
 http_access allow localhost
-http_access allow all
+http_access deny all
 refresh_pattern ^ftp:           1440    20%     10080
 refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
@@ -521,6 +522,7 @@ echo ""
 		apt-get -y install squid
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
+http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -542,7 +544,7 @@ acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
 http_access allow SSH
 http_access allow localnet
 http_access allow localhost
-http_access allow all
+http_access deny all
 refresh_pattern ^ftp:           1440    20%     10080
 refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
@@ -602,7 +604,7 @@ echo -e "${NC} "
 	fi
 	echo "Port Nginx        : 85"
 	echo "IP Proxy          : $IP"
-	echo "Port Proxy        : $PROXY"
+	echo "Port Proxy        : $PROXY 3128"
 	echo ""
 	case $OPENVPNSYSTEM in
 		1)
