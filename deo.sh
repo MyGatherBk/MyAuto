@@ -621,5 +621,3 @@ echo -e "${NC} "
 	echo ""
 	exit
 
-	;;
-
