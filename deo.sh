@@ -84,11 +84,18 @@ echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
-	if [[ -e /etc/openvpn/server.conf ]]; then
+	
+	
+		echo "-------------------------------------------------------" 
+	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
+	echo "-------------------------------------------------------"
+	echo -e "เมนูสคริปท์ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
+	echo ""
+		if [[ -e /etc/openvpn/server.conf ]]; then
 		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
 	else
 		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
-	fi
+	        fi
 	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
 			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
@@ -107,10 +114,9 @@ echo -e "${NC} "
 	echo -e "|${GRAY} 0${NC}| อัพเดตฟังก์ชั่นสคริปท์"
 	echo ""
 	echo ""
-	read -p "เลือกหัวข้อฟังก์ชั่นที่ต้องการใช้งาน : " FUNCTIONSCRIPT
-
-
-case $FUNCTIONSCRIPT in
+        read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
+echo ""
+case $MENU in
 
 	1) # ==================================================================================================================
 
@@ -818,6 +824,11 @@ fi
 
 rm -rf Install
 wget https://raw.githubusercontent.com/MyGatherBk/PURE/master/deo.sh && chmod +x deo.sh && bash deo.sh
+	;;
+
+
+
+esac
 	;;
 
 
