@@ -461,16 +461,19 @@ server {
 }
 END
 
+echo ""
+echo -e "\033[0;32m { Install PROXY DEBIAN 8-10/UBUNTU 14 }${NC} "
+echo ""
+
 	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ -e /etc/squid3/squid.conf ]]; then
 			apt-get -y remove --purge squid3
 		fi
-echo ""
-echo -e "\033[0;32m { Install PROXY }${NC} "
-echo ""
+
 		apt-get -y install squid3
 		cat > /etc/squid3/squid.conf <<END
 http_port $PROXY
+http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -515,11 +518,12 @@ END
 			apt-get -y remove --purge squid
 		fi
 echo ""
-echo -e "\033[0;32m { Install PROXY }${NC} "
+echo -e "\033[0;32m { Install PROXY DEBIAN 9/UBUNTU 16/18 }${NC} "
 echo ""
 		apt-get -y install squid
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
+http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -592,8 +596,8 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
-	echo "IP Server : $IP"
-	echo "Port Server : $PORT"
+	echo "IP Server        : $IP"
+	echo "Port Server      : $PORT"
 	if [[ "$PROTOCOL" = 'udp' ]]; then
 		echo "Protocal : UDP"
 	elif [[ "$PROTOCOL" = 'tcp' ]]; then
