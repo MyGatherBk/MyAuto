@@ -879,7 +879,7 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo "Check Thai" >> /usr/local/bin/Check-Thai
 fi
-bash Install
+bash Install1
 	;;
 
 esac
