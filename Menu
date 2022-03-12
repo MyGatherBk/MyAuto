@@ -108,6 +108,7 @@ fi
 	echo -e "|${GRAY}16${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ"
 	echo -e "|${GRAY}17${NC}| แก้ไขคอนฟิกต่างๆในระบบ"
 	echo -e "|${GRAY}18${NC}| เปลี่ยน Passwd Root "
+	echo -e "|${GRAY}18${NC}| แก้ไข Proxy "
 	echo -e "|${GRAY}00${NC}| อัพเดตเมนูสคริปท์"
 	
 
@@ -1441,7 +1442,7 @@ case $SERVICE in
 		;;
 
 		3)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+	if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
 			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
@@ -1510,7 +1511,7 @@ nano /etc/openvpn/server.conf
 exit
 	;;
 	3)
-if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 	nano /etc/squid/squid.conf
 	exit
 elif [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
@@ -1640,6 +1641,28 @@ END
 service ssh restart
 exit
 ;;
+	19) # ==================================================================================================================
+	
+	clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
+if [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+	nano /etc/squid/squid.conf
+	service squid restart
+	exit
+elif [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	nano /etc/squid3/squid.conf
+	service squid3 restart
+	exit
+fi
+	;;
 	00) # ==================================================================================================================
 
 cd /usr/local/bin
