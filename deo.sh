@@ -89,14 +89,14 @@ echo -e "${NC} "
 	else
 		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} ✔   ${NC}"
 	fi
-	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
 			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
 		elif [[ -e /etc/squid3/squid.conf ]]; then
 			echo -e "|${GRAY} 2${NC}| ถอนการติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
 		fi
 
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="17.04"' ]]; then
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
 			echo -e "|${GRAY} 2${NC}| ติดตั้ง SQUID PROXY ${GREEN} ✔   ${NC}"
 		elif [[ -e /etc/squid/squid.conf ]]; then
@@ -818,8 +818,6 @@ fi
 
 rm -rf Install
 wget https://raw.githubusercontent.com/MyGatherBk/PURE/master/deo.sh && chmod +x deo.sh && bash deo.sh
-
-esac
-
+	;;
 
 
