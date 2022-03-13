@@ -94,27 +94,14 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
 	if [[ -e /etc/openvpn/server.conf ]]; then
-		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES    ${NC}"
+	echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES    ${NC}"
 	else
-		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES    ${NC}"
+	echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES    ${NC}"
 	fi
-		echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root ${GREEN} YES ${ORANGE} ${GREEN} ʕ •ᴥ•ʔゝ☆${NC}"
-	        echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	        echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES   ${NC}"
-		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES    ${NC}"
-		fi
-
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES   ${NC}"
-		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES    ${NC}"
-		fi
-	fi
+	echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root ${GREEN} YES ${ORANGE} ${GREEN} ʕ •ᴥ•ʔゝ☆${NC}"
+	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
+	echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
+	echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES   ${NC}"
 	echo ""
 	echo -e "|${GRAY} 0${NC}| อัพเดตฟังก์ชั่นสคริปท์"
 	echo -e "|${GRAY}00${NC}| CHANGE TO ENGLISH"
@@ -126,27 +113,14 @@ elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "FUNCTION SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
 	if [[ -e /etc/openvpn/server.conf ]]; then
-		echo -e "|${GRAY} 1${NC}| REMOVE OPENVPN TERMINAL CONTROL${GREEN} YES   ${NC}"
+	echo -e "|${GRAY} 1${NC}| REMOVE OPENVPN TERMINAL CONTROL${GREEN} YES   ${NC}"
 	else
-		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL${GREEN} YES   ${NC}"
+	echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL${GREEN} YES   ${NC}"
 	fi
 	echo -e "|${GRAY} 2${NC}| Change Password Root ${GREEN} YES ${GREEN} ʕ •ᴥ•ʔゝ☆${NC}"
 	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
 	echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
-		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
-		fi
-
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
-		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
-		fi
-	fi
+	echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
 	echo ""
 	echo -e "|${GRAY} 0${NC}| UPDATE FUNCTION SCRIPT"
 	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาไทย"
@@ -762,6 +736,9 @@ exit
 
  if [[ -e /etc/squid/squid.conf ]]; then
 	apt-get -y remove --purge squid
+	
+fi
+exit
 clear
 echo ""
 echo ""
@@ -774,7 +751,7 @@ echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC}" 
 	echo "Squid Proxy .....Removed."
 	exit
-fi
+
 clear
 echo ""
 echo ""
