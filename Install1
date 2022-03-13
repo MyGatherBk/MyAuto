@@ -466,7 +466,8 @@ dev tun
 proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
-remote $IP $PORT
+port $PORT
+remote $IP
 http-proxy $IP $PROXY
 resolv-retry infinite
 nobind
@@ -558,7 +559,6 @@ echo ""
 		apt-get -y install squid3
 		cat > /etc/squid3/squid.conf <<END
 http_port $PROXY
-http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -606,7 +606,6 @@ END
 		apt-get -y install squid
 		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
-http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
