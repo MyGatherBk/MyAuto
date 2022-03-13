@@ -248,7 +248,6 @@ echo -e "\033[35;1m
 ${NC} "
 	read -p "IP Server : " -e -i $IP IP
 	read -p "Port Server : " -e -i 443 PORT
-	read -p "Port Proxy : " -e -i 8080 PROXY
 	echo ""
 	echo -e " |${GRAY}1${NC}| UDP"
 	echo -e " |${GRAY}2${NC}| TCP"
@@ -442,7 +441,7 @@ proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
 remote $IP $PORT
-http-proxy $IP $PROXY
+http-proxy $IP 8080
 resolv-retry infinite
 nobind
 persist-key
@@ -526,7 +525,7 @@ echo -e "\033[0;32m { Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18-20 }${NC} "
 echo ""
 apt-get -y install squid;
 cp /etc/squid/squid.conf
-wget -O /etc/squid/squid.conf "https://github.com/MyGatherBk/MyAuto/blob/master/squid.conf"
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/squid.conf"
 sed -i $IP2 /etc/squid/squid.conf;
 systemctl restart squid
 
@@ -701,23 +700,6 @@ exit
        ;;
 	5) # ==================================================================================================================
 
- if [[ -e /etc/squid/squid.conf ]]; then
-	apt-get -y remove --purge squid
-	
-fi
-exit
-clear
-echo ""
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC}" 
-	echo "Squid Proxy .....Removed."
-	exit
 
 clear
 echo ""
@@ -730,11 +712,10 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC}" 
 
-read -p "Port Proxy : " -e -i 8080 PROXY
 # install squid
 apt-get -y install squid
 cat > /etc/squid/squid.conf <<END
-http_port $PROXY
+http_port 8080
 http_port 3128
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
@@ -763,13 +744,10 @@ refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
-		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid/squid.conf;
-		/etc/init.d/squid restart
-		/etc/init.d/openvpn restart
-		/etc/init.d/nginx restart
-		service squid restart
-	clear
+sed -i $IP2 /etc/squid/squid.conf;
+service squid restart
+
+clear
 echo ""
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -781,7 +759,7 @@ echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC}" 
 	echo "Squid Proxy .....Install finish."
 	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
+	echo "Port Proxy : 8080,3128
 	echo ""
 	exit
 
