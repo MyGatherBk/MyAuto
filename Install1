@@ -33,9 +33,7 @@ RED='\033[31;1m'
 BLUE='\033[34;1m'
 MAGENTA='\033[35;1m'
 CYAN='\033[36;1m'
-PURPLE='\033[0;35m'
-ORANGE='\033[0;33m'
-GREEND="\033[1;32m'
+
 
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
@@ -100,7 +98,7 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 	else
 		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES    ${NC}"
 	fi
-		echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root ${GREEN} YES ${ORANGE} ${ORANGE} ʕ •ᴥ•ʔゝ☆${NC}"
+		echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root ${GREEN} YES ${ORANGE} ${GREEN} ʕ •ᴥ•ʔゝ☆${NC}"
 	        echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
 	        echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
 	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
@@ -132,7 +130,7 @@ elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	else
 		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL${GREEN} YES   ${NC}"
 	fi
-	echo -e "|${GRAY} 2${NC}| Change Password Root ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆${NC}"
+	echo -e "|${GRAY} 2${NC}| Change Password Root ${GREEN} YES ${GREEN} ʕ •ᴥ•ʔゝ☆${NC}"
 	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
 	echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
 	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
