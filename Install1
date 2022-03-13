@@ -760,7 +760,7 @@ exit
        ;;
 	5) # ==================================================================================================================
 
- if[[ -e /etc/squid/squid.conf ]]; then
+ if [[ -e /etc/squid/squid.conf ]]; then
 	apt-get -y remove --purge squid
 clear
 echo ""
