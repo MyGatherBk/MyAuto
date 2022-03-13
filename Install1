@@ -90,7 +90,7 @@ echo -e "${RED} #               { VPN / SSH }                  #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEND} ไอพีเซิฟ: $IP "
+echo -e "${GREEN}ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 if [[ -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "╔══════✮❁•°MyGatherBK°•❁✮ ══════╗${MAGENTA} ʕ •ᴥ•ʔゝ☆${RED}${NC}"
