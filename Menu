@@ -88,15 +88,15 @@ fi
 	echo -e "|${GRAY}10${NC}| ตรวจสอบแบนด์วิดท์"
 	echo -e "|${GRAY}11${NC}| ตรวจสอบแบนด์วิดท์แบบรายชั่วโมง"
 	echo -e "|${GRAY}12${NC}| ตรวจสอบแบนด์วิดท์ต่อบัญชี"
-	echo -e "|${GRAY}13${NC}| ปรับเปลี่ยนระบบของเซิฟเวอร์ ${PURPLE}${NC}"
+	echo -e "|${GRAY}13${NC}| ${BLUE}ปรับเปลี่ยนระบบของเซิฟเวอร์ ${PURPLE}${NC}"
 	if [[ $CHECKSYSTEM ]]; then
 		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้"
 	else
 		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${GRAY}ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน  ${NC}"
 	fi
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
-	echo -e "|${GRAY}16${NC}| เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${CYAN}${NC}"
-	echo -e "|${GRAY}17${NC}| แก้ไขคอนฟิกต่างๆในระบบ ${PURPLE}${NC}"
+	echo -e "|${GRAY}16${NC}| ${MAGENTA}เปิด-ปิด-รีสตาร์ท การทำงานของระบบ  ${NC}"
+	echo -e "|${GRAY}17${NC}| ${BLUE}แก้ไขคอนฟิกต่างๆในระบบ ${NC}"
 	echo -e "|${GRAY}18${NC}| เปลี่ยน Passwd Root "
 	echo -e "|${GRAY}19${NC}| แก้ไข Proxy "
 	echo -e "|${GRAY}00${NC}| อัพเดตเมนูสคริปท์"
@@ -104,7 +104,7 @@ fi
 
 
 	echo ""
-	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
+	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ${NC}"
 	# vnstat meter
 if [[ -e /etc/vnstat.conf ]]; then
 	INTERFACE=`vnstat -m | head -n2 | awk '{print $1}'`
@@ -127,8 +127,8 @@ do
 		fi
 done < /etc/passwd
 bash Auto-Delete-Client
-echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY}$TOTALBW${NC}${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
-echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<< ${NC}"
+echo -e "แบนด์วิดท์ที่ใช้ไปทั้งหมด ${GRAY} $TOTALBW ${NC} ${GRAY}B${NC}  |  กำลังเชื่อมต่อ ${GRAY}$ON${NC} บัญชี"
+echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ${NC}"
         read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
 echo ""
 case $MENU in
