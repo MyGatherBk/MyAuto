@@ -9,26 +9,16 @@ CHECKSYSTEM=$(tail -n +2 /etc/openvpn/server.conf | grep "^username-as-common-na
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 #
 # Color
-BLUE='\033[0;34m'
+GRAY='\033[1;33m'
 GREEN='\033[0;32m'
-RED='\033[0;31m'
-CYAN='\033[0;36m'
 NC='\033[0m'
-z1='\e[31;1m'  #red
-z2='\e[34;1m'  #blue
-z3='\e[32;1m'  #green
-z4='\e[35;1m'  #magenta
-z5='\e[36;1m'  #cyan
-z6='\e[33;1m'  #yellow
-z7='\e[0m'
-cor[1]="\033[1;36m"
-cor[2]="\033[1;33m"
-cor[3]="\033[1;31m"
-cor[5]="\033[1;32m"
-cor[4]="\033[0m"
-color1='\e[031;1m'
-color2='\e[34;1m'
-color3='\e[0m'
+YELLOW='\033[33;1m'
+RED='\033[31;1m'
+BLUE='\033[34;1m'
+MAGENTA='\033[35;1m'
+CYAN='\033[36;1m'
+PURPLE='\033[0;35m'
+ORANGE='\033[0;33m'
 
 # ads
 echo ""
@@ -84,7 +74,7 @@ fi
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
-	echo -e "เมนูสคริปท์ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
+	echo -e "เมนูสคริปท์ ${ORANGE}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
 	echo ""
 	echo -e "|${GRAY} 1${NC}| เพิ่มบัญชีผู้ใช้ OpenVPN"
 	echo -e "|${GRAY} 2${NC}| เพิ่มบัญชีผู้ใช้ SSH (HTTP)"
