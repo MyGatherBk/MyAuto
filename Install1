@@ -587,7 +587,6 @@ END
 		/etc/init.d/squid restart
 		/etc/init.d/openvpn restart
 		/etc/init.d/nginx restart
-		service squid restart
 
 
 echo ""
