@@ -556,12 +556,9 @@ refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
-		IP2="s/xxxxxxxxx/$IP/g";
-		sed -i $IP2 /etc/squid/squid.conf;
-		/etc/init.d/squid restart
-		/etc/init.d/openvpn restart
-		/etc/init.d/nginx restart
-
+IP2="s/xxxxxxxxx/$IP/g";
+sed -i $IP2 /etc/squid/squid.conf;
+service squid restart
 
 echo ""
 echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
