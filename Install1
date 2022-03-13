@@ -24,7 +24,6 @@ clear
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 # fi
 
-# Color
 GRAY='\033[1;33m'
 GREEN='\033[0;32m'
 NC='\033[0m'
@@ -33,7 +32,8 @@ RED='\033[31;1m'
 BLUE='\033[34;1m'
 MAGENTA='\033[35;1m'
 CYAN='\033[36;1m'
-
+PURPLE='\033[0;35m'
+ORANGE='\033[0;33m'
 
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
@@ -41,7 +41,7 @@ if [[ -e /etc/debian_version ]]; then
 	GROUPNAME=nogroup
 	RCLOCAL='/etc/rc.local'
 
-	if [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="20.04"' ]]; then
+	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]]; then
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
@@ -91,17 +91,30 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 if [[ -e /usr/local/bin/Check-Thai ]]; then
-	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
+	echo -e "MyGatherBK ${YELLOW} •——————•°•✿•°•——————•${MAGENTA} ʕ •ᴥ•ʔゝ☆${RED}"
 	echo ""
 	if [[ -e /etc/openvpn/server.conf ]]; then
-	echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES    ${NC}"
+		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES  ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 	else
-	echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES    ${NC}"
+		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 	fi
-	echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root ${GREEN} YES ${ORANGE} ${GREEN} ʕ •ᴥ•ʔゝ☆${NC}"
-	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES   ${NC}"
+		echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root ${GREEN} YES ${ORANGE} ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+	        echo -e "|${GRAY} 3${NC}| ←~∋(｡Ψ▼ｰ▼)∈ ${RED} NO   ${NC}"
+	        echo -e "|${GRAY} 4${NC}| ←~∋(｡Ψ▼ｰ▼)∈ ${RED} NO   ${NC}"
+	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+		elif [[ -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+		elif [[ -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+		fi
+	fi
 	echo ""
 	echo -e "|${GRAY} 0${NC}| อัพเดตฟังก์ชั่นสคริปท์"
 	echo -e "|${GRAY}00${NC}| CHANGE TO ENGLISH"
@@ -113,14 +126,27 @@ elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "FUNCTION SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
 	if [[ -e /etc/openvpn/server.conf ]]; then
-	echo -e "|${GRAY} 1${NC}| REMOVE OPENVPN TERMINAL CONTROL${GREEN} YES   ${NC}"
+		echo -e "|${GRAY} 1${NC}| REMOVE OPENVPN TERMINAL CONTROL${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 	else
-	echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL${GREEN} YES   ${NC}"
+		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 	fi
-	echo -e "|${GRAY} 2${NC}| Change Password Root ${GREEN} YES ${GREEN} ʕ •ᴥ•ʔゝ☆${NC}"
-	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
+	echo -e "|${GRAY} 2${NC}| Change Password Root ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+	echo -e "|${GRAY} 3${NC}| ←~∋(｡Ψ▼ｰ▼)∈ ${RED} NO   ${NC}"
+	echo -e "|${GRAY} 4${NC}| ←~∋(｡Ψ▼ｰ▼)∈ ${RED} NO   ${NC}"
+	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ ! -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+		elif [[ -e /etc/squid3/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ALL SERVER ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+		if [[ ! -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+		elif [[ -e /etc/squid/squid.conf ]]; then
+			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ALL SERVER ${GREEN} YES  ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+		fi
+	fi
 	echo ""
 	echo -e "|${GRAY} 0${NC}| UPDATE FUNCTION SCRIPT"
 	echo -e "|${GRAY}00${NC}| เปลี่ยนเป็นภาษาไทย"
@@ -248,6 +274,7 @@ echo -e "\033[35;1m
 ${NC} "
 	read -p "IP Server : " -e -i $IP IP
 	read -p "Port Server : " -e -i 443 PORT
+	read -p "Port Proxy : " -e -i 8080 PROXY
 	echo ""
 	echo -e " |${GRAY}1${NC}| UDP"
 	echo -e " |${GRAY}2${NC}| TCP"
@@ -441,7 +468,7 @@ proto $PROTOCOL
 sndbuf 0
 rcvbuf 0
 remote $IP $PORT
-http-proxy $IP 8080
+http-proxy $IP $PROXY
 resolv-retry infinite
 nobind
 persist-key
@@ -521,13 +548,102 @@ server {
 END
 
 echo ""
-echo -e "\033[0;32m { Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18-20 }${NC} "
+echo -e "\033[0;32m { Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18 }${NC} "
 echo ""
-apt-get -y install squid;
-cp /etc/squid/squid.conf
-wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/squid.conf"
-sed -i $IP2 /etc/squid/squid.conf;
-systemctl restart squid
+#Install squid3
+	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		if [[ -e /etc/squid3/squid.conf ]]; then
+			apt-get -y remove --purge squid3
+		fi
+
+		apt-get -y install squid3
+		cat > /etc/squid3/squid.conf <<END
+http_port $PROXY
+http_port 3128
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+		IP2="s/xxxxxxxxx/$IP/g";
+		sed -i $IP2 /etc/squid3/squid.conf;
+		if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+			service squid3 restart
+			/etc/init.d/openvpn restart
+			/etc/init.d/nginx restart
+		else
+			/etc/init.d/squid3 restart
+			/etc/init.d/openvpn restart
+			/etc/init.d/nginx restart
+		fi
+
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+		if [[ -e /etc/squid/squid.conf ]]; then
+			apt-get -y remove --purge squid
+		fi
+#Install squid
+		apt-get -y install squid
+		cat > /etc/squid/squid.conf <<END
+http_port $PROXY
+http_port 3128
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+		IP2="s/xxxxxxxxx/$IP/g";
+		sed -i $IP2 /etc/squid/squid.conf;
+		/etc/init.d/squid restart
+		/etc/init.d/openvpn restart
+		/etc/init.d/nginx restart
+	fi
+
+fi
+
 
 echo ""
 echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
@@ -592,7 +708,7 @@ echo -e "${NC} "
 	esac
 	echo ""
 	echo "===================================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${YELLOW} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${PURPLE} M۫۰۪ ${ORANGE} เพื่อไปยังขั้นตอนถัดไป"
 	echo "===================================================================="
 	echo ""
 	exit
@@ -694,14 +810,14 @@ service ssh restart
 exit
 ;;
 	3) # ==================================================================================================================
-
-       ;;
+          ;;
 	4) # ==================================================================================================================
-       ;;
+          ;;
 	5) # ==================================================================================================================
 
-
-clear
+if [[ -e /etc/squid3/squid.conf ]]; then
+	apt-get -y remove --purge squid3
+	clear
 echo ""
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -711,12 +827,30 @@ echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC}" 
+	echo "Squid Proxy .....Removed."
+	exit
+elif [[ -e /etc/squid/squid.conf ]]; then
+	apt-get -y remove --purge squid
+	clear
+echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC}" 
+	echo "Squid Proxy .....Removed."
+	exit
+fi
 
-# install squid
-apt-get -y install squid
-cat > /etc/squid/squid.conf <<END
-http_port 8080
-http_port 3128
+read -p "Port Proxy : " -e -i 8080 PROXY
+
+if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	apt-get -y install squid3
+	cat > /etc/squid3/squid.conf <<END
+http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 acl localnet src 10.0.0.0/8
@@ -744,10 +878,14 @@ refresh_pattern ^gopher:        1440    0%      1440
 refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
 refresh_pattern .               0       20%     4320
 END
-sed -i $IP2 /etc/squid/squid.conf;
-service squid restart
-
-clear
+	IP2="s/xxxxxxxxx/$IP/g";
+	sed -i $IP2 /etc/squid3/squid.conf;
+	if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+		service squid3 restart
+	else
+		/etc/init.d/squid3 restart
+	fi
+	clear
 echo ""
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -759,11 +897,62 @@ echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC}" 
 	echo "Squid Proxy .....Install finish."
 	echo "IP Proxy : $IP"
-	echo "Port Proxy : 8080,3128
+	echo "Port Proxy : $PROXY"
 	echo ""
 	exit
 
+elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
+	apt-get -y install squid
+	cat > /etc/squid/squid.conf <<END
+http_port $PROXY
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
+http_access allow SSH
+http_access allow localnet
+http_access allow localhost
+http_access allow all
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+END
+	IP2="s/xxxxxxxxx/$IP/g";
+	service squid3 restart
+	sed -i $IP2 /etc/squid/squid.conf;
+	/etc/init.d/squid restart
+	clear
+echo ""
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC}" 
+	echo "Squid Proxy .....Install finish."
+	echo "IP Proxy : $IP"
+	echo "Port Proxy : $PROXY"
+	echo ""
+	exit
 
+fi
 
 	;;
 
