@@ -33,6 +33,8 @@ RED='\033[31;1m'
 BLUE='\033[34;1m'
 MAGENTA='\033[35;1m'
 CYAN='\033[36;1m'
+PURPLE='\033[0;35m\]"
+ORANGE='\033[0;33m\]"
 
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
@@ -90,28 +92,28 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 if [[ -e /usr/local/bin/Check-Thai ]]; then
-	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
+	echo -e "ฟังก์ชั่นสคริปท์ ${YELLOW} MyGatherBK-VPN ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 	echo ""
 	if [[ -e /etc/openvpn/server.conf ]]; then
-		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES    ${NC}"
+		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES  ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 	else
-		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES    ${NC}"
+		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 	fi
-	echo -e "|${GRAY} 2${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
+		echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root ${GREEN} YES ${ORANGE} ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+	        echo -e "|${GRAY} 3${NC}| ←~∋(｡Ψ▼ｰ▼)∈ ${RED} NO   ${NC}"
+	        echo -e "|${GRAY} 4${NC}| ←~∋(｡Ψ▼ｰ▼)∈ ${RED} NO   ${NC}"
 	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES   ${NC}"
+			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES    ${NC}"
+			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES   ${NC}"
+			echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES    ${NC}"
+			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 		fi
 	fi
 	echo ""
@@ -125,25 +127,25 @@ elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "FUNCTION SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
 	if [[ -e /etc/openvpn/server.conf ]]; then
-		echo -e "|${GRAY} 1${NC}| REMOVE OPENVPN TERMINAL CONTROL${GREEN} YES   ${NC}"
+		echo -e "|${GRAY} 1${NC}| REMOVE OPENVPN TERMINAL CONTROL${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 	else
-		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL${GREEN} YES   ${NC}"
+		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 	fi
-	echo -e "|${GRAY} 2${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
+	echo -e "|${GRAY} 2${NC}| Change Password Root ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+	echo -e "|${GRAY} 3${NC}| ←~∋(｡Ψ▼ｰ▼)∈ ${RED} NO   ${NC}"
+	echo -e "|${GRAY} 4${NC}| ←~∋(｡Ψ▼ｰ▼)∈ ${RED} NO   ${NC}"
 	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
+			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
+			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ALL SERVER ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
+			echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER ${GREEN} YES ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ALL SERVER ${GREEN} YES   ${NC}"
+			echo -e "|${GRAY} 5${NC}| REMOVE SQUID PROXY ALL SERVER ${GREEN} YES  ${ORANGE} ʕ •ᴥ•ʔゝ☆"
 		fi
 	fi
 	echo ""
@@ -714,13 +716,104 @@ echo -e "${NC} "
 
 	;;
 
-    2) # ==================================================================================================================
-	   ;;
+        2) # ==================================================================================================================
+	   #!/bin/bash
+clear
+echo ""
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
+echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
+echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
+echo -e "${RED} =============== OS-32 & 64-bit =================    "
+echo -e "${GREEN} ไอพีเซิฟ: $IP "
+echo -e "${NC} "
+echo ""
+echo "             === WELLCOM === "
+echo " ======================================"
+echo "    กำหนดรหัสผ่านสำหรับล็อกอินด้วยชื่อ root  "
+echo " ====================================="
+passwd
+cat > /etc/ssh/sshd_config <<-END
+# Package generated configuration file
+# See the sshd_config(5) manpage for details
+# What ports, IPs and protocols we listen for
+Port 22
+# Use these options to restrict which interfaces/protocols sshd will bind to
+#ListenAddress ::
+#ListenAddress 0.0.0.0
+Protocol 2
+# HostKeys for protocol version 2
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+#Privilege Separation is turned on for security
+UsePrivilegeSeparation yes
+# Lifetime and size of ephemeral version 1 server key
+KeyRegenerationInterval 3600
+ServerKeyBits 1024
+# Logging
+SyslogFacility AUTH
+LogLevel INFO
+# Authentication:
+LoginGraceTime 120
+PermitRootLogin yes
+StrictModes yes
+RSAAuthentication yes
+PubkeyAuthentication yes
+#AuthorizedKeysFile	%h/.ssh/authorized_keys
+# Don't read the user's ~/.rhosts and ~/.shosts files
+IgnoreRhosts yes
+# For this to work you will also need host keys in /etc/ssh_known_hosts
+RhostsRSAAuthentication no
+# similar for protocol version 2
+HostbasedAuthentication no
+# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication
+#IgnoreUserKnownHosts yes
+# To enable empty passwords, change to yes (NOT RECOMMENDED)
+PermitEmptyPasswords no
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication no
+# Change to no to disable tunnelled clear text passwords
+PasswordAuthentication yes
+# Kerberos options
+#KerberosAuthentication no
+#KerberosGetAFSToken no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+# GSSAPI options
+#GSSAPIAuthentication no
+#GSSAPICleanupCredentials yes
+X11Forwarding yes
+X11DisplayOffset 10
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+#UseLogin no
+#MaxStartups 10:30:60
+#Banner /etc/issue.net
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+Subsystem sftp /usr/lib/openssh/sftp-server
+# Set this to 'yes' to enable PAM authentication, account processing,
+# and session processing. If this is enabled, PAM authentication will
+# be allowed through the ChallengeResponseAuthentication and
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of "PermitRootLogin without-password".
+# If you just want the PAM account and session checks to run without
+# PAM authentication, then enable this but set PasswordAuthentication
+# and ChallengeResponseAuthentication to 'no'.
+UsePAM yes
+END
+service ssh restart
+exit
+;;
 	3) # ==================================================================================================================
-
-       ;;
+          ;;
 	4) # ==================================================================================================================
-       ;;
+          ;;
 	5) # ==================================================================================================================
 
 if [[ -e /etc/squid3/squid.conf ]]; then
