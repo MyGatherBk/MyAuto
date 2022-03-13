@@ -24,7 +24,6 @@ clear
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
 # fi
 
-# Color
 GRAY='\033[1;33m'
 GREEN='\033[0;32m'
 NC='\033[0m'
@@ -33,8 +32,8 @@ RED='\033[31;1m'
 BLUE='\033[34;1m'
 MAGENTA='\033[35;1m'
 CYAN='\033[36;1m'
-PURPLE='\033[0;35m\]"
-ORANGE='\033[0;33m\]"
+PURPLE='\033[0;35m'
+ORANGE='\033[0;33m'
 
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
@@ -92,7 +91,7 @@ echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 if [[ -e /usr/local/bin/Check-Thai ]]; then
-	echo -e "ฟังก์ชั่นสคริปท์ ${YELLOW} MyGatherBK-VPN ${ORANGE} ʕ •ᴥ•ʔゝ☆"
+	echo -e "MyGatherBK ${YELLOW} •——————•°•✿•°•——————•${MAGENTA} ʕ •ᴥ•ʔゝ☆${RED}"
 	echo ""
 	if [[ -e /etc/openvpn/server.conf ]]; then
 		echo -e "|${GRAY} 1${NC}| ถอนการติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล ${GREEN} YES  ${ORANGE} ʕ •ᴥ•ʔゝ☆"
@@ -709,7 +708,7 @@ echo -e "${NC} "
 	esac
 	echo ""
 	echo "===================================================================="
-	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${YELLOW} m ${NC} เพื่อไปยังขั้นตอนถัดไป"
+	echo -e "ติดตั้งสำเร็จ... กรุณาพิมพ์คำสั่ง${PURPLE} M۫۰۪ ${ORANGE} เพื่อไปยังขั้นตอนถัดไป"
 	echo "===================================================================="
 	echo ""
 	exit
