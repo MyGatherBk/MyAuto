@@ -1,0 +1,55 @@
+
+
+
+sudo apt update
+sudo apt upgrade
+sudo apt install build-essential
+
+wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
+
+tar xzf softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
+cd vpnserver
+sudo make
+sudo ./vpnserver start
+
+cd ..
+sudo mv vpnserver /usr/local
+
+ cd /usr/local/vpnserver/
+ sudo chmod 600 *
+ sudo chmod 700 vpnserver
+ sudo chmod 700 vpncmd
+ 
+ /lib/systemd/system/vpnserver.service
+ 
+ sudo apt install nano
+ 
+ sudo nano /lib/systemd/system/vpnserver.service
+ 
+ [Unit]
+Description=SoftEther VPN Server
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/vpnserver/vpnserver start
+ExecStop=/usr/local/vpnserver/vpnserver stop
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+sudo systemctl daemon-reload
+sudo systemctl enable vpnserver.service
+
+
+sudo apt-get install ufw
+sudo ufw enable
+
+sudo ufw allow 1701
+sudo ufw allow 1194
+sudo ufw allow 443
+
+
