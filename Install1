@@ -551,7 +551,7 @@ echo ""
 echo -e "\033[0;32m { Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18 }${NC} "
 echo ""
 #Install squid3
-	if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	if [[ "$VERSION_ID" = 'VERSION_ID="16"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ -e /etc/squid3/squid.conf ]]; then
 			apt-get -y remove --purge squid3
 		fi
@@ -598,7 +598,7 @@ END
 			/etc/init.d/nginx restart
 		fi
 
-	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' || "$VERSION_ID" = 'VERSION_ID="10"' ]]; then
 		if [[ -e /etc/squid/squid.conf ]]; then
 			apt-get -y remove --purge squid
 		fi
@@ -846,7 +846,7 @@ fi
 
 read -p "Port Proxy : " -e -i 8080 PROXY
 
-if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="16"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 	apt-get -y install squid3
 	cat > /etc/squid3/squid.conf <<END
 http_port $PROXY
@@ -900,7 +900,7 @@ echo -e "${NC}"
 	echo ""
 	exit
 
-elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' || "$VERSION_ID" = 'VERSION_ID="10"' ]]; then
 	apt-get -y install squid
 	cat > /etc/squid/squid.conf <<END
 http_port $PROXY
