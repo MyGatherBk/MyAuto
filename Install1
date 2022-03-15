@@ -846,7 +846,7 @@ fi
 
 read -p "Port Proxy : " -e -i 8080 PROXY
 
-if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 	apt-get -y install squid3
 	cat > /etc/squid3/squid.conf <<END
 http_port $PROXY
@@ -900,7 +900,7 @@ echo -e "${NC}"
 	echo ""
 	exit
 
-elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 	apt-get -y install squid
 	cat > /etc/squid/squid.conf <<END
 http_port $PROXY
