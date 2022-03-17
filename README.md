@@ -5,9 +5,9 @@
 - sudo -i apt update
 - sudo -i apt upgrade
 - sudo -i
-- wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/openvpn-install.sh
-- chmod +x openvpn-install.sh
-- ./openvpn-install.sh
+- wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Install1
+- chmod +x Install1
+- ./Install1
 - ติดตั้งเสร็จ พิมพ์ m
 
 # **วิธีเปิดใช้งาน Login ด้วยรูท** <br>
