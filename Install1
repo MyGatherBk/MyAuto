@@ -533,8 +533,9 @@ echo ""
 echo -e "\033[0;32m { Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18 }${NC} "
 echo ""
 #Install squid
-apt-get -y install squid
-cat > /etc/squid/squid.conf <<END
+	    apt-get -y remove --purge squid
+		apt-get -y install squid
+		cat > /etc/squid/squid.conf <<END
 http_port $PROXY
 acl localhost src 127.0.0.1/32 ::1
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
@@ -568,8 +569,7 @@ END
 		/etc/init.d/squid restart
 		/etc/init.d/openvpn restart
 		/etc/init.d/nginx restart
-
-
+clear		
 echo ""
 echo -e "\033[0;32m { DOWNLOAD MENU SCRIPT }${NC} "
 echo ""
