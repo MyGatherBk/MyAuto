@@ -2,8 +2,7 @@
 # **Debian 8-9-(10) Ubuntu 14-16-18 ** <br>
 
 # **ติดตั้ง Openvpn** <br>
-- sudo -i apt update
-- sudo -i apt upgrade
+- apt-get update -y; apt-get upgrade -y; wget
 - sudo -i
 - wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Install1
 - chmod +x Install1
