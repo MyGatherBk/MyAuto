@@ -1631,7 +1631,6 @@ service ssh restart
 exit
 ;;
 	19) # ==================================================================================================================
-	
 	clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -1643,9 +1642,9 @@ echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 echo ""
 if [[ "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="14.04"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
-		if [[ -e /etc/squid/squid.conf ]]; then
 	nano /etc/squid/squid.conf
 	exit
+
 elif [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
 	nano /etc/squid3/squid.conf
 	exit
