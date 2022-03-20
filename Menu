@@ -1252,7 +1252,7 @@ echo ""
 echo -e "เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
 echo ""
 echo -e "|${GRAY}1${NC}| OPENVPN"
-echo -e "|${GRAY}2${NC}| -----------------"
+echo -e "|${GRAY}2${NC}| DROPBEAR ไม่แนะนำให้ใช้"
 echo -e "|${GRAY}3${NC}| SQUID PROXY"
 echo ""
 read -p "เลือกหัวข้อที่ต้องการใช้งาน : " SERVICE
