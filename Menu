@@ -92,7 +92,7 @@ fi
 	if [[ $CHECKSYSTEM ]]; then
 		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้"
 	else
-		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${NC}${GRAY} ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน  ${NC}"
+		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${NC} ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน ${GRAY}  ${NC}"
 	fi
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
 	echo -e "|${GRAY}16${NC}| ${GREEN}เปิด-ปิด-รีสตาร์ท การทำงานของระบบ  ${NC}"
@@ -1292,6 +1292,67 @@ case $SERVICE in
 	echo -e "	OpenVPN ${GRAY}RESTARTED${NC}"
 	echo ""
 	exit
+		;;
+
+	esac
+
+	;;
+	
+	2)
+
+	echo ""
+	echo -e "	|${GRAY}1${NC}| เปิด"
+	echo -e "	|${GRAY}2${NC}| ปิด ${GRAY}หากปิดการทำงานจะไม่สามารถเข้าสู่เทอมินอลได้ ${NC} "
+	echo -e "	|${GRAY}3${NC}| รีสตาร์ท"
+	echo ""
+	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEDROPBEAR
+
+	case $SERVICEDROPBEAR in
+
+		1)
+
+	if [[ -e /etc/default/dropbear ]]; then
+		service ssh start
+		echo ""
+		echo -e "	SSH Dropbear ${GRAY}STARTED${NC}"
+		echo ""
+		exit
+	elif [[ ! -e /etc/default/dropbear ]]; then
+		echo ""
+		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
+		echo ""
+		exit
+	fi
+		;;
+
+		2)
+	if [[ -e /etc/default/dropbear ]]; then
+		service ssh stop
+		echo ""
+		echo -e "	SSH Dropbear ${GRAY}STOPPED${NC}"
+		echo ""
+		exit
+	elif [[ ! -e /etc/default/dropbear ]]; then
+		echo ""
+		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
+		echo ""
+		exit
+	fi
+		;;
+
+		3)
+	if [[ -e /etc/default/dropbear ]]; then
+		service ssh restart
+		echo ""
+		echo -e "	SSH Dropbear ${GRAY}RESTARTED${NC}"
+		echo ""
+		exit
+	elif [[ ! -e /etc/default/dropbear ]]; then
+		echo ""
+		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
+		echo ""
+		exit
+	fi
 		;;
 
 	esac
