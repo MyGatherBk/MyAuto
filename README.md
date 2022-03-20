@@ -1,5 +1,5 @@
 # **VPN SSH Openvpn** <br>
-# **Debian 8-9-(10) Ubuntu 14-16-18 ** <br>
+# **Debian 8-9-(10) Ubuntu 14-16-18-20 ** <br>
 
 # **ติดตั้ง Openvpn** <br>
 - sudo apt update
