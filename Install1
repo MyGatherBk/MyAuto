@@ -99,8 +99,8 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 	fi
 	echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root    ${NC}"
 	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 4${NC}| ถอนการติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด    ${NC}"	
-        echo -e "|${GRAY} 5${NC}| ติดตั้ง SQUID PROXY เซิร์ฟเวอร์ทั้งหมด    ${NC}"
+	echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
+        echo -e "|${GRAY} 5${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
 	echo ""
 	echo ""
 	echo -e "|${GRAY} 0${NC}| อัพเดตฟังก์ชั่นสคริปท์"
@@ -125,8 +125,8 @@ elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 	fi
 	echo -e "|${GRAY} 2${NC}| Change Password Root   ${NC}"
 	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 4${NC}| REMOVE SQUID PROXY ALL SERVER   ${NC}"
-	echo -e "|${GRAY} 5${NC}| INSTALL SQUID PROXY ALL SERVER   ${NC}"
+	echo -e "|${GRAY} 4${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
+	echo -e "|${GRAY} 5${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
     echo ""
 	echo ""
 	echo -e "|${GRAY} 0${NC}| UPDATE FUNCTION SCRIPT"
@@ -788,91 +788,11 @@ service ssh restart
 exit
 ;;
 	3) # ==================================================================================================================
-          ;;
+        ;;
 	4) # ==================================================================================================================
-	
-apt-get -y remove --purge squid
-cat > /etc/squid/squid.conf
-clear
-echo ""
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC}" 
-	echo "Squid Proxy .....Removed."
-	exit
 	;;
 	5) # ==================================================================================================================
-
-clear
-echo ""
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC}"
-read -p "Port Proxy : " -e -i 8080 PROXY
-
-apt-get -y install squid
-cat > /etc/squid/squid.conf <<END
-http_port $PROXY
-acl localhost src 127.0.0.1/32 ::1
-acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
-acl localnet src 10.0.0.0/8
-acl localnet src 172.16.0.0/12
-acl localnet src 192.168.0.0/16
-acl SSL_ports port 443
-acl Safe_ports port 80
-acl Safe_ports port 21
-acl Safe_ports port 443
-acl Safe_ports port 70
-acl Safe_ports port 210
-acl Safe_ports port 1025-65535
-acl Safe_ports port 280
-acl Safe_ports port 488
-acl Safe_ports port 591
-acl Safe_ports port 777
-acl CONNECT method CONNECT
-acl SSH dst xxxxxxxxx-xxxxxxxxx/255.255.255.255
-http_access allow SSH
-http_access allow localnet
-http_access allow localhost
-http_access allow all
-refresh_pattern ^ftp:           1440    20%     10080
-refresh_pattern ^gopher:        1440    0%      1440
-refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
-refresh_pattern .               0       20%     4320
-END
-	IP2="s/xxxxxxxxx/$IP/g";
-	service squid restart
-	sed -i $IP2 /etc/squid/squid.conf;
-	/etc/init.d/squid restart
-clear
-echo ""
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC}" 
-	echo "Squid Proxy .....Install finish."
-	echo "IP Proxy : $IP"
-	echo "Port Proxy : $PROXY"
-	echo ""
-	exit
-    
 	;;
-
-
 	0) # ==================================================================================================================
 
 wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Install1
