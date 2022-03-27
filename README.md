@@ -4,6 +4,7 @@
 # **ติดตั้ง Openvpn** <br>
 - sudo apt update
 - sudo apt upgrade
+- reboot
 - sudo -i
 - wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Install1
 - chmod +x Install1
