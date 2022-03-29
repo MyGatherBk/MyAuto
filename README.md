@@ -18,3 +18,13 @@
 - ./SetRPW.sh
 - ตั้งพาสโดยใช้คำสั่ง passwd root
 
+
+
+
+- cd /usr/local/bin
+- wget -q -O k "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Install1"
+- chmod +x /usr/local/bin/k
+- k
+- .....ติดตั้งเสร็จ พิมพ์ k
+
+
