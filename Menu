@@ -297,7 +297,7 @@ echo ""
 		echo ""
 		echo "IP : $IP"
 		echo "Port : 22"
-		echo "Proxy Port : $PROXY"
+		echo "Proxy Port : 8080"
 		exit
 	else
 		echo ""
