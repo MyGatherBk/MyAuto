@@ -956,10 +956,10 @@ fi
 	;;
 	0) # ==================================================================================================================
 
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Install1
-chmod +x Install1
-./Install1
-
+cd /usr/local/bin
+wget -q -O k "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Install1"
+chmod +x /usr/local/bin/k
+k
 	;;
 
 	00) # ==================================================================================================================
