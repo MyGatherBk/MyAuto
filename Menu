@@ -27,11 +27,9 @@ echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
-echo ""
-	echo "-------------------------------------------------------" 
-	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
-	echo "-------------------------------------------------------"
-	echo -e "เมนูสคริปท์ ${ORANGE}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
+	echo "----------------------------------------------------------" 
+	echo "|||||||||||||||| เมนูสคริปท์ MyGatherBK-VPN |||||||||||||||||" 
+	echo "----------------------------------------------------------"
 	echo ""
 	echo -e "|${GRAY} 1${NC}| ${RED}เพิ่มบัญชีผู้ใช้ OpenVPN ${NC}"
 	echo -e "|${GRAY} 2${NC}| เพิ่มบัญชีผู้ใช้ SSH (HTTP) ${NC}"
@@ -49,7 +47,7 @@ echo ""
 	if [[ $CHECKSYSTEM ]]; then
 		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้"
 	else
-		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${NC} ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน ${GRAY}  ${NC}"
+		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน"
 	fi
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
 	echo -e "|${GRAY}16${NC}| ${GREEN}เปิด-ปิด-รีสตาร์ท การทำงานของระบบ  ${NC}"
@@ -64,14 +62,24 @@ chek=$(cat /etc/issue.net)
 tram=$( free -m | awk 'NR==2 {print $2}' )
 up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
 echo -e "\e[032;1mSYSTEM OS:\e[0m  $chek" 
-echo -e "\e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
-echo -e "\e[032;1mSystem Uptime:\e[0m $up"
+echo -e "\e[032;1mจำนวน RAM ทั้งหมด:\e[0m $tram MB"
+echo -e "\e[032;1mเวลาทำงานของระบบ:\e[0m $up"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" 
 if [ -e "/var/log/auth.log" ]; then
         LOG="/var/log/auth.log";
 fi
 if [ -e "/var/log/secure" ]; then
         LOG="/var/log/secure";
+fi
+if [ -f "/etc/openvpn/openvpn-status.log" ]; then
+        line=`cat /etc/openvpn/openvpn-status.log | wc -l`
+        a=$((3+((line-8)/2)))
+        b=$(((line-8)/2))
+        echo "---------------=[ OpenVPN User Login ]=----------------";
+        echo "ชื่อผู้ใช้      |      IP Address      |      เชื่อมต่อตั้งแต่";
+        echo "-------------------------------------------------------";
+        cat /etc/openvpn/openvpn-status.log | head -n $a | tail -n $b | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
+        cat /tmp/vpn-login-db.txt
 fi
 	echo ""
 	echo -e "${BLUE}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ${NC}"
