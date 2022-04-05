@@ -5,9 +5,9 @@ GROUPNAME=nogroup
 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 CHECKSYSTEM=$(tail -n +2 /etc/openvpn/server.conf | grep "^username-as-common-name")
 # IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-if [[ "$IP" = "IP2" ]]; thenN
+#if [[ "$IP" = "IP2" ]]; thenN
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
-fi
+#fi
 # Color
 GRAY='\033[1;33m'
 GREEN='\033[0;32m'
@@ -1668,69 +1668,32 @@ fi
 	
 if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8" || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
+			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
 			echo ""
 			exit
-	else
+		else
 			service squid restart
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
+			echo ""
 			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
 			echo ""
 			exit
 		fi
 	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
+			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
 			echo ""
 			exit
 		else
 			service squid3 restart
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
+			echo ""
 			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
 			echo ""
 			exit
 		fi
 fi
 		;;
-
-	esac
-
-	;;
 	00) # ==================================================================================================================
 
 cd /usr/local/bin
