@@ -5,9 +5,9 @@ GROUPNAME=nogroup
 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
 CHECKSYSTEM=$(tail -n +2 /etc/openvpn/server.conf | grep "^username-as-common-name")
 # IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-#if [[ "$IP" = "" ]]; thenN
+# if [[ "$IP" = "" ]]; thenN
 IP=$(wget -4qO- "http://whatismyip.akamai.com/")
-#fi
+#
 # Color
 GRAY='\033[1;33m'
 GREEN='\033[0;32m'
@@ -23,7 +23,7 @@ ORANGE='\033[0;33m'
 # ads
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -82,7 +82,7 @@ fi
 	echo -e "|${GRAY} 4${NC}| ตรวจสอบบัญชีผู้ใช้ทั้งหมด และตรวจสอบบัญชีที่กำลังเชื่อมต่อ"
 	echo -e "|${GRAY} 5${NC}| เปลี่ยนรหัสผ่านบัญชีผู้ใช้"
 	echo -e "|${GRAY} 6${NC}| เปลี่ยนวันหมดอายุบัญชีผู้ใช้"
-	echo -e "|${GRAY} 7${NC}| ${GREEN}ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ  ${NC}"
+	echo -e "|${GRAY} 7${NC}| ตั้งค่าเวลารีบูทเซิฟเวอร์อัตโนมัติ"
 	echo -e "|${GRAY} 8${NC}| ทดสอบความเร็วอินเตอร์เน็ต"
 	echo -e "|${GRAY} 9${NC}| Credits Banner HTTP INJECTOR"
 	echo -e "|${GRAY}10${NC}| ตรวจสอบแบนด์วิดท์"
@@ -92,7 +92,7 @@ fi
 	if [[ $CHECKSYSTEM ]]; then
 		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้"
 	else
-		echo -e "|${GRAY}14${NC}| ${GRAY}แบนและปลดแบนบัญชีผู้ใช้ ${NC} ${ORANGE}ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน  ${NC}"
+		echo -e "|${GRAY}14${NC}| แบนและปลดแบนบัญชีผู้ใช้ ${NC} ใช้งานไม่ได้กับเซิฟเวอร์ระบบปัจจุบัน ${GRAY}  ${NC}"
 	fi
 	echo -e "|${GRAY}15${NC}| ปรับความเร็วอินเตอร์เน็ต"
 	echo -e "|${GRAY}16${NC}| ${GREEN}เปิด-ปิด-รีสตาร์ท การทำงานของระบบ  ${NC}"
@@ -137,12 +137,13 @@ case $MENU in
 
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
+echo ""
 if [[ $CHECKSYSTEM ]]; then
 	echo ""
 	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
@@ -162,7 +163,7 @@ if [[ $CHECKSYSTEM ]]; then
 		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -242,10 +243,10 @@ newclient () {
 	EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
 	echo -e "$CLIENT\n$CLIENT\n"|passwd $CLIENT &> /dev/null
 
-clear
+	clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -264,18 +265,16 @@ fi
 	;;
 
 	2) # ==================================================================================================================
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
-echo -e "${NC} "
 echo ""
-
 	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
 
 	if [ $? -eq 0 ]; then
@@ -283,8 +282,7 @@ echo ""
 		echo ""
 		echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
 		read -p "กำหนดวันหมดอายุ : " -e TimeActive
-		
-                IP=$(wget -4qO- "http://whatismyip.akamai.com/")
+
 		PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
 		PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
 		useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
@@ -299,7 +297,7 @@ echo ""
 		echo ""
 		echo "IP : $IP"
 		echo "Port : 22"
-		echo "Proxy Port : 8080"
+		echo "Proxy Port : $PROXY"
 		exit
 	else
 		echo ""
@@ -319,10 +317,10 @@ echo ""
 
 	3) # ==================================================================================================================
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -371,13 +369,12 @@ fi
 		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
-echo ""
 echo ""
 echo ""
 echo "ลำดับ   ชื่อบัญชีผู้ใช้        สถานะ      วันหมดอายุ"
@@ -418,7 +415,7 @@ exit
 clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -468,7 +465,7 @@ echo ""
 clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -512,10 +509,10 @@ fi
 
 	7) # ==================================================================================================================
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -535,7 +532,7 @@ fi
 clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -673,16 +670,7 @@ fi
 	;;
 
 	9) # ==================================================================================================================
-clear
-echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
-echo ""
+
 # Banner
 rm /etc/bannerssh
 wget -O /etc/bannerssh "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/issue.net"
@@ -708,10 +696,10 @@ TOTAL=$(vnstat -i $INTERFACE | grep "total:" | awk '{print $8" "substr ($9, 1, 1
 RXTOTAL=$(vnstat -i $INTERFACE | grep "rx:" | awk '{print $2" "substr ($9, 1, 1)}')
 TXTOTAL=$(vnstat -i $INTERFACE | grep "tx:" | awk '{print $5" "substr ($9, 1, 1)}')
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -901,10 +889,10 @@ TX24=$(vnstat -h | sed -n '23p' | awk '{print $9}' | cut -d ',' -f 1-20 --output
 CONRX24=$(echo "scale=2;$RX24 / 1000000" | bc)
 CONTX24=$(echo "scale=2;$TX24 / 1000000" | bc)
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -947,10 +935,10 @@ exit
 
 	12) # ==================================================================================================================
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -982,10 +970,10 @@ fi
 
 	13) # ==================================================================================================================
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -1059,10 +1047,10 @@ esac
 
 	14) # ==================================================================================================================
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -1076,10 +1064,10 @@ if [[ ! $CHECKSYSTEM ]]; then
 	exit
 fi
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -1164,10 +1152,10 @@ esac
 
 	15) # ==================================================================================================================
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -1251,10 +1239,10 @@ esac
 
 	16) # ==================================================================================================================
 
-clear
+		clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -1383,7 +1371,7 @@ case $SERVICE in
 	case $SERVICEPROXY in
 
 		1)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8" || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+	if [[ "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="14.04"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
 			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
@@ -1396,7 +1384,7 @@ case $SERVICE in
 			echo ""
 			exit
 		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
 			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
@@ -1413,7 +1401,7 @@ case $SERVICE in
 		;;
 
 		2)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8" || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+	if [[ "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="14.04"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
 			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
@@ -1426,7 +1414,7 @@ case $SERVICE in
 			echo ""
 			exit
 		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
 			echo ""
 			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
@@ -1485,7 +1473,7 @@ esac
 clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -1512,10 +1500,10 @@ nano /etc/openvpn/server.conf
 exit
 	;;
 	3)
-if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8" || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="14.04"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 	nano /etc/squid/squid.conf
 	exit
-elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
 	nano /etc/squid3/squid.conf
 	exit
 fi
@@ -1537,7 +1525,7 @@ esac
 clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
@@ -1643,21 +1631,21 @@ service ssh restart
 exit
 ;;
 	19) # ==================================================================================================================
-clear
+	clear
 echo ""
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
 echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
 echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
 echo -e "${RED} =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
 echo ""
-if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8" || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+if [[ "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="9"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="14.04"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"' || "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 	nano /etc/squid/squid.conf
 	exit
 
-elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+elif [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
 	nano /etc/squid3/squid.conf
 	exit
 fi
