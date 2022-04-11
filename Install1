@@ -811,7 +811,7 @@ clear
 echo ""
 echo -e "${RED}  =============== OS-32 & 64-bit =================    "
 echo -e "${RED}  #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${GREEN}#         เปิด-ปิด-รีสตาร์ท SQUID PROXY            #    "
+echo -e "${GREEN} #         เปิด-ปิด-รีสตาร์ท SQUID PROXY            #    "
 echo -e "${RED}  =============== OS-32 & 64-bit =================    "
 echo -e "${GREEN} ไอพีเซิฟ: $IP "
 echo -e "${NC} "
