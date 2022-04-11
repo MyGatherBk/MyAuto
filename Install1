@@ -42,13 +42,13 @@ if [[ -e /etc/debian_version ]]; then
 
 	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="20.04"' ]]; then
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
 		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
 		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
 		echo ""
@@ -59,13 +59,13 @@ echo -e "${NC} "
 	fi
 else
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
 	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
 	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
 	echo ""
@@ -77,14 +77,13 @@ fi
 
 # Menu
 echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
 if [[ -e /usr/local/bin/Check-Thai ]]; then
 	echo -e "ฟังก์ชั่นสคริปท์ ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
@@ -162,13 +161,13 @@ case $FUNCTIONSCRIPT in
 
 # ads
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
 # Install openvpn
 cd
 echo -e "\033[35;1m
@@ -252,15 +251,15 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 # exit
 
 else
-	clear
+clear
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
 # Install openvpn
 cd
 echo -e "\033[35;1m
@@ -666,14 +665,13 @@ chmod +x /usr/local/bin/m
 	
 	clear
 echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
 	echo "OpenVPN, Squid Proxy, Nginx .....Install finish."
 	echo "IP Server        : $IP"
 	echo "Port Server      : $PORT"
@@ -714,15 +712,13 @@ echo -e "${NC} "
 	   #!/bin/bash
 clear
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
 echo ""
-echo "             === WELLCOM === "
 echo " ======================================"
 echo "    กำหนดรหัสผ่านสำหรับล็อกอินด้วยชื่อ root  "
 echo " ====================================="
@@ -809,12 +805,13 @@ exit
 	4) # ==================================================================================================================
 clear
 echo ""
-echo -e "${RED}  =============== OS-32 & 64-bit =================    "
-echo -e "${RED}  #    OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18    #    "
-echo -e "${GREEN} #         เปิด-ปิด-รีสตาร์ท SQUID PROXY            #    "
-echo -e "${RED}  =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
+echo ""
 echo -e "|${GRAY}1${NC}| SQUID PROXY"
 echo ""
 read -p "เลือกหัวข้อที่ต้องการใช้งาน : " SERVICE
@@ -933,30 +930,27 @@ esac
 	5) # ==================================================================================================================
 if [[ -e /etc/squid3/squid.conf ]]; then
 	apt-get -y remove --purge squid3
-	clear
+clear
 echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
 	echo "Squid Proxy .....Removed."
 	exit
 elif [[ -e /etc/squid/squid.conf ]]; then
-	apt-get -y remove --purge squid
-	clear
+clear
 echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
 	echo "Squid Proxy .....Removed."
 	exit
 fi
@@ -1003,14 +997,13 @@ END
 	fi
 	clear
 echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
 	echo "Squid Proxy .....Install finish."
 	echo "IP Proxy   : $IP"
 	echo "Port Proxy : $PROXY"
@@ -1052,16 +1045,15 @@ END
 	service squid3 restart
 	sed -i $IP2 /etc/squid/squid.conf;
 	/etc/init.d/squid restart
-	clear
+clear
 echo ""
+echo "=============== OS-32 & 64-bit =================    "
+echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
+echo "#         BY : Pirakit Khawpleum               #    "
+echo "#    FB : https://m.me/pirakrit.khawplum       #    "
+echo "=============== OS-32 & 64-bit =================    "
+echo " ไอพีเซิฟ: $IP "
 echo ""
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${RED} #  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo -e "${RED} #         BY : Pirakit Khawpleum               #    "
-echo -e "${RED} #    FB : https://m.me/pirakrit.khawplum       #    "
-echo -e "${RED} =============== OS-32 & 64-bit =================    "
-echo -e "${GREEN} ไอพีเซิฟ: $IP "
-echo -e "${NC} "
 	echo "Squid Proxy .....Install finish."
 	echo "IP Proxy   : $IP"
 	echo "Port Proxy : $PROXY"
