@@ -804,10 +804,12 @@ exit
 	service openvpn restart
 	;;
 	4) # ==================================================================================================================
-	if [[ "$OS" = 'debian' ]]; then 
-		service squid3 restart 
-	else 
-		service squid restart 
+        if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+	service squid3 restart
+	else
+	fi
+	elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
+	service squid restart 	
 	fi
 	;;
 
