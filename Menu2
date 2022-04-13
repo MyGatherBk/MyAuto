@@ -134,7 +134,7 @@ echo -e "Create by Jiraphat Yuenying"
     00) # ==================================================================================================================
 cd /usr/local/bin
 wget -q -O c "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu2"
-chmod +x /usr/local/bin/m
+chmod +x /usr/local/bin/c
 c
 	;;
 esac
