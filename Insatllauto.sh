@@ -42,143 +42,69 @@ apt-get -y --purge remove bind9*;
 apt-get -y purge sendmail*
 apt-get -y remove sendmail*
 
-# update
-apt-get update; apt-get -y upgrade;
 
-# install webserver
-apt-get -y install nginx php5-fpm php5-cli
 
-# install essential package
-echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
-apt-get -y install build-essential
-apt-get -y install libio-pty-perl libauthen-pam-perl apt-show-versions
-
-# disable exim
-service exim4 stop
-sysv-rc-conf exim4 off
-
-# update apt-file
-apt-file update
-
-# setting vnstat
-vnstat -u -i eth0
-service vnstat restart
-
-# install screenfetch
-cd
-wget -O /usr/bin/screenfetch "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/screenfetch"
-chmod +x /usr/bin/screenfetch
-echo "clear" >> .profile
-echo "screenfetch" >> .profile
-
-# install webserver
-cd
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
-cat > /etc/nginx/nginx.conf <<END3
+echo ""
+echo -e "\033[35;1m { install nginx }${NC} "
+echo ""
+	cd
+	apt-get -y install nginx
+	cat > /etc/nginx/nginx.conf <<END
 user www-data;
-
-worker_processes 1;
+worker_processes 2;
 pid /var/run/nginx.pid;
-
 events {
 	multi_accept on;
-  worker_connections 1024;
+        worker_connections 1024;
 }
-
 http {
-	gzip on;
-	gzip_vary on;
-	gzip_comp_level 5;
-	gzip_types    text/plain application/x-javascript text/xml text/css;
-
 	autoindex on;
-  sendfile on;
-  tcp_nopush on;
-  tcp_nodelay on;
-  keepalive_timeout 65;
-  types_hash_max_size 2048;
-  server_tokens off;
-  include /etc/nginx/mime.types;
-  default_type application/octet-stream;
-  access_log /var/log/nginx/access.log;
-  error_log /var/log/nginx/error.log;
-  client_max_body_size 32M;
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        server_tokens off;
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+        client_max_body_size 32M;
 	client_header_buffer_size 8m;
 	large_client_header_buffers 8 8m;
-
 	fastcgi_buffer_size 8m;
 	fastcgi_buffers 8 8m;
-
 	fastcgi_read_timeout 600;
-
-  include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/conf.d/*.conf;
 }
-END3
-mkdir -p /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/index.html"
-echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-args='$args'
-uri='$uri'
-document_root='$document_root'
-fastcgi_script_name='$fastcgi_script_name'
-cat > /etc/nginx/conf.d/vps.conf <<END4
+END
+	mkdir -p /home/vps/public_html
+	echo "<pre>by MyGatherBK | MyGatherBK</pre>" > /home/vps/public_html/index.html
+	echo "<?phpinfo(); ?>" > /home/vps/public_html/info.php
+	args='$args'
+	uri='$uri'
+	document_root='$document_root'
+	fastcgi_script_name='$fastcgi_script_name'
+	cat > /etc/nginx/conf.d/vps.conf <<END
 server {
-  listen       80;
-  server_name  127.0.0.1 localhost;
-  access_log /var/log/nginx/vps-access.log;
-  error_log /var/log/nginx/vps-error.log error;
-  root   /home/vps/public_html;
-
-  location / {
-    index  index.html index.htm index.php;
-    try_files $uri $uri/ /index.php?$args;
-  }
-
-  location ~ \.php$ {
-    include /etc/nginx/fastcgi_params;
-    fastcgi_pass  127.0.0.1:9000;
-    fastcgi_index index.php;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-  }
+    listen       80;
+    server_name  127.0.0.1 localhost;
+    access_log /var/log/nginx/vps-access.log;
+    error_log /var/log/nginx/vps-error.log error;
+    root   /home/vps/public_html;
+    location / {
+        index  index.html index.htm index.php;
+	try_files $uri $uri/ /index.php?$args;
+    }
+    location ~ \.php$ {
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass  127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
 }
+END
 
-END4
-sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
-service php5-fpm restart
-service nginx restart
-
-# setting port ssh
-sed -i '/Port 22/a Port 443' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
-sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
-service ssh restart
-
-# install dropbear
-apt-get install dropbear
-sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=442/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 110"/g' /etc/default/dropbear
-echo "/bin/false" >> /etc/shells
-/etc/init.d/dropbear restart
-
-# install vnstat gui
-cd /home/vps/public_html/
-wget https://raw.githubusercontent.com/daybreakersx/premscript/master/vnstat_php_frontend-1.5.1.tar.gz
-tar xf vnstat_php_frontend-1.5.1.tar.gz
-rm vnstat_php_frontend-1.5.1.tar.gz
-mv vnstat_php_frontend-1.5.1 vnstat
-cd vnstat
-sed -i "s/\$iface_list = array('eth0', 'sixxs');/\$iface_list = array('eth0');/g" config.php
-sed -i "s/\$language = 'nl';/\$language = 'en';/g" config.php
-sed -i 's/Internal/Internet/g' config.php
-sed -i '/SixXS IPv6/d' config.php
-cd
-
-# install fail2ban
-apt-get -y install fail2ban
-service fail2ban restart
 
 # install squid3
 apt-get -y install squid3
@@ -225,15 +151,7 @@ sed -i $MYIP2 /etc/stunnel/stunnel.conf
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 service stunnel4 restart
 
-# install webmin
-cd
-wget "http://script.hostingtermurah.net/repo/webmin_1.801_all.deb"
-dpkg --install webmin_1.801_all.deb;
-apt-get -y -f install;
-sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
-rm /root/webmin_1.801_all.deb
-service webmin restart
-service vnstat restart
+
 
 #install PPTP
 apt-get -y install pptpd
@@ -261,24 +179,7 @@ END
 mkdir /var/lib/premium-script
 /etc/init.d/pptpd restart
 
-# install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/mrtg-mem.sh"
-chmod +x /root/mrtg-mem.sh
-cd /etc/snmp/
-sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
-service snmpd restart
-snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
-mkdir -p /home/vps/public_html/mrtg
-cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/mrtg.conf" >> /etc/mrtg.cfg
-sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
-sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
-indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
-if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
-cd
+
 
 #install OpenVPN
 apt-get -y install openvpn easy-rsa openssl iptables
@@ -427,22 +328,9 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:730
 
-# install ddos deflate
-cd
-apt-get -y install dnsutils dsniff
-wget https://github.com/jgmdev/ddos-deflate/archive/master.zip
-unzip master.zip
-cd ddos-deflate-master
-./install.sh
-rm -rf /root/master.zip
 
-# setting banner
-rm /etc/issue.net
-wget -O /etc/issue.net "https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/issue.net"
-sed -i 's@#Banner@Banner@g' /etc/ssh/sshd_config
-sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
-service ssh restart
-service dropbear restart
+
+
 
 #Setting IPtables
 cat > /etc/iptables.up.rules <<-END
