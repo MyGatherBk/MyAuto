@@ -3026,10 +3026,9 @@ cd
 
 	;;
     00) # ==================================================================================================================
-wget https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/updates/install-premiumscript.sh -O - -o /dev/null|sh
-else
-echo "Options Not Available In Menu."
-echo " "
-exit
+cd /usr/local/bin
+wget -q -O z "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu1"
+chmod +x /usr/local/bin/z
+z
 	;;
 esac
