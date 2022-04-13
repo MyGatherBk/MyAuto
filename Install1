@@ -93,8 +93,8 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล    ${NC}"
 	fi
 	echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root    ${NC}"
-	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 4${NC}| ${GREEN}เปิด-ปิด-รีสตาร์ท พร็อกซี่ ${NC}"
+	echo -e "|${GRAY} 3${NC}| ${GREEN}รีสตาร์ท Openvpn ${NC}"
+	echo -e "|${GRAY} 4${NC}| ${GREEN}รีสตาร์ท พร็อกซี่ ${NC}"
 	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
 			echo -e "|${GRAY} 5${NC}| ติดตั้งใช้ได้กับ AllServer SQUID PROXY ${GREEN} ✔   ${NC}"
@@ -127,8 +127,8 @@ elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL   ${NC}"
 	fi
 	echo -e "|${GRAY} 2${NC}| Change Password Root   ${NC}"
-	echo -e "|${GRAY} 3${NC}| -ʢᵕ﹏ᵕʡ}${RED} NO   ${NC}"
-	echo -e "|${GRAY} 4${NC}| ${GREEN}On-Off-Restart Proxy ${NC}"
+	echo -e "|${GRAY} 3${NC}| ${GREEN}Restart Openvpn ${NC}"
+	echo -e "|${GRAY} 4${NC}| ${GREEN}Restart Proxy ${NC}"
 		if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
 			echo -e "|${GRAY} 5${NC}| Install works with AllServer. SQUID PROXY ${GREEN} ✔   ${NC}"
@@ -801,130 +801,14 @@ service ssh restart
 exit
 ;;
 	3) # ==================================================================================================================
-        ;;
-	4) # ==================================================================================================================
-clear
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
-echo ""
-echo -e "|${GRAY}1${NC}| SQUID PROXY"
-echo ""
-read -p "เลือกหัวข้อที่ต้องการใช้งาน : " SERVICE
-
-case $SERVICE in
-
-	1)
-
-	echo ""
-	echo -e "	|${GRAY}1${NC}| เปิด"
-	echo -e "	|${GRAY}2${NC}| ปิด"
-	echo -e "	|${GRAY}3${NC}| รีสตาร์ท"
-	echo ""
-	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEPROXY
-
-	case $SERVICEPROXY in
-
-		1)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid start
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
-			echo ""
-			exit
-		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid3 start
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
-			echo ""
-			exit
-		fi
-	fi
-		;;
-
-		2)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid stop
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STOPPED${NC}"
-			echo ""
-			exit
-		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid3 stop
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}STOPPED${NC}"
-			echo ""
-			exit
-		fi
-	fi
-		;;
-
-		3)
-	if [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
-		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid restart
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
-			echo ""
-			exit
-		fi
-	elif [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
-		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo ""
-			echo "	ยังไม่ได้ติดตั้ง Squid Proxy"
-			echo ""
-			exit
-		else
-			service squid3 restart
-			echo ""
-			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
-			echo ""
-			exit
-		fi
-	fi
-		;;
-
-	esac
-
+	service openvpn restart
 	;;
-
-esac
-
+	4) # ==================================================================================================================
+	if [[ "$OS" = 'debian' ]]; then 
+		service squid3 restart 
+	else 
+		service squid restart 
+	fi
 	;;
 
 	5) # ==================================================================================================================
