@@ -152,35 +152,6 @@ sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 service stunnel4 restart
 
 
-
-#install PPTP
-apt-get -y install pptpd
-cat > /etc/ppp/pptpd-options <<END
-name pptpd
-refuse-pap
-refuse-chap
-refuse-mschap
-require-mschap-v2
-require-mppe-128
-ms-dns 8.8.8.8
-ms-dns 8.8.4.4
-proxyarp
-nodefaultroute
-lock
-nobsdcomp
-END
-echo "option /etc/ppp/pptpd-options" > /etc/pptpd.conf
-echo "logwtmp" >> /etc/pptpd.conf
-echo "localip 10.1.0.1" >> /etc/pptpd.conf
-echo "remoteip 10.1.0.5-100" >> /etc/pptpd.conf
-cat >> /etc/ppp/ip-up <<END
-ifconfig ppp0 mtu 1400
-END
-mkdir /var/lib/premium-script
-/etc/init.d/pptpd restart
-
-
-
 #install OpenVPN
 apt-get -y install openvpn easy-rsa openssl iptables
 cp -r /usr/share/easy-rsa/ /etc/openvpn
