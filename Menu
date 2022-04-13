@@ -1205,119 +1205,14 @@ echo "#         BY : Pirakit Khawpleum               #    "
 echo "#    FB : https://m.me/pirakrit.khawplum       #    "
 echo "=============== OS-32 & 64-bit =================    "
 echo " ไอพีเซิฟ: $IP "
-echo ""${NC} "
 echo ""
-echo -e "เปิด-ปิด-รีสตาร์ท การทำงานของระบบ ${GRAY}✿.｡.:* *.:｡✿*ﾟ’ﾟ･✿.｡.:*${NC}"
-echo ""
-echo -e "|${GRAY}1${NC}| OPENVPN"
-echo -e "|${GRAY}2${NC}| DROPBEAR ไม่แนะนำให้ใช้"
-echo -e "|${GRAY}3${NC}| SQUID PROXY"
+echo -e "|${GRAY}1${NC}| SQUID PROXY"
 echo ""
 read -p "เลือกหัวข้อที่ต้องการใช้งาน : " SERVICE
 
 case $SERVICE in
 
 	1)
-
-	echo ""
-	echo -e "	|${GRAY}1${NC}| เปิด"
-	echo -e "	|${GRAY}2${NC}| ปิด"
-	echo -e "	|${GRAY}3${NC}| รีสตาร์ท"
-	echo ""
-	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEOPENVPN
-
-	case $SERVICEOPENVPN in
-
-		1)
-	service openvpn start
-	echo ""
-	echo -e "	OpenVPN ${GRAY}STARTED${NC}"
-	echo ""
-	exit
-		;;
-
-		2)
-	service openvpn stop
-	echo ""
-	echo -e "	OpenVPN ${GRAY}STOPPED${NC}"
-	echo ""
-	exit
-		;;
-
-		3)
-	service openvpn restart
-	echo ""
-	echo -e "	OpenVPN ${GRAY}RESTARTED${NC}"
-	echo ""
-	exit
-		;;
-
-	esac
-
-	;;
-	
-	2)
-
-	echo ""
-	echo -e "	|${GRAY}1${NC}| เปิด"
-	echo -e "	|${GRAY}2${NC}| ปิด ${GRAY}หากปิดการทำงานจะไม่สามารถเข้าสู่เทอมินอลได้ ${NC} "
-	echo -e "	|${GRAY}3${NC}| รีสตาร์ท"
-	echo ""
-	read -p "	เลือกหัวข้อที่ต้องการใช้งาน : " SERVICEDROPBEAR
-
-	case $SERVICEDROPBEAR in
-
-		1)
-
-	if [[ -e /etc/default/dropbear ]]; then
-		service ssh start
-		echo ""
-		echo -e "	SSH Dropbear ${GRAY}STARTED${NC}"
-		echo ""
-		exit
-	elif [[ ! -e /etc/default/dropbear ]]; then
-		echo ""
-		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
-		echo ""
-		exit
-	fi
-		;;
-
-		2)
-	if [[ -e /etc/default/dropbear ]]; then
-		service ssh stop
-		echo ""
-		echo -e "	SSH Dropbear ${GRAY}STOPPED${NC}"
-		echo ""
-		exit
-	elif [[ ! -e /etc/default/dropbear ]]; then
-		echo ""
-		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
-		echo ""
-		exit
-	fi
-		;;
-
-		3)
-	if [[ -e /etc/default/dropbear ]]; then
-		service ssh restart
-		echo ""
-		echo -e "	SSH Dropbear ${GRAY}RESTARTED${NC}"
-		echo ""
-		exit
-	elif [[ ! -e /etc/default/dropbear ]]; then
-		echo ""
-		echo "	ยังไม่ได้ติดตั้ง SSH Dropbear"
-		echo ""
-		exit
-	fi
-		;;
-
-	esac
-
-	;;
-
-	3)
 
 	echo ""
 	echo -e "	|${GRAY}1${NC}| เปิด"
