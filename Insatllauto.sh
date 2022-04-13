@@ -399,8 +399,10 @@ iptables-restore < /etc/iptables.up.rules
 
 # download script
 cd
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu1 -O - -o /dev/null|sh
-
+cd /usr/local/bin
+wget -q -O z "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu1"
+chmod +x /usr/local/bin/z
+z
 # finalizing
 apt-get -y autoremove
 chown -R www-data:www-data /home/vps/public_html
