@@ -1,0 +1,140 @@
+#!/bin/bash
+# Created by http://www.vps-murah.net
+# Modified by 0123456
+
+if [[ -e /etc/debian_version ]]; then
+	OS=debian
+	RCLOCAL='/etc/rc.local'
+elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
+	OS=centos
+	RCLOCAL='/etc/rc.d/rc.local'
+	chmod +x /etc/rc.d/rc.local
+else
+	echo "ดูเหมือนว่าคุณไม่ได้เรียกใช้โปรแกรมติดตั้งนี้ on Debian, Ubuntu or Centos system"
+	exit
+fi
+color1='\e[031;1m'
+color2='\e[34;1m'
+color3='\e[0m'
+echo "--------------- Welcome To Premium Script Menu ---------------"
+	echo "------------ Modified by Ekkachai Chompoowiset -----------"
+	echo " "
+	cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
+	cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
+	freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
+	tram=$( free -m | awk 'NR==2 {print $2}' )
+	swap=$( free -m | awk 'NR==4 {print $2}' )
+	up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
+
+	echo -e "\e[032;1mCPU Model:\e[0m $cname"
+	echo -e "\e[032;1mNumber Of Cores:\e[0m $cores"
+	echo -e "\e[032;1mCPU Frequency:\e[0m $freq MHz"
+	echo -e "\e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
+	echo -e "\e[032;1mTotal Amount Of Swap:\e[0m $swap MB"
+	echo -e "\e[032;1mSystem Uptime:\e[0m $up"
+	echo -e "-----------------------------------------------------"
+	echo ""
+	echo -e "-----=[ SSH & OpenVPN Section ]=-----"
+	echo -e "${color1}1${color3}.สร้าง user ใหม่ "
+	echo -e "${color1}2${color3}.ลบ user"
+	echo -e "${color1}3${color3}.สร้าง user ทดลอง"
+	echo -e "${color1}4${color3}.ดูจำนวน user"
+	
+	
+echo -e "${color1}00${color3}.อัปเดตสคริปต์พรีเมียม"
+echo "-------------------------------------------"
+echo ""	
+echo ""
+read -p "เลือกหัวข้อเมนูที่ต้องการใช้งาน : " MENU
+echo ""
+case $MENU in
+
+	1) # ==================================================================================================================
+	#!/bin/bash
+#script by jiraphat yuenying
+
+read -p "Username : " Login
+read -p "Password : " Pass
+read -p "Expired (วัน): " masaaktif
+
+IP=`dig +short myip.opendns.com @resolver1.opendns.com`
+useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
+exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
+echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
+echo -e ""
+echo -e "====สร้าง User===="
+echo -e "Host: $IP" 
+#echo -e "Port OpenSSH: 22,80"
+#echo -e "Port Dropbear: 143,443"
+echo -e "Squid: 8080,3128"
+#echo -e "Config OpenVPN (TCP 1194): http://$IP:81/client.ovpn"
+echo -e "Username: $Login "
+echo -e "Password: $Pass"
+echo -e "-----------------------------"
+echo -e "วันหมดอายุ : $exp"
+echo -e "============================="
+echo -e "Made by Jiraphat Yuenying"
+echo -e ""
+	;;
+	2) # ==================================================================================================================
+	#!/bin/bash
+# Script delete user SSH
+# Created by Jiraphat Yuenying
+
+read -p "Delete User : " Nama
+
+userdel -r $Nama
+	;;
+	3) # ==================================================================================================================
+	#!/bin/bash
+#Script auto create trial user SSH
+#Create by Jiraphat Yuenying
+
+IP=`dig +short myip.opendns.com @resolver1.opendns.com`
+
+Login=trial`</dev/urandom tr -dc X-Z0-9 | head -c4`
+hari="1"
+Pass=`</dev/urandom tr -dc a-f0-9 | head -c9`
+
+useradd -e `date -d "$hari days" +"%Y-%m-%d"` -s /bin/false -M $Login
+echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
+echo -e ""
+echo -e "====trial SSH account===="
+echo -e "Host: $IP" 
+#echo -e "Port OpenSSH: 22,80"
+#echo -e "Port Dropbear: 143,443"
+echo -e "Squid: 8080,3128"
+#echo -e "Config OpenVPN (TCP 1194): http://$IP:81/client.ovpn"
+echo -e "Username: $Login"
+echo -e "Password: $Pass\n"
+echo -e "========================="
+echo -e "Create by Jiraphat Yuenying"
+echo -e ""
+	;;
+	
+	    04) # ==================================================================================================================
+echo "-------------------------------"
+echo "USERNAME          EXP DATE     "
+echo "-------------------------------"
+while read expired
+do
+        AKUN="$(echo $expired | cut -d: -f1)"
+        ID="$(echo $expired | grep -v nobody | cut -d: -f3)"
+        exp="$(chage -l $AKUN | grep "Account expires" | awk -F": " '{print $2}')"
+        if [[ $ID -ge 1000 ]]; then
+        printf "%-17s %2s\n" "$AKUN" "$exp"
+        fi
+done < /etc/passwd
+JUMLAH="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
+echo "-------------------------------"
+echo "จำนวน user : $JUMLAH user"
+echo "-------------------------------"
+echo -e "Create by Jiraphat Yuenying"
+	;;
+    00) # ==================================================================================================================
+cd /usr/local/bin
+wget -q -O c "https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu2"
+chmod +x /usr/local/bin/m
+c
+	;;
+esac
