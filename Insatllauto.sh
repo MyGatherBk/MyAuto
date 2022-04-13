@@ -511,7 +511,7 @@ iptables-restore < /etc/iptables.up.rules
 
 # download script
 cd
-wget https://raw.githubusercontent.com/ZENON-VPN/autoscript/master/updates/install-premiumscript.sh -O - -o /dev/null|sh
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Menu1 -O - -o /dev/null|sh
 
 # finalizing
 apt-get -y autoremove
