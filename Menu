@@ -257,8 +257,8 @@ echo ""
 		echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
 		read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
-		PROXY1="$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
-		PROXY2="$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
+		PROXY="$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
+		PROXY="$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
 		useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
 		EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
 		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
@@ -271,8 +271,7 @@ echo ""
 		echo ""
 		echo "IP   : $IP"
 		echo "Port : 22"
-		echo "Proxy Port : $PROXY1"
-		echo "Proxy Port : $PROXY2"
+		echo "Proxy Port : $PROXY"
 		exit
 	else
 		echo ""
