@@ -93,20 +93,20 @@ if [[ -e /usr/local/bin/Check-Thai ]]; then
 		echo -e "|${GRAY} 1${NC}| ติดตั้ง OPENVPN ที่ควบคุมการใช้งานผ่านเทอร์มินอล    ${NC}"
 	fi
 	echo -e "|${GRAY} 2${NC}| เปลี่ยน Passwd Root    ${NC}"
-	echo -e "|${GRAY} 3${NC}| ${GREEN}รีสตาร์ท Openvpn ${NC}"
-	echo -e "|${GRAY} 4${NC}| ${GREEN}รีสตาร์ท พร็อกซี่ ${NC}"
+	echo -e "|${GRAY} 3${NC}| ${GREEN}สตาร์ท/เปิด Openvpn ${NC}"
+	echo -e "|${GRAY} 4${NC}| ${GREEN}สตาร์ท/เปิด พร็อกซี่ ${NC}"
 	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ติดตั้งใช้ได้กับ AllServer SQUID PROXY ${GREEN} ✔   ${NC}"
+			echo -e "|${GRAY} 5${NC}| ติดตั้ง พร็อกซี่ ใช้ได้ทุกเซิร์ฟเวอร์ เท่านั้น ${GREEN} ✔   ${NC}"
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง AllServer SQUID PROXY ${GREEN} ✔   ${NC}"
+			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง พร็อกซี่ ใช้ได้ทุกเซิร์ฟเวอร์ เท่านั้น ${GREEN} ✔   ${NC}"
 		fi
 
 	elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ติดตั้งใช้ได้กับ AllServer SQUID PROXY ${GREEN} ✔   ${NC}"
+			echo -e "|${GRAY} 5${NC}| ติดตั้ง พร็อกซี่ ใช้ได้ทุกเซิร์ฟเวอร์ เท่านั้น ${GREEN} ✔   ${NC}"
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| ถอนการติดตั้ง AllServer SQUID PROXY ${GREEN} ✔   ${NC}"
+			echo -e "|${GRAY} 5${NC}| พร็อกซี่ ใช้ได้ทุกเซิร์ฟเวอร์ เท่านั้น ${GREEN} ✔   ${NC}"
 		fi
 	fi
 	echo ""
@@ -127,20 +127,20 @@ elif [[ ! -e /usr/local/bin/Check-Thai ]]; then
 		echo -e "|${GRAY} 1${NC}| INSTALL OPENVPN TERMINAL CONTROL   ${NC}"
 	fi
 	echo -e "|${GRAY} 2${NC}| Change Password Root   ${NC}"
-	echo -e "|${GRAY} 3${NC}| ${GREEN}Restart Openvpn ${NC}"
-	echo -e "|${GRAY} 4${NC}| ${GREEN}Restart Proxy ${NC}"
+	echo -e "|${GRAY} 3${NC}| ${GREEN}start/Open Openvpn ${NC}"
+	echo -e "|${GRAY} 4${NC}| ${GREEN}start/Open Proxy ${NC}"
 		if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
 		if [[ ! -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| Install works with AllServer. SQUID PROXY ${GREEN} ✔   ${NC}"
+			echo -e "|${GRAY} 5${NC}| Install a proxy, it works on all servers only. ${GREEN} ✔   ${NC}"
 		elif [[ -e /etc/squid3/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| REMOVE AllServer SQUID PROXY ${GREEN} ✔   ${NC}"
+			echo -e "|${GRAY} 5${NC}| REMOVE Proxy works on all servers only. ${GREEN} ✔   ${NC}"
 		fi
 
         elif [[ "$VERSION_ID" = 'VERSION_ID="9"'|| "$VERSION_ID" = 'VERSION_ID="8"' || "$VERSION_ID" = 'VERSION_ID="10"' || "$VERSION_ID" = 'VERSION_ID="16.04"' || "$VERSION_ID" = 'VERSION_ID="18.04"'|| "$VERSION_ID" = 'VERSION_ID="20.04"' ]]; then
 		if [[ ! -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| Install works with AllServer. SQUID PROXY ${GREEN} ✔   ${NC}"
+			echo -e "|${GRAY} 5${NC}| Install a proxy, it works on all servers only. ${GREEN} ✔   ${NC}"
 		elif [[ -e /etc/squid/squid.conf ]]; then
-			echo -e "|${GRAY} 5${NC}| REMOVE AllServer SQUID PROXY ${GREEN} ✔   ${NC}"
+			echo -e "|${GRAY} 5${NC}| REMOVE Proxy works on all servers only. ${GREEN} ✔   ${NC}"
 		fi
 	fi
         echo ""
@@ -834,9 +834,9 @@ echo ""
 			echo ""
 			exit
 		else
-			service squid restart
+			service squid start
 			echo ""
-			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
+			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
 			echo ""
 			exit
 		fi
@@ -847,9 +847,9 @@ echo ""
 			echo ""
 			exit
 		else
-			service squid3 restart
+			service squid3 start
 			echo ""
-			echo -e "	Squid Proxy ${GRAY}RESTARTED${NC}"
+			echo -e "	Squid Proxy ${GRAY}STARTED${NC}"
 			echo ""
 			exit
 		fi
