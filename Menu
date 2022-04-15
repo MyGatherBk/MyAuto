@@ -30,6 +30,22 @@ echo "#    FB : https://m.me/pirakrit.khawplum       #    "
 echo "=============== OS-32 & 64-bit =================    "
 echo " ไอพีเซิฟ: $IP "
 echo ""
+echo " "
+	cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
+	cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
+	freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
+	tram=$( free -m | awk 'NR==2 {print $2}' )
+	swap=$( free -m | awk 'NR==4 {print $2}' )
+	up=$(uptime|awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }')
+
+	echo -e "\e[032;1mCPU Model:\e[0m $cname"
+	echo -e "\e[032;1mNumber Of Cores:\e[0m $cores"
+	echo -e "\e[032;1mCPU Frequency:\e[0m $freq MHz"
+	echo -e "\e[032;1mTotal Amount Of RAM:\e[0m $tram MB"
+	echo -e "\e[032;1mTotal Amount Of Swap:\e[0m $swap MB"
+	echo -e "\e[032;1mSystem Uptime:\e[0m $up"
+	echo -e "-----------------------------------------------------"
+	echo ""
 	echo "-------------------------------------------------------" 
 	echo "|||||||||||||||| MyGatherBK-VPN |||||||||||||||||" 
 	echo "-------------------------------------------------------"
@@ -210,7 +226,7 @@ echo "#    FB : https://m.me/pirakrit.khawplum       #    "
 echo "=============== OS-32 & 64-bit =================    "
 echo " ไอพีเซิฟ: $IP "
 echo ""
-	echo "ชื่อบัญชี : $CLIENT"
+	echo "ชื่อบัญชี       : $CLIENT"
 	echo "หมดอายุในวันที่ : $EXP"
 	echo ""
 	echo "ดาวน์โหลดคอนฟิก : http://$IP:85/$RANDOMFOLDER/$CLIENT.ovpn "
@@ -231,6 +247,7 @@ echo "#    FB : https://m.me/pirakrit.khawplum       #    "
 echo "=============== OS-32 & 64-bit =================    "
 echo " ไอพีเซิฟ: $IP "
 echo ""
+IP=$(wget -qO- ipv4.icanhazip.com)
 	read -p "ชื่อบัญชีที่ต้องการสร้าง : " -e CLIENT
 
 	if [ $? -eq 0 ]; then
@@ -239,8 +256,8 @@ echo ""
 		echo -e "     ${GRAY}ระบุตัวเลข 30 จะทำให้บัญชีที่สร้างใช้งานไม่ได้ในอีก 30 วัน${NC}"
 		read -p "กำหนดวันหมดอายุ : " -e TimeActive
 
-		PROXY=$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
-		PROXY=$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
+		PROXY="$(grep '^http_port ' /etc/squid/squid.conf | cut -d " " -f 2)
+		PROXY="$(grep '^http_port ' /etc/squid3/squid.conf | cut -d " " -f 2)
 		useradd -e `date -d "$TimeActive days" +"%Y-%m-%d"` -s /bin/false -M $CLIENT
 		EXP="$(chage -l $CLIENT | grep "Account expires" | awk -F": " '{print $2}')"
 		echo -e "$PASSWORD\n$PASSWORD\n"|passwd $CLIENT &> /dev/null
@@ -251,7 +268,7 @@ echo ""
 		echo "รหัสผ่าน : $PASSWORD"
 		echo "หมดอายุในวันที่ : $EXP"
 		echo ""
-		echo "IP : $IP"
+		echo "IP   : $IP"
 		echo "Port : 22"
 		echo "Proxy Port : $PROXY"
 		exit
