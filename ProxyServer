@@ -76,13 +76,10 @@ echo "=============== OS-32 & 64-bit =================    "
 echo " ไอพีเซิฟ: $IP "
 echo ""
 
-	echo -e "FUNCTION SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
+	echo "FUNCTION SCRIPT MyGatherBK-VPN"
 	echo ""
-	echo "|${GRAY} 1${NC}|  Install ProxyServer"
-	echo "|${GRAY} 2${NC}| ${GREEN}Restart/Open Proxy"
-	echo ""
-	echo ""
-	echo -e "|${GRAY} 0${NC}| UPDATE FUNCTION SCRIPT"
+	echo "|1| Install-ProxyServer"
+	echo "|2| Restart/ProxyServer"
 	echo ""
 	echo ""
 	read -p "Select a Function Script : " FUNCTIONSCRIPT
@@ -253,11 +250,4 @@ echo ""
 		fi
 	fi
 	;;
-	0) # ==================================================================================================================
-
-rm -rf Install
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/ProxyServer && chmod +x ProxyServer && bash ProxyServer
-	;;
-
-
 esac
