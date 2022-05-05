@@ -283,5 +283,5 @@ echo "
 [√] ที่ Ocspanel.info/howto
 ----------------------------------------------
  " | lolcat
-rm -f /root/ocsall.sh
+rm -f /root/OcsPanel.sh
 cd ~/
