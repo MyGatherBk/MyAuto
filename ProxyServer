@@ -78,16 +78,14 @@ echo ""
 
 	echo -e "FUNCTION SCRIPT ${GRAY}MyGatherBK-VPN${NC}"
 	echo ""
-	echo -e "|${GRAY} 1${NC}|  Install ProxyServer   ${NC}"
-	echo -e "|${GRAY} 2${NC}| ${GREEN}Restart/Open Proxy ${NC}"
+	echo "|${GRAY} 1${NC}|  Install ProxyServer"
+	echo "|${GRAY} 2${NC}| ${GREEN}Restart/Open Proxy"
+	echo ""
+	echo ""
 	echo -e "|${GRAY} 0${NC}| UPDATE FUNCTION SCRIPT"
 	echo ""
 	echo ""
 	read -p "Select a Function Script : " FUNCTIONSCRIPT
-	
-	
-
-
 
 case $FUNCTIONSCRIPT in
 
@@ -106,7 +104,7 @@ cd
 echo ""
 read -p "Port Proxy : " -e -i 8080 PROXY
 echo ""
-echo -e "\033[0;32m { Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18-20 }${NC} "
+echo "{ Install PROXY DEBIAN 8-9-10/UBUNTU 14-16-18-20 }"
 echo ""
 #Install squid3
 	if [[ "$VERSION_ID" = 'VERSION_ID="7"' || "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
