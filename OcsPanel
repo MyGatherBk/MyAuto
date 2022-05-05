@@ -1,72 +1,44 @@
 #!/bin/bash
 
-if [[ "$EUID" -ne 0 ]]; then
-	echo ""
-	echo "กรุณาเข้าสู่ระบบผู้ใช้ root ก่อนทำการใช้งานสคริปท์"
-	echo "คำสั่งเข้าสู่ระบบผู้ใช้ root คือ sudo -i"
-	echo ""
+myip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0' | head -n1`;
+myint=`ifconfig | grep -B1 "inet addr:$myip" | head -n1 | awk '{print $1}'`;
+
+ red='\e[1;31m'
+               green='\e[0;32m'
+               NC='\e[0m'
+			   
+               echo "Connect ocspanel.info..."
+               sleep 1
+               
+			   echo "กำลังตรวจสอบ Permision..."
+               sleep 1
+               
+			   echo -e "${green}ได้รับอนุญาตแล้ว...${NC}"
+               sleep 1
+			   
+flag=0
+
+if [ $USER != 'root' ]; then
+	echo "คุณต้องเรียกใช้งานนี้เป็น root"
 	exit
 fi
 
-if [[ ! -e /dev/net/tun ]]; then
-	echo ""
-	echo "TUN ไม่สามารถใช้งานได้"
-	exit
-fi
-
-
-# Set Localtime GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-
-clear
-# IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-#if [[ "$IP" = "" ]]; then
-MYIP=$(wget -qO- ipv4.icanhazip.com);
-#fi
-
+# initialisasi var
+export DEBIAN_FRONTEND=noninteractive
+OS=`uname -m`;
 
 if [[ -e /etc/debian_version ]]; then
-	OS=debian
-	VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
-	GROUPNAME=nogroup
+	#OS=debian
 	RCLOCAL='/etc/rc.local'
-
-	if [[ "$VERSION_ID" != 'VERSION_ID="10"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="18.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="20.04"' ]]; then
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
-echo ""
-		echo "เวอร์ชั่น OS ของคุณเป็นเวอร์ชั่นที่ยังไม่รองรับ"
-		echo "สำหรับเวอร์ชั่นที่รองรับได้ จะมีดังนี้..."
-		echo ""
-		echo "Ubuntu 14.04 - 16.04 - 18.04 - 20.04"
-		echo "Debian 8 - 9 -10"
-		echo ""
-		exit
-	fi
 else
-echo ""
-echo "=============== OS-32 & 64-bit =================    "
-echo "#  OS  DEBIAN 8-9-10  OS  UBUNTU 14-16-18-20   #    "
-echo "#         BY : Pirakit Khawpleum               #    "
-echo "#    FB : https://m.me/pirakrit.khawplum       #    "
-echo "=============== OS-32 & 64-bit =================    "
-echo " ไอพีเซิฟ: $IP "
-echo ""
-	echo "OS ที่คุณใช้ไม่สามารถรองรับได้กับสคริปท์นี้"
-	echo "สำหรับ OS ที่รองรับได้ จะมีดังนี้..."
-	echo ""
-	echo "Ubuntu 14.04 - 16.04 - 18.04 -20.04"
-	echo "Debian 8 - 9 -10"
-	echo ""
+	echo "คุณไม่ได้เรียกใช้สคริปต์นี้ในระบบปฏิบัติการ Debian"
 	exit
 fi
 
+# GO TO ROOT
+cd
 
+MYIP=$(wget -qO- ipv4.icanhazip.com);
 
 # Install Ocs Panel
 
