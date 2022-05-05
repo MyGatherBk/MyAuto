@@ -256,7 +256,7 @@ echo ""
 	0) # ==================================================================================================================
 
 rm -rf Install
-wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/Install1 && chmod +x Install1 && bash Install1
+wget https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/ProxyServer && chmod +x ProxyServer && bash ProxyServer
 	;;
 
 
