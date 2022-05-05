@@ -36,6 +36,13 @@ else
 fi
 
 
+vps="VPS";
+
+if [[ $vps = "VPS" ]]; then
+	source="http://truepay.me"
+else
+	source="lifestyle-vpn.tk/admin007"
+fi
 # GO TO ROOT
 cd
 
