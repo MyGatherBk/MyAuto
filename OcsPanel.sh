@@ -35,13 +35,40 @@ else
 	exit
 fi
 
+
 # GO TO ROOT
 cd
 
 MYIP=$(wget -qO- ipv4.icanhazip.com);
 
-# Install Ocs Panel
+flag=0
 
+wget --quiet -O iplist.txt https://raw.githubusercontent.com/MyGatherBk/MyAuto/master/ip.txt
+
+iplist="iplist.txt"
+
+lines=`cat $iplist`
+
+for line in $lines; do
+#        echo "$line"
+        if [ "$line" = "$myip" ];
+        then
+                flag=1
+        fi
+
+done
+
+if [ $flag -eq 0 ]
+then
+   echo  "ขออภัยเฉพาะ IP @ Password ที่ลงทะเบียนเท่านั้นที่สามารถใช้สคริปต์นี้ได้!
+ติดต่อ: HERE BIRD (097-026-7262) Facebook : m.me/ceolnw"
+
+rm -f /root/iplist.txt
+
+rm -f /root/OcsPanel.sh
+	
+	exit 1
+fi
 
 apt-get install boxes
 sudo apt-get -y install ruby
@@ -50,7 +77,7 @@ sudo gem install lolcat
 clear
 echo "
 ----------------------------------------------
-[√] ยินดีต้อนรับเข้าสู่ : 
+[√] ยินดีต้อนรับเข้าสู่ : ระบบสคริป 097-026-7262 
 [1] Do you want to continue? [Y/n] = Y
 [2] Do you want to continue? [Y/n] = Y
 [√] ในขั้นตอนนี้ตอบ : Y... [ OK !! ]
